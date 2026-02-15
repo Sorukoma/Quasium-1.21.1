@@ -1,0 +1,16 @@
+{
+  "item.quasium.quasiumingot": "Слиток квазиума",
+  "item.quasium.rawquasium": "Сырой квазиум",
+  "item.quasium.quasium_helmet": "Квазиумовый шлем",
+  "item.quasium.quasium_chestplate": "Квазиумовый нагрудник",
+  "item.quasium.quasium_leggings": "Квазиумовые поножи",
+  "item.quasium.quasium_boots": "Квазиумовые ботинки",
+  "item.quasium.progression_book": "Книга Прогрессии",
+  "gui.quasium.progression_book.title": "Книга Прогрессии",
+  "advancements.quasium.root.title": "Квазиум",
+  "advancements.quasium.root.description": "Начало вашего путешествия по Квазиуму",
+  "advancements.quasium.smelt_raw_quasium.title": "Переплавка Квазиума",
+  "advancements.quasium.smelt_raw_quasium.description": "Переплавьте сырой квазиум в слиток квазиума",
+  "advancements.quasium.kaif_level_30.title": "Мастерство Кайфа",
+  "advancements.quasium.kaif_level_30.description": "Достигните 30 уровня Кайфа"
+}

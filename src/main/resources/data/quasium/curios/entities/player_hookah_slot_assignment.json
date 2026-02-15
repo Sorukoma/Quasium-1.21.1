@@ -1,0 +1,4 @@
+{
+  "entities": ["player"],
+  "slots": ["back_hookah_slot"]
+}

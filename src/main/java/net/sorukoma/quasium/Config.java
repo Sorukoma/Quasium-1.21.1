@@ -11,6 +11,10 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    public static final ModConfigSpec.DoubleValue QUASIUM_ARMOR_DODGE_CHANCE = BUILDER
+            .comment("The chance to dodge an attack when wearing a full set of Quasium armor (0.0 to 1.0)")
+            .defineInRange("quasiumArmorDodgeChance", 0.8, 0.0, 1.0);
+
     public static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
             .comment("Whether to log the dirt block on common setup")
             .define("logDirtBlock", true);

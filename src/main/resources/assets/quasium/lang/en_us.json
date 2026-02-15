@@ -1,0 +1,16 @@
+{
+  "item.quasium.quasiumingot": "Quasium Ingot",
+  "item.quasium.rawquasium": "Raw Quasium",
+  "item.quasium.quasium_helmet": "Quasium Helmet",
+  "item.quasium.quasium_chestplate": "Quasium Chestplate",
+  "item.quasium.quasium_leggings": "Quasium Leggings",
+  "item.quasium.quasium_boots": "Quasium Boots",
+  "item.quasium.progression_book": "Progression Book",
+  "gui.quasium.progression_book.title": "Progression Book",
+  "advancements.quasium.root.title": "Quasium",
+  "advancements.quasium.root.description": "The beginning of your Quasium journey",
+  "advancements.quasium.smelt_raw_quasium.title": "Quasium Smelting",
+  "advancements.quasium.smelt_raw_quasium.description": "Smelt Raw Quasium into a Quasium Ingot",
+  "advancements.quasium.kaif_level_30.title": "Kaif Mastery",
+  "advancements.quasium.kaif_level_30.description": "Reach Kaif Level 30"
+}

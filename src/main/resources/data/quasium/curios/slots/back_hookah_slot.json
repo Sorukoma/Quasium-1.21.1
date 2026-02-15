@@ -1,0 +1,7 @@
+{
+  "size": 1,
+  "icon": "curios:slot/empty_back_slot",
+  "validators": [
+    "quasium:potion_validator"
+  ]
+}

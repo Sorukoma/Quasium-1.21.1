@@ -1,0 +1,33 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "smelted_quasium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:quasiumingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smelt_raw_quasium.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:quasiumingot"
+    },
+    "title": {
+      "translate": "advancements.quasium.smelt_raw_quasium.title"
+    }
+  },
+  "requirements": [
+    [
+      "smelted_quasium"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

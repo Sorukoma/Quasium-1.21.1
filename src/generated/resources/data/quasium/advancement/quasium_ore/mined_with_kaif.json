@@ -1,0 +1,26 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "mined_quasium_ore": {
+      "trigger": "quasium:quasium_ore_mined"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.quasium_ore_mined.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:rawquasium"
+    },
+    "title": {
+      "translate": "advancements.quasium.quasium_ore_mined.title"
+    }
+  },
+  "requirements": [
+    [
+      "mined_quasium_ore"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=east":  { "model": "quasium:block/quasium_anvil", "y": 270 },
+    "facing=north": { "model": "quasium:block/quasium_anvil", "y": 180 },
+    "facing=south": { "model": "quasium:block/quasium_anvil" },
+    "facing=west":  { "model": "quasium:block/quasium_anvil", "y": 90 }
+  }
+}

@@ -21,6 +21,7 @@ repositories {
     // Add here additional repositories if required by some of the dependencies below.
     mavenCentral()
     maven { url "https://maven.theillusivec4.top/" } // Curios API repository
+    maven { url "https://maven.blamejared.com/" } // JEI repository
 }
 
 base {
@@ -136,12 +137,9 @@ dependencies {
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"
     implementation "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"
 
-    // Example optional mod dependency with JEI
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
-    // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
-    // localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    // JEI — API для компиляции, runtime для тестов
+    compileOnly "mezz.jei:jei-1.21.1-neoforge-api:${jei_version}"
+    localRuntime "mezz.jei:jei-1.21.1-neoforge:${jei_version}"
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar

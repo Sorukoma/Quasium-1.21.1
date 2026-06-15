@@ -1,36 +1,28 @@
 package net.sorukoma.quasium.network;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.sorukoma.quasium.component.ModDataComponents;
 import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-// import net.sorukoma.quasium.client.ClientHookahInputHandler; // Откатываем импорт
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
 
 public class PacketHookahPuffDataClientHandler {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public record ClientHookahData(int puffsRemainingPotion, int puffsRemainingCharcoal, @Nullable UUID attachedPlayerUUID, @Nullable String attachedPlayerName) {}
+    public record ClientHookahData(float totalHeat, int totalTobaccoWeight, @Nullable ModDataComponents.HookahBowlContents bowlContents) {}
 
     private static final Map<BlockPos, ClientHookahData> clientHookahStates = new HashMap<>();
 
     public static void handle(final PacketHookahPuffData payload, final IPayloadContext context) {
         context.enqueueWork(() -> {
-            LOGGER.debug("Client: Received PacketHookahPuffData for block at {}. PuffsPotion: {}, CoalTime: {}, AttachedUUID: {}, AttachedName: {}",
-                    payload.blockPos(), payload.puffsRemainingPotion(), payload.puffsRemainingCharcoal(), payload.attachedPlayerUUID(), payload.attachedPlayerName());
-
             clientHookahStates.put(payload.blockPos(), new ClientHookahData(
-                payload.puffsRemainingPotion(),
-                payload.puffsRemainingCharcoal(),
-                payload.attachedPlayerUUID(),
-                payload.attachedPlayerName()
+                payload.totalHeat(),
+                payload.totalTobaccoWeight(),
+                payload.bowlContents()
             ));
-            // ClientHookahInputHandler.resetAttachInProgress(); // Откатываем вызов
-            LOGGER.debug("Client: ClientHookahInputHandler.resetAttachInProgress() called after PacketHookahPuffData.");
         });
     }
 
@@ -39,8 +31,11 @@ public class PacketHookahPuffDataClientHandler {
         return clientHookahStates.get(pos);
     }
 
-    // Откатываем этот метод
-    // public static Map<BlockPos, ClientHookahData> getAllClientHookahStates() {
-    //     return clientHookahStates;
-    // }
+    public static void clearAllData() {
+        clientHookahStates.clear();
+    }
+
+    public static void removeData(BlockPos pos) {
+        clientHookahStates.remove(pos);
+    }
 }

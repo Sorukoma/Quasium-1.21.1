@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "wood": "quasium:block/soaking_bowl"
+  },
+  "elements": [
+    {
+      "name": "bowl_base",
+      "from": [3, 0, 3],
+      "to": [13, 3, 13],
+      "faces": {
+        "north": {"uv": [0, 13, 10, 16], "texture": "#wood"},
+        "east": {"uv": [0, 13, 10, 16], "texture": "#wood"},
+        "south": {"uv": [0, 13, 10, 16], "texture": "#wood"},
+        "west": {"uv": [0, 13, 10, 16], "texture": "#wood"},
+        "up": {"uv": [3, 3, 13, 13], "texture": "#wood"},
+        "down": {"uv": [3, 3, 13, 13], "texture": "#wood"}
+      }
+    },
+    {
+      "name": "bowl_rim",
+      "from": [3, 3, 3],
+      "to": [13, 4, 13],
+      "faces": {
+        "north": {"uv": [0, 12, 10, 13], "texture": "#wood"},
+        "east": {"uv": [0, 12, 10, 13], "texture": "#wood"},
+        "south": {"uv": [0, 12, 10, 13], "texture": "#wood"},
+        "west": {"uv": [0, 12, 10, 13], "texture": "#wood"},
+        "up": {"uv": [3, 3, 13, 13], "texture": "#wood"}
+      }
+    }
+  ]
+}

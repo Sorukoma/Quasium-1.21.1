@@ -1,9 +1,7 @@
 {
-  "title": "Мастерство Кайфа",
+  "title": "quasium.progression.kaif_mastery.title",
   "pages": [
-    {
-      "text": "Поздравляем! Вы достигли 30 уровня Кайфа. Теперь вы настоящий мастер своего дела. Продолжайте исследовать мир и открывать новые грани удовольствия!"
-    }
+    { "text": "quasium.progression.kaif_mastery.page1" }
   ],
   "unlockCondition": "quasium:kaif/kaif_level_30"
 }

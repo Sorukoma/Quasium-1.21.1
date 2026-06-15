@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "quasium:block/tobacco_crop_stage0"
+  }
+}

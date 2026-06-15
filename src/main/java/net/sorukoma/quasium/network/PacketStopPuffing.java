@@ -8,7 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.sorukoma.quasium.QuasiumMod;
 
 public record PacketStopPuffing(BlockPos blockPos) implements CustomPacketPayload {
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "stop_puffing");
+    public static final CustomPacketPayload.Type<PacketStopPuffing> ID =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "stop_puffing")); // Corrected type and initialization
     public static final StreamCodec<FriendlyByteBuf, PacketStopPuffing> STREAM_CODEC = CustomPacketPayload.codec(PacketStopPuffing::write, PacketStopPuffing::new);
 
     public PacketStopPuffing(FriendlyByteBuf buffer) {
@@ -21,6 +22,6 @@ public record PacketStopPuffing(BlockPos blockPos) implements CustomPacketPayloa
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
-        return new Type<>(ID);
+        return ID; // Simply return the static ID
     }
 }

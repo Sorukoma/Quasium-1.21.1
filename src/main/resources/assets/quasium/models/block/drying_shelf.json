@@ -1,0 +1,49 @@
+{
+  "textures": {
+    "shelf": "minecraft:block/oak_planks"
+  },
+  "elements": [
+    {
+      "name": "shelf_board",
+      "from": [2, 14, 12],
+      "to": [14, 16, 16],
+      "faces": {
+        "north": {"uv": [2, 0, 14, 2], "texture": "#shelf"},
+        "east":  {"uv": [0, 0, 4, 2],  "texture": "#shelf"},
+        "south": {"uv": [2, 0, 14, 2], "texture": "#shelf"},
+        "west":  {"uv": [0, 0, 4, 2],  "texture": "#shelf"},
+        "up":    {"uv": [2, 0, 14, 4], "texture": "#shelf"},
+        "down":  {"uv": [2, 0, 14, 4], "texture": "#shelf"}
+      }
+    },
+    {
+      "name": "left_bracket",
+      "from": [2, 10, 15],
+      "to": [4, 14, 16],
+      "faces": {
+        "north": {"uv": [12, 2, 14, 6], "texture": "#shelf"},
+        "east":  {"uv": [15, 2, 16, 6], "texture": "#shelf"},
+        "south": {"uv": [2, 2, 4, 6],   "texture": "#shelf"},
+        "west":  {"uv": [0, 2, 1, 6],   "texture": "#shelf"},
+        "up":    {"uv": [2, 15, 4, 16],  "texture": "#shelf"},
+        "down":  {"uv": [2, 15, 4, 16],  "texture": "#shelf"}
+      }
+    },
+    {
+      "name": "right_bracket",
+      "from": [12, 10, 15],
+      "to": [14, 14, 16],
+      "faces": {
+        "north": {"uv": [2, 2, 4, 6],   "texture": "#shelf"},
+        "east":  {"uv": [0, 2, 1, 6],   "texture": "#shelf"},
+        "south": {"uv": [12, 2, 14, 6], "texture": "#shelf"},
+        "west":  {"uv": [15, 2, 16, 6], "texture": "#shelf"},
+        "up":    {"uv": [12, 15, 14, 16],"texture": "#shelf"},
+        "down":  {"uv": [12, 15, 14, 16],"texture": "#shelf"}
+      }
+    }
+  ],
+  "display": {
+    "gui": {"rotation": [30, 225, 0], "translation": [0, 4, 0], "scale": [0.625, 0.625, 0.625]}
+  }
+}

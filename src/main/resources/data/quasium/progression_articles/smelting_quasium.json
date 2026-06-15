@@ -1,12 +1,8 @@
 {
-  "title": "Переплавка Квазиума",
+  "title": "quasium.progression.smelting_quasium.title",
   "pages": [
-    {
-      "text": "Сырой квазиум, найденный глубоко под землей, может быть переплавлен в слитки квазиума в обычной печи. Слитки квазиума являются основным компонентом для создания мощных инструментов и брони."
-    },
-    {
-      "text": "Для переплавки просто поместите сырой квазиум в верхний слот печи, а любое топливо - в нижний. Дождитесь завершения процесса, и вы получите ценный слиток квазиума."
-    }
+    { "text": "quasium.progression.smelting_quasium.page1" },
+    { "text": "quasium.progression.smelting_quasium.page2" }
   ],
   "unlockCondition": "quasium:smelt_raw_quasium"
 }

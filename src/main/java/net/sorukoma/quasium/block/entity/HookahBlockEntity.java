@@ -1,220 +1,810 @@
 package net.sorukoma.quasium.block.entity;
 
-import com.mojang.serialization.DynamicOps;
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import net.sorukoma.quasium.screen.HookahMenu;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.sorukoma.quasium.Config;
+import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.data.PlayerKaifData;
+import net.sorukoma.quasium.data.PlayerTobaccoData;
+import net.sorukoma.quasium.entity.HookahConnectionEntity;
+import net.sorukoma.quasium.item.CalloudItem;
+import net.sorukoma.quasium.item.ModItems;
 import net.sorukoma.quasium.network.ModPackets;
+import net.sorukoma.quasium.network.PacketHookahPuffData;
 import net.sorukoma.quasium.network.PacketSpawnSmoke;
+import net.sorukoma.quasium.network.PacketStopHookahPuffSoundClient;
+import net.sorukoma.quasium.screen.HookahMenu;
+import net.sorukoma.quasium.block.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.UUID;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.alchemy.PotionContents;
-import com.google.common.collect.Lists;
-import net.sorukoma.quasium.network.PacketHookahPuffData;
-import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
-import net.sorukoma.quasium.QuasiumMod; // Импортируем QuasiumMod
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+/**
+ * Block entity для кальяна — bowl-based логика с поддержкой обычных табаков и самозамесов.
+ *
+ * Slot 0: CalloudItem (каллауд с углями)
+ * Slot 1: HookahBowlItem (max 1)
+ *
+ * Все данные о табаке хранятся в HookahBowlContents DataComponent
+ * на ItemStack чаши (group-based модель: BowlTobaccoGroup + slotAssignments).
+ *
+ * Механика жара: кальян курится только при наличии каллауда с достаточной суммарной силой жара.
+ * Уголь постепенно теряет жар. Если жар падает ниже порога — курение прекращается.
+ */
 public class HookahBlockEntity extends BlockEntity implements MenuProvider {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    // Константы для расхода
+    // ─── Constants ───
     public static final int TICKS_PER_SECOND = 20;
-    public static final int MAX_PUFFS_PER_POTION = 60 * TICKS_PER_SECOND; // 1 зелье = 60 секунд затяжки
-    public static final int COAL_BURN_TIME_TICKS = 60 * TICKS_PER_SECOND; // 1 уголь горит 1 минуту
-    private static final float EFFECT_DURATION_MULTIPLIER = 1.5f; // 1 секунда затяжки -> 1.5 секунды эффекта
-    private static final float SMOKE_DURATION_MULTIPLIER = 2.0f; // 1 секунда затяжки -> 2 секунды пара
-    private static final int AIR_CONSUMPTION_PER_TICK_PUFF = 5; // Сколько воздуха (в тиках) расходуется за 1 тик затяжки
-    private static final double PIPE_DETACH_DISTANCE_SQ = 2.0 * 2.0; // Квадрат расстояния для отсоединения трубки (2 блока)
+    public static final int TOBACCO_TICKS_PER_GRAM = 320;
+    public static final int MAX_TOBACCO_WEIGHT = 20 * TOBACCO_TICKS_PER_GRAM;
+    public static final int TOBACCO_CONSUMPTION_PER_PUFF = 1;
+    public static final int TOBACCO_OVER_BURN_THRESHOLD_GRAMS = 15;
+    public static final float TOBACCO_OVER_BURN_EXTRA_RATE = 0.5f;
+    public static final int AIR_CONSUMPTION_PER_TICK_PUFF = 5;
+    public static final int MAX_PUFFS_PER_POTION = 60 * TICKS_PER_SECOND;
+    private static final int NAUSEA_PER_10_NEGATIVE_KAIF = 1;
 
-    private int puffsRemainingPotion = 0; // Оставшееся время зелья в тиках
-    private int currentCoalBurnTime = 0; // Оставшееся время горения текущего угля в тиках
+    // Пороги силы жара для разных типов табака
+    public static final float HEAT_THRESHOLD_REGULAR = 1.0f;
+    public static final float HEAT_THRESHOLD_SELF_MIXED_TOBACCO = 1.5f;
+    public static final float HEAT_THRESHOLD_SELF_MIXED_MAKHORKA = 2.0f;
+
+    // Лимиты углей для перегрева
+    public static final int CHARCOAL_LIMIT_REGULAR = 2;
+    public static final int CHARCOAL_LIMIT_SELF_MIXED_TOBACCO = 3;
+    public static final int CHARCOAL_LIMIT_SELF_MIXED_MAKHORKA = 4;
+
+    // За каждый уголь сверх лимита — x3 к сгоранию табака
+    public static final float OVERHEAT_MULTIPLIER_PER_CHARCOAL = 3.0f;
+
+    // Остывание heatingProgress углей в каллауде при idle — множитель замедления
+    // В печке без топлива: coolingTime = maxTicks/3*2. В каллауде: coolingTime = maxTicks * factor
+    // factor=5 → MM_27 остывает за 10 мин, MM_25 за 7.5 мин, MM_22 за 5 мин
+    public static final int CALLOUD_IDLE_COOLING_FACTOR = 5;
+
+    // Перегрев: если totalHeat > threshold × 1.8 (жара на 80% больше чем требуется), табак сгорает быстрее
+    // rate = excessHeat × 0.4 за тик. 2 MM_27 при 100% для обычного табака: excessHeat=1.2, rate=0.48/тик
+    public static final float OVERHEAT_THRESHOLD_MULTIPLIER = 1.8f;
+    public static final float OVERHEAT_BURN_RATE_PER_UNIT = 0.4f;
+
+    // ─── Bowl-derived state ───
+    private int totalTobaccoWeight = 0;
+    private float tobaccoOverBurnAccumulator = 0f;
+    private float overheatBurnAccumulator = 0f;
     @Nullable
-    private PotionContents activePotionContents = null; // Новое поле для хранения активных эффектов зелья
+    private ModDataComponents.HookahBowlContents cachedBowlContents = null;
+    private int lastGramsCount = 0;
 
-    private final Set<UUID> puffingPlayers = new HashSet<>(); // Игроки, которые в данный момент "тянут" кальян
-
+    // ─── Heat tracking (для синхронизации с клиентом) ───
+    private boolean needsSync = false;
+    private float lastSyncedTotalHeat = -1f;
+    private int lastSyncedCharcoalCount = -1;
+    private int lastSyncedTotalTobaccoWeight = Integer.MIN_VALUE;
     @Nullable
-    private UUID attachedPlayerUUID = null; // UUID игрока, держащего трубку
-    @Nullable
-    private String attachedPlayerName = null; // Имя игрока, держащего трубку
+    private ModDataComponents.HookahBowlContents lastSyncedBowlContents = null;
 
+    // ─── Puff tracking per player ───
+    private final Set<HookahConnectionEntity> activeConnections = new HashSet<>();
+    private final Map<UUID, Integer> playerPuffDurations = new HashMap<>();
+    private final Map<UUID, Integer> playerAirConsumed = new HashMap<>();
+    private final Map<UUID, Integer> playerKaifAccumulators = new HashMap<>();
+    private final Map<UUID, Float> playerPuffEfficiencyAccumulators = new HashMap<>();
+
+    // ─── Item handler ───
     private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-            if (!level.isClientSide()) {
-                // Отправка обновления клиенту, если необходимо
-            }
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            if (slot == 0) return stack.getItem() instanceof CalloudItem;
+            if (slot == 1) return stack.is(ModItems.HOOKAH_BOWL.get());
+            return false;
         }
 
         @Override
-        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return switch (slot) {
-                case 0 -> stack.getItem() == Items.CHARCOAL; // Слот для углей
-                case 1 -> stack.getItem() instanceof PotionItem; // Слот для зелья
-                default -> super.isItemValid(slot, stack);
-            };
+        public int getSlotLimit(int slot) {
+            return slot == 1 ? 1 : super.getSlotLimit(slot);
+        }
+
+        @Override
+        protected int getStackLimit(int slot, @NotNull ItemStack stack) {
+            return slot == 1 ? 1 : super.getStackLimit(slot, stack);
+        }
+
+        @Override
+        public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+            if (slot == 1) {
+                if (stack.isEmpty()) {
+                    super.setStackInSlot(slot, ItemStack.EMPTY);
+                    clearBowlState();
+                    needsSync = true;
+                } else if (stack.is(ModItems.HOOKAH_BOWL.get())) {
+                    super.setStackInSlot(slot, stack.copyWithCount(1));
+                    readBowlContents(itemHandler.getStackInSlot(1));
+                    needsSync = true;
+                }
+                return;
+            }
+            super.setStackInSlot(slot, stack);
+        }
+
+        @Override
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+            if (slot == 1) {
+                if (!isItemValid(slot, stack)) return stack;
+                if (!getStackInSlot(slot).isEmpty()) return stack;
+                if (!simulate) {
+                    super.setStackInSlot(slot, stack.copyWithCount(1));
+                    readBowlContents(itemHandler.getStackInSlot(1));
+                    needsSync = true;
+                }
+                return ItemStack.EMPTY;
+            }
+            return super.insertItem(slot, stack, simulate);
+        }
+
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+            if (slot == 1) {
+                ItemStack current = getStackInSlot(slot);
+                if (current.isEmpty()) return ItemStack.EMPTY;
+                if (!simulate) {
+                    super.setStackInSlot(slot, ItemStack.EMPTY);
+                    clearBowlState();
+                    needsSync = true;
+                    return current.copy();
+                }
+                return current.copy();
+            }
+            return super.extractItem(slot, amount, simulate);
+        }
+
+        @Override
+        protected void onContentsChanged(int slot) {
+            if (level != null && !level.isClientSide()) {
+                setChanged();
+                needsSync = true;
+            }
         }
     };
 
+    // ─── Constructor ───
     public HookahBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.HOOKAH_BE.get(), pPos, pBlockState);
     }
 
-    public ItemStackHandler getItemHandler() {
-        return itemHandler;
-    }
-
-    public int getPuffsRemainingPotion() {
-        return puffsRemainingPotion;
-    }
-
-    public int getCurrentCoalBurnTime() {
-        return currentCoalBurnTime;
-    }
-
-    public int getMaxPuffsPerPotion() {
-        return MAX_PUFFS_PER_POTION;
-    }
-
-    public int getCoalBurnTimeTicks() {
-        return COAL_BURN_TIME_TICKS;
-    }
-
+    // ─── Public accessors ───
+    public ItemStackHandler getItemHandler() { return itemHandler; }
+    public int getTotalTobaccoWeight() { return totalTobaccoWeight; }
     @Nullable
-    public UUID getAttachedPlayerUUID() {
-        return attachedPlayerUUID;
+    public ModDataComponents.HookahBowlContents getCachedBowlContents() { return cachedBowlContents; }
+    public int getMaxPuffsPerPotion() { return MAX_PUFFS_PER_POTION; }
+    public boolean isPlayerPuffing(UUID playerUUID) { return playerPuffDurations.containsKey(playerUUID); }
+
+    // ─── Heat helpers ───
+
+    public float getTotalHeat() {
+        ItemStack calloudStack = itemHandler.getStackInSlot(0);
+        if (!(calloudStack.getItem() instanceof CalloudItem)) return 0f;
+        ModDataComponents.CalloudData calloudData = calloudStack.getOrDefault(
+                ModDataComponents.CALLOUD_CONTENTS.get(),
+                new ModDataComponents.CalloudData(List.of(), List.of())
+        );
+        return calloudData.totalHeat();
     }
 
-    @Nullable
-    public String getAttachedPlayerName() {
-        return attachedPlayerName;
+    public int getCharcoalCount() {
+        ItemStack calloudStack = itemHandler.getStackInSlot(0);
+        if (!(calloudStack.getItem() instanceof CalloudItem)) return 0;
+        ModDataComponents.CalloudData calloudData = calloudStack.getOrDefault(
+                ModDataComponents.CALLOUD_CONTENTS.get(),
+                new ModDataComponents.CalloudData(List.of(), List.of())
+        );
+        return calloudData.charcoalCount();
     }
 
-    public boolean isPipeAttached() {
-        return attachedPlayerUUID != null;
-    }
-
-    public void attachPipe(UUID playerUUID, String playerName) {
-        this.attachedPlayerUUID = playerUUID;
-        this.attachedPlayerName = playerName;
-        QuasiumMod.addAttachedPipe(playerUUID, worldPosition); // Добавляем запись в QuasiumMod
-        setChanged();
-        if (level != null && !level.isClientSide()) {
-            // Отправить обновление клиенту, чтобы GUI мог обновиться
-            ModPackets.sendToClientsTrackingBlock(new PacketHookahPuffData(worldPosition, puffsRemainingPotion, currentCoalBurnTime, attachedPlayerUUID, attachedPlayerName), this);
+    /** Определить тип табака и вернуть порог жара. */
+    private float getHeatThreshold() {
+        if (cachedBowlContents == null || cachedBowlContents.groups().isEmpty()) {
+            return HEAT_THRESHOLD_REGULAR;
         }
+        boolean hasSelfMixed = false;
+        boolean isMakhorka = false;
+        for (ModDataComponents.BowlTobaccoGroup group : cachedBowlContents.groups()) {
+            if (group.isSelfMixed()) {
+                hasSelfMixed = true;
+                if ("makhorka".equals(group.base())) {
+                    isMakhorka = true;
+                }
+            }
+        }
+        if (isMakhorka) return HEAT_THRESHOLD_SELF_MIXED_MAKHORKA;
+        if (hasSelfMixed) return HEAT_THRESHOLD_SELF_MIXED_TOBACCO;
+        return HEAT_THRESHOLD_REGULAR;
     }
 
-    public void detachPipe(@Nullable UUID playerUUID) { // Изменяем сигнатуру для принятия UUID
-        if (playerUUID != null) {
-            QuasiumMod.removeAttachedPipe(playerUUID); // Удаляем запись из QuasiumMod
+    /** Определить лимит углей для текущего табака. */
+    private int getCharcoalLimit() {
+        if (cachedBowlContents == null || cachedBowlContents.groups().isEmpty()) {
+            return CHARCOAL_LIMIT_REGULAR;
         }
-        this.attachedPlayerUUID = null;
-        this.attachedPlayerName = null;
-        setChanged();
-        if (level != null && !level.isClientSide()) {
-            // Отправить обновление клиенту
-            ModPackets.sendToClientsTrackingBlock(new PacketHookahPuffData(worldPosition, puffsRemainingPotion, currentCoalBurnTime, attachedPlayerUUID, attachedPlayerName), this);
+        boolean hasSelfMixed = false;
+        boolean isMakhorka = false;
+        for (ModDataComponents.BowlTobaccoGroup group : cachedBowlContents.groups()) {
+            if (group.isSelfMixed()) {
+                hasSelfMixed = true;
+                if ("makhorka".equals(group.base())) {
+                    isMakhorka = true;
+                }
+            }
         }
+        if (isMakhorka) return CHARCOAL_LIMIT_SELF_MIXED_MAKHORKA;
+        if (hasSelfMixed) return CHARCOAL_LIMIT_SELF_MIXED_TOBACCO;
+        return CHARCOAL_LIMIT_REGULAR;
     }
 
-    public void manualDetachPipe(Player player) {
-        if (this.level == null || this.level.isClientSide()) {
-            return;
-        }
+    // ─── Bowl state management ───
 
-        if (attachedPlayerUUID != null && attachedPlayerUUID.equals(player.getUUID())) {
-            detachPipe(player.getUUID()); // Используем обновленный метод detachPipe
-            stopPuffing(player.getUUID()); // Убеждаемся, что игрок прекращает затяжку
-
-            // Трубка не выдается, так как она не потреблялась при прикреплении
-
-            player.sendSystemMessage(Component.literal("You detached the hookah pipe."));
+    private void readBowlContents(ItemStack bowlItem) {
+        ModDataComponents.HookahBowlContents contents = bowlItem.getOrDefault(
+                ModDataComponents.HOOKAH_BOWL_CONTENTS.get(),
+                new ModDataComponents.HookahBowlContents(List.of(), Map.of(), Set.of(), false)
+        );
+        if (!contents.slotAssignments().isEmpty() || !contents.burnedSlots().isEmpty()) {
+            // Bowl has content (active or burned slots) — mark as heated when entering the hookah
+            contents = contents.withHeated(true);
+            bowlItem.set(ModDataComponents.HOOKAH_BOWL_CONTENTS.get(), contents);
+            totalTobaccoWeight = contents.filledSlotCount() * TOBACCO_TICKS_PER_GRAM;
+            cachedBowlContents = contents;
+            lastGramsCount = contents.filledSlotCount();
         } else {
-            player.sendSystemMessage(Component.literal("You are not attached to this hookah."));
+            totalTobaccoWeight = 0;
+            tobaccoOverBurnAccumulator = 0f;
+            cachedBowlContents = null;
+            lastGramsCount = 0;
         }
     }
 
-    public void startPuffing(UUID playerUUID) {
-        puffingPlayers.add(playerUUID);
-        LOGGER.debug("Player {} started puffing at {}", playerUUID, worldPosition);
+    private boolean readBowlFromSlot1() {
+        ItemStack bowlItem = itemHandler.getStackInSlot(1);
+        if (bowlItem.isEmpty() || !bowlItem.is(ModItems.HOOKAH_BOWL.get())) {
+            clearBowlState();
+            return false;
+        }
+        readBowlContents(bowlItem);
+        return totalTobaccoWeight > 0;
     }
 
-    public void stopPuffing(UUID playerUUID) {
-        puffingPlayers.remove(playerUUID);
-        LOGGER.debug("Player {} stopped puffing at {}", playerUUID, worldPosition);
+    private void clearBowlState() {
+        totalTobaccoWeight = 0;
+        tobaccoOverBurnAccumulator = 0f;
+        cachedBowlContents = null;
+        lastGramsCount = 0;
     }
+
+    private void updateBowlItemDuringConsumption() {
+        ItemStack bowlItem = itemHandler.getStackInSlot(1);
+        if (bowlItem.isEmpty() || !bowlItem.is(ModItems.HOOKAH_BOWL.get())) return;
+
+        int currentGrams = totalTobaccoWeight / TOBACCO_TICKS_PER_GRAM;
+        if (currentGrams == lastGramsCount) return;
+
+        int gramsToRemove = lastGramsCount - currentGrams;
+        ModDataComponents.HookahBowlContents contents = bowlItem.getOrDefault(
+                ModDataComponents.HOOKAH_BOWL_CONTENTS.get(),
+                new ModDataComponents.HookahBowlContents(List.of(), Map.of(), Set.of(), false)
+        );
+
+        for (int i = 0; i < gramsToRemove; i++) {
+            contents = contents.burnLastSlot();
+        }
+
+        // If all slots are gone (both active and burned), clear the bowl completely
+        if (contents.slotAssignments().isEmpty() && contents.burnedSlots().isEmpty()) {
+            contents = contents.cleared();
+        }
+
+        bowlItem.set(ModDataComponents.HOOKAH_BOWL_CONTENTS.get(), contents);
+
+        if (!contents.slotAssignments().isEmpty() || !contents.burnedSlots().isEmpty()) {
+            cachedBowlContents = contents;
+        } else {
+            cachedBowlContents = null;
+        }
+
+        lastGramsCount = currentGrams;
+    }
+
+    // ─── Puff lifecycle ───
+
+    public void startPuffing(HookahConnectionEntity connectionEntity) {
+        activeConnections.add(connectionEntity);
+        if (connectionEntity.getAttachedPlayerUUID() != null) {
+            playerPuffDurations.put(connectionEntity.getAttachedPlayerUUID(), 0);
+        }
+        needsSync = true;
+    }
+
+    public void stopPuffing(HookahConnectionEntity connectionEntity, Player player) {
+        if (this.level == null || this.level.isClientSide()) return;
+
+        UUID playerUUID = connectionEntity.getAttachedPlayerUUID();
+        Integer totalPuffDurationTicks = playerUUID != null ? playerPuffDurations.remove(playerUUID) : null;
+        Float puffEfficiencySum = playerUUID != null ? playerPuffEfficiencyAccumulators.remove(playerUUID) : null;
+        if (playerUUID != null) {
+            playerAirConsumed.remove(playerUUID);
+            playerKaifAccumulators.remove(playerUUID);
+        }
+
+        // Compute average puff efficiency and effective duration for effects
+        float avgPuffEfficiency = 1.0f;
+        int effectivePuffDuration = totalPuffDurationTicks != null ? totalPuffDurationTicks : 0;
+        if (puffEfficiencySum != null && totalPuffDurationTicks != null && totalPuffDurationTicks > 0) {
+            avgPuffEfficiency = puffEfficiencySum / totalPuffDurationTicks;
+            effectivePuffDuration = (int)(totalPuffDurationTicks * avgPuffEfficiency);
+        }
+
+        // Apply tobacco effects
+        if (player instanceof ServerPlayer serverPlayer) {
+            if (effectivePuffDuration > 0) {
+                ItemStack bowlItem = itemHandler.getStackInSlot(1);
+                ModDataComponents.HookahBowlContents effectContents = null;
+
+                if (!bowlItem.isEmpty() && bowlItem.is(ModItems.HOOKAH_BOWL.get())) {
+                    effectContents = bowlItem.getOrDefault(
+                            ModDataComponents.HOOKAH_BOWL_CONTENTS.get(),
+                            new ModDataComponents.HookahBowlContents(List.of(), Map.of(), Set.of(), false)
+                    );
+                    if (effectContents.slotAssignments().isEmpty()) effectContents = null;
+                }
+
+                // Fallback to cached contents
+                if (effectContents == null && cachedBowlContents != null) {
+                    effectContents = cachedBowlContents;
+                }
+
+                if (effectContents != null) {
+                    applyTobaccoEffects(serverPlayer, effectivePuffDuration, effectContents);
+                    // Track tried flavors/bases
+                    for (ModDataComponents.BowlTobaccoGroup group : effectContents.groups()) {
+                        if (group.isRegular()) {
+                            PlayerTobaccoData.addTriedFlavors(serverPlayer, Set.of(group.flavor()));
+                        } else {
+                            PlayerTobaccoData.addTriedFlavors(serverPlayer, Set.of("self_mixed_" + group.base()));
+                        }
+                    }
+                }
+            }
+        }
+
+        if (totalTobaccoWeight <= 0) {
+            clearBowlState();
+        }
+
+        connectionEntity.setPuffing(false);
+        activeConnections.remove(connectionEntity);
+
+        ModPackets.sendToClientsTrackingBlock(new PacketStopHookahPuffSoundClient(this.worldPosition, false), this);
+        ModPackets.sendToClientsTrackingEntityAndSelf(new PacketSpawnSmoke(player.getId(), player.getLookAngle()), player);
+        needsSync = true;
+    }
+
+    public void stopClientPuffSound() {
+        if (level != null && level.isClientSide()) {
+            LOGGER.debug("Client: Stopping puff sound for hookah at {}", worldPosition);
+        }
+    }
+
+    public boolean tryPuff(Player player) {
+        if (this.level == null || this.level.isClientSide()) return false;
+
+        // Air check
+        if (player.getAirSupply() <= AIR_CONSUMPTION_PER_TICK_PUFF) {
+            for (HookahConnectionEntity connection : activeConnections) {
+                if (connection.getAttachedPlayerUUID() != null &&
+                    connection.getAttachedPlayerUUID().equals(player.getUUID())) {
+                    ItemStack pipeItem = player.getMainHandItem().is(ModItems.HOOKAH_PIPE.get()) ?
+                                         player.getMainHandItem() :
+                                         player.getOffhandItem();
+                    if (pipeItem.is(ModItems.HOOKAH_PIPE.get())) {
+                        long cooldownEndTime = this.level.getGameTime() + 100L;
+                        pipeItem.set(ModDataComponents.HOOKAH_PIPE_COOLDOWN_END.get(), cooldownEndTime);
+                    }
+                    if (connection.isPuffing()) {
+                        connection.stopPuffing(this, player);
+                    }
+                    break;
+                }
+            }
+            return false;
+        }
+
+        ItemStack bowlItem = itemHandler.getStackInSlot(1);
+        boolean hasPuffableContent = !bowlItem.isEmpty() && bowlItem.is(ModItems.HOOKAH_BOWL.get()) && totalTobaccoWeight > 0;
+
+        // Calloud & heat check
+        ItemStack calloudStack = itemHandler.getStackInSlot(0);
+        if (!(calloudStack.getItem() instanceof CalloudItem)) {
+            // No calloud — stop puffing
+            for (HookahConnectionEntity connection : activeConnections) {
+                if (connection.getAttachedPlayerUUID() != null &&
+                    connection.getAttachedPlayerUUID().equals(player.getUUID())) {
+                    connection.stopPuffing(this, player);
+                    connection.discard();
+                    break;
+                }
+            }
+            return false;
+        }
+
+        ModDataComponents.CalloudData calloudData = calloudStack.getOrDefault(
+                ModDataComponents.CALLOUD_CONTENTS.get(),
+                new ModDataComponents.CalloudData(List.of(), List.of())
+        );
+
+        float totalHeat = calloudData.totalHeat();
+        float heatThreshold = getHeatThreshold();
+        int charcoalCount = calloudData.charcoalCount();
+        int charcoalLimit = getCharcoalLimit();
+
+        // Not enough heat — can't puff
+        if (totalHeat < heatThreshold) {
+            for (HookahConnectionEntity connection : activeConnections) {
+                if (connection.getAttachedPlayerUUID() != null &&
+                    connection.getAttachedPlayerUUID().equals(player.getUUID())) {
+                    connection.stopPuffing(this, player);
+                    connection.discard();
+                    break;
+                }
+            }
+            return false;
+        }
+
+        // Puff efficiency: if heatRatio < 60% of max possible heat, effects scale down
+        // heatRatio >= 0.6 → full efficiency (1.0). Below 0.6 → linear: at 60%=0.8, at 0%=0
+        float maxPossibleHeat = calloudData.maxPossibleHeat();
+        float heatRatio = maxPossibleHeat > 0f ? totalHeat / maxPossibleHeat : 0f;
+        final float puffEfficiency = heatRatio >= 0.6f ? 1.0f : (heatRatio / 0.6f) * 0.8f;
+
+        // Heat decay: reduce remaining ticks of each charcoal
+        // Overheat multiplier: for each charcoal beyond limit, multiply tobacco consumption by 3
+        float overheatMultiplier = 1.0f;
+        if (charcoalCount > charcoalLimit) {
+            int extra = charcoalCount - charcoalLimit;
+            overheatMultiplier = (float) Math.pow(OVERHEAT_MULTIPLIER_PER_CHARCOAL, extra);
+        }
+
+        // Decay each charcoal's remaining ticks (1 tick of puff = 1 tick of burn)
+        List<ModDataComponents.CharcoalData> newCharcoals = new ArrayList<>();
+        boolean anyRemoved = false;
+        for (ModDataComponents.CharcoalData cd : calloudData.charcoals()) {
+            int newRemaining = Math.max(0, cd.remainingTicks() - 1);
+            if (newRemaining > 0) {
+                newCharcoals.add(new ModDataComponents.CharcoalData(cd.size(), newRemaining, cd.heatingProgress()));
+            } else {
+                anyRemoved = true;
+            }
+        }
+
+        // Decay stacked charcoals remaining ticks too
+        List<ModDataComponents.CharcoalData> newStackedCharcoals = new ArrayList<>();
+        for (ModDataComponents.CharcoalData cd : calloudData.stackedCharcoals()) {
+            int newRemaining = Math.max(0, cd.remainingTicks() - 1);
+            if (newRemaining > 0) {
+                newStackedCharcoals.add(new ModDataComponents.CharcoalData(cd.size(), newRemaining, cd.heatingProgress()));
+            } else {
+                anyRemoved = true;
+            }
+        }
+
+        if (anyRemoved || newCharcoals.size() != calloudData.charcoals().size() || newStackedCharcoals.size() != calloudData.stackedCharcoals().size()) {
+            calloudStack.set(ModDataComponents.CALLOUD_CONTENTS.get(), new ModDataComponents.CalloudData(newCharcoals, newStackedCharcoals));
+            needsSync = true;
+        }
+
+        // Tobacco consumption
+        if (totalTobaccoWeight > 0) {
+            int consumption = TOBACCO_CONSUMPTION_PER_PUFF;
+            int currentGrams = totalTobaccoWeight / TOBACCO_TICKS_PER_GRAM;
+            int burnedSlotsCount = cachedBowlContents != null ? cachedBowlContents.burnedSlots().size() : 0;
+            int totalOccupiedSlots = currentGrams + burnedSlotsCount;
+            if (totalOccupiedSlots > TOBACCO_OVER_BURN_THRESHOLD_GRAMS) {
+                tobaccoOverBurnAccumulator += TOBACCO_OVER_BURN_EXTRA_RATE;
+                if (tobaccoOverBurnAccumulator >= 1.0f) {
+                    consumption += 1;
+                    tobaccoOverBurnAccumulator -= 1.0f;
+                }
+            } else {
+                tobaccoOverBurnAccumulator = 0f;
+            }
+
+            // Overheat burn: if totalHeat > threshold × 1.8, tobacco burns faster
+            float overheatThreshold = heatThreshold * OVERHEAT_THRESHOLD_MULTIPLIER;
+            if (totalHeat > overheatThreshold) {
+                float excessHeat = totalHeat - overheatThreshold;
+                overheatBurnAccumulator += excessHeat * OVERHEAT_BURN_RATE_PER_UNIT;
+                if (overheatBurnAccumulator >= 1.0f) {
+                    consumption += 1;
+                    overheatBurnAccumulator -= 1.0f;
+                }
+            } else {
+                overheatBurnAccumulator = 0f;
+            }
+
+            // Apply overheat multiplier
+            consumption = (int) Math.ceil(consumption * overheatMultiplier);
+
+            totalTobaccoWeight -= consumption;
+            if (totalTobaccoWeight < 0) totalTobaccoWeight = 0;
+
+            if (player instanceof ServerPlayer serverPlayer && consumption > 0) {
+                net.sorukoma.quasium.data.PlayerOverdoseData.recordConsumption(serverPlayer, consumption);
+            }
+
+            if (totalTobaccoWeight == 0) {
+                // Tobacco weight is 0 but burned slots may still exist
+                if (!bowlItem.isEmpty() && bowlItem.is(ModItems.HOOKAH_BOWL.get())) {
+                    ModDataComponents.HookahBowlContents currentContents = bowlItem.getOrDefault(
+                            ModDataComponents.HOOKAH_BOWL_CONTENTS.get(),
+                            new ModDataComponents.HookahBowlContents(List.of(), Map.of(), Set.of(), false)
+                    );
+                    if (!currentContents.slotAssignments().isEmpty() || !currentContents.burnedSlots().isEmpty()) {
+                        // Burn any remaining active slots, keep burned slots
+                        while (!currentContents.slotAssignments().isEmpty()) {
+                            currentContents = currentContents.burnLastSlot();
+                        }
+                        if (currentContents.burnedSlots().isEmpty()) {
+                            bowlItem.set(ModDataComponents.HOOKAH_BOWL_CONTENTS.get(), currentContents.cleared());
+                            cachedBowlContents = null;
+                        } else {
+                            bowlItem.set(ModDataComponents.HOOKAH_BOWL_CONTENTS.get(), currentContents);
+                            cachedBowlContents = currentContents;
+                        }
+                    } else {
+                        bowlItem.set(ModDataComponents.HOOKAH_BOWL_CONTENTS.get(), ModDataComponents.HookahBowlContents.cleared());
+                        cachedBowlContents = null;
+                    }
+                }
+                lastGramsCount = 0;
+                needsSync = true;
+            } else {
+                updateBowlItemDuringConsumption();
+                needsSync = true;
+            }
+        }
+
+        // Player air consumption
+        playerPuffDurations.compute(player.getUUID(), (uuid, duration) -> duration == null ? 1 : duration + 1);
+        playerAirConsumed.compute(player.getUUID(), (uuid, consumed) -> consumed == null ? AIR_CONSUMPTION_PER_TICK_PUFF : consumed + AIR_CONSUMPTION_PER_TICK_PUFF);
+        playerPuffEfficiencyAccumulators.compute(player.getUUID(), (uuid, acc) -> acc == null ? puffEfficiency : acc + puffEfficiency);
+        player.setAirSupply(Math.max(0, player.getAirSupply() - AIR_CONSUMPTION_PER_TICK_PUFF));
+
+        // Kaif accumulation — check compatibility
+        ModDataComponents.HookahBowlContents currentContents = cachedBowlContents;
+        boolean isCompatible = currentContents != null && currentContents.isCompatible();
+
+        playerKaifAccumulators.compute(player.getUUID(), (uuid, acc) -> acc == null ? 1 : acc + 1);
+        if (playerKaifAccumulators.get(player.getUUID()) >= TICKS_PER_SECOND) {
+            int kaifPerSecond = Config.KAIF_PER_SECOND_SMOKING.getAsInt();
+            if (kaifPerSecond > 0 && player instanceof ServerPlayer) {
+                int adjustedKaif = Math.max(1, (int)(kaifPerSecond * puffEfficiency));
+                if (isCompatible) {
+                    PlayerKaifData.addKaif(player, adjustedKaif);
+                } else {
+                    PlayerKaifData.subtractKaif(player, kaifPerSecond);
+                    applyNauseaFromNegativeKaif((ServerPlayer) player);
+                }
+            }
+            playerKaifAccumulators.put(player.getUUID(), 0);
+        }
+
+        return true;
+    }
+
+    // ─── Tick logic ───
+
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, HookahBlockEntity pBlockEntity) {
+        if (pLevel.isClientSide()) return;
+
+        // Puff each active connection
+        boolean isAnyPuffing = false;
+        Set<HookahConnectionEntity> connectionsToRemove = new HashSet<>();
+        for (HookahConnectionEntity connection : pBlockEntity.activeConnections) {
+            if (connection.isRemoved() || connection.level() != pLevel) {
+                connectionsToRemove.add(connection);
+                continue;
+            }
+            if (!connection.isPuffing()) continue;
+            isAnyPuffing = true;
+
+            UUID connUUID = connection.getAttachedPlayerUUID();
+            Player player = connUUID != null ? pLevel.getPlayerByUUID(connUUID) : null;
+            if (player instanceof ServerPlayer) {
+                pBlockEntity.tryPuff(player);
+            } else {
+                connectionsToRemove.add(connection);
+            }
+        }
+        // Чистим per-player аккумуляторы для удаляемых соединений, иначе мапы растут без границ
+        for (HookahConnectionEntity removed : connectionsToRemove) {
+            UUID uuid = removed.getAttachedPlayerUUID();
+            if (uuid != null) {
+                pBlockEntity.playerPuffDurations.remove(uuid);
+                pBlockEntity.playerAirConsumed.remove(uuid);
+                pBlockEntity.playerKaifAccumulators.remove(uuid);
+                pBlockEntity.playerPuffEfficiencyAccumulators.remove(uuid);
+            }
+        }
+        pBlockEntity.activeConnections.removeAll(connectionsToRemove);
+
+        // Idle coal decay: when no one is puffing, coals cool down and burn through naturally
+        if (!isAnyPuffing) {
+            pBlockEntity.idleCoalDecay();
+        }
+
+        if (!pBlockEntity.isHookahPuffDataDirty()) return;
+        pBlockEntity.syncHookahPuffDataToTrackingClients();
+    }
+
+    private void idleCoalDecay() {
+        ItemStack calloudStack = itemHandler.getStackInSlot(0);
+        if (!(calloudStack.getItem() instanceof CalloudItem)) return;
+
+        ModDataComponents.CalloudData calloudData = calloudStack.getOrDefault(
+                ModDataComponents.CALLOUD_CONTENTS.get(),
+                new ModDataComponents.CalloudData(List.of(), List.of())
+        );
+
+        if (calloudData.charcoals().isEmpty() && calloudData.stackedCharcoals().isEmpty()) return;
+
+        List<ModDataComponents.CharcoalData> newCharcoals = new ArrayList<>();
+        List<ModDataComponents.CharcoalData> newStackedCharcoals = new ArrayList<>();
+        boolean anyChanged = false;
+
+        for (ModDataComponents.CharcoalData cd : calloudData.charcoals()) {
+            float newProgress = cd.heatingProgress();
+            if (newProgress > 0f) {
+                float coolingPerTick = 100.0f / (cd.size().getMaxTicks() * CALLOUD_IDLE_COOLING_FACTOR);
+                newProgress = Math.max(0f, newProgress - coolingPerTick);
+            }
+
+            if (cd.remainingTicks() > 0 || newProgress > 0f) {
+                if (newProgress != cd.heatingProgress()) {
+                    anyChanged = true;
+                }
+                newCharcoals.add(new ModDataComponents.CharcoalData(cd.size(), cd.remainingTicks(), newProgress));
+            } else {
+                anyChanged = true;
+            }
+        }
+
+        // Stacked charcoals cool down the same way as base
+        for (ModDataComponents.CharcoalData cd : calloudData.stackedCharcoals()) {
+            float newProgress = cd.heatingProgress();
+            if (newProgress > 0f) {
+                float coolingPerTick = 100.0f / (cd.size().getMaxTicks() * CALLOUD_IDLE_COOLING_FACTOR);
+                newProgress = Math.max(0f, newProgress - coolingPerTick);
+            }
+
+            if (cd.remainingTicks() > 0 || newProgress > 0f) {
+                if (newProgress != cd.heatingProgress()) {
+                    anyChanged = true;
+                }
+                newStackedCharcoals.add(new ModDataComponents.CharcoalData(cd.size(), cd.remainingTicks(), newProgress));
+            } else {
+                anyChanged = true;
+            }
+        }
+
+        if (anyChanged) {
+            calloudStack.set(ModDataComponents.CALLOUD_CONTENTS.get(), new ModDataComponents.CalloudData(newCharcoals, newStackedCharcoals));
+            needsSync = true;
+            setChanged();
+        }
+    }
+
+    // ─── Sync ───
+
+    private boolean isHookahPuffDataDirty() {
+        float currentHeat = getTotalHeat();
+        int currentCharcoalCount = getCharcoalCount();
+        return needsSync
+                || Math.abs(lastSyncedTotalHeat - currentHeat) > 0.01f
+                || lastSyncedCharcoalCount != currentCharcoalCount
+                || lastSyncedTotalTobaccoWeight != totalTobaccoWeight
+                || !java.util.Objects.equals(lastSyncedBowlContents, cachedBowlContents);
+    }
+
+    private PacketHookahPuffData createHookahPuffDataPacket() {
+        return new PacketHookahPuffData(worldPosition, getTotalHeat(), totalTobaccoWeight, cachedBowlContents);
+    }
+
+    private void markHookahPuffDataSynced() {
+        lastSyncedTotalHeat = getTotalHeat();
+        lastSyncedCharcoalCount = getCharcoalCount();
+        lastSyncedTotalTobaccoWeight = totalTobaccoWeight;
+        lastSyncedBowlContents = cachedBowlContents;
+        needsSync = false;
+    }
+
+    private void syncHookahPuffDataToTrackingClients() {
+        setChanged();
+        ModPackets.sendToClientsTrackingBlock(createHookahPuffDataPacket(), this);
+        markHookahPuffDataSynced();
+    }
+
+    public void syncHookahPuffDataToPlayer(ServerPlayer player) {
+        PacketDistributor.sendToPlayer(player, createHookahPuffDataPacket());
+    }
+
+    // ─── NBT serialization ───
 
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        pTag.putInt("PuffsRemainingPotion", puffsRemainingPotion);
-        pTag.putInt("CurrentCoalBurnTime", currentCoalBurnTime);
-        if (attachedPlayerUUID != null) {
-            pTag.putUUID("AttachedPlayerUUID", attachedPlayerUUID);
-            pTag.putString("AttachedPlayerName", attachedPlayerName);
-        }
-        if (activePotionContents != null) {
-            // Сохраняем PotionContents
-            PotionContents.CODEC.encodeStart(pRegistries.createSerializationContext(NbtOps.INSTANCE), activePotionContents)
-                    .resultOrPartial(s -> System.err.println("Failed to save PotionContents: " + s))
-                    .ifPresent(tagElement -> pTag.put("ActivePotionContents", tagElement));
-        }
         super.saveAdditional(pTag, pRegistries);
+        pTag.put("inventory", itemHandler.serializeNBT(pRegistries));
+        pTag.putInt("TotalTobaccoWeight", totalTobaccoWeight);
     }
 
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
         itemHandler.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
-        puffsRemainingPotion = pTag.getInt("PuffsRemainingPotion");
-        currentCoalBurnTime = pTag.getInt("CurrentCoalBurnTime");
-        if (pTag.hasUUID("AttachedPlayerUUID")) {
-            attachedPlayerUUID = pTag.getUUID("AttachedPlayerUUID");
-            attachedPlayerName = pTag.getString("AttachedPlayerName");
-            // При загрузке мира, если трубка была прикреплена, добавляем ее в карту QuasiumMod
-            if (level != null && !level.isClientSide()) {
-                QuasiumMod.addAttachedPipe(attachedPlayerUUID, worldPosition);
-            }
-        }
-        if (pTag.contains("ActivePotionContents")) {
-            // Загружаем PotionContents
-            PotionContents.CODEC.parse(pRegistries.createSerializationContext(NbtOps.INSTANCE), pTag.get("ActivePotionContents"))
-                    .resultOrPartial(s -> System.err.println("Failed to load PotionContents: " + s))
-                    .ifPresent(contents -> activePotionContents = contents);
+
+        ItemStack slot1Item = itemHandler.getStackInSlot(1);
+        if (!slot1Item.isEmpty() && slot1Item.is(ModItems.HOOKAH_BOWL.get())) {
+            readBowlContents(slot1Item);
+        } else if (!slot1Item.isEmpty()) {
+            LOGGER.warn("Legacy non-bowl item in slot 1 at {}, clearing", worldPosition);
+            itemHandler.setStackInSlot(1, ItemStack.EMPTY);
+            clearBowlState();
         }
     }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        tag.put("inventory", itemHandler.serializeNBT(registries));
+        tag.putInt("TotalTobaccoWeight", totalTobaccoWeight);
+        return tag;
+    }
+
+    @Nullable
+    @Override
+    public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> getUpdatePacket() {
+        return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    // ─── Drops ───
 
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
@@ -223,6 +813,8 @@ public class HookahBlockEntity extends BlockEntity implements MenuProvider {
         }
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
+
+    // ─── Menu provider ───
 
     @Override
     public Component getDisplayName() {
@@ -235,166 +827,73 @@ public class HookahBlockEntity extends BlockEntity implements MenuProvider {
         return new HookahMenu(pContainerId, pPlayerInventory, this);
     }
 
-    // Новый метод для обработки затяжки с переменной длительностью
-    public void processPuff(Player player, int puffDurationTicks) {
-        if (this.level == null || this.level.isClientSide()) {
-            return;
-        }
+    // ─── Tobacco effects ───
 
-        // Проверяем, что игрок, который тянет, является привязанным игроком
-        if (attachedPlayerUUID == null || !attachedPlayerUUID.equals(player.getUUID())) {
-            player.sendSystemMessage(Component.literal("You need to attach the hookah pipe first!"));
-            return;
-        }
-
-        // Проверяем, что у игрока достаточно кислорода для затяжки
-        if (player.getAirSupply() <= AIR_CONSUMPTION_PER_TICK_PUFF) { // Если кислорода меньше, чем минимальный расход
-            player.sendSystemMessage(Component.literal("You are out of breath!"));
-            stopPuffing(player.getUUID()); // Останавливаем затяжку
-            return;
-        }
-
-        LOGGER.debug("Processing puff for player {} at {}. Requested duration: {} ticks", player.getName().getString(), worldPosition, puffDurationTicks);
-
-        ItemStack charcoalStack = itemHandler.getStackInSlot(0);
-        ItemStack potionStackInSlot = itemHandler.getStackInSlot(1);
-
-        // --- Handle Charcoal ---
-        boolean hasCoal = currentCoalBurnTime > 0;
-        if (!hasCoal) {
-            if (charcoalStack.getItem() == Items.CHARCOAL && !charcoalStack.isEmpty()) {
-                charcoalStack.shrink(1);
-                itemHandler.setStackInSlot(0, charcoalStack);
-                currentCoalBurnTime = COAL_BURN_TIME_TICKS;
-                player.sendSystemMessage(Component.literal("New charcoal loaded!"));
-                hasCoal = true;
-            } else {
-                player.sendSystemMessage(Component.literal("Hookah needs charcoal!"));
-                return; // Still need charcoal to puff at all
-            }
-        }
-
-        // --- Handle Potion ---
-        boolean hasPotionEffects = puffsRemainingPotion > 0;
-        if (!hasPotionEffects) { // If potion puffs are 0 or less
-            if (potionStackInSlot.getItem() instanceof PotionItem && !potionStackInSlot.isEmpty()) {
-                PotionContents newPotionContents = potionStackInSlot.getComponents().get(DataComponents.POTION_CONTENTS);
-                if (newPotionContents != null && newPotionContents.getAllEffects().iterator().hasNext()) { // Check if new potion has effects
-                    activePotionContents = newPotionContents;
-                    // Потребляем зелье (или оставляем пустую бутылку, если это обычное зелье)
-                    if (potionStackInSlot.getItem() == Items.POTION) {
-                        itemHandler.setStackInSlot(1, new ItemStack(Items.GLASS_BOTTLE));
-                    } else {
-                        potionStackInSlot.shrink(1);
-                        itemHandler.setStackInSlot(1, potionStackInSlot);
-                    }
-                    puffsRemainingPotion = MAX_PUFFS_PER_POTION;
-                    player.sendSystemMessage(Component.literal("New potion loaded!"));
-                    hasPotionEffects = true;
-                } else {
-                    player.sendSystemMessage(Component.literal("Potion has no effects! Puffing empty."));
-                    activePotionContents = null; // Ensure no old effects are applied
-                }
-            } else {
-                player.sendSystemMessage(Component.literal("Hookah needs a potion! Puffing empty."));
-                activePotionContents = null; // Ensure no old effects are applied
-            }
-        }
-
-        // Определяем, сколько затяжек мы можем сделать
-        // Potion duration no longer limits the puff itself, only whether effects are applied.
-        int actualPuffDuration = Math.min(puffDurationTicks, currentCoalBurnTime);
-
-        LOGGER.debug("Calculated actual puff duration: {} ticks (Requested: {}, Coal left: {})", actualPuffDuration, puffDurationTicks, currentCoalBurnTime);
-
-        if (actualPuffDuration <= 0) {
-            String reason = "";
-            if (puffDurationTicks <= 0) reason = "Puff duration was 0.";
-            else if (currentCoalBurnTime <= 0) reason = "No coal burn time remaining.";
-            player.sendSystemMessage(Component.literal("Not enough resources for a puff! " + reason));
-            LOGGER.warn("Puff failed for player {} at {}. Reason: {}", player.getName().getString(), worldPosition, reason);
-            return;
-        }
-
-        // Потребляем ресурсы
-        currentCoalBurnTime -= actualPuffDuration; // Coal burns regardless
-
-        // Потребляем potion puffs, если они есть
-        if (hasPotionEffects) {
-            puffsRemainingPotion -= actualPuffDuration;
-            if (puffsRemainingPotion < 0) puffsRemainingPotion = 0; // Предотвращаем отрицательные значения
-        }
-
-
-        // Применяем эффекты зелья ТОЛЬКО если есть оставшиеся затяжки зелья И activePotionContents не null
-        if (activePotionContents != null && hasPotionEffects) {
-            List<MobEffectInstance> mobEffects = Lists.newArrayList(activePotionContents.getAllEffects());
-            for (MobEffectInstance effect : mobEffects) {
-                int effectDuration = (int) (actualPuffDuration * EFFECT_DURATION_MULTIPLIER);
-                player.addEffect(new MobEffectInstance(effect.getEffect(), effectDuration, effect.getAmplifier(), effect.isAmbient(), effect.isVisible()));
-            }
-        } else if (activePotionContents != null && !hasPotionEffects) {
-            // Если зелье только что закончилось или уже было пустым, очищаем активные эффекты для следующей затяжки.
-            activePotionContents = null;
-        }
-
-
-        setChanged();
-
-        // Отправить пакет на клиент для создания частиц дыма
-        ModPackets.sendToClientsTrackingBlock(new PacketSpawnSmoke(worldPosition, player.getLookAngle()), this);
-        // Отправить пакет на клиент для обновления данных о затяжках
-        ModPackets.sendToClientsTrackingBlock(new PacketHookahPuffData(worldPosition, puffsRemainingPotion, currentCoalBurnTime, attachedPlayerUUID, attachedPlayerName), this);
-
-        String potionStatus = hasPotionEffects ? String.format("Potion left: %.1fs", (float)puffsRemainingPotion / TICKS_PER_SECOND) : "Potion empty";
-        player.sendSystemMessage(Component.literal(String.format("You puffed the hookah for %.1fs! %s, Coal burn time left: %.1fs",
-                (float)actualPuffDuration / TICKS_PER_SECOND, potionStatus, (float)currentCoalBurnTime / TICKS_PER_SECOND)));
+    private Holder<MobEffect> getMobEffectForFlavor(String flavor) {
+        return switch (flavor) {
+            case "mint" -> MobEffects.MOVEMENT_SPEED;
+            case "citrus" -> MobEffects.DAMAGE_BOOST;
+            case "berry" -> MobEffects.JUMP;
+            default -> null;
+        };
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, HookahBlockEntity pBlockEntity) {
-        if (pLevel.isClientSide()) {
+    /**
+     * Apply tobacco effects based on bowl contents and compatibility.
+     * Compatible mixes: effects are applied (regular via flavor mapping, self_mixed via effects list).
+     * Incompatible mixes: no effects applied, kaif already subtracted during puff.
+     */
+    private void applyTobaccoEffects(ServerPlayer player, int totalPuffDurationTicks, ModDataComponents.HookahBowlContents contents) {
+        boolean compatible = contents.isCompatible();
+
+        if (!compatible) {
+            // Incompatible mix — no effects, kaif already subtracted during puff
+            player.sendSystemMessage(Component.translatable("quasium.message.incompatible_mix_effects"));
+            applyNauseaFromNegativeKaif(player);
             return;
         }
 
-        // Уменьшаем время горения угля
-        if (pBlockEntity.currentCoalBurnTime > 0) {
-            pBlockEntity.currentCoalBurnTime--;
-            pBlockEntity.setChanged(); // Важно, чтобы изменения сохранялись
-            // Отправляем обновление клиенту, чтобы шкала угля обновлялась
-            // Отправляем только если изменилось значение, чтобы не спамить пакетами
-            if (pBlockEntity.currentCoalBurnTime % TICKS_PER_SECOND == 0 || pBlockEntity.currentCoalBurnTime == 0) { // Обновляем каждую секунду или когда заканчивается
-                ModPackets.sendToClientsTrackingBlock(new PacketHookahPuffData(pBlockEntity.worldPosition, pBlockEntity.puffsRemainingPotion, pBlockEntity.currentCoalBurnTime, pBlockEntity.attachedPlayerUUID, pBlockEntity.attachedPlayerName), pBlockEntity);
+        // Compatible mix — apply effects
+        Map<Integer, Integer> groupPercentages = contents.getGroupPercentages();
+
+        for (int groupIdx = 0; groupIdx < contents.groups().size(); groupIdx++) {
+            ModDataComponents.BowlTobaccoGroup group = contents.groups().get(groupIdx);
+            Integer pctObj = groupPercentages.get(groupIdx);
+            if (pctObj == null) continue;
+            int percentage = pctObj;
+            int durationSeconds = (int) Math.ceil(percentage * totalPuffDurationTicks / (double) TICKS_PER_SECOND / 100.0);
+            int durationTicks = durationSeconds * TICKS_PER_SECOND;
+            if (durationTicks <= 0) continue;
+
+            if (group.isRegular()) {
+                Holder<MobEffect> effect = getMobEffectForFlavor(group.flavor());
+                if (effect != null) {
+                    int amplifier = percentage > 70 ? 1 : 0;
+                    player.addEffect(new MobEffectInstance(effect, durationTicks, amplifier));
+                }
+            } else {
+                // Self-mixed: apply all effects from the group
+                float strength = group.strength();
+                for (MobEffectInstance templateEffect : group.effects()) {
+                    int amplifier = templateEffect.getAmplifier();
+                    // Stronger tobacco amplifies effects
+                    if (strength > 0.5f) amplifier += 1;
+                    player.addEffect(new MobEffectInstance(templateEffect.getEffect(), durationTicks, amplifier));
+                }
             }
         }
+    }
 
-        // Расход кислорода для игроков, которые "тянут" кальян
-        // Расходуем кислород каждый тик
-        for (UUID playerUUID : pBlockEntity.puffingPlayers) {
-            Player player = pLevel.getPlayerByUUID(playerUUID);
-            if (player instanceof ServerPlayer serverPlayer) {
-                // Проверяем, что игрок все еще находится рядом с кальяном и смотрит на него (опционально)
-                // Для простоты, пока просто расходуем кислород
-                serverPlayer.setAirSupply(Math.max(0, serverPlayer.getAirSupply() - pBlockEntity.AIR_CONSUMPTION_PER_TICK_PUFF)); // Расход каждый тик
-
-                // Если кислорода не осталось, останавливаем затяжку
-                if (serverPlayer.getAirSupply() <= 0) {
-                    pBlockEntity.stopPuffing(playerUUID);
-                    serverPlayer.sendSystemMessage(Component.literal("You ran out of air!"));
-                }
-
-                // Проверяем расстояние до кальяна
-                if (pBlockEntity.isPipeAttached() && pBlockEntity.getAttachedPlayerUUID().equals(playerUUID)) {
-                    if (serverPlayer.distanceToSqr(pBlockEntity.getBlockPos().getCenter()) > PIPE_DETACH_DISTANCE_SQ) {
-                        pBlockEntity.detachPipe(playerUUID); // Передаем playerUUID
-                        pBlockEntity.stopPuffing(playerUUID);
-                        serverPlayer.sendSystemMessage(Component.literal("You walked too far from the hookah!"));
-                        // Трубка не выдается, так как она не потреблялась при прикреплении
-
-                        // if (!serverPlayer.getInventory().add(new ItemStack(net.sorukoma.quasium.item.ModItems.HOOKAH_PIPE.get()))) {
-                        //     Containers.dropItemStack(pLevel, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), new ItemStack(net.sorukoma.quasium.item.ModItems.HOOKAH_PIPE.get()));
-                        // }
-                    }
-                }
+    /**
+     * Apply nausea based on negative kaif.
+     * For every 10 points below 0: +1 level of nausea.
+     */
+    private void applyNauseaFromNegativeKaif(ServerPlayer player) {
+        int kaif = PlayerKaifData.getKaifValue(player);
+        if (kaif < 0) {
+            int nauseaLevel = Math.abs(kaif) / 10;
+            if (nauseaLevel > 0) {
+                player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, TICKS_PER_SECOND * 5, Math.min(nauseaLevel - 1, 4)));
             }
         }
     }

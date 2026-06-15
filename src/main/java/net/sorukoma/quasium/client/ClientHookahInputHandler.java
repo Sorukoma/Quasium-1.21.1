@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,149 +17,136 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.sorukoma.quasium.QuasiumMod;
 import net.sorukoma.quasium.block.ModBlocks;
 import net.sorukoma.quasium.item.ModItems;
-import net.sorukoma.quasium.network.PacketPuffDuration;
-import net.sorukoma.quasium.network.PacketStartPuffing;
-import net.sorukoma.quasium.network.PacketStopPuffing;
-import net.sorukoma.quasium.network.PacketAttachPipe;
-import net.sorukoma.quasium.network.PacketHookahPuffDataClientHandler;
-import net.sorukoma.quasium.network.PacketHookahPuffDataClientHandler.ClientHookahData;
+import net.sorukoma.quasium.network.PacketStartPuffing; // Эти пакеты теперь отправляются из HookahPipeItem
+import net.sorukoma.quasium.network.PacketStopPuffing; // Эти пакеты теперь отправляются из HookahPipeItem
+import net.sorukoma.quasium.network.PacketAttachPipeToServer;
+import net.sorukoma.quasium.network.PacketDetachPipeToServer;
 import org.lwjgl.glfw.GLFW;
-import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
 import net.neoforged.neoforge.common.util.TriState;
-
-import java.util.UUID;
 
 @EventBusSubscriber(modid = QuasiumMod.MOD_ID, value = Dist.CLIENT)
 public class ClientHookahInputHandler {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    private static BlockPos connectedHookahPos = null;
+    private static boolean connectedToBackpack = false;
+    private static long lastInteractionTime = 0;
+    private static final int INTERACTION_COOLDOWN_TICKS = 10; // Кулдаун в тиках (0.5 секунды)
 
-    private static long rightClickStartTime = -1;
-    private static BlockPos targetHookahPos = null;
-    // private static boolean isAttachInProgress = false; // Откатываем это поле
+    // Метод для установки подключенного кальяна (вызывается из PacketSyncHookahConnectionHandler)
+    public static void setConnectedHookahPos(BlockPos pos) {
+        connectedHookahPos = pos;
+        if (pos != null) {
+            connectedToBackpack = false; // Can't be connected to both at the same time
+        }
+    }
+
+    // Метод для получения подключенного кальяна (используется HookahPipeItem)
+    public static BlockPos getConnectedHookahPos() {
+        return connectedHookahPos;
+    }
+
+    // Backpack hookah connection
+    public static void setConnectedToBackpack(boolean connected) {
+        connectedToBackpack = connected;
+        if (connected) {
+            connectedHookahPos = null; // Can't be connected to both at the same time
+        }
+    }
+
+    public static boolean isConnectedToBackpack() {
+        return connectedToBackpack;
+    }
 
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player == null || minecraft.level == null) return;
 
-        LOGGER.debug("ClientHookahInputHandler.onRightClickBlock called. Player: {}, Hand: {}, Shift: {}, Item: {}, Block: {}",
-                minecraft.player.getName().getString(), event.getHand(), minecraft.player.isShiftKeyDown(),
-                event.getItemStack().getItem().getDescriptionId(), event.getPos());
+        // Проверяем кулдаун
+        if (minecraft.level.getGameTime() - lastInteractionTime < INTERACTION_COOLDOWN_TICKS) {
+            event.setCanceled(true);
+            event.setUseItem(TriState.TRUE);
+            event.setUseBlock(TriState.TRUE);
+            return;
+        }
 
         // Обрабатываем только основную руку
         if (event.getHand() == InteractionHand.MAIN_HAND) {
-            BlockPos blockPos = event.getPos();
-            BlockEntity blockEntity = minecraft.level.getBlockEntity(blockPos);
+            BlockPos clickedBlockPos = event.getPos();
+            BlockEntity blockEntity = minecraft.level.getBlockEntity(clickedBlockPos);
 
-            if (blockEntity != null && blockEntity.getBlockState().is(ModBlocks.HOOKAH_BLOCK.get())) {
-                if (blockEntity instanceof net.sorukoma.quasium.block.entity.HookahBlockEntity hookahBlockEntity) {
-                    // Получаем актуальные данные о кальяне с клиента
-                    ClientHookahData hookahData = PacketHookahPuffDataClientHandler.getClientHookahData(blockPos);
+            boolean isHoldingPipe = event.getItemStack().getItem() == ModItems.HOOKAH_PIPE.get();
+            boolean isShiftKeyDown = minecraft.player.isShiftKeyDown();
+            boolean isHookahBlock = (blockEntity != null && blockEntity.getBlockState().is(ModBlocks.HOOKAH_BLOCK.get()));
 
-                    boolean isHoldingPipe = event.getItemStack().getItem() == ModItems.HOOKAH_PIPE.get();
-                    boolean isPipeAttached = hookahData != null && hookahData.attachedPlayerUUID() != null;
-                    boolean isAttachedByThisPlayer = isPipeAttached && minecraft.player.getUUID().equals(hookahData.attachedPlayerUUID());
+            // Сценарий 1: Прикрепление трубки (Shift + ПКМ с трубкой по кальяну)
+            if (isShiftKeyDown && isHoldingPipe && isHookahBlock) {
+                PacketDistributor.sendToServer(new PacketAttachPipeToServer(clickedBlockPos)); // Отправляем пакет на сервер
+                minecraft.player.sendSystemMessage(Component.literal("Attempting to attach hookah pipe..."));
+                event.setCanceled(true); // Отменяем событие, чтобы серверный HookahBlock.useItemOn не обрабатывал его
+                event.setUseItem(TriState.TRUE); // Указываем, что предмет был использован
+                event.setUseBlock(TriState.TRUE); // Указываем, что блок был использован
+                lastInteractionTime = minecraft.level.getGameTime(); // Обновляем время последней интеракции
+                return;
+            }
 
-                    LOGGER.debug("ClientHookahInputHandler: isHoldingPipe={}, isPipeAttached={}, isAttachedByThisPlayer={}",
-                            isHoldingPipe, isPipeAttached, isAttachedByThisPlayer);
-
-                    // Сценарий 1: Прикрепление трубки (Shift + ПКМ с трубкой)
-                    if (minecraft.player.isShiftKeyDown() && isHoldingPipe && !isPipeAttached) {
-                        PacketDistributor.sendToServer(new PacketAttachPipe(blockPos)); // Отправляем пакет для прикрепления
-                        minecraft.player.sendSystemMessage(Component.literal("Attempting to attach hookah pipe..."));
-                        event.setCanceled(true);
-                        event.setUseItem(TriState.TRUE); // Исправлено на TRUE
-                        event.setUseBlock(TriState.TRUE); // Исправлено на TRUE
-                        LOGGER.debug("ClientHookahInputHandler: Attach pipe scenario. Sent PacketAttachPipe. Set Canceled=true, UseItem=TRUE, UseBlock=TRUE.");
-                        return; // Важно, чтобы не обрабатывалось дальше
-                    }
-
-                    // Сценарий 2: Затяжка (ПКМ без Shift с трубкой, когда прикреплена)
-                    if (!minecraft.player.isShiftKeyDown() && isHoldingPipe && isAttachedByThisPlayer) {
-                        rightClickStartTime = minecraft.level.getGameTime();
-                        targetHookahPos = blockPos;
-                        PacketDistributor.sendToServer(new PacketStartPuffing(targetHookahPos));
-                        LOGGER.debug("Client: Started puffing at {} at game time {}", targetHookahPos, rightClickStartTime);
-                        event.setCanceled(true);
-                        event.setUseItem(TriState.TRUE); // Исправлено на TRUE
-                        event.setUseBlock(TriState.TRUE); // Исправлено на TRUE
-                        LOGGER.debug("ClientHookahInputHandler: Puffing scenario. Set Canceled=true, UseItem=TRUE, UseBlock=TRUE.");
-                        return; // Важно, чтобы не обрабатывалось дальше
-                    }
-                    
-                    // Сценарий 3: Открепление трубки (Shift + ПКМ без предмета, когда прикреплена этим игроком)
-                    if (minecraft.player.isShiftKeyDown() && !isHoldingPipe && isAttachedByThisPlayer) {
-                        // Здесь мы не отправляем отдельный пакет, так как HookahBlock.useWithoutItem на сервере
-                        // уже содержит логику detachPipe. Мы просто позволяем событию пройти.
-                        LOGGER.debug("ClientHookahInputHandler: Detach pipe scenario (Shift+PKM without item). Allowing event to propagate.");
-                        event.setUseBlock(TriState.DEFAULT);
-                        event.setUseItem(TriState.DEFAULT);
-                        return;
-                    }
-
-                    // Для всех остальных сценариев, позволяем методам HookahBlock на сервере обработать это.
-                    // Например: ПКМ с трубкой, но не прикреплена (должно сказать прикрепить),
-                    // Shift+ПКМ с трубкой, но уже прикреплена (должно сказать, что уже прикреплена),
-                    // ПКМ без трубки (открыть GUI).
-                    event.setUseBlock(TriState.DEFAULT);
-                    event.setUseItem(TriState.DEFAULT);
-                    LOGGER.debug("ClientHookahInputHandler: Default scenario. Set UseItem=DEFAULT, UseBlock=DEFAULT.");
-                }
+            // Сценарий 2: Открепление трубки (Shift + ПКМ без предмета по кальяну)
+            if (isShiftKeyDown && !isHoldingPipe && isHookahBlock) {
+                PacketDistributor.sendToServer(new PacketDetachPipeToServer(clickedBlockPos)); // Отправляем пакет на сервер
+                minecraft.player.sendSystemMessage(Component.literal("Attempting to detach hookah pipe..."));
+                event.setCanceled(true); // Отменяем событие
+                event.setUseItem(TriState.TRUE); // Указываем, что предмет был использован
+                event.setUseBlock(TriState.TRUE); // Указываем, что блок был использован
+                lastInteractionTime = minecraft.level.getGameTime(); // Обновляем время последней интеракции
+                return;
             }
         }
+        // Для всех остальных сценариев, позволяем предмету/блоку обработать это.
+        // Логика начала затяжки при клике по блоку (не кальяну) или по кальяну без Shift
+        // теперь полностью в HookahPipeItem.java.
+        event.setUseBlock(TriState.DEFAULT);
+        event.setUseItem(TriState.DEFAULT);
     }
 
-    // Откатываем onRightClickEmpty
-    // @SubscribeEvent
-    // public static void onRightClickEmpty(PlayerInteractEvent.RightClickEmpty event) {
-    //     Minecraft minecraft = Minecraft.getInstance();
-    //     if (minecraft.player == null || minecraft.level == null) return;
-    //
-    //     LOGGER.debug("ClientHookahInputHandler.onRightClickEmpty called. Player: {}, Hand: {}, Shift: {}, Item: {}",
-    //             minecraft.player.getName().getString(), event.getHand(), minecraft.player.isShiftKeyDown(),
-    //             event.getItemStack().getItem().getDescriptionId());
-    //
-    //     if (event.getHand() == InteractionHand.MAIN_HAND) {
-    //         // Сценарий затяжки при ПКМ в воздух
-    //         if (handlePuffing(minecraft, minecraft.player.isShiftKeyDown(), event.getItemStack())) {
-    //             // event.setCanceled(true); // RightClickEmpty не имеет setCanceled
-    //             event.setUseItem(InteractionResult.SUCCESS); // Используем InteractionResult для RightClickEmpty
-    //             LOGGER.debug("ClientHookahInputHandler: Puffing handled by helper from RightClickEmpty. Set UseItem=SUCCESS.");
-    //             return;
-    //         }
-    //         // Если не затяжка, позволяем другим обработчикам взять на себя (например, съесть еду)
-    //         event.setUseItem(InteractionResult.PASS); // Используем InteractionResult для RightClickEmpty
-    //         LOGGER.debug("ClientHookahInputHandler: Default scenario for RightClickEmpty. Set UseItem=PASS.");
-    //     }
-    // }
-
     @SubscribeEvent
-    public static void onMouseButtonReleased(InputEvent.MouseButton.Post event) {
+    public static void onRightClickEmpty(PlayerInteractEvent.RightClickEmpty event) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player == null || minecraft.level == null) return;
 
-        // Если отпущена правая кнопка мыши, и мы отслеживали затяжку
-        if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && event.getAction() == InputConstants.RELEASE && rightClickStartTime != -1 && targetHookahPos != null) {
-            long durationHeldTicks = minecraft.level.getGameTime() - rightClickStartTime;
-
-            LOGGER.debug("Client: Calculated puff duration: {} ticks (Start: {}, End: {})", durationHeldTicks, rightClickStartTime, minecraft.level.getGameTime());
-
-            if (durationHeldTicks > 0) {
-                PacketDistributor.sendToServer(new PacketPuffDuration(targetHookahPos, (int) durationHeldTicks));
-            }
-            PacketDistributor.sendToServer(new PacketStopPuffing(targetHookahPos));
-
-            rightClickStartTime = -1;
-            targetHookahPos = null;
+        // Проверяем кулдаун
+        if (minecraft.level.getGameTime() - lastInteractionTime < INTERACTION_COOLDOWN_TICKS) {
+            return;
         }
+
+        // Обрабатываем только основную руку
+        if (event.getHand() == InteractionHand.MAIN_HAND) {
+            boolean isHoldingPipe = event.getItemStack().getItem() == ModItems.HOOKAH_PIPE.get();
+            boolean isShiftKeyDown = minecraft.player.isShiftKeyDown();
+
+            // Если игрок держит трубку и не нажимает Shift, и подключен к кальяну,
+            // то это потенциальное начало затяжки по воздуху.
+            // Логика начала затяжки теперь полностью в HookahPipeItem.java.
+            // Здесь мы просто обновляем кулдаун и позволяем предмету обработать событие.
+            if (!isShiftKeyDown && isHoldingPipe && connectedHookahPos != null) {
+                lastInteractionTime = minecraft.level.getGameTime(); // Обновляем время последней интеракции
+                // Не отменяем событие и не устанавливаем UseItem/UseBlock,
+                // так как HookahPipeItem.use будет вызван автоматически.
+                return;
+            }
+        }
+        // Для всех остальных сценариев, просто позволяем событию пройти.
     }
 
-    // Откатываем этот метод
-    // public static void resetAttachInProgress() {
-    //     if (isAttachInProgress) {
-    //         LOGGER.debug("ClientHookahInputHandler: resetAttachInProgress called. Setting isAttachInProgress to false.");
-    //         isAttachInProgress = false;
+    // Метод onMouseButtonReleased больше не нужен, т.к. releaseUsing в HookahPipeItem обрабатывает отпускание кнопки.
+    // @SubscribeEvent
+    // public static void onMouseButtonReleased(InputEvent.MouseButton.Post event) {
+    //     Minecraft minecraft = Minecraft.getInstance();
+    //     if (minecraft.player == null || minecraft.level == null) return;
+
+    //     // Если отпущена правая кнопка мыши, и мы отслеживали затяжку
+    //     if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && event.getAction() == InputConstants.RELEASE && targetHookahPos != null) {
+    //         PacketDistributor.sendToServer(new PacketStopPuffing(targetHookahPos));
+    //         LOGGER.debug("Client: Stopped puffing at {}", targetHookahPos);
+    //         targetHookahPos = null;
     //     }
     // }
 }

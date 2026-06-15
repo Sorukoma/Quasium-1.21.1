@@ -24,3 +24,9 @@ runs
 run-data
 
 repo
+
+# decompiled library stubs / tooling (not needed for the mod)
+/net/
+/mezz/
+.qwen
+memory

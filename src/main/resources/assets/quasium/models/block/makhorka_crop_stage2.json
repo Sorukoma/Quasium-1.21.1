@@ -1,0 +1,5 @@
+{  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "quasium:block/makhorka_crop_stage2"
+  }
+}

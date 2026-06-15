@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "quasium:block/undried_quasium_block" }
+  }
+}

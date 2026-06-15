@@ -1,38 +1,43 @@
 package net.sorukoma.quasium.network;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.sorukoma.quasium.QuasiumMod;
-import org.jetbrains.annotations.Nullable; // Импортируем Nullable
-import java.util.UUID; // Импортируем UUID
+import net.sorukoma.quasium.component.ModDataComponents;
+import org.jetbrains.annotations.Nullable;
 
-public record PacketHookahPuffData(BlockPos blockPos, int puffsRemainingPotion, int puffsRemainingCharcoal, @Nullable UUID attachedPlayerUUID, @Nullable String attachedPlayerName) implements CustomPacketPayload {
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "hookah_puff_data");
-    public static final StreamCodec<FriendlyByteBuf, PacketHookahPuffData> STREAM_CODEC = CustomPacketPayload.codec(PacketHookahPuffData::write, PacketHookahPuffData::new);
+public record PacketHookahPuffData(BlockPos blockPos, float totalHeat,
+                                   int totalTobaccoWeight, @Nullable ModDataComponents.HookahBowlContents bowlContents) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<PacketHookahPuffData> ID =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "hookah_puff_data"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, PacketHookahPuffData> STREAM_CODEC = StreamCodec.of(
+            PacketHookahPuffData::encode, PacketHookahPuffData::decode
+    );
 
-    public PacketHookahPuffData(FriendlyByteBuf buffer) {
-        this(buffer.readBlockPos(), buffer.readInt(), buffer.readInt(), buffer.readBoolean() ? buffer.readUUID() : null, buffer.readBoolean() ? buffer.readUtf() : null);
+    private static void encode(RegistryFriendlyByteBuf buf, PacketHookahPuffData pkt) {
+        buf.writeBlockPos(pkt.blockPos);
+        buf.writeFloat(pkt.totalHeat);
+        buf.writeInt(pkt.totalTobaccoWeight);
+        buf.writeBoolean(pkt.bowlContents != null);
+        if (pkt.bowlContents != null) {
+            ModDataComponents.HookahBowlContents.STREAM_CODEC.encode(buf, pkt.bowlContents);
+        }
     }
 
-    public void write(FriendlyByteBuf buffer) {
-        buffer.writeBlockPos(blockPos);
-        buffer.writeInt(puffsRemainingPotion);
-        buffer.writeInt(puffsRemainingCharcoal);
-        buffer.writeBoolean(attachedPlayerUUID != null);
-        if (attachedPlayerUUID != null) {
-            buffer.writeUUID(attachedPlayerUUID);
-        }
-        buffer.writeBoolean(attachedPlayerName != null);
-        if (attachedPlayerName != null) {
-            buffer.writeUtf(attachedPlayerName);
-        }
+    private static PacketHookahPuffData decode(RegistryFriendlyByteBuf buf) {
+        BlockPos blockPos = buf.readBlockPos();
+        float totalHeat = buf.readFloat();
+        int totalTobaccoWeight = buf.readInt();
+        boolean hasContents = buf.readBoolean();
+        ModDataComponents.HookahBowlContents bowlContents = hasContents ? ModDataComponents.HookahBowlContents.STREAM_CODEC.decode(buf) : null;
+        return new PacketHookahPuffData(blockPos, totalHeat, totalTobaccoWeight, bowlContents);
     }
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
-        return new Type<>(ID);
+        return ID;
     }
 }

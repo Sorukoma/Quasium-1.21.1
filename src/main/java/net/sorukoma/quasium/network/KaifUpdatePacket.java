@@ -13,7 +13,8 @@ import net.sorukoma.quasium.client.ClientKaifData;
 
 public record KaifUpdatePacket(int kaifValue) implements CustomPacketPayload {
 
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "kaif_update");
+    public static final CustomPacketPayload.Type<KaifUpdatePacket> ID =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "kaif_update")); // Corrected type and initialization
     public static final StreamCodec<FriendlyByteBuf, KaifUpdatePacket> STREAM_CODEC = StreamCodec.of(KaifUpdatePacket::encode, KaifUpdatePacket::decode);
 
     public static KaifUpdatePacket decode(FriendlyByteBuf buf) {
@@ -24,15 +25,9 @@ public record KaifUpdatePacket(int kaifValue) implements CustomPacketPayload {
         buf.writeInt(packet.kaifValue());
     }
 
-    // Метод id() не является частью интерфейса CustomPacketPayload, но может быть полезен для других целей.
-    // Если он вызывает ошибку, его можно удалить.
-    public ResourceLocation id() {
-        return ID;
-    }
-
-    @Override // Добавлена реализация метода type() из CustomPacketPayload
+    @Override
     public Type<? extends CustomPacketPayload> type() {
-        return new Type<>(ID);
+        return ID; // Simply return the static ID
     }
 
     public static void handle(KaifUpdatePacket packet, IPayloadContext context) {

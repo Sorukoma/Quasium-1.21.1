@@ -15,6 +15,18 @@ public class Config {
             .comment("The chance to dodge an attack when wearing a full set of Quasium armor (0.0 to 1.0)")
             .defineInRange("quasiumArmorDodgeChance", 0.8, 0.0, 1.0);
 
+    public static final ModConfigSpec.IntValue KAIF_PER_SECOND_SMOKING = BUILDER
+            .comment("How much kaif is gained per second of smoking hookah")
+            .defineInRange("kaifPerSecondSmoking", 2, 0, 100);
+
+    public static final ModConfigSpec.DoubleValue OVERDOSE_THRESHOLD_GRAMS = BUILDER
+            .comment("Grams of tobacco consumed within the overdose window that triggers overdose")
+            .defineInRange("overdoseThresholdGrams", 20.0, 1.0, 100.0);
+
+    public static final ModConfigSpec.IntValue OVERDOSE_WINDOW_MINUTES = BUILDER
+            .comment("Time window in minutes for tracking tobacco consumption before overdose triggers")
+            .defineInRange("overdoseWindowMinutes", 5, 1, 30);
+
     public static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
             .comment("Whether to log the dirt block on common setup")
             .define("logDirtBlock", true);

@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.hookah.title",
+  "pages": [
+    { "text": "quasium.progression.hookah.page1" },
+    { "text": "quasium.progression.hookah.page2" },
+    { "text": "quasium.progression.hookah.page3" },
+    { "text": "quasium.progression.hookah.page4" }
+  ],
+  "unlockCondition": "quasium:hookah/opened_gui"
+}

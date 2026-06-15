@@ -1,0 +1,96 @@
+package net.sorukoma.quasium.network;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.sorukoma.quasium.block.entity.HookahBlockEntity;
+import net.sorukoma.quasium.entity.HookahConnectionEntity;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import java.util.List;
+import java.util.Optional;
+
+import com.mojang.logging.LogUtils;
+import org.slf4j.Logger;
+import net.sorukoma.quasium.data.BackpackHookahState;
+
+public class PacketAttachPipeToServerHandler {
+    private static final Logger LOGGER = LogUtils.getLogger();
+    private static final double MAX_DISTANCE_SQ = 64.0; // 8 blocks
+
+    public static void handle(final PacketAttachPipeToServer payload, final IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (!(context.player() instanceof ServerPlayer player)) return;
+            BlockPos blockPos = payload.blockPos();
+
+            LOGGER.debug("Server: Received PacketAttachPipeToServer from player {} for block at {}", player.getName().getString(), blockPos);
+
+            // Distance validation
+            if (player.blockPosition().distSqr(blockPos) > MAX_DISTANCE_SQ) {
+                LOGGER.warn("Server: Player {} tried to attach pipe to hookah at {} but is too far away.", player.getName().getString(), blockPos);
+                return;
+            }
+
+            if (player.level().isLoaded(blockPos)) {
+                BlockEntity blockEntity = player.level().getBlockEntity(blockPos);
+                if (blockEntity instanceof HookahBlockEntity hookahBlockEntity) {
+
+                    // Detach from any other standing hookahs first
+                    List<HookahConnectionEntity> allPlayerConnections = player.level().getEntitiesOfClass(
+                            HookahConnectionEntity.class,
+                            new AABB(player.blockPosition()).inflate(64.0),
+                            e -> e.getAttachedPlayerUUID() != null &&
+                                 e.getAttachedPlayerUUID().equals(player.getUUID())
+                    );
+                    for (HookahConnectionEntity oldConn : allPlayerConnections) {
+                        BlockEntity oldBe = player.level().getBlockEntity(oldConn.getHookahBlockPos());
+                        if (oldBe instanceof HookahBlockEntity oldHookahBe) {
+                            oldConn.stopPuffing(oldHookahBe, player);
+                        }
+                        oldConn.discard();
+                    }
+
+                    // Detach from backpack hookah if connected
+                    BackpackHookahState backpackState = BackpackHookahState.getState(player.getUUID());
+                    if (backpackState != null && backpackState.isPuffing()) {
+                        backpackState.stopPuffing();
+                        PacketDistributor.sendToPlayer(player, new PacketSyncBackpackPipeConnection(false));
+                    }
+
+                    // Check if already attached to THIS specific hookah
+                    List<HookahConnectionEntity> existingConnections = player.level().getEntitiesOfClass(
+                            HookahConnectionEntity.class,
+                            new AABB(blockPos).inflate(HookahConnectionEntity.PIPE_DETACH_DISTANCE_SQ + 1.0),
+                            hookahConnection -> hookahConnection.getAttachedPlayerUUID() != null &&
+                                                hookahConnection.getAttachedPlayerUUID().equals(player.getUUID()) &&
+                                                hookahConnection.getHookahBlockPos() != null &&
+                                                hookahConnection.getHookahBlockPos().equals(blockPos)
+                    );
+
+                    if (existingConnections.isEmpty()) {
+                        HookahConnectionEntity connectionEntity = new HookahConnectionEntity(player.level(), player.getUUID(), blockPos);
+                        player.level().addFreshEntity(connectionEntity);
+                        player.sendSystemMessage(Component.literal("You attached the hookah pipe."));
+                        PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.of(blockPos)));
+                        LOGGER.debug("Server: HookahConnectionEntity created for player {} at {}.", player.getUUID(), blockPos);
+                    } else {
+                        player.sendSystemMessage(Component.literal("Your pipe is already attached to this hookah."));
+                        PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.of(blockPos)));
+                        LOGGER.debug("Server: Pipe already attached for player {}.", player.getUUID());
+                    }
+                } else {
+                    player.sendSystemMessage(Component.literal("Error: Hookah Block Entity not found at " + blockPos));
+                    PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.empty()));
+                    LOGGER.error("Server: Hookah Block Entity not found at {} when handling PacketAttachPipeToServer.", blockPos);
+                }
+            } else {
+                player.sendSystemMessage(Component.literal("Error: Block not loaded at " + blockPos));
+                PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.empty()));
+                LOGGER.error("Server: Block not loaded at {} when handling PacketAttachPipeToServer.", blockPos);
+            }
+        });
+    }
+}

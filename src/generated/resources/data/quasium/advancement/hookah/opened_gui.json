@@ -1,0 +1,26 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "hookah_opened": {
+      "trigger": "quasium:hookah_opened"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.hookah_opened.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:hookah_pipe"
+    },
+    "title": {
+      "translate": "advancements.quasium.hookah_opened.title"
+    }
+  },
+  "requirements": [
+    [
+      "hookah_opened"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

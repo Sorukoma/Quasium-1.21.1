@@ -2,7 +2,7 @@ package net.sorukoma.quasium.client;
 
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.sorukoma.quasium.data.PlayerKaifData; // Для MAX_KAIF
+import net.sorukoma.quasium.data.PlayerKaifData;
 
 @OnlyIn(Dist.CLIENT)
 public class ClientKaifData {
@@ -13,6 +13,6 @@ public class ClientKaifData {
     }
 
     public static void setKaifValue(int value) {
-        clientKaifValue = Math.max(0, Math.min(PlayerKaifData.MAX_KAIF, value));
+        clientKaifValue = Math.max(PlayerKaifData.MIN_KAIF, Math.min(PlayerKaifData.MAX_KAIF, value));
     }
 }

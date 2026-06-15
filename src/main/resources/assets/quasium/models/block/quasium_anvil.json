@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_anvil",
+  "textures": {
+    "top": "quasium:block/quasium_anvil_top",
+    "body": "quasium:block/quasium_anvil",
+    "particle": "quasium:block/quasium_anvil"
+  }
+}

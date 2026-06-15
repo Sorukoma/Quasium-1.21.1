@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "fermenting=false": { "model": "quasium:block/fermentation_barrel" },
+    "fermenting=true":  { "model": "quasium:block/fermentation_barrel_fermenting" }
+  }
+}

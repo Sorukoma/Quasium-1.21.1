@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "quasium:block/drying_shelf" },
+    "facing=south": { "model": "quasium:block/drying_shelf", "y": 180 },
+    "facing=west":  { "model": "quasium:block/drying_shelf", "y": 270 },
+    "facing=east":  { "model": "quasium:block/drying_shelf", "y": 90 }
+  }
+}

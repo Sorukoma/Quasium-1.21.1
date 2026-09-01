@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-10T15:16:09.240367801	Global Loot Modifiers : quasium
-edceb2a9ddb98cf224c2a39a5bea0480ffcaaf8a data/neoforge/loot_modifiers/global_loot_modifiers.json
-d5c9257bebf10d1391ad345a33df028ca6c2d047 data/quasium/loot_modifiers/tobacco_seeds_from_short_grass.json
-b52794606c3420f38ab89be83c3ed1df5bc4583a data/quasium/loot_modifiers/tobacco_seeds_from_tall_grass.json
+// 1.21.1	2026-08-22T23:03:59.674016978	Global Loot Modifiers : quasium
+cdb09fbd181d4d83159f5f2a330e65a41ec64343 data/neoforge/loot_modifiers/global_loot_modifiers.json
+add0f26a6b5b1eb220389bfea440b39a481c0cc4 data/quasium/loot_modifiers/tobacco_seeds_from_short_grass.json
+8e68c353c444527a158b441a9ba2337137d8fe96 data/quasium/loot_modifiers/tobacco_seeds_from_tall_grass.json

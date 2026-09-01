@@ -1,12 +1,10 @@
 package net.sorukoma.quasium.block;
 
 import com.mojang.logging.LogUtils;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -31,7 +29,6 @@ import net.sorukoma.quasium.block.entity.ModBlockEntities;
 import net.sorukoma.quasium.data.PlayerTobaccoData;
 import net.sorukoma.quasium.entity.HookahConnectionEntity;
 import net.sorukoma.quasium.item.ModItems;
-import net.sorukoma.quasium.item.TobaccoItem;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -57,7 +54,6 @@ public class HookahBlock extends BaseEntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        LOGGER.debug("HookahBlock.useItemOn called. ClientSide: {}, Player: {}, Hand: {}, Shift: {}, Item: {}", pLevel.isClientSide(), pPlayer.getName().getString(), pHand, pPlayer.isShiftKeyDown(), pStack.getItem().getDescriptionId());
 
         if (pLevel.isClientSide()) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -72,7 +68,6 @@ public class HookahBlock extends BaseEntityBlock {
 
         // Если игрок держит HookahPipeItem
         if (pStack.is(ModItems.HOOKAH_PIPE.get())) {
-            LOGGER.debug("Server: Player holding Hookah Pipe. Interaction handled by client packet. Returning CONSUME.");
             // Логика прикрепления/затяжки теперь полностью управляется ClientHookahInputHandler через пакеты.
             // Этот метод просто подтверждает, что взаимодействие с трубкой было обработано.
             return ItemInteractionResult.CONSUME;
@@ -83,20 +78,16 @@ public class HookahBlock extends BaseEntityBlock {
             triggerHookahAdvancement((ServerPlayer) pPlayer);
             PlayerTobaccoData.syncOnLogin((ServerPlayer) pPlayer);
             ((ServerPlayer) pPlayer).openMenu(hookahBlockEntity, pPos);
-            LOGGER.debug("Server: Opening GUI. Returning CONSUME.");
             return ItemInteractionResult.CONSUME;
         }
 
-        LOGGER.debug("Server: useItemOn not handled by custom logic. Returning PASS_TO_DEFAULT_BLOCK_INTERACTION.");
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHit) {
-        LOGGER.debug("HookahBlock.useWithoutItem called. ClientSide: {}, Player: {}, Shift: {}", pLevel.isClientSide(), pPlayer.getName().getString(), pPlayer.isShiftKeyDown());
 
         if (pLevel.isClientSide()) {
-            LOGGER.debug("Client: useWithoutItem. Returning PASS.");
             return InteractionResult.PASS; // Пусть сервер обрабатывает
         }
 
@@ -109,14 +100,12 @@ public class HookahBlock extends BaseEntityBlock {
 
         // Если Shift-клик без предмета, это теперь обрабатывается PacketDetachPipeToServer
         if (pPlayer.isShiftKeyDown()) {
-            LOGGER.debug("Server: Shift-clicking without item. Detachment handled by client packet. Returning CONSUME.");
             return InteractionResult.CONSUME;
         } else {
             // Сценарий: ПКМ без Shift без предмета (Открыть GUI)
             triggerHookahAdvancement((ServerPlayer) pPlayer);
             PlayerTobaccoData.syncOnLogin((ServerPlayer) pPlayer);
             ((ServerPlayer) pPlayer).openMenu(hookahBlockEntity, pPos);
-            LOGGER.debug("Server: Opening GUI. Returning CONSUME.");
             return InteractionResult.CONSUME;
         }
     }
@@ -143,7 +132,7 @@ public class HookahBlock extends BaseEntityBlock {
                         Player attachedPlayer = pLevel.getPlayerByUUID(connection.getAttachedPlayerUUID());
                         if (attachedPlayer != null) {
                             connection.stopPuffing(hookahBlockEntity, attachedPlayer);
-                            attachedPlayer.sendSystemMessage(Component.literal("Your hookah pipe detached because the hookah was broken!"));
+                            attachedPlayer.sendSystemMessage(Component.translatable("quasium.message.pipe_detached_broken"));
                         }
                         connection.discard();
                     }

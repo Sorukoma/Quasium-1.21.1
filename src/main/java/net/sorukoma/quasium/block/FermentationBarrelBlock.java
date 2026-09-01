@@ -8,12 +8,10 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -27,6 +25,7 @@ import net.sorukoma.quasium.block.entity.FermentationBarrelBlockEntity;
 import net.sorukoma.quasium.block.entity.ModBlockEntities;
 import net.sorukoma.quasium.component.ModDataComponents;
 import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.item.TobaccoVarieties;
 import org.jetbrains.annotations.Nullable;
 
 public class FermentationBarrelBlock extends BaseEntityBlock {
@@ -51,13 +50,12 @@ public class FermentationBarrelBlock extends BaseEntityBlock {
         BlockEntity entity = level.getBlockEntity(pos);
         if (!(entity instanceof FermentationBarrelBlockEntity barrelEntity)) return ItemInteractionResult.FAIL;
 
-        if (state.getValue(FERMENTING)) {
+        if (state.getValue(FERMENTING) && !heldItem.is(net.minecraft.world.item.Items.SUGAR)) {
             player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.fermenting"), true);
             return ItemInteractionResult.CONSUME;
         }
 
-        boolean isLeaves = heldItem.getItem() == ModItems.TOBACCO_LEAVES.get()
-                        || heldItem.getItem() == ModItems.MAKHORKA_LEAVES.get();
+        boolean isLeaves = TobaccoVarieties.isLeaf(heldItem);
         boolean isFermentedLeaves = isLeaves && heldItem.has(ModDataComponents.FERMENTED.get());
 
         if (isFermentedLeaves) {
@@ -66,6 +64,11 @@ public class FermentationBarrelBlock extends BaseEntityBlock {
         }
 
         if (isLeaves) {
+            int dryingStage = heldItem.getOrDefault(ModDataComponents.DRYING_STAGE.get(), 0);
+            if (dryingStage < 2) {
+                player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.needs_dried_leaves"), true);
+                return ItemInteractionResult.CONSUME;
+            }
             ItemStack slotItem = barrelEntity.getItemHandler().getStackInSlot(0);
 
             if (slotItem.isEmpty()) {
@@ -93,7 +96,26 @@ public class FermentationBarrelBlock extends BaseEntityBlock {
             }
         }
 
-        if (heldItem.getItem() instanceof AxeItem || heldItem.getItem() == ModItems.NETHERITE_HAMMER.get()) {
+        if (heldItem.is(net.minecraft.world.item.Items.SUGAR)) {
+            if (state.getValue(FERMENTING)) {
+                if (barrelEntity.addSugar()) {
+                    if (!player.isCreative()) heldItem.shrink(1);
+                    player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.sugar_accelerated"), true);
+                } else {
+                    player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.sugar_rejected"), true);
+                }
+                return ItemInteractionResult.CONSUME;
+            }
+            if (barrelEntity.addSugar()) {
+                if (!player.isCreative()) heldItem.shrink(1);
+                player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.added_sugar"), true);
+            } else {
+                player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.sugar_rejected"), true);
+            }
+            return ItemInteractionResult.CONSUME;
+        }
+
+        if (heldItem.getItem() == ModItems.NETHERITE_HAMMER.get()) {
             ItemStack slotItem = barrelEntity.getItemHandler().getStackInSlot(0);
             if (slotItem.isEmpty()) {
                 player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.empty"), true);
@@ -119,15 +141,37 @@ public class FermentationBarrelBlock extends BaseEntityBlock {
         BlockEntity entity = level.getBlockEntity(pos);
         if (!(entity instanceof FermentationBarrelBlockEntity barrelEntity)) return InteractionResult.FAIL;
 
+        if (barrelEntity.isReady()) {
+            boolean wasSpoiled = barrelEntity.isSpoiled();
+            ItemStack result = barrelEntity.takeResult();
+            player.getInventory().placeItemBackInInventory(result);
+            if (state.getValue(FERMENTING)) {
+                level.setBlock(pos, state.setValue(FERMENTING, false), 3);
+            }
+            player.displayClientMessage(Component.translatable(wasSpoiled
+                    ? "block.quasium.fermentation_barrel.collected_spoiled"
+                    : "block.quasium.fermentation_barrel.collected_ready"), true);
+            return InteractionResult.SUCCESS;
+        }
+
         if (state.getValue(FERMENTING)) {
-            player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.fermenting"), true);
+            int seconds = Math.max(0, (barrelEntity.getFermentationTotalTime() - barrelEntity.getFermentationProgress()) / 20);
+            player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.progress", seconds), true);
             return InteractionResult.SUCCESS;
         }
 
         ItemStack slotItem = barrelEntity.getItemHandler().getStackInSlot(0);
         if (!slotItem.isEmpty()) {
-            player.getInventory().placeItemBackInInventory(slotItem.copy());
-            barrelEntity.getItemHandler().setStackInSlot(0, ItemStack.EMPTY);
+            if (player.isShiftKeyDown()) {
+                player.getInventory().placeItemBackInInventory(slotItem.copy());
+                barrelEntity.getItemHandler().setStackInSlot(0, ItemStack.EMPTY);
+                return InteractionResult.SUCCESS;
+            }
+            if (!slotItem.has(ModDataComponents.FERMENTED.get())) {
+                barrelEntity.startFermentation();
+                level.setBlock(pos, state.setValue(FERMENTING, true), 3);
+                player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.started"), true);
+            }
             return InteractionResult.SUCCESS;
         }
 

@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.sorukoma.quasium.QuasiumMod;
 import net.sorukoma.quasium.progression.ProgressionArticle;
 import org.slf4j.Logger;
 
@@ -34,12 +33,11 @@ public class ProgressionArticleManager extends SimpleJsonResourceReloadListener 
             try {
                 ProgressionArticle article = GSON.fromJson(entry.getValue(), ProgressionArticle.class);
                 articles.put(id, article);
-                LOGGER.info("Loaded progression article: {}", id);
             } catch (Exception e) {
                 LOGGER.error("Failed to load progression article: {}", id, e);
             }
         }
-        LOGGER.info("Loaded {} progression articles.", articles.size());
+        LOGGER.debug("Loaded {} progression articles.", articles.size());
     }
 
     public Map<ResourceLocation, ProgressionArticle> getArticles() {

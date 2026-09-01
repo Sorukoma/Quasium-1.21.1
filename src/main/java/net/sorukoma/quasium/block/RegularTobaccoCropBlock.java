@@ -13,7 +13,7 @@ public class RegularTobaccoCropBlock extends TobaccoCropBlock {
     private final Supplier<Item> shearSeedDropItem;
 
     /** Шанс дропа семян махорки при стрижке обычного табака ножницами. Меняйте это значение для тестирования. */
-    private static final float MAKHORKA_SHEAR_SEED_DROP_CHANCE = 0.5F;
+    private static final float MAKHORKA_SHEAR_SEED_DROP_CHANCE = 0.05F;
 
     public RegularTobaccoCropBlock(Supplier<Item> seedsItem, Supplier<Item> leavesItem, Supplier<Item> shearSeedDropItem, BlockBehaviour.Properties properties) {
         super(properties);

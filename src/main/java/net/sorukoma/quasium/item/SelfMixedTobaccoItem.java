@@ -1,7 +1,6 @@
 package net.sorukoma.quasium.item;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,7 +17,6 @@ import net.minecraft.ChatFormatting;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
 
 public class SelfMixedTobaccoItem extends Item {
     public SelfMixedTobaccoItem(Properties properties) {
@@ -57,8 +55,13 @@ public class SelfMixedTobaccoItem extends Item {
         return InteractionResultHolder.sidedSuccess(selfMixedStack, level.isClientSide());
     }
 
-    /** Копировать self_mixed компоненты на 1г предмет. */
-    private void copySelfMixedComponents(ItemStack source, ItemStack target) {
+    public static ItemStack createOneGram(ItemStack source) {
+        ItemStack oneGram = new ItemStack(ModItems.ONE_GRAM_SELF_MIXED_TOBACCO.get());
+        copySelfMixedComponents(source, oneGram);
+        return oneGram;
+    }
+
+    private static void copySelfMixedComponents(ItemStack source, ItemStack target) {
         if (source.has(ModDataComponents.TOBACCO_BASE.get())) {
             target.set(ModDataComponents.TOBACCO_BASE.get(), source.get(ModDataComponents.TOBACCO_BASE.get()));
         }
@@ -68,7 +71,15 @@ public class SelfMixedTobaccoItem extends Item {
         if (source.has(ModDataComponents.MOLASSES_AMOUNT.get())) {
             target.set(ModDataComponents.MOLASSES_AMOUNT.get(), source.get(ModDataComponents.MOLASSES_AMOUNT.get()));
         }
-        // Эффекты: SELF_MIXED_EFFECTS или POTION_EFFECT
+        if (source.has(ModDataComponents.ESSENCE_TYPE.get())) {
+            target.set(ModDataComponents.ESSENCE_TYPE.get(), source.get(ModDataComponents.ESSENCE_TYPE.get()));
+        }
+        if (source.has(ModDataComponents.ESSENCE_AMOUNT.get())) {
+            target.set(ModDataComponents.ESSENCE_AMOUNT.get(), source.get(ModDataComponents.ESSENCE_AMOUNT.get()));
+        }
+        if (source.has(ModDataComponents.TOXIC.get())) {
+            target.set(ModDataComponents.TOXIC.get(), source.get(ModDataComponents.TOXIC.get()));
+        }
         if (source.has(ModDataComponents.SELF_MIXED_EFFECTS.get())) {
             target.set(ModDataComponents.SELF_MIXED_EFFECTS.get(), source.get(ModDataComponents.SELF_MIXED_EFFECTS.get()));
         } else if (source.has(ModDataComponents.POTION_EFFECT.get())) {
@@ -103,6 +114,11 @@ public class SelfMixedTobaccoItem extends Item {
         if (stack.has(ModDataComponents.MOLASSES_AMOUNT.get())) {
             int ml = stack.get(ModDataComponents.MOLASSES_AMOUNT.get());
             tooltipComponents.add(Component.translatable("quasium.tooltip.molasses_ml", ml).withStyle(ChatFormatting.AQUA));
+        }
+
+        // Токсичность (мутация "toxic" гибрида) — предупреждение об уроне при курении
+        if (stack.getOrDefault(ModDataComponents.TOXIC.get(), false)) {
+            tooltipComponents.add(Component.translatable("quasium.tooltip.tobacco_toxic").withStyle(ChatFormatting.DARK_GREEN));
         }
 
         // Эффекты зелья (список — для смешанных самозамесов)

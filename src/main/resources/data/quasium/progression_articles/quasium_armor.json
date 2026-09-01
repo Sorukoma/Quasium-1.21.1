@@ -1,0 +1,9 @@
+{
+  "title": "quasium.progression.quasium_armor.title",
+  "hint": "quasium.progression.quasium_armor.hint",
+  "pages": [
+    { "text": "quasium.progression.quasium_armor.page1" },
+    { "text": "quasium.progression.quasium_armor.page2" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_armor"
+}

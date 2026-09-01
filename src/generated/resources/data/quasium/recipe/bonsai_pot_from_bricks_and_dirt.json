@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "D": {
+      "item": "minecraft:dirt"
+    }
+  },
+  "pattern": [
+    "B B",
+    "BDB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:bonsai_pot"
+  }
+}

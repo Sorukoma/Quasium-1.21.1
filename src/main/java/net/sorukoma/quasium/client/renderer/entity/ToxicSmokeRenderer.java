@@ -9,20 +9,9 @@ import net.sorukoma.quasium.QuasiumMod;
 import net.sorukoma.quasium.entity.ToxicSmokeEntity;
 
 public class ToxicSmokeRenderer extends EntityRenderer<ToxicSmokeEntity> {
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "textures/entity/toxic_smoke.png");
 
-    private static final ResourceLocation DUMMY_TEXTURE = ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "textures/entity/toxic_smoke.png");
-
-    public ToxicSmokeRenderer(EntityRendererProvider.Context context) {
-        super(context);
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation(ToxicSmokeEntity entity) {
-        return DUMMY_TEXTURE;
-    }
-
-    @Override
-    public void render(ToxicSmokeEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-        // Не рендерим модель — только частицы спавнятся в ToxicSmokeEntity.tick()
-    }
+    public ToxicSmokeRenderer(EntityRendererProvider.Context context) { super(context); }
+    @Override public ResourceLocation getTextureLocation(ToxicSmokeEntity entity) { return TEXTURE; }
+    @Override public void render(ToxicSmokeEntity entity, float yaw, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int light) { }
 }

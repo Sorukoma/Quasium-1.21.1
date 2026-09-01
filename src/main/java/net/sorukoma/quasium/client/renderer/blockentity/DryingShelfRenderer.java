@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.sorukoma.quasium.block.DryingShelfBlock;
 import net.sorukoma.quasium.block.entity.DryingShelfBlockEntity;
+import net.sorukoma.quasium.component.ModDataComponents;
+import com.mojang.math.Axis;
 import org.joml.Quaternionf;
 
 public class DryingShelfRenderer implements BlockEntityRenderer<DryingShelfBlockEntity> {
@@ -45,7 +47,11 @@ public class DryingShelfRenderer implements BlockEntityRenderer<DryingShelfBlock
         // Place the item just in front of the board's center.
         poseStack.translate(0.0, 0.20, 0.30);
 
-        poseStack.scale(0.4f, 0.4f, 0.4f);
+        int stage = item.getOrDefault(ModDataComponents.DRYING_STAGE.get(), 0);
+        float scale = stage >= 3 ? 0.32f : stage == 2 ? 0.37f : 0.42f;
+        if (stage == 2) poseStack.mulPose(Axis.ZP.rotationDegrees(8f));
+        if (stage >= 3) poseStack.mulPose(Axis.ZP.rotationDegrees(18f));
+        poseStack.scale(scale, scale, scale);
 
         Minecraft.getInstance().getItemRenderer().renderStatic(
                 item, ItemDisplayContext.FIXED, combinedLight, combinedOverlay,

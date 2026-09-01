@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.sorukoma.quasium.block.FermentationBarrelBlock;
 import net.sorukoma.quasium.component.ModDataComponents;
-import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.item.TobaccoVarieties;
 import org.jetbrains.annotations.Nullable;
 
 public class FermentationBarrelBlockEntity extends BlockEntity {
@@ -40,8 +40,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
             if (!current.isEmpty()) {
                 return stack.getItem() == current.getItem();
             }
-            return stack.getItem() == ModItems.TOBACCO_LEAVES.get()
-                    || stack.getItem() == ModItems.MAKHORKA_LEAVES.get();
+            return TobaccoVarieties.isLeaf(stack);
         }
 
         @Override
@@ -52,8 +51,12 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
     };
 
     private boolean fermenting = false;
+    private boolean ready = false;
+    private boolean spoiled = false;
     private int fermentationProgress = 0;
-    private int fermentationTotalTime = 200; // 10 seconds for testing
+    private int fermentationTotalTime = 1200;
+    private int spoilGraceTime = 1200;
+    private int sugarBoosts = 0;
 
     public FermentationBarrelBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FERMENTATION_BARREL_BE.get(), pos, state);
@@ -75,11 +78,38 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
         return fermentationTotalTime;
     }
 
+    public boolean isReady() { return ready; }
+    public boolean isSpoiled() { return spoiled; }
+
+    public ItemStack takeResult() {
+        if (!ready || itemHandler.getStackInSlot(0).isEmpty()) return ItemStack.EMPTY;
+        ItemStack result = itemHandler.getStackInSlot(0).copy();
+        itemHandler.setStackInSlot(0, ItemStack.EMPTY);
+        fermenting = false;
+        ready = false;
+        spoiled = false;
+        fermentationProgress = 0;
+        fermentationTotalTime = 1200;
+        sugarBoosts = 0;
+        setChanged();
+        return result;
+    }
+
     public void startFermentation() {
         this.fermenting = true;
+        this.ready = false;
+        this.spoiled = false;
         this.fermentationProgress = 0;
-        this.fermentationTotalTime = 200;
+        this.fermentationTotalTime = Math.max(600, 1200 - sugarBoosts * 200);
         setChanged();
+    }
+
+    public boolean addSugar() {
+        if (itemHandler.getStackInSlot(0).isEmpty() || ready || spoiled || sugarBoosts >= 3) return false;
+        sugarBoosts++;
+        if (fermenting) fermentationProgress = Math.min(fermentationTotalTime, fermentationProgress + 400);
+        setChanged();
+        return true;
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, FermentationBarrelBlockEntity entity) {
@@ -93,21 +123,36 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
 
         entity.fermentationProgress++;
 
-        if (entity.fermentationProgress >= entity.fermentationTotalTime) {
+        if (entity.fermentationProgress % 20 == 0 && level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.BUBBLE_POP,
+                    pos.getX() + 0.5, pos.getY() + 1.05, pos.getZ() + 0.5,
+                    3, 0.25, 0.05, 0.25, 0.01);
+        }
+
+        if (!entity.ready && entity.fermentationProgress >= entity.fermentationTotalTime) {
             ItemStack input = entity.itemHandler.getStackInSlot(0);
+            entity.spoiled = entity.sugarBoosts > 0 && level.random.nextFloat() < 0.15f * entity.sugarBoosts;
             if (!input.isEmpty()) {
                 ItemStack result = input.copy();
                 result.set(ModDataComponents.FERMENTED.get(), true);
+                if (entity.spoiled) result.set(ModDataComponents.SPOILED.get(), true);
                 entity.itemHandler.setStackInSlot(0, result);
             }
             entity.fermenting = false;
-            entity.fermentationProgress = 0;
-            entity.fermentationTotalTime = 0;
-
+            entity.ready = true;
             level.setBlock(pos, state.setValue(FermentationBarrelBlock.FERMENTING, false), 3);
+            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.BREWING_STAND_BREW, net.minecraft.sounds.SoundSource.BLOCKS, 0.8f, 1.1f);
+            entity.setChangedAndSync();
         }
 
         entity.setChanged();
+    }
+
+    private void setChangedAndSync() {
+        setChanged();
+        if (level != null && !level.isClientSide) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        }
     }
 
     @Override
@@ -115,8 +160,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
         CompoundTag tag = new CompoundTag();
         tag.put("inventory", itemHandler.serializeNBT(registries));
         tag.putBoolean("fermenting", fermenting);
+        tag.putBoolean("ready", ready);
+        tag.putBoolean("spoiled", spoiled);
         tag.putInt("fermentationProgress", fermentationProgress);
         tag.putInt("fermentationTotalTime", fermentationTotalTime);
+        tag.putInt("sugarBoosts", sugarBoosts);
         return tag;
     }
 
@@ -125,8 +173,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
         super.loadAdditional(tag, registries);
         itemHandler.deserializeNBT(registries, tag.getCompound("inventory"));
         fermenting = tag.getBoolean("fermenting");
+        ready = tag.getBoolean("ready");
+        spoiled = tag.getBoolean("spoiled");
         fermentationProgress = tag.getInt("fermentationProgress");
-        fermentationTotalTime = tag.contains("fermentationTotalTime") ? tag.getInt("fermentationTotalTime") : 200;
+        fermentationTotalTime = tag.contains("fermentationTotalTime") ? tag.getInt("fermentationTotalTime") : 2400;
+        sugarBoosts = tag.contains("sugarBoosts") ? tag.getInt("sugarBoosts") : 0;
     }
 
     @Override
@@ -134,8 +185,11 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
         super.saveAdditional(tag, registries);
         tag.put("inventory", itemHandler.serializeNBT(registries));
         tag.putBoolean("fermenting", fermenting);
+        tag.putBoolean("ready", ready);
+        tag.putBoolean("spoiled", spoiled);
         tag.putInt("fermentationProgress", fermentationProgress);
         tag.putInt("fermentationTotalTime", fermentationTotalTime);
+        tag.putInt("sugarBoosts", sugarBoosts);
     }
 
     @Nullable

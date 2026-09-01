@@ -1,7 +1,6 @@
 package net.sorukoma.quasium.screen;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
@@ -15,9 +14,6 @@ public class ModMenuTypes {
 
     public static final DeferredHolder<MenuType<?>, MenuType<HookahMenu>> HOOKAH_MENU =
             MENUS.register("hookah_menu", () -> IMenuTypeExtension.create(HookahMenu::new));
-
-    public static final DeferredHolder<MenuType<?>, MenuType<MixingBowlMenu>> MIXING_BOWL_MENU =
-            MENUS.register("mixing_bowl_menu", () -> IMenuTypeExtension.create(MixingBowlMenu::new));
 
     public static final DeferredHolder<MenuType<?>, MenuType<BackpackHookahMenu>> BACKPACK_HOOKAH_MENU =
             MENUS.register("backpack_hookah_menu", () -> IMenuTypeExtension.create((id, inv, buf) -> new BackpackHookahMenu(id, inv)));

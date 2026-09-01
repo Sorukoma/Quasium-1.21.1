@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "quasium:block/essence_press_side",
+    "north": "quasium:block/essence_press_side",
+    "south": "quasium:block/essence_press_side",
+    "east": "quasium:block/essence_press_side",
+    "west": "quasium:block/essence_press_side",
+    "up": "quasium:block/essence_press_top",
+    "down": "quasium:block/essence_press_bottom"
+  }
+}

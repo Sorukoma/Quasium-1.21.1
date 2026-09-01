@@ -1,0 +1,44 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_drying_shelf": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:drying_shelf"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tallow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:tallow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.obtained_tallow.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:tallow"
+    },
+    "title": {
+      "translate": "advancements.quasium.obtained_tallow.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_tallow",
+      "has_drying_shelf"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -2,7 +2,6 @@ package net.sorukoma.quasium.advancements.triggers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.CriterionValidator;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;

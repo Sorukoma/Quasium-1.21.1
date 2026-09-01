@@ -1,0 +1,33 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_anvil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:quasium_anvil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.obtained_anvil.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:quasium_anvil"
+    },
+    "title": {
+      "translate": "advancements.quasium.obtained_anvil.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_anvil"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

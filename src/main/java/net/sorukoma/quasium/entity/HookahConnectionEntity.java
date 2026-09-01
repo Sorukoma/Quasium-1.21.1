@@ -15,7 +15,6 @@ import net.minecraft.world.phys.Vec3;
 import net.sorukoma.quasium.block.entity.HookahBlockEntity;
 import net.sorukoma.quasium.network.ModPackets;
 import net.sorukoma.quasium.network.PacketStopHookahPuffSoundClient;
-import net.sorukoma.quasium.network.PacketSpawnSmoke;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -122,9 +121,10 @@ public class HookahConnectionEntity extends Entity {
                 return;
             }
 
-            // Проверяем дистанцию между игроком и кальяном
-            if (player.distanceToSqr(Vec3.atCenterOf(this.hookahBlockPos)) > PIPE_DETACH_DISTANCE_SQ) {
-                player.sendSystemMessage(net.minecraft.network.chat.Component.literal("You walked too far from the hookah!"));
+            // Проверяем дистанцию между игроком и кальяном (sub-level aware для Sable:
+            // координаты кальяна на контрапшене лежат в plot-grid, обычная distanceToSqr дала бы мусор)
+            if (net.sorukoma.quasium.compat.SableCompat.distanceSqr(player, Vec3.atCenterOf(this.hookahBlockPos)) > PIPE_DETACH_DISTANCE_SQ) {
+                player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("quasium.message.walked_away"));
                 this.stopPuffing(hookahBlockEntity, player); // Передаем игрока для спавна дыма
                 this.discard(); // Отбрасываем сущность, если игрок отошел слишком далеко
                 return;
@@ -134,7 +134,7 @@ public class HookahConnectionEntity extends Entity {
             boolean holdingPipe = player.getMainHandItem().getItem() == net.sorukoma.quasium.item.ModItems.HOOKAH_PIPE.get() ||
                                   player.getOffhandItem().getItem() == net.sorukoma.quasium.item.ModItems.HOOKAH_PIPE.get();
             if (!holdingPipe) {
-                player.sendSystemMessage(net.minecraft.network.chat.Component.literal("You let go of the hookah pipe!"));
+                player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("quasium.message.let_go"));
                 this.stopPuffing(hookahBlockEntity, player); // Передаем игрока для спавна дыма
                 this.discard();
                 return;
@@ -143,12 +143,7 @@ public class HookahConnectionEntity extends Entity {
             // Обновляем позицию сущности, чтобы она всегда была на кальяне
             this.setPos(this.hookahBlockPos.getX() + 0.5, this.hookahBlockPos.getY() + 0.5, this.hookahBlockPos.getZ() + 0.5);
 
-            // Логика затяжки каждый тик, пока игрок держит ПКМ
-            if (this.isPuffing()) {
-                if (!hookahBlockEntity.tryPuff(player)) { // Затяжка на 1 тик
-                    this.stopPuffing(hookahBlockEntity, player); // Если затяжка не удалась, останавливаем
-                }
-            }
+            // Затяжку тикает HookahBlockEntity, чтобы общий ресурс обрабатывался один раз.
         }
     }
 

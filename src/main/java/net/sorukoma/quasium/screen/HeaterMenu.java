@@ -63,7 +63,9 @@ public class HeaterMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return blockEntity != null && player.distanceToSqr(blockEntity.getBlockPos().getX() + 0.5, blockEntity.getBlockPos().getY() + 0.5, blockEntity.getBlockPos().getZ() + 0.5) <= 64.0;
+        // SableCompat: учитывает sub-level Sable, чтобы GUI нагревателя на движущемся
+        // контрапшене не закрывался мгновенно из-за координат plot-grid.
+        return blockEntity != null && net.sorukoma.quasium.compat.SableCompat.distanceSqrToBlockCenter(player, blockEntity.getBlockPos()) <= 64.0;
     }
 
     @Override

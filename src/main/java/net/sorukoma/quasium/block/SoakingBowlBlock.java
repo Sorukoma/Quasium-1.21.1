@@ -7,13 +7,13 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -25,6 +25,7 @@ import net.sorukoma.quasium.block.entity.SoakingBowlBlockEntity;
 import net.sorukoma.quasium.block.entity.ModBlockEntities;
 import net.sorukoma.quasium.component.ModDataComponents;
 import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.item.TobaccoVarieties;
 import org.jetbrains.annotations.Nullable;
 
 public class SoakingBowlBlock extends BaseEntityBlock {
@@ -41,101 +42,139 @@ public class SoakingBowlBlock extends BaseEntityBlock {
         BlockEntity entity = level.getBlockEntity(pos);
         if (!(entity instanceof SoakingBowlBlockEntity bowlEntity)) return ItemInteractionResult.FAIL;
 
-        // Загрузка ферментированных листьев
-        boolean isFermentedLeaves = (heldItem.getItem() == ModItems.TOBACCO_LEAVES.get() ||
-                                   heldItem.getItem() == ModItems.MAKHORKA_LEAVES.get()) &&
-                                  heldItem.has(ModDataComponents.FERMENTED.get());
+        boolean isFermentedLeaves = TobaccoVarieties.isLeaf(heldItem)
+                && heldItem.has(ModDataComponents.FERMENTED.get());
+
         if (isFermentedLeaves) {
-            ItemStack slotItem = bowlEntity.getItemHandler().getStackInSlot(0);
-            if (slotItem.isEmpty()) {
-                bowlEntity.getItemHandler().setStackInSlot(0, heldItem.copyWithCount(1));
-                if (!player.isCreative()) heldItem.shrink(1);
-                return ItemInteractionResult.CONSUME;
-            } else {
-                player.displayClientMessage(Component.translatable("block.quasium.soaking_bowl.leaves_busy"), true);
+            if (heldItem.getOrDefault(ModDataComponents.SPOILED.get(), false)) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.spoiled_leaves"), true);
                 return ItemInteractionResult.CONSUME;
             }
-        }
-
-        // Загрузка зелья
-        if (heldItem.getItem() == Items.POTION) {
-            ItemStack potionSlot = bowlEntity.getItemHandler().getStackInSlot(1);
-            if (potionSlot.isEmpty()) {
-                bowlEntity.getItemHandler().setStackInSlot(1, heldItem.copyWithCount(1));
-                if (!player.isCreative()) {
-                    player.getInventory().placeItemBackInInventory(new ItemStack(Items.GLASS_BOTTLE));
-                    heldItem.shrink(1);
-                }
-                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.added_potion", "пotion"), true);
-                return ItemInteractionResult.CONSUME;
-            } else {
-                player.displayClientMessage(Component.translatable("block.quasium.soaking_bowl.potion_busy"), true);
+            if (bowlEntity.getTobaccoGrams() >= 1) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.full"), true);
                 return ItemInteractionResult.CONSUME;
             }
+            bowlEntity.setMakhorka(false);
+            bowlEntity.setVariety(TobaccoVarieties.getVariety(heldItem));
+            bowlEntity.setLeafStars(
+                    heldItem.getOrDefault(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), 0),
+                    heldItem.getOrDefault(ModDataComponents.TOBACCO_YIELD_STARS.get(), 0),
+                    heldItem.getOrDefault(ModDataComponents.TOBACCO_QUALITY_STARS.get(), 0));
+            bowlEntity.setLeafToxic("toxic".equals(heldItem.getOrDefault(ModDataComponents.TOBACCO_MUTATION.get(), "")));
+            bowlEntity.setOverdried(heldItem.getOrDefault(ModDataComponents.DRYING_STAGE.get(), 0) >= 3);
+            bowlEntity.setTobaccoGrams(1);
+            if (!player.isCreative()) heldItem.shrink(1);
+            player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.added_tobacco", 30), true);
+            bowlEntity.setChanged();
+            return ItemInteractionResult.CONSUME;
         }
 
-        // Добавление мелассы (только до замеса, когда есть листья и зелье)
+        // Свежие (неферментированные) листья замешивать нельзя — только ферментированные.
+        if (TobaccoVarieties.isLeaf(heldItem) && !heldItem.has(ModDataComponents.FERMENTED.get())) {
+            player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.needs_fermented"), true);
+            return ItemInteractionResult.CONSUME;
+        }
+
         if (heldItem.is(ModItems.MOLASSES_BOTTLE.get())) {
-            int molassesMass = heldItem.getOrDefault(ModDataComponents.MOLASSES_MASS.get(), 5);
-            if (molassesMass > 0) {
-                // Проверяем, можно ли добавить мелассу (есть листья и зелье, но замес ещё не запущен)
-                boolean hasLeavesAndPotion = !bowlEntity.getItemHandler().getStackInSlot(0).isEmpty() &&
-                                            !bowlEntity.getItemHandler().getStackInSlot(1).isEmpty();
-                boolean canAddMolasses = hasLeavesAndPotion && bowlEntity.getResultItem().isEmpty() && !bowlEntity.isSoaking()
-                        && bowlEntity.getMolassesAmount() < 5; // не расходуем бутылку, если миска уже полна
-                
-                if (canAddMolasses) {
-                    // Добавляем только 1 единицу за клик
-                    bowlEntity.addMolasses(1);
-
-                    // Удаляем 1 единицу из бутылки
-                    int newMass = molassesMass - 1;
-                    if (!player.isCreative() && newMass <= 0) {
-                        // Бутылка пуста — возвращаем пустую бутылку и убираем текущую
-                        player.getInventory().placeItemBackInInventory(new ItemStack(Items.GLASS_BOTTLE));
-                        heldItem.shrink(1);
-                    } else {
-                        // Уменьшаем массу
-                        if (!player.isCreative()) {
-                            heldItem.set(ModDataComponents.MOLASSES_MASS.get(), newMass);
-                        }
-                    }
-
-                    // Обновляем тултипы после изменения мелассы
-                    bowlEntity.updateTooltip();
-
-                    player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.added_molasses", 1), true);
-                    return ItemInteractionResult.CONSUME;
-                } else {
-                    player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.no_tobacco"), true);
-                    return ItemInteractionResult.CONSUME;
-                }
+            int mass = 5;
+            if (bowlEntity.getMolassesMb() + mass > 20) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.molasses_full"), true);
+                return ItemInteractionResult.CONSUME;
             }
+            bowlEntity.setMolassesMb(bowlEntity.getMolassesMb() + mass);
+            if (!player.isCreative()) {
+                heldItem.shrink(1);
+                player.getInventory().placeItemBackInInventory(new ItemStack(Items.GLASS_BOTTLE));
+            }
+            player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.added_molasses", bowlEntity.getMolassesMb()), true);
+            bowlEntity.setChanged();
+            return ItemInteractionResult.CONSUME;
         }
 
-        // Проверка на палочку для запуска процесса смешивания или показа прогресса
+        if (heldItem.is(ModItems.ESSENCE_BOTTLE.get())) {
+            int amount = heldItem.getOrDefault(ModDataComponents.ESSENCE_AMOUNT.get(), 20);
+            String type = heldItem.getOrDefault(ModDataComponents.ESSENCE_TYPE.get(), "unknown");
+            int transferred = Math.min(5, Math.min(amount, 20 - bowlEntity.getEssenceMb()));
+            if (transferred <= 0) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.essence_full"), true);
+                return ItemInteractionResult.CONSUME;
+            }
+            bowlEntity.addEssence(type, transferred);
+            if (!player.isCreative()) {
+                int remaining = amount - transferred;
+                if (remaining <= 0) {
+                    heldItem.shrink(1);
+                    player.getInventory().placeItemBackInInventory(new ItemStack(Items.GLASS_BOTTLE));
+                } else {
+                    heldItem.set(ModDataComponents.ESSENCE_AMOUNT.get(), remaining);
+                }
+            }
+            player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.added_essence", type, bowlEntity.getEssenceMb()), true);
+            return ItemInteractionResult.CONSUME;
+        }
+
         if (heldItem.is(Items.STICK)) {
-            ItemStack leavesSlot = bowlEntity.getItemHandler().getStackInSlot(0);
-            boolean hasLeaves = !leavesSlot.isEmpty();
-            boolean hasPotion = !bowlEntity.getItemHandler().getStackInSlot(1).isEmpty();
-            boolean isSoaking = bowlEntity.isSoaking();
-            
-            if (isSoaking) {
-                // Показываем прогресс замеса
-                player.displayClientMessage(bowlEntity.getSoakingStatusMessage(), true);
-                return ItemInteractionResult.CONSUME;
-            } else if (hasLeaves && hasPotion) {
-                // Запускаем замес
-                boolean isMakhorka = leavesSlot.getItem() == ModItems.MAKHORKA_LEAVES.get();
-                bowlEntity.startSoaking(isMakhorka, player);
-                return ItemInteractionResult.CONSUME;
+            if (!bowlEntity.canStartSoaking() && !bowlEntity.isSoaking()) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.bad_balance"), true);
             } else {
+                bowlEntity.stir();
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.stirred"), true);
+            }
+            return ItemInteractionResult.CONSUME;
+        }
+
+        if (heldItem.is(Items.BOWL)) {
+            if (!bowlEntity.isReady()) {
                 player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.not_ready"), true);
                 return ItemInteractionResult.CONSUME;
             }
+            ItemStack result = bowlEntity.takeResult();
+            if (!result.isEmpty()) {
+                if (!player.isCreative()) {
+                    heldItem.shrink(1);
+                    player.getInventory().placeItemBackInInventory(new ItemStack(Items.BOWL));
+                }
+                player.getInventory().placeItemBackInInventory(result);
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.transferred"), true);
+            }
+            return ItemInteractionResult.CONSUME;
+        }
+
+        if (heldItem.is(ModItems.HOOKAH_BOWL.get())) {
+            player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.use_tobacco_pack"), true);
+            return ItemInteractionResult.CONSUME;
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    public static java.util.List<MobEffectInstance> createEssenceEffects(String flavor) {
+        java.util.List<MobEffectInstance> effects = new java.util.ArrayList<>();
+        for (String type : flavor.split("\\+")) {
+            var effect = switch (type) {
+                case "mint" -> MobEffects.MOVEMENT_SPEED;
+                case "lemon", "lime", "orange", "grapefruit" -> MobEffects.DAMAGE_BOOST;
+                case "berry" -> MobEffects.JUMP;
+                case "lavender" -> MobEffects.REGENERATION;
+                case "cocoa" -> MobEffects.DAMAGE_RESISTANCE;
+                case "apple" -> MobEffects.HEALTH_BOOST;
+                case "watermelon" -> MobEffects.WATER_BREATHING;
+                case "grape" -> MobEffects.LUCK;
+                case "cherry" -> MobEffects.NIGHT_VISION;
+                case "vanilla" -> MobEffects.SLOW_FALLING;
+                case "coffee" -> MobEffects.DIG_SPEED;
+                case "cinnamon" -> MobEffects.DAMAGE_BOOST;
+                case "coconut" -> MobEffects.DAMAGE_RESISTANCE;
+                case "rose" -> MobEffects.REGENERATION;
+                case "anise" -> MobEffects.MOVEMENT_SPEED;
+                case "ice" -> MobEffects.FIRE_RESISTANCE;
+                case "honey" -> MobEffects.ABSORPTION;
+                case "nether" -> MobEffects.FIRE_RESISTANCE;
+                default -> null;
+            };
+            if (effect != null) effects.add(new MobEffectInstance(effect, 200, 0));
+        }
+        return effects;
     }
 
     @Override
@@ -145,15 +184,28 @@ public class SoakingBowlBlock extends BaseEntityBlock {
         BlockEntity entity = level.getBlockEntity(pos);
         if (!(entity instanceof SoakingBowlBlockEntity bowlEntity)) return InteractionResult.FAIL;
 
-        // Извлечение ванильной миской (работает всегда, когда есть результат)
-        ItemStack mainHand = player.getMainHandItem();
-        if (mainHand.is(Items.BOWL)) {
-            ItemStack resultSlot = bowlEntity.getResultItem();
-            if (!resultSlot.isEmpty()) {
-                player.getInventory().placeItemBackInInventory(resultSlot.copy());
-                bowlEntity.clearResult();
-                return InteractionResult.CONSUME;
+        int grams = bowlEntity.getTobaccoGrams();
+        if (grams > 0) {
+            float ratio = grams > 0 ? bowlEntity.getMolassesMb() / (float)grams : 0f;
+            if (bowlEntity.isSoaking()) {
+                int seconds = Math.max(0, (bowlEntity.getSoakingTotalTime() - bowlEntity.getSoakingProgress()) / 20);
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.soaking_progress", seconds), true);
+            } else if (bowlEntity.isReady() && bowlEntity.isToxic()) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_toxic"), true);
+            } else if (bowlEntity.isReady()) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_ideal"), true);
+            } else if (ratio < 0.15f) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_dry"), true);
+            } else if (ratio > 0.25f) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_wet"), true);
+            } else if (bowlEntity.getEssenceMb() <= 0) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_no_essence"), true);
+            } else if (bowlEntity.isToxic()) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_toxic"), true);
+            } else {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_needs_stirring"), true);
             }
+            return InteractionResult.CONSUME;
         }
 
         return InteractionResult.PASS;
@@ -169,10 +221,6 @@ public class SoakingBowlBlock extends BaseEntityBlock {
                     if (!stack.isEmpty()) {
                         Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
                     }
-                }
-                ItemStack result = bowlEntity.getResultItem();
-                if (!result.isEmpty()) {
-                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), result);
                 }
             }
         }

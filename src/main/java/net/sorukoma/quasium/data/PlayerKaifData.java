@@ -34,6 +34,15 @@ public class PlayerKaifData {
         }
     }
 
+    /**
+     * Отправляет текущее значение kaif клиенту. Нужно при входе игрока: kaif хранится в NBT
+     * на сервере, а ClientKaifData стартует с 0, поэтому без явной синхронизации вернувшийся
+     * игрок видел бы 0 (HUD кайфометра) до первого изменения kaif.
+     */
+    public static void syncOnLogin(ServerPlayer serverPlayer) {
+        PacketDistributor.sendToPlayer(serverPlayer, new KaifUpdatePacket(getKaifValue(serverPlayer)));
+    }
+
     public static void addKaif(Player player, int amount) {
         setKaifValue(player, getKaifValue(player) + amount);
     }

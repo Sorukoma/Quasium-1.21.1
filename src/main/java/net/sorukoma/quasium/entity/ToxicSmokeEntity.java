@@ -12,127 +12,82 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.sorukoma.quasium.compat.CreateDivingProtection;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class ToxicSmokeEntity extends Entity {
+    private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(ToxicSmokeEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Boolean> FREEZING = SynchedEntityData.defineId(ToxicSmokeEntity.class, EntityDataSerializers.BOOLEAN);
 
-    private static final EntityDataAccessor<Float> DAMAGE =
-            SynchedEntityData.defineId(ToxicSmokeEntity.class, EntityDataSerializers.FLOAT);
-
-    private int lifetimeTicks = 20; // ~1 секунда жизни
+    private final Set<UUID> hitEntities = new HashSet<>();
+    private int lifetimeTicks = 24;
     private UUID ownerUUID;
 
     public ToxicSmokeEntity(EntityType<?> type, Level level) {
         super(type, level);
-        this.noCulling = true;
+        noCulling = true;
     }
 
-    public ToxicSmokeEntity(Level level, Player owner, Vec3 startPos, Vec3 velocity, float damage) {
+    public ToxicSmokeEntity(Level level, Player owner, Vec3 start, Vec3 velocity, float damage, boolean freezing) {
         this(ModEntityTypes.TOXIC_SMOKE.get(), level);
-        this.ownerUUID = owner.getUUID();
-        this.setPos(startPos);
-        this.setDeltaMovement(velocity);
-        this.entityData.set(DAMAGE, damage);
+        ownerUUID = owner.getUUID();
+        setPos(start);
+        setDeltaMovement(velocity);
+        entityData.set(DAMAGE, damage);
+        entityData.set(FREEZING, freezing);
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        builder.define(DAMAGE, 0.0f);
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag tag) {
-        this.lifetimeTicks = tag.getInt("LifetimeTicks");
-        if (tag.hasUUID("OwnerUUID")) {
-            this.ownerUUID = tag.getUUID("OwnerUUID");
-        }
-        this.entityData.set(DAMAGE, tag.getFloat("Damage"));
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag tag) {
-        tag.putInt("LifetimeTicks", this.lifetimeTicks);
-        if (this.ownerUUID != null) {
-            tag.putUUID("OwnerUUID", this.ownerUUID);
-        }
-        tag.putFloat("Damage", this.entityData.get(DAMAGE));
+        builder.define(DAMAGE, 0f);
+        builder.define(FREEZING, false);
     }
 
     @Override
     public void tick() {
         super.tick();
+        Vec3 motion = getDeltaMovement();
+        setPos(getX() + motion.x, getY() + motion.y, getZ() + motion.z);
 
-        if (this.level().isClientSide) {
-            // Клиент: спавним частицы дыма
-            for (int i = 0; i < 3; i++) {
-                this.level().addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,
-                        this.getX() + (this.random.nextDouble() - 0.5) * 0.3,
-                        this.getY() + (this.random.nextDouble() - 0.5) * 0.3,
-                        this.getZ() + (this.random.nextDouble() - 0.5) * 0.3,
-                        this.getDeltaMovement().x * 0.1,
-                        this.getDeltaMovement().y * 0.1 + 0.02,
-                        this.getDeltaMovement().z * 0.1);
+        if (level() instanceof ServerLevel serverLevel) {
+            if (entityData.get(FREEZING)) {
+                serverLevel.sendParticles(ParticleTypes.SNOWFLAKE, getX(), getY(), getZ(), 3, 0.12, 0.12, 0.12, 0.01);
+            } else {
+                serverLevel.sendParticles(ParticleTypes.WITCH, getX(), getY(), getZ(), 3, 0.12, 0.12, 0.12, 0.01);
             }
-            return;
-        }
-
-        // Сервер: двигаем снаряд
-        Vec3 motion = this.getDeltaMovement();
-        this.setPos(this.getX() + motion.x, this.getY() + motion.y, this.getZ() + motion.z);
-
-        // Спавним частицы на сервере для других игроков
-        if (this.level() instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE,
-                    this.getX(), this.getY(), this.getZ(), 2,
-                    (this.random.nextDouble() - 0.5) * 0.2,
-                    0.02,
-                    (this.random.nextDouble() - 0.5) * 0.2,
-                    0.01);
-        }
-
-        // Проверяем столкновения с живыми существами
-        float damage = this.entityData.get(DAMAGE);
-        Player owner = this.ownerUUID != null ? this.level().getPlayerByUUID(this.ownerUUID) : null;
-
-        for (LivingEntity target : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.5))) {
-            if (target.equals(owner)) continue;
-            if (target.isInvulnerable()) continue;
-
-            DamageSource damageSource = this.level().damageSources().drown();
-            float remainingDamage = CreateDivingProtection.absorbDamage(target, damage);
-            if (remainingDamage > 0) {
-                target.hurt(damageSource, remainingDamage);
+            Player owner = ownerUUID == null ? null : level().getPlayerByUUID(ownerUUID);
+            for (LivingEntity target : level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(0.65))) {
+                if (target == owner || !hitEntities.add(target.getUUID())) continue;
+                float damage = CreateDivingProtection.absorbDamage(target, entityData.get(DAMAGE));
+                if (damage > 0f) target.hurt(level().damageSources().drown(), damage);
+                if (entityData.get(FREEZING)) target.setTicksFrozen(Math.max(target.getTicksFrozen(), 180));
             }
         }
 
-        // Уменьшаем время жизни
-        this.lifetimeTicks--;
-        if (this.lifetimeTicks <= 0) {
-            this.discard();
-        }
+        if (--lifetimeTicks <= 0) discard();
     }
 
     @Override
-    public boolean shouldRenderAtSqrDistance(double distance) {
-        return distance < 4096.0;
+    protected void readAdditionalSaveData(CompoundTag tag) {
+        lifetimeTicks = tag.getInt("LifetimeTicks");
+        if (tag.hasUUID("OwnerUUID")) ownerUUID = tag.getUUID("OwnerUUID");
+        entityData.set(DAMAGE, tag.getFloat("Damage"));
+        entityData.set(FREEZING, tag.getBoolean("Freezing"));
     }
 
     @Override
-    public boolean isPickable() {
-        return false;
+    protected void addAdditionalSaveData(CompoundTag tag) {
+        tag.putInt("LifetimeTicks", lifetimeTicks);
+        if (ownerUUID != null) tag.putUUID("OwnerUUID", ownerUUID);
+        tag.putFloat("Damage", entityData.get(DAMAGE));
+        tag.putBoolean("Freezing", entityData.get(FREEZING));
     }
 
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
-
-    @Override
-    public boolean hurt(DamageSource source, float amount) {
-        return false; // Smoke can't be hurt
-    }
+    @Override public boolean isPickable() { return false; }
+    @Override public boolean isPushable() { return false; }
+    @Override public boolean hurt(DamageSource source, float amount) { return false; }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "quasium:raw_briquette"
+  },
+  "result": {
+    "count": 3,
+    "id": "quasium:charcoal_22"
+  }
+}

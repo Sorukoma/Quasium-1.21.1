@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.calloud.title",
+  "hint": "quasium.progression.calloud.hint",
+  "pages": [
+    { "text": "quasium.progression.calloud.page1" },
+    { "text": "quasium.progression.calloud.page2" },
+    { "text": "quasium.progression.calloud.page3" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_calloud"
+}

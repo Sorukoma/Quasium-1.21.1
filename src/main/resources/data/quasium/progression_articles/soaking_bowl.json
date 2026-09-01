@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.soaking_bowl.title",
+  "hint": "quasium.progression.soaking_bowl.hint",
+  "pages": [
+    { "text": "quasium.progression.soaking_bowl.page1" },
+    { "text": "quasium.progression.soaking_bowl.page2" },
+    { "text": "quasium.progression.soaking_bowl.page3" }
+  ],
+  "unlockCondition": "quasium:progression/self_mixed_obtained"
+}

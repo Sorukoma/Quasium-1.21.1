@@ -1,0 +1,9 @@
+{
+  "title": "quasium.progression.regular_tobacco.title",
+  "hint": "quasium.progression.regular_tobacco.hint",
+  "pages": [
+    { "text": "quasium.progression.regular_tobacco.page1" },
+    { "text": "quasium.progression.regular_tobacco.page2" }
+  ],
+  "unlockCondition": "quasium:progression/flavored_tobacco"
+}

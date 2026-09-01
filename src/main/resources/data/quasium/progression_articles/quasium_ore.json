@@ -1,9 +1,11 @@
 {
   "title": "quasium.progression.quasium_ore.title",
+  "hint": "quasium.progression.quasium_ore.hint",
   "pages": [
     { "text": "quasium.progression.quasium_ore.page1" },
     { "text": "quasium.progression.quasium_ore.page2" },
     { "text": "quasium.progression.quasium_ore.page3" },
     { "text": "quasium.progression.quasium_ore.page4" }
-  ]
+  ],
+  "unlockCondition": "quasium:quasium_ore/mined_with_kaif"
 }

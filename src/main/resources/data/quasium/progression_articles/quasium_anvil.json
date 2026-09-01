@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.quasium_anvil.title",
+  "hint": "quasium.progression.quasium_anvil.hint",
+  "pages": [
+    { "text": "quasium.progression.quasium_anvil.page1" },
+    { "text": "quasium.progression.quasium_anvil.page2" },
+    { "text": "quasium.progression.quasium_anvil.page3" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_anvil"
+}

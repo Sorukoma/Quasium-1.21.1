@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "quasium:deepslate_quasium_ore"
+    "quasium:deepslate_quasium_ore",
+    "quasium:quasium_anvil",
+    "quasium:heater",
+    "quasium:undried_quasium_block",
+    "quasium:quasium_block"
   ]
 }

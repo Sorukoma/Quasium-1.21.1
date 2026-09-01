@@ -16,14 +16,10 @@ import net.minecraft.world.SimpleMenuProvider;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
 
 public class HookahBowlItem extends Item {
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     public HookahBowlItem(Properties pProperties) {
         super(pProperties);
@@ -32,15 +28,11 @@ public class HookahBowlItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
-        LOGGER.info("HookahBowlItem.use() called. ClientSide={}, Hand={}, Item={}",
-                pLevel.isClientSide(), pUsedHand, itemstack.getDescriptionId());
         if (!pLevel.isClientSide()) {
             ModDataComponents.HookahBowlContents contents = itemstack.getOrDefault(
                     ModDataComponents.HOOKAH_BOWL_CONTENTS.get(),
                     ModDataComponents.HookahBowlContents.cleared()
             );
-            LOGGER.info("Server: Opening bowl GUI. Hand={}, Groups={}, Filled={}",
-                    pUsedHand, contents.groups().size(), contents.filledSlotCount());
 
             pPlayer.openMenu(new SimpleMenuProvider(
                     (pContainerId, pPlayerInventory, pPlayerEntity) ->

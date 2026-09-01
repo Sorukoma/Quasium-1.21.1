@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3; // Import Vec3
@@ -21,7 +20,6 @@ import net.sorukoma.quasium.network.PacketStopPuffing;
 import net.sorukoma.quasium.network.PacketStartPuffingBackpack;
 import net.sorukoma.quasium.network.PacketStopPuffingBackpack;
 import net.sorukoma.quasium.client.ClientHookahInputHandler;
-import net.sorukoma.quasium.block.ModBlocks;
 import net.sorukoma.quasium.component.ModDataComponents;
 
 import org.slf4j.Logger;
@@ -42,7 +40,7 @@ public class HookahPipeItem extends Item {
         if (pLevel.isClientSide()) {
             Long cooldownEnd = itemstack.get(ModDataComponents.HOOKAH_PIPE_COOLDOWN_END.get());
             if (cooldownEnd != null && pLevel.getGameTime() < cooldownEnd) {
-                pPlayer.displayClientMessage(net.minecraft.network.chat.Component.literal("You are out of breath! Wait before using the hookah pipe again."), true);
+                pPlayer.displayClientMessage(net.minecraft.network.chat.Component.translatable("quasium.message.pipe_cooldown"), true);
                 return InteractionResultHolder.fail(itemstack);
             }
         }
@@ -63,8 +61,8 @@ public class HookahPipeItem extends Item {
 
             if (hitResult.getType() == HitResult.Type.BLOCK) {
                 BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-                BlockState targetBlockState = pLevel.getBlockState(blockHitResult.getBlockPos());
-                isLookingAtHookahBlock = targetBlockState.is(ModBlocks.HOOKAH_BLOCK.get());
+                isLookingAtHookahBlock = pLevel.getBlockEntity(blockHitResult.getBlockPos())
+                        instanceof net.sorukoma.quasium.block.entity.HookahBlockEntity;
             }
 
             // Если игрок держит трубку, смотрит на блок кальяна и нажимает Shift,

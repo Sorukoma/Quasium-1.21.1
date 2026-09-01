@@ -9,7 +9,6 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.sorukoma.quasium.block.entity.HookahBlockEntity;
 import net.sorukoma.quasium.entity.HookahConnectionEntity;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,11 +25,16 @@ public class PacketAttachPipeToServerHandler {
             if (!(context.player() instanceof ServerPlayer player)) return;
             BlockPos blockPos = payload.blockPos();
 
-            LOGGER.debug("Server: Received PacketAttachPipeToServer from player {} for block at {}", player.getName().getString(), blockPos);
 
-            // Distance validation
-            if (player.blockPosition().distSqr(blockPos) > MAX_DISTANCE_SQ) {
+            // Distance validation (sub-level aware so hookahs on moving Sable contraptions still work)
+            if (net.sorukoma.quasium.compat.SableCompat.distanceSqrToBlockCenter(player, blockPos) > MAX_DISTANCE_SQ) {
                 LOGGER.warn("Server: Player {} tried to attach pipe to hookah at {} but is too far away.", player.getName().getString(), blockPos);
+                return;
+            }
+
+            boolean holdingPipe = player.getMainHandItem().is(net.sorukoma.quasium.item.ModItems.HOOKAH_PIPE.get())
+                    || player.getOffhandItem().is(net.sorukoma.quasium.item.ModItems.HOOKAH_PIPE.get());
+            if (!holdingPipe) {
                 return;
             }
 
@@ -73,21 +77,19 @@ public class PacketAttachPipeToServerHandler {
                     if (existingConnections.isEmpty()) {
                         HookahConnectionEntity connectionEntity = new HookahConnectionEntity(player.level(), player.getUUID(), blockPos);
                         player.level().addFreshEntity(connectionEntity);
-                        player.sendSystemMessage(Component.literal("You attached the hookah pipe."));
+                        player.sendSystemMessage(Component.translatable("quasium.message.pipe_attached"));
                         PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.of(blockPos)));
-                        LOGGER.debug("Server: HookahConnectionEntity created for player {} at {}.", player.getUUID(), blockPos);
                     } else {
-                        player.sendSystemMessage(Component.literal("Your pipe is already attached to this hookah."));
+                        player.sendSystemMessage(Component.translatable("quasium.message.pipe_already_attached"));
                         PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.of(blockPos)));
-                        LOGGER.debug("Server: Pipe already attached for player {}.", player.getUUID());
                     }
                 } else {
-                    player.sendSystemMessage(Component.literal("Error: Hookah Block Entity not found at " + blockPos));
+                    player.sendSystemMessage(Component.translatable("quasium.message.hookah_missing"));
                     PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.empty()));
                     LOGGER.error("Server: Hookah Block Entity not found at {} when handling PacketAttachPipeToServer.", blockPos);
                 }
             } else {
-                player.sendSystemMessage(Component.literal("Error: Block not loaded at " + blockPos));
+                player.sendSystemMessage(Component.translatable("quasium.message.hookah_not_loaded"));
                 PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.empty()));
                 LOGGER.error("Server: Block not loaded at {} when handling PacketAttachPipeToServer.", blockPos);
             }

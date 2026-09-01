@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#quasium:dikar_biomes",
+  "features": "quasium:patch_dikar",
+  "step": "vegetal_decoration"
+}

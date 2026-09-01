@@ -4,6 +4,8 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
@@ -12,6 +14,7 @@ import net.sorukoma.quasium.QuasiumMod;
 import net.sorukoma.quasium.datagen.worldgen.ModConfiguredFeatures;
 import net.sorukoma.quasium.datagen.worldgen.ModPlacedFeatures;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -37,5 +40,8 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, worldgenLookupProvider));
         generator.addProvider(event.includeServer(), new ModAdvancementProvider(packOutput, worldgenLookupProvider, event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new ModGlobalLootModifiersProvider(packOutput, worldgenLookupProvider));
+        generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Set.of(),
+                List.of(new LootTableProvider.SubProviderEntry(ModBlockLootProvider::new, LootContextParamSets.BLOCK)),
+                worldgenLookupProvider));
     }
 }

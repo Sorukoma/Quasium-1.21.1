@@ -5,8 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,9 +13,7 @@ import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.sorukoma.quasium.QuasiumMod;
-import net.sorukoma.quasium.block.ModBlocks;
 import net.sorukoma.quasium.item.ModItems;
-import net.sorukoma.quasium.network.PacketStartPuffing; // Эти пакеты теперь отправляются из HookahPipeItem
 import net.sorukoma.quasium.network.PacketStopPuffing; // Эти пакеты теперь отправляются из HookahPipeItem
 import net.sorukoma.quasium.network.PacketAttachPipeToServer;
 import net.sorukoma.quasium.network.PacketDetachPipeToServer;
@@ -76,12 +72,12 @@ public class ClientHookahInputHandler {
 
             boolean isHoldingPipe = event.getItemStack().getItem() == ModItems.HOOKAH_PIPE.get();
             boolean isShiftKeyDown = minecraft.player.isShiftKeyDown();
-            boolean isHookahBlock = (blockEntity != null && blockEntity.getBlockState().is(ModBlocks.HOOKAH_BLOCK.get()));
+            boolean isHookahBlock = (blockEntity instanceof net.sorukoma.quasium.block.entity.HookahBlockEntity);
 
             // Сценарий 1: Прикрепление трубки (Shift + ПКМ с трубкой по кальяну)
             if (isShiftKeyDown && isHoldingPipe && isHookahBlock) {
                 PacketDistributor.sendToServer(new PacketAttachPipeToServer(clickedBlockPos)); // Отправляем пакет на сервер
-                minecraft.player.sendSystemMessage(Component.literal("Attempting to attach hookah pipe..."));
+                minecraft.player.sendSystemMessage(Component.translatable("quasium.message.attempting_attach"));
                 event.setCanceled(true); // Отменяем событие, чтобы серверный HookahBlock.useItemOn не обрабатывал его
                 event.setUseItem(TriState.TRUE); // Указываем, что предмет был использован
                 event.setUseBlock(TriState.TRUE); // Указываем, что блок был использован
@@ -89,14 +85,28 @@ public class ClientHookahInputHandler {
                 return;
             }
 
-            // Сценарий 2: Открепление трубки (Shift + ПКМ без предмета по кальяну)
-            if (isShiftKeyDown && !isHoldingPipe && isHookahBlock) {
+            // Сценарий 2: Открепление трубки (Shift + ПКМ ПУСТОЙ рукой по кальяну).
+            // Важно: только пустая рука, иначе shift+ПКМ с шахтой/чашей/каллаудом
+            // (сборка модульного кальяна) ошибочно трактовался бы как открепление.
+            if (isShiftKeyDown && event.getItemStack().isEmpty() && isHookahBlock) {
                 PacketDistributor.sendToServer(new PacketDetachPipeToServer(clickedBlockPos)); // Отправляем пакет на сервер
-                minecraft.player.sendSystemMessage(Component.literal("Attempting to detach hookah pipe..."));
+                minecraft.player.sendSystemMessage(Component.translatable("quasium.message.attempting_detach"));
                 event.setCanceled(true); // Отменяем событие
                 event.setUseItem(TriState.TRUE); // Указываем, что предмет был использован
                 event.setUseBlock(TriState.TRUE); // Указываем, что блок был использован
                 lastInteractionTime = minecraft.level.getGameTime(); // Обновляем время последней интеракции
+                return;
+            }
+            // Сценарий 3: сборка/вода/GUI модульного кальяна. Ванильный конвейер НЕ вызывает
+            // Block.useItemOn при shift+предмет, поэтому шлём собственный пакет на сервер
+            // (как для трубки). Обрабатываем ЛКМ-жесты сборки и заливку воды.
+            if (blockEntity instanceof net.sorukoma.quasium.block.entity.ModularHookahBlockEntity) {
+                PacketDistributor.sendToServer(new net.sorukoma.quasium.network.PacketModularHookahInteract(
+                        clickedBlockPos, event.getHand() == InteractionHand.MAIN_HAND));
+                event.setCanceled(true);
+                event.setUseItem(TriState.FALSE);
+                event.setUseBlock(TriState.FALSE);
+                lastInteractionTime = minecraft.level.getGameTime();
                 return;
             }
         }

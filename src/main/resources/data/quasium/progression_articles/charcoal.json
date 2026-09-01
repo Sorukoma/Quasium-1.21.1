@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.charcoal.title",
+  "hint": "quasium.progression.charcoal.hint",
+  "pages": [
+    { "text": "quasium.progression.charcoal.page1" },
+    { "text": "quasium.progression.charcoal.page2" },
+    { "text": "quasium.progression.charcoal.page3" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_charcoal"
+}

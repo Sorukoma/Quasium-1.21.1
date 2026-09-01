@@ -1,7 +1,9 @@
 {
   "title": "quasium.progression.kaif_mastery.title",
+  "hint": "quasium.progression.kaif_mastery.hint",
   "pages": [
-    { "text": "quasium.progression.kaif_mastery.page1" }
+    { "text": "quasium.progression.kaif_mastery.page1" },
+    { "text": "quasium.progression.kaif_mastery.page2" }
   ],
   "unlockCondition": "quasium:kaif/kaif_level_30"
 }

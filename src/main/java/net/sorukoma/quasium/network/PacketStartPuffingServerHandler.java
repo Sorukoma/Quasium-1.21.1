@@ -23,8 +23,10 @@ public class PacketStartPuffingServerHandler {
             if (!(context.player() instanceof ServerPlayer player)) return;
             BlockPos blockPos = payload.blockPos();
 
-            // Валидация дистанции: не доверяем произвольной позиции от клиента
-            if (player.blockPosition().distSqr(blockPos) > MAX_DISTANCE_SQ) {
+            // Валидация дистанции: не доверяем произвольной позиции от клиента.
+            // Через SableCompat — иначе кальян на движущемся корабле (Create Aeronautics)
+            // оказался бы «слишком далеко» из-за координат sub-level.
+            if (net.sorukoma.quasium.compat.SableCompat.distanceSqrToBlockCenter(player, blockPos) > MAX_DISTANCE_SQ) {
                 return;
             }
 
@@ -32,11 +34,12 @@ public class PacketStartPuffingServerHandler {
             ItemStack pipeItem = player.getMainHandItem().is(ModItems.HOOKAH_PIPE.get()) ?
                                  player.getMainHandItem() :
                                  player.getOffhandItem();
-            if (pipeItem.is(ModItems.HOOKAH_PIPE.get())) {
-                Long cooldownEnd = pipeItem.get(ModDataComponents.HOOKAH_PIPE_COOLDOWN_END.get());
-                if (cooldownEnd != null && player.level().getGameTime() < cooldownEnd) {
-                    return; // Кулдаун ещё активен, игнорируем пакет
-                }
+            if (!pipeItem.is(ModItems.HOOKAH_PIPE.get())) {
+                return;
+            }
+            Long cooldownEnd = pipeItem.get(ModDataComponents.HOOKAH_PIPE_COOLDOWN_END.get());
+            if (cooldownEnd != null && player.level().getGameTime() < cooldownEnd) {
+                return;
             }
 
             if (player.level().isLoaded(blockPos)) {
@@ -59,7 +62,7 @@ public class PacketStartPuffingServerHandler {
                         connectionEntity.startPuffing(hookahBlockEntity);
                     } else {
                         player.connection.send(new ClientboundSetActionBarTextPacket(
-                                Component.literal("You are not properly connected to this hookah.")));
+                                Component.translatable("quasium.message.not_connected")));
                     }
                 }
             }

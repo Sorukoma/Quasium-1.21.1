@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": {
+      "item": "minecraft:white_dye"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "N": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    "IDI",
+    " I ",
+    "INI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:modular_shaft_white"
+  }
+}

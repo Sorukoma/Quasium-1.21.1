@@ -10,6 +10,7 @@ import java.util.Set;
 public class ClientTobaccoData {
     private static Set<String> triedFlavors = new HashSet<>();
     private static Set<Float> triedSelfMixedStrengths = new HashSet<>();
+    private static java.util.Map<String, Boolean> flavorPreferences = new java.util.HashMap<>();
 
     public static Set<String> getTriedFlavors() {
         return triedFlavors;
@@ -17,6 +18,14 @@ public class ClientTobaccoData {
 
     public static Set<Float> getTriedSelfMixedStrengths() {
         return triedSelfMixedStrengths;
+    }
+
+    public static java.util.Map<String, Boolean> getFlavorPreferences() {
+        return flavorPreferences;
+    }
+
+    public static void setFlavorPreferences(java.util.Map<String, Boolean> preferences) {
+        flavorPreferences = new java.util.HashMap<>(preferences);
     }
 
     public static void setTriedFlavors(Set<String> flavors) {

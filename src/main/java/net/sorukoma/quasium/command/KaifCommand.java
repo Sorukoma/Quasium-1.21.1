@@ -50,8 +50,8 @@ public class KaifCommand {
     private static int setKaif(CommandContext<CommandSourceStack> context, Collection<ServerPlayer> targets, int value) { // Удален throws CommandSyntaxException
         for (ServerPlayer player : targets) {
             PlayerKaifData.setKaifValue(player, value);
-            player.sendSystemMessage(Component.literal("Ваш уровень кайфа установлен на " + value));
-            context.getSource().sendSuccess(() -> Component.literal("Уровень кайфа игрока " + player.getName().getString() + " установлен на " + value), true);
+            player.sendSystemMessage(Component.translatable("quasium.message.kaif_set", value));
+            context.getSource().sendSuccess(() -> Component.translatable("quasium.message.kaif_set_other", player.getName(), value), true);
         }
         return 1;
     }
@@ -60,8 +60,8 @@ public class KaifCommand {
         for (ServerPlayer player : targets) {
             // int currentKaif = PlayerKaifData.getKaifValue(player); // Удалена неиспользуемая переменная
             PlayerKaifData.addKaif(player, value);
-            player.sendSystemMessage(Component.literal("Вам добавлено " + value + " кайфа. Текущий уровень: " + PlayerKaifData.getKaifValue(player)));
-            context.getSource().sendSuccess(() -> Component.literal("Игроку " + player.getName().getString() + " добавлено " + value + " кайфа. Текущий уровень: " + PlayerKaifData.getKaifValue(player)), true);
+            player.sendSystemMessage(Component.translatable("quasium.message.kaif_add", value, PlayerKaifData.getKaifValue(player)));
+            context.getSource().sendSuccess(() -> Component.translatable("quasium.message.kaif_add_other", value, player.getName(), PlayerKaifData.getKaifValue(player)), true);
         }
         return 1;
     }
@@ -70,15 +70,15 @@ public class KaifCommand {
         for (ServerPlayer player : targets) {
             // int currentKaif = PlayerKaifData.getKaifValue(player); // Удалена неиспользуемая переменная
             PlayerKaifData.subtractKaif(player, value);
-            player.sendSystemMessage(Component.literal("У вас отнято " + value + " кайфа. Текущий уровень: " + PlayerKaifData.getKaifValue(player)));
-            context.getSource().sendSuccess(() -> Component.literal("У игрока " + player.getName().getString() + " отнято " + value + " кайфа. Текущий уровень: " + PlayerKaifData.getKaifValue(player)), true);
+            player.sendSystemMessage(Component.translatable("quasium.message.kaif_remove", value, PlayerKaifData.getKaifValue(player)));
+            context.getSource().sendSuccess(() -> Component.translatable("quasium.message.kaif_remove_other", value, player.getName(), PlayerKaifData.getKaifValue(player)), true);
         }
         return 1;
     }
 
     private static int getKaif(CommandContext<CommandSourceStack> context, ServerPlayer target) { // Удален throws CommandSyntaxException
         int kaifValue = PlayerKaifData.getKaifValue(target);
-        context.getSource().sendSuccess(() -> Component.literal("Уровень кайфа игрока " + target.getName().getString() + ": " + kaifValue), false);
+        context.getSource().sendSuccess(() -> Component.translatable("quasium.message.kaif_query_other", target.getName(), kaifValue), false);
         return kaifValue;
     }
 }

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#quasium:ledyanoy_biomes",
+  "features": "quasium:patch_ledyanoy",
+  "step": "vegetal_decoration"
+}

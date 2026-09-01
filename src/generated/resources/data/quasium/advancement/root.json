@@ -6,13 +6,13 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "quasium:textures/block/quasium_block.png",
+    "background": "quasium:textures/item/progression_book.png",
     "description": {
       "translate": "advancements.quasium.root.description"
     },
     "icon": {
       "count": 1,
-      "id": "quasium:quasiumingot"
+      "id": "quasium:progression_book"
     },
     "show_toast": false,
     "title": {

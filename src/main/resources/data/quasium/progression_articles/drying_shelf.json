@@ -1,0 +1,9 @@
+{
+  "title": "quasium.progression.drying_shelf.title",
+  "hint": "quasium.progression.drying_shelf.hint",
+  "pages": [
+    { "text": "quasium.progression.drying_shelf.page1" },
+    { "text": "quasium.progression.drying_shelf.page2" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_tallow"
+}

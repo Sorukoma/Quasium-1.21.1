@@ -3,17 +3,46 @@ package net.sorukoma.quasium.data;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.sorukoma.quasium.QuasiumMod;
 import net.sorukoma.quasium.network.TobaccoDataSyncPacket;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PlayerTobaccoData {
     private static final String TRIED_FLAVORS_KEY = "QuasiumTriedFlavors";
     private static final String TRIED_SELF_MIXED_STRENGTHS_KEY = "QuasiumTriedSelfMixedStrengths";
+    private static final String FLAVOR_PREFERENCES_KEY = "QuasiumTriedFlavorPreferences";
+
+    public static Map<String, Boolean> getFlavorPreferences(Player player) {
+        Map<String, Boolean> result = new LinkedHashMap<>();
+        String data = player.getPersistentData().getString(FLAVOR_PREFERENCES_KEY);
+        if (!data.isEmpty()) {
+            for (String entry : data.split(",")) {
+                String[] parts = entry.split("=", 2);
+                if (parts.length == 2) result.put(parts[0], Boolean.parseBoolean(parts[1]));
+            }
+        }
+        return result;
+    }
+
+    public static void addFirstFlavorResult(Player player, String flavor) {
+        if (flavor == null || flavor.isBlank()) return;
+        Map<String, Boolean> results = getFlavorPreferences(player);
+        for (String part : flavor.split("\\+")) {
+            if (part.isBlank() || results.containsKey(part)) continue;
+            results.put(part, PlayerFlavorPreferenceData.liked(player, part));
+        }
+        if (!results.isEmpty()) {
+            player.getPersistentData().putString(FLAVOR_PREFERENCES_KEY, results.entrySet().stream()
+                    .map(entry -> entry.getKey() + "=" + entry.getValue())
+                    .collect(Collectors.joining(",")));
+            syncToClient(player);
+        }
+    }
 
     public static Set<String> getTriedFlavors(Player player) {
         String data = player.getPersistentData().getString(TRIED_FLAVORS_KEY);
@@ -65,7 +94,7 @@ public class PlayerTobaccoData {
     private static void syncToClient(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
             PacketDistributor.sendToPlayer(serverPlayer, new TobaccoDataSyncPacket(
-                    getTriedFlavors(player), getTriedSelfMixedStrengths(player)
+                    getTriedFlavors(player), getTriedSelfMixedStrengths(player), getFlavorPreferences(player)
             ));
         }
     }
@@ -73,8 +102,10 @@ public class PlayerTobaccoData {
     public static void syncOnLogin(ServerPlayer serverPlayer) {
         Set<String> flavors = getTriedFlavors(serverPlayer);
         Set<Float> strengths = getTriedSelfMixedStrengths(serverPlayer);
-        if (!flavors.isEmpty() || !strengths.isEmpty()) {
-            PacketDistributor.sendToPlayer(serverPlayer, new TobaccoDataSyncPacket(flavors, strengths));
+        if (!flavors.isEmpty() || !strengths.isEmpty() || !getFlavorPreferences(serverPlayer).isEmpty()) {
+            PacketDistributor.sendToPlayer(serverPlayer, new TobaccoDataSyncPacket(
+                    flavors, strengths, getFlavorPreferences(serverPlayer)
+            ));
         }
     }
 }

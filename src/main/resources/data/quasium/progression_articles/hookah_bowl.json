@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.hookah_bowl.title",
+  "hint": "quasium.progression.hookah_bowl.hint",
+  "pages": [
+    { "text": "quasium.progression.hookah_bowl.page1" },
+    { "text": "quasium.progression.hookah_bowl.page2" },
+    { "text": "quasium.progression.hookah_bowl.page3" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_bowl"
+}

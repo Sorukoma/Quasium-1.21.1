@@ -11,12 +11,8 @@ import net.sorukoma.quasium.item.ModItems;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
-import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
 
 public class ModCurios {
-
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     public static final ResourceLocation BACKPACK_HOOKAH_VALIDATOR_ID = ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "backpack_hookah_validator");
 
@@ -30,7 +26,6 @@ public class ModCurios {
     }
 
     private static void enqueueIMC(final InterModEnqueueEvent event) {
-        LOGGER.info("Registering Curios Predicate for validator: {}", BACKPACK_HOOKAH_VALIDATOR_ID);
         event.enqueueWork(() -> CuriosApi.registerCurioPredicate(BACKPACK_HOOKAH_VALIDATOR_ID, ModCurios::isBackpackHookahItem));
     }
 

@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#quasium:jerky_inputs/raw_beef",
+    "#quasium:jerky_inputs/raw_pork",
+    "#quasium:jerky_inputs/raw_chicken",
+    "#quasium:jerky_inputs/raw_mutton",
+    "#quasium:jerky_inputs/raw_rabbit",
+    "#quasium:jerky_inputs/raw_cod",
+    "#quasium:jerky_inputs/raw_salmon"
+  ]
+}

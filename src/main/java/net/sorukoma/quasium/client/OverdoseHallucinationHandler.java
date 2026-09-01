@@ -130,9 +130,16 @@ public class OverdoseHallucinationHandler {
                 // Try to create the entity — if it fails, skip this type
                 try {
                     Entity testEntity = type.create(mc.level);
-                    if (testEntity != null) {
+                    // Only living entities make sense as hallucinations. This also defensively
+                    // excludes non-living modded entities that crash or render incorrectly when
+                    // spawned outside their normal lifecycle — e.g. Create / Create Aeronautics
+                    // contraption & Sable sub-level entities, whose renderers NPE without an
+                    // attached contraption.
+                    if (testEntity instanceof net.minecraft.world.entity.LivingEntity) {
                         testEntity.discard();
                         cachedEntityTypes.add(type);
+                    } else if (testEntity != null) {
+                        testEntity.discard();
                     }
                 } catch (Exception e) {
                     // Some mod entity types crash on create() — skip them

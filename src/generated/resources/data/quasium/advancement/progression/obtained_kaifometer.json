@@ -1,0 +1,33 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_kaifometer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:kaifometer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.obtained_kaifometer.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:kaifometer"
+    },
+    "title": {
+      "translate": "advancements.quasium.obtained_kaifometer.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_kaifometer"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_backpack_hookah": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:backpack_hookah"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.obtained_backpack_hookah.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:backpack_hookah"
+    },
+    "title": {
+      "translate": "advancements.quasium.obtained_backpack_hookah.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_backpack_hookah"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

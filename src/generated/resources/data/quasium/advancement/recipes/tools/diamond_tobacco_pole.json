@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_golden_pole": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:golden_tobacco_pole"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:diamond_tobacco_pole"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_golden_pole"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:diamond_tobacco_pole"
+    ]
+  }
+}

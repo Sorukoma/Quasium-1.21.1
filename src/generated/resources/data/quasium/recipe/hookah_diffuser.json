@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    " I ",
+    "III",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:hookah_diffuser"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_glycerin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:glycerin_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_molasses": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:molasses_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.obtained_glycerin.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:glycerin_bottle"
+    },
+    "title": {
+      "translate": "advancements.quasium.obtained_glycerin.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_glycerin",
+      "has_molasses"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

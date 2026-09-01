@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:blue_ice"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "ICI",
+    "CBC",
+    "ICI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:hookah_cooler"
+  }
+}

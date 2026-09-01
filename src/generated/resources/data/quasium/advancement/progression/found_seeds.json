@@ -1,0 +1,44 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_makhorka_seeds": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:peschanik_seeds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tobacco_seeds": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:dikar_seeds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.found_seeds.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:dikar_seeds"
+    },
+    "title": {
+      "translate": "advancements.quasium.found_seeds.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_tobacco_seeds",
+      "has_makhorka_seeds"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

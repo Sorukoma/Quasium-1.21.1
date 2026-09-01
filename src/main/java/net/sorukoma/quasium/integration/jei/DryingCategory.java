@@ -69,7 +69,7 @@ public class DryingCategory implements IRecipeCategory<DryingRecipes.DryingRecip
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, DryingRecipes.DryingRecipe recipe, mezz.jei.api.recipe.IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 0, 9)
-                .addItemStack(new ItemStack(recipe.input().get()));
+                .addItemStack(new ItemStack(recipe.displayInput().get()));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 60, 9)
                 .addItemStack(new ItemStack(recipe.output().get()));
     }

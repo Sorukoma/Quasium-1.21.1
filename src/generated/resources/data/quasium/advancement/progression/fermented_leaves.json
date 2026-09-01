@@ -1,0 +1,33 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_fermented_barrel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:fermentation_barrel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.fermented_leaves.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:dikar_leaves"
+    },
+    "title": {
+      "translate": "advancements.quasium.fermented_leaves.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_fermented_barrel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

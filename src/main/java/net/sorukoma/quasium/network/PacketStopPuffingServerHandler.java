@@ -33,13 +33,13 @@ public class PacketStopPuffingServerHandler {
                         HookahConnectionEntity connectionEntity = connections.get(0); // Берем первое найденное соединение
                         connectionEntity.stopPuffing(hookahBlockEntity, player); // Передаем player
                     } else {
-                        player.sendSystemMessage(Component.literal("You are not properly connected to this hookah."));
+                        player.sendSystemMessage(Component.translatable("quasium.message.not_connected"));
                     }
                 } else {
-                    player.sendSystemMessage(Component.literal("Error: Hookah Block Entity not found at " + blockPos));
+                    player.sendSystemMessage(Component.translatable("quasium.message.hookah_missing"));
                 }
             } else {
-                player.sendSystemMessage(Component.literal("Error: Block not loaded at " + blockPos));
+                player.sendSystemMessage(Component.translatable("quasium.message.hookah_not_loaded"));
             }
         });
     }

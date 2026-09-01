@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.molasses_chain.title",
+  "hint": "quasium.progression.molasses_chain.hint",
+  "pages": [
+    { "text": "quasium.progression.molasses_chain.page1" },
+    { "text": "quasium.progression.molasses_chain.page2" },
+    { "text": "quasium.progression.molasses_chain.page3" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_glycerin"
+}

@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class PlayerOverdoseData {
 
-    private static final int TOBACCO_TICKS_PER_GRAM = 320;
+    private static final int TOBACCO_TICKS_PER_GRAM = 250;
 
     // Per-player consumption tracking: per-second accumulator (tick-units)
     private static final Map<UUID, Integer> tickConsumptionAccumulators = new HashMap<>();

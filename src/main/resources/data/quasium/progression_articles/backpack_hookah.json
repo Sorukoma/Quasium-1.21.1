@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.backpack_hookah.title",
+  "hint": "quasium.progression.backpack_hookah.hint",
+  "pages": [
+    { "text": "quasium.progression.backpack_hookah.page1" },
+    { "text": "quasium.progression.backpack_hookah.page2" },
+    { "text": "quasium.progression.backpack_hookah.page3" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_backpack_hookah"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "quasium:item/one_gram_self_mixed_tobacco"
+  }
+}

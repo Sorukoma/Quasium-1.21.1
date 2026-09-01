@@ -22,8 +22,7 @@ public class ModEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<ToxicSmokeEntity>> TOXIC_SMOKE =
             ENTITY_TYPES.register("toxic_smoke", () -> EntityType.Builder.<ToxicSmokeEntity>of(ToxicSmokeEntity::new, MobCategory.MISC)
-                    .sized(0.5F, 0.5F)
-                    .setShouldReceiveVelocityUpdates(true)
+                    .sized(0.5f, 0.5f)
                     .setTrackingRange(64)
                     .setUpdateInterval(1)
                     .build("toxic_smoke"));

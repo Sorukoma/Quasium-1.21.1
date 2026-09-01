@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_quasium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:rawquasium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:quasiumingot_from_blasting_rawquasium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_quasium"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:quasiumingot_from_blasting_rawquasium"
+    ]
+  }
+}

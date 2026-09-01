@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:hookah_bowl_from_smelting_unfired_hookah_bowl"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unfired_hookah_bowl": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:unfired_hookah_bowl"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_unfired_hookah_bowl"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:hookah_bowl_from_smelting_unfired_hookah_bowl"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.kaif_system.title",
+  "hint": "quasium.progression.kaif_system.hint",
+  "pages": [
+    { "text": "quasium.progression.kaif_system.page1" },
+    { "text": "quasium.progression.kaif_system.page2" },
+    { "text": "quasium.progression.kaif_system.page3" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_kaifometer"
+}

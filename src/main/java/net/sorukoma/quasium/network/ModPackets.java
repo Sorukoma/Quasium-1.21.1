@@ -35,6 +35,8 @@ public class ModPackets {
         registrar.playToClient(OreLuckDataSyncPacket.ID, OreLuckDataSyncPacket.STREAM_CODEC, OreLuckDataSyncPacket::handle);
         // Регистрируем пакет OverdoseStatusPacket (Server-to-Client)
         registrar.playToClient(OverdoseStatusPacket.ID, OverdoseStatusPacket.STREAM_CODEC, OverdoseStatusPacket::handle);
+        // Регистрируем пакет ProgressionArticlesSyncPacket (Server-to-Client)
+        registrar.playToClient(ProgressionArticlesSyncPacket.ID, ProgressionArticlesSyncPacket.STREAM_CODEC, ProgressionArticlesSyncPacket::handle);
         // Регистрируем новые пакеты для начала/остановки затяжки
         registrar.playToServer(PacketStartPuffing.ID, PacketStartPuffing.STREAM_CODEC, PacketStartPuffingServerHandler::handle);
         registrar.playToServer(PacketStopPuffing.ID, PacketStopPuffing.STREAM_CODEC, PacketStopPuffingServerHandler::handle);
@@ -42,8 +44,8 @@ public class ModPackets {
         registrar.playToServer(PacketAttachPipeToServer.ID, PacketAttachPipeToServer.STREAM_CODEC, PacketAttachPipeToServerHandler::handle);
         // Регистрируем пакет для открепления трубки
         registrar.playToServer(PacketDetachPipeToServer.ID, PacketDetachPipeToServer.STREAM_CODEC, PacketDetachPipeToServerHandler::handle);
-        // Регистрируем пакет для смешивания табака
-        registrar.playToServer(PacketMixTobacco.TYPE, PacketMixTobacco.STREAM_CODEC, PacketMixTobacco::handle);
+        // Модульный кальян: сборка/вода/GUI (shift+ПКМ с предметом ванилла не доводит до useItemOn)
+        registrar.playToServer(PacketModularHookahInteract.ID, PacketModularHookahInteract.STREAM_CODEC, PacketModularHookahInteractHandler::handle);
         // Регистрируем пакеты для наспинного кальяна
         registrar.playToServer(PacketOpenBackpackHookahGui.ID, PacketOpenBackpackHookahGui.STREAM_CODEC, PacketOpenBackpackHookahGuiHandler::handle);
         registrar.playToServer(PacketAttachPipeBackpack.ID, PacketAttachPipeBackpack.STREAM_CODEC, PacketAttachPipeBackpackHandler::handle);

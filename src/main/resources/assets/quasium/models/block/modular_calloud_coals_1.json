@@ -1,0 +1,77 @@
+{
+  "render_type": "cutout",
+  "textures": {
+    "0": "quasium:block/modular_coal_ember",
+    "particle": "quasium:block/modular_coal_ember"
+  },
+  "elements": [
+    {
+      "from": [
+        7.4,
+        0.75,
+        7.4
+      ],
+      "to": [
+        8.5,
+        1.85,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ]
+}

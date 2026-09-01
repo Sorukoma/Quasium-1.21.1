@@ -1,6 +1,45 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "quasium:item/backpack_hookah"
+  "parent": "quasium:block/hookah_block",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [45, 24, 8],
+      "translation": [1, 0.75, 0.5],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [45, 24, 8],
+      "translation": [1, 0.75, 0.5],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "gui": {
+      "rotation": [25, 22.5, 0],
+      "translation": [0, -0.75, 0],
+      "scale": [0.65, 0.65, 0.65]
+    },
+    "ground": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 2, 0],
+      "scale": [0.3, 0.3, 0.3]
+    },
+    "fixed": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "head": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    }
   }
 }

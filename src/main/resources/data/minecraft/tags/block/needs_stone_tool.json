@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "quasium:undried_quasium_block",
+    "quasium:quasium_block"
+  ]
+}

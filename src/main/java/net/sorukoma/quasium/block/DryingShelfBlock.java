@@ -3,6 +3,7 @@ package net.sorukoma.quasium.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -13,7 +14,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -30,6 +30,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
 import net.sorukoma.quasium.block.entity.DryingShelfBlockEntity;
 import net.sorukoma.quasium.block.entity.ModBlockEntities;
+import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.item.JerkyItem;
+import net.sorukoma.quasium.item.TobaccoVarieties;
+import net.sorukoma.quasium.recipe.DryingRecipes;
 import org.jetbrains.annotations.Nullable;
 
 public class DryingShelfBlock extends BaseEntityBlock {
@@ -115,8 +119,9 @@ public class DryingShelfBlock extends BaseEntityBlock {
         BlockEntity entity = level.getBlockEntity(pos);
         if (!(entity instanceof DryingShelfBlockEntity shelfEntity)) return ItemInteractionResult.FAIL;
 
-        // Allow inserting ANY item, not just drying inputs
-        if (!heldItem.isEmpty()) {
+        if (!heldItem.isEmpty() && (heldItem.getItem() instanceof JerkyItem
+                || DryingRecipes.isValidInput(heldItem)
+                || TobaccoVarieties.isLeaf(heldItem))) {
             ItemStack slotItem = shelfEntity.getItemHandler().getStackInSlot(0);
             if (slotItem.isEmpty()) {
                 shelfEntity.getItemHandler().setStackInSlot(0, heldItem.copyWithCount(1));
@@ -136,6 +141,21 @@ public class DryingShelfBlock extends BaseEntityBlock {
 
         ItemStack slotItem = shelfEntity.getItemHandler().getStackInSlot(0);
         if (!slotItem.isEmpty()) {
+            if (player.isShiftKeyDown() && shelfEntity.getDryingTotalTime() > 0) {
+                int progress;
+                int secondsLeft;
+                if (slotItem.getItem() instanceof JerkyItem) {
+                    progress = slotItem.getOrDefault(ModDataComponents.DRYING_PROGRESS.get(), 0);
+                    int maxTicks = shelfEntity.getDryingTotalTime() * JerkyItem.MAX_DRYING_PERCENT / 100;
+                    secondsLeft = Math.max(0, (maxTicks - shelfEntity.getDryingProgress() + 19) / 20);
+                } else {
+                    progress = Math.min(100, shelfEntity.getDryingProgress() * 100 / shelfEntity.getDryingTotalTime());
+                    secondsLeft = Math.max(0, (shelfEntity.getDryingTotalTime() - shelfEntity.getDryingProgress() + 19) / 20);
+                }
+                player.displayClientMessage(Component.translatable(
+                        "quasium.message.drying_shelf.progress", progress, secondsLeft), true);
+                return InteractionResult.SUCCESS;
+            }
             player.getInventory().placeItemBackInInventory(slotItem.copy());
             shelfEntity.getItemHandler().setStackInSlot(0, ItemStack.EMPTY);
             return InteractionResult.SUCCESS;

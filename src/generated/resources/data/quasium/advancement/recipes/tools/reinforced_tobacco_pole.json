@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:reinforced_tobacco_pole"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wooden_pole": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:wooden_tobacco_pole"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wooden_pole"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:reinforced_tobacco_pole"
+    ]
+  }
+}

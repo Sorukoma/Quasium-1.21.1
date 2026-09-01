@@ -1,0 +1,88 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_berry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:berry_tobacco"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_grapefruit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:grapefruit_tobacco"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lemon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:lemon_tobacco"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lime": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:lime_tobacco"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_mint": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:mint_tobacco"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_orange": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:orange_tobacco"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.flavored_tobacco.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:mint_tobacco"
+    },
+    "title": {
+      "translate": "advancements.quasium.flavored_tobacco.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_mint",
+      "has_lemon",
+      "has_lime",
+      "has_orange",
+      "has_grapefruit",
+      "has_berry"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

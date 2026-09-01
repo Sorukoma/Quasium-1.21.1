@@ -1,0 +1,11 @@
+{
+  "title": "quasium.progression.tobacco_crops.title",
+  "hint": "quasium.progression.tobacco_crops.hint",
+  "pages": [
+    { "text": "quasium.progression.tobacco_crops.page1" },
+    { "text": "quasium.progression.tobacco_crops.page2" },
+    { "text": "quasium.progression.tobacco_crops.page3" },
+    { "text": "quasium.progression.tobacco_crops.page4" }
+  ],
+  "unlockCondition": "quasium:progression/found_seeds"
+}

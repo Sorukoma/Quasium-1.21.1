@@ -1,7 +1,6 @@
 package net.sorukoma.quasium.network;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.sorukoma.quasium.client.ClientHookahInputHandler;
 import org.slf4j.Logger;
@@ -18,11 +17,9 @@ public class PacketSyncHookahConnectionHandler {
             payload.connectedHookahPos().ifPresentOrElse(
                     pos -> {
                         ClientHookahInputHandler.setConnectedHookahPos(pos);
-                        LOGGER.debug("Client: Received PacketSyncHookahConnection. Connected to hookah at {}", pos);
                     },
                     () -> {
                         ClientHookahInputHandler.setConnectedHookahPos(null);
-                        LOGGER.debug("Client: Received PacketSyncHookahConnection. Disconnected from hookah.");
                     }
             );
         });

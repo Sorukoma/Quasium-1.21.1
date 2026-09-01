@@ -1,0 +1,9 @@
+{
+  "title": "quasium.progression.heater.title",
+  "hint": "quasium.progression.heater.hint",
+  "pages": [
+    { "text": "quasium.progression.heater.page1" },
+    { "text": "quasium.progression.heater.page2" }
+  ],
+  "unlockCondition": "quasium:progression/obtained_heater"
+}

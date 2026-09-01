@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "quasium:dikar_seeds"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:progression_book"
+  }
+}

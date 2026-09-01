@@ -29,4 +29,23 @@ repo
 /net/
 /mezz/
 .qwen
-memory
+memorylatest.txt
+memory/
+QWEN.md
+
+# editor / tooling leftovers
+*~
+*.orig
+*.rej
+*.bak
+debug.log
+
+# python texture-generation tooling (local dev helpers, not part of the mod)
+__pycache__/
+generate_*.py
+
+# node tooling (not part of the mod build)
+node_modules/
+package.json
+package-lock.json
+opencode.json

@@ -4,17 +4,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
@@ -24,6 +24,7 @@ import net.sorukoma.quasium.Config;
 import net.sorukoma.quasium.QuasiumMod;
 import net.sorukoma.quasium.block.ModBlocks;
 import net.sorukoma.quasium.block.entity.HookahBlockEntity;
+import net.sorukoma.quasium.command.FlavorPreferenceCommand;
 import net.sorukoma.quasium.command.KaifCommand;
 import net.sorukoma.quasium.data.PlayerKaifData;
 import net.sorukoma.quasium.data.PlayerOreLuckData;
@@ -32,12 +33,12 @@ import net.sorukoma.quasium.data.PlayerTobaccoData;
 import net.sorukoma.quasium.entity.HookahConnectionEntity;
 import net.sorukoma.quasium.item.ModItems;
 import net.sorukoma.quasium.item.ProbabilisticItemListing;
-import net.sorukoma.quasium.network.ModPackets;
-import net.sorukoma.quasium.network.PacketStopHookahPuffSoundClient;
-import net.sorukoma.quasium.network.PacketSyncHookahConnection;
+import net.sorukoma.quasium.network.ProgressionArticlesSyncPacket;
+import net.sorukoma.quasium.progression.ProgressionArticle;
+import net.sorukoma.quasium.progression.manager.ProgressionArticleManager;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @EventBusSubscriber(modid = QuasiumMod.MOD_ID)
 public class ModEvents {
@@ -58,10 +59,14 @@ public class ModEvents {
     /** Вероятность появления трубки кальяна у инструментальщика (2 уровень). */
     private static final float HOOKAH_PIPE_TRADE_PROBABILITY = 0.5F;
 
-    // ─── Торги жителей ───
-
     @SubscribeEvent
     public static void onVillagerTrades(VillagerTradesEvent event) {
+        if (event.getType() == VillagerProfession.FARMER) {
+            List<ItemListing> level1 = event.getTrades().get(1);
+            level1.add(new BasicItemListing(2, new ItemStack(ModItems.TOBACCO_SEEDS.get(), 4), 16, 2, 0.05F));
+            level1.add(new BasicItemListing(2, new ItemStack(ModItems.MAKHORKA_SEEDS.get(), 4), 16, 2, 0.05F));
+        }
+
         if (event.getType() == VillagerProfession.CLERIC) {
             // 5 уровень (мастер) — блок кальяна
             List<ItemListing> level5 = event.getTrades().get(5);
@@ -70,18 +75,70 @@ public class ModEvents {
                     HOOKAH_BLOCK_TRADE_PROBABILITY
             ));
 
-            // 3 уровень (journeyman) — обычные табаки (mint, citrus, berry), 15 эм. за 2 шт
+            // 3 уровень (journeyman) — обычные табаки, 15 эм. за 2 шт
             List<ItemListing> level3 = event.getTrades().get(3);
             level3.add(new ProbabilisticItemListing(
                     new BasicItemListing(15, new ItemStack(ModItems.MINT_TOBACCO.get(), 2), 2, 10, 0.05F),
                     REGULAR_TOBACCO_TRADE_PROBABILITY
             ));
             level3.add(new ProbabilisticItemListing(
-                    new BasicItemListing(15, new ItemStack(ModItems.CITRUS_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    new BasicItemListing(15, new ItemStack(ModItems.LEMON_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.LIME_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.ORANGE_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.GRAPEFRUIT_TOBACCO.get(), 2), 2, 10, 0.05F),
                     REGULAR_TOBACCO_TRADE_PROBABILITY
             ));
             level3.add(new ProbabilisticItemListing(
                     new BasicItemListing(15, new ItemStack(ModItems.BERRY_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.APPLE_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.WATERMELON_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.GRAPE_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.CHERRY_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.VANILLA_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.COFFEE_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.CINNAMON_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.COCONUT_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.ROSE_TOBACCO.get(), 2), 2, 10, 0.05F),
+                    REGULAR_TOBACCO_TRADE_PROBABILITY
+            ));
+            level3.add(new ProbabilisticItemListing(
+                    new BasicItemListing(15, new ItemStack(ModItems.ANISE_TOBACCO.get(), 2), 2, 10, 0.05F),
                     REGULAR_TOBACCO_TRADE_PROBABILITY
             ));
         }
@@ -103,7 +160,7 @@ public class ModEvents {
         if (event.getEntity() instanceof Player player) {
             if (hasFullQuasiumArmor(player)) {
                 if (player.level().random.nextFloat() < Config.QUASIUM_ARMOR_DODGE_CHANCE.get()) {
-                    player.sendSystemMessage(Component.literal("Уклонение!"));
+                    player.sendSystemMessage(Component.translatable("quasium.message.dodge"));
 
                     for (ItemStack armorStack : player.getInventory().armor) {
                         if (!armorStack.isEmpty() && armorStack.getItem() instanceof ArmorItem) {
@@ -113,7 +170,7 @@ public class ModEvents {
                     event.setAmount(0f);
 
                     PlayerKaifData.addKaif(player, 5);
-                    player.sendSystemMessage(Component.literal("Кайф увеличен на 5! Текущий кайф: " + PlayerKaifData.getKaifValue(player)));
+                    player.sendSystemMessage(Component.translatable("quasium.message.kaif_increase", PlayerKaifData.getKaifValue(player)));
                 }
             }
         }
@@ -168,6 +225,7 @@ public class ModEvents {
             // Overdose check: track tobacco consumption and update overdose state
             if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
                 PlayerOverdoseData.tickCheck(serverPlayer);
+                net.sorukoma.quasium.data.KaifAbilitiesHandler.tick(serverPlayer);
             }
         }
     }
@@ -217,8 +275,32 @@ public class ModEvents {
         if (event.getEntity().level().isClientSide()) return;
 
         if (event.getEntity() instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+            PlayerKaifData.syncOnLogin(serverPlayer);
             PlayerTobaccoData.syncOnLogin(serverPlayer);
             PlayerOreLuckData.syncOnLogin(serverPlayer);
+        }
+    }
+
+    /**
+     * Синхронизирует определения статей прогрессии (датапак) с клиентом. Срабатывает при
+     * входе игрока и при /reload, поэтому покрывает оба случая. Без этого на выделенном
+     * сервере книга прогрессии у игроков пустая — менеджер статей существует только
+     * на серверной стороне.
+     */
+    @SubscribeEvent
+    public static void onDatapackSync(OnDatapackSyncEvent event) {
+        ProgressionArticleManager manager = QuasiumMod.getProgressionArticleManager();
+        if (manager == null) return;
+
+        List<ProgressionArticle> articles = new ArrayList<>(manager.getArticles().values());
+        ProgressionArticlesSyncPacket packet = new ProgressionArticlesSyncPacket(articles);
+
+        if (event.getPlayer() != null) {
+            PacketDistributor.sendToPlayer(event.getPlayer(), packet);
+        } else {
+            for (net.minecraft.server.level.ServerPlayer player : event.getPlayerList().getPlayers()) {
+                PacketDistributor.sendToPlayer(player, packet);
+            }
         }
     }
 
@@ -255,6 +337,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         new KaifCommand(event.getDispatcher());
+        FlavorPreferenceCommand.register(event.getDispatcher());
     }
 
     private static boolean hasFullQuasiumArmor(Player player) {

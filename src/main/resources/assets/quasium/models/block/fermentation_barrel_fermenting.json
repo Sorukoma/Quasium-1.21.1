@@ -1,7 +1,7 @@
 {
   "textures": {
-    "side": "minecraft:block/barrel_side",
-    "top": "minecraft:block/barrel_top",
+    "side": "quasium:block/fermentation_barrel_side",
+    "top": "quasium:block/fermentation_barrel_top",
     "bottom": "minecraft:block/barrel_top"
   },
   "elements": [

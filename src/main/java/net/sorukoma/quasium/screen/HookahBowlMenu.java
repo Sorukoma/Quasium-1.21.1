@@ -13,6 +13,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.sorukoma.quasium.component.ModDataComponents;
 import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.item.SelfMixedTobaccoItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -112,16 +113,28 @@ public class HookahBowlMenu extends AbstractContainerMenu {
         public boolean mayPlace(@NotNull ItemStack stack) {
             if (isHeated) return false;
             return (stack.is(ModItems.ONE_GRAM_TOBACCO.get()) && stack.has(ModDataComponents.TOBACCO_FLAVOR.get()))
-                    || (stack.is(ModItems.ONE_GRAM_SELF_MIXED_TOBACCO.get()) && stack.has(ModDataComponents.TOBACCO_BASE.get()));
+                    || (stack.is(ModItems.ONE_GRAM_SELF_MIXED_TOBACCO.get()) && stack.has(ModDataComponents.TOBACCO_BASE.get()))
+                    || stack.getItem() instanceof SelfMixedTobaccoItem;
         }
 
         @Override
         public boolean mayPickup(@NotNull Player player) {
+            // Нагретая чаша: забор несгоревшего табака разрешён, но предмет уничтожается
+            // (см. tryRemove ниже). Сгоревший табак и обычные слоты — без ограничений.
+            return true;
+        }
+
+        @Override
+        public java.util.Optional<ItemStack> tryRemove(int amount, int maxAmount, Player player) {
             ItemStack stack = getItem();
             if (isHeated && !stack.isEmpty() && !stack.is(ModItems.BURNED_TOBACCO.get())) {
-                return false;
+                // Несгоревший табак из нагретой чаши: очищаем слот и не отдаём предмет игроку.
+                // Установка EMPTY триггерит onContentsChanged -> updateBowlItem() — состояние
+                // чаши корректно пересохраняется в DataComponent.
+                setByPlayer(ItemStack.EMPTY);
+                return java.util.Optional.of(ItemStack.EMPTY);
             }
-            return true;
+            return super.tryRemove(amount, maxAmount, player);
         }
 
         @Override
@@ -151,6 +164,10 @@ public class HookahBowlMenu extends AbstractContainerMenu {
                 slotItem.set(ModDataComponents.TOBACCO_BASE.get(), group.base());
                 slotItem.set(ModDataComponents.TOBACCO_DAMAGE.get(), group.strength());
                 slotItem.set(ModDataComponents.SELF_MIXED_EFFECTS.get(), group.effects());
+                slotItem.set(ModDataComponents.ESSENCE_TYPE.get(), group.flavor());
+                slotItem.set(ModDataComponents.ESSENCE_AMOUNT.get(), group.essenceAmount());
+                slotItem.set(ModDataComponents.MOLASSES_AMOUNT.get(), group.molassesAmount());
+                if (group.toxic()) slotItem.set(ModDataComponents.TOXIC.get(), true);
             }
             if (isHeated) {
                 slotItem.set(ModDataComponents.HEATED_MARKER.get(), true);
@@ -190,8 +207,12 @@ public class HookahBowlMenu extends AbstractContainerMenu {
                 String base = slotStack.get(ModDataComponents.TOBACCO_BASE.get());
                 float strength = slotStack.getOrDefault(ModDataComponents.TOBACCO_DAMAGE.get(), 0f);
                 List<MobEffectInstance> effects = slotStack.getOrDefault(ModDataComponents.SELF_MIXED_EFFECTS.get(), List.of());
-                String flavorId = "self_mixed_" + base + "_" + strength;
-                groupData = new ModDataComponents.BowlTobaccoGroup("self_mixed", flavorId, base, strength, effects);
+                int essenceAmount = slotStack.getOrDefault(ModDataComponents.ESSENCE_AMOUNT.get(), 0);
+                int molassesAmount = slotStack.getOrDefault(ModDataComponents.MOLASSES_AMOUNT.get(), 0);
+                String flavor = slotStack.getOrDefault(ModDataComponents.ESSENCE_TYPE.get(), "mixed");
+                boolean toxic = slotStack.getOrDefault(ModDataComponents.TOXIC.get(), false);
+                groupData = new ModDataComponents.BowlTobaccoGroup("self_mixed", flavor, base, strength, effects,
+                        essenceAmount, molassesAmount, toxic);
             } else {
                 continue;
             }
@@ -229,6 +250,24 @@ public class HookahBowlMenu extends AbstractContainerMenu {
     }
 
     @Override
+    public void clicked(int slotId, int button, ClickType clickType, Player player) {
+        if (isServerSide && slotId >= BOWL_SLOTS_START && slotId < BOWL_SLOTS_START + BOWL_SLOTS_COUNT
+                && !isHeated && getCarried().getItem() instanceof SelfMixedTobaccoItem) {
+            ItemStack source = getCarried();
+            int weight = source.getOrDefault(ModDataComponents.TOBACCO_WEIGHT.get(), 0);
+            Slot target = this.slots.get(slotId);
+            if (weight > 0 && !target.hasItem() && target.mayPlace(source)) {
+                target.setByPlayer(SelfMixedTobaccoItem.createOneGram(source));
+                source.set(ModDataComponents.TOBACCO_WEIGHT.get(), weight - 1);
+                if (weight <= 1) setCarried(ItemStack.EMPTY);
+                updateBowlItem();
+                return;
+            }
+        }
+        super.clicked(slotId, button, clickType, player);
+    }
+
+    @Override
     public ItemStack quickMoveStack(Player player, int index) {
         ItemStack result = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
@@ -239,7 +278,9 @@ public class HookahBowlMenu extends AbstractContainerMenu {
 
         if (index >= BOWL_SLOTS_START && index < BOWL_SLOTS_START + BOWL_SLOTS_COUNT) {
             if (isHeated && !stack.isEmpty() && !stack.is(ModItems.BURNED_TOBACCO.get())) {
+                // Несгоревший табак из нагретой чаши: уничтожаем и не переносим в инвентарь.
                 slot.setByPlayer(ItemStack.EMPTY);
+                slot.setChanged();
                 return ItemStack.EMPTY;
             }
             if (!this.moveItemStackTo(stack, PLAYER_INV_START, HOTBAR_END, true)) {
@@ -247,6 +288,23 @@ public class HookahBowlMenu extends AbstractContainerMenu {
             }
         } else if (index >= PLAYER_INV_START && index < HOTBAR_END) {
             if (isHeated) return ItemStack.EMPTY;
+            if (stack.getItem() instanceof SelfMixedTobaccoItem) {
+                int targetIndex = -1;
+                for (int i = BOWL_SLOTS_START; i < BOWL_SLOTS_START + BOWL_SLOTS_COUNT; i++) {
+                    if (!this.slots.get(i).hasItem()) {
+                        targetIndex = i;
+                        break;
+                    }
+                }
+                int weight = stack.getOrDefault(ModDataComponents.TOBACCO_WEIGHT.get(), 0);
+                if (targetIndex < 0 || weight <= 0) return ItemStack.EMPTY;
+                this.slots.get(targetIndex).setByPlayer(SelfMixedTobaccoItem.createOneGram(stack));
+                stack.set(ModDataComponents.TOBACCO_WEIGHT.get(), weight - 1);
+                if (weight <= 1) slot.setByPlayer(ItemStack.EMPTY);
+                else slot.setChanged();
+                updateBowlItem();
+                return result;
+            }
             if (stack.is(ModItems.ONE_GRAM_TOBACCO.get()) || stack.is(ModItems.ONE_GRAM_SELF_MIXED_TOBACCO.get())) {
                 if (!this.moveItemStackTo(stack, BOWL_SLOTS_START, BOWL_SLOTS_START + BOWL_SLOTS_COUNT, false)) {
                     return ItemStack.EMPTY;

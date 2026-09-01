@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "quasium:item/unfired_hookah_bowl"
+  }
+}

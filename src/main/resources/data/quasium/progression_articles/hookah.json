@@ -1,5 +1,6 @@
 {
   "title": "quasium.progression.hookah.title",
+  "hint": "quasium.progression.hookah.hint",
   "pages": [
     { "text": "quasium.progression.hookah.page1" },
     { "text": "quasium.progression.hookah.page2" },

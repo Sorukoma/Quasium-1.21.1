@@ -1,0 +1,44 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_self_mixed": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:self_mixed_tobacco"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_soaking_bowl": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:soaking_bowl"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.self_mixed_obtained.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:self_mixed_tobacco"
+    },
+    "title": {
+      "translate": "advancements.quasium.self_mixed_obtained.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_self_mixed",
+      "has_soaking_bowl"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -9,7 +9,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.sorukoma.quasium.QuasiumMod;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.effect.MobEffectInstance;
 
@@ -40,12 +39,6 @@ public class ModDataComponents {
                     .networkSynchronized(ByteBufCodecs.VAR_INT)
                     .build());
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<TobaccoMixData>> TOBACCO_MIX = DATA_COMPONENT_TYPES.register("tobacco_mix",
-            () -> DataComponentType.<TobaccoMixData>builder()
-                    .persistent(TobaccoMixData.CODEC)
-                    .networkSynchronized(TobaccoMixData.STREAM_CODEC)
-                    .build());
-
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> HOOKAH_PIPE_COOLDOWN_END = DATA_COMPONENT_TYPES.register("hookah_pipe_cooldown_end",
             () -> DataComponentType.<Long>builder()
                     .persistent(Codec.LONG)
@@ -59,6 +52,12 @@ public class ModDataComponents {
                     .build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> FERMENTED = DATA_COMPONENT_TYPES.register("fermented",
+            () -> DataComponentType.<Boolean>builder()
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> SPOILED = DATA_COMPONENT_TYPES.register("spoiled",
             () -> DataComponentType.<Boolean>builder()
                     .persistent(Codec.BOOL)
                     .networkSynchronized(ByteBufCodecs.BOOL)
@@ -80,6 +79,42 @@ public class ModDataComponents {
             () -> DataComponentType.<Integer>builder()
                     .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> DRYING_STAGE = DATA_COMPONENT_TYPES.register("drying_stage",
+            () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> DRYING_PROGRESS = DATA_COMPONENT_TYPES.register("drying_progress",
+            () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> DRYING_RATE = DATA_COMPONENT_TYPES.register("drying_rate",
+            () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> ESSENCE_TYPE = DATA_COMPONENT_TYPES.register("essence_type",
+            () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ESSENCE_AMOUNT = DATA_COMPONENT_TYPES.register("essence_amount",
+            () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> TOXIC = DATA_COMPONENT_TYPES.register("toxic",
+            () -> DataComponentType.<Boolean>builder()
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL)
                     .build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> TOBACCO_BASE = DATA_COMPONENT_TYPES.register("tobacco_base",
@@ -121,6 +156,36 @@ public class ModDataComponents {
                     .networkSynchronized(ByteBufCodecs.STRING_UTF8)
                     .build());
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> TOBACCO_VARIETY = DATA_COMPONENT_TYPES.register("tobacco_variety",
+            () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TOBACCO_STRENGTH_STARS = DATA_COMPONENT_TYPES.register("tobacco_strength_stars",
+            () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TOBACCO_YIELD_STARS = DATA_COMPONENT_TYPES.register("tobacco_yield_stars",
+            () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TOBACCO_QUALITY_STARS = DATA_COMPONENT_TYPES.register("tobacco_quality_stars",
+            () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> TOBACCO_MUTATION = DATA_COMPONENT_TYPES.register("tobacco_mutation",
+            () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<HookahBowlContents>> HOOKAH_BOWL_CONTENTS = DATA_COMPONENT_TYPES.register("hookah_bowl_contents",
             () -> DataComponentType.<HookahBowlContents>builder()
                     .persistent(HookahBowlContents.CODEC)
@@ -131,53 +196,26 @@ public class ModDataComponents {
         DATA_COMPONENT_TYPES.register(eventBus);
     }
 
-    public record TobaccoMixData(Map<String, Integer> flavors) {
-        public TobaccoMixData {
-            flavors = Collections.unmodifiableMap(new LinkedHashMap<>(flavors));
-        }
-
-        public static final Codec<TobaccoMixData> CODEC = Codec.unboundedMap(Codec.STRING, Codec.INT)
-                .xmap(TobaccoMixData::new, TobaccoMixData::flavors);
-
-        public static final StreamCodec<FriendlyByteBuf, TobaccoMixData> STREAM_CODEC = StreamCodec.of(
-                (buf, data) -> {
-                    buf.writeVarInt(data.flavors.size());
-                    for (Map.Entry<String, Integer> entry : data.flavors.entrySet()) {
-                        buf.writeUtf(entry.getKey());
-                        buf.writeVarInt(entry.getValue());
-                    }
-                },
-                buf -> {
-                    int size = buf.readVarInt();
-                    Map<String, Integer> map = new LinkedHashMap<>();
-                    for (int i = 0; i < size; i++) {
-                        map.put(buf.readUtf(), buf.readVarInt());
-                    }
-                    return new TobaccoMixData(map);
-                }
-        );
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            TobaccoMixData that = (TobaccoMixData) o;
-            return Objects.equals(flavors, that.flavors);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(flavors);
-        }
-    }
-
     public record BowlTobaccoGroup(
             String type,       // "regular" or "self_mixed"
             String flavor,     // для regular: flavor name; для self_mixed: group identifier
             String base,       // для self_mixed: "tobacco"/"makhorka"; для regular: "regular"
             float strength,    // крепость; 0.0 для regular
-            List<MobEffectInstance> effects  // эффекты self_mixed; empty для regular
+            List<MobEffectInstance> effects,  // эффекты self_mixed; empty для regular
+            int essenceAmount,
+            int molassesAmount,
+            boolean toxic      // токсичный самозамес (мутация гибрида) — наносит урон при курении
     ) {
+        public BowlTobaccoGroup(String type, String flavor, String base, float strength,
+                                List<MobEffectInstance> effects) {
+            this(type, flavor, base, strength, effects, 0, 0, false);
+        }
+
+        public BowlTobaccoGroup(String type, String flavor, String base, float strength,
+                                List<MobEffectInstance> effects, int essenceAmount, int molassesAmount) {
+            this(type, flavor, base, strength, effects, essenceAmount, molassesAmount, false);
+        }
+
         public BowlTobaccoGroup {
             effects = Collections.unmodifiableList(new ArrayList<>(effects));
         }
@@ -191,7 +229,10 @@ public class ModDataComponents {
                         Codec.STRING.fieldOf("flavor").forGetter(BowlTobaccoGroup::flavor),
                         Codec.STRING.fieldOf("base").forGetter(BowlTobaccoGroup::base),
                         Codec.FLOAT.fieldOf("strength").forGetter(BowlTobaccoGroup::strength),
-                        MobEffectInstance.CODEC.listOf().fieldOf("effects").forGetter(BowlTobaccoGroup::effects)
+                        MobEffectInstance.CODEC.listOf().fieldOf("effects").forGetter(BowlTobaccoGroup::effects),
+                        Codec.INT.optionalFieldOf("essence_amount", 0).forGetter(BowlTobaccoGroup::essenceAmount),
+                        Codec.INT.optionalFieldOf("molasses_amount", 0).forGetter(BowlTobaccoGroup::molassesAmount),
+                        Codec.BOOL.optionalFieldOf("toxic", false).forGetter(BowlTobaccoGroup::toxic)
                 ).apply(instance, BowlTobaccoGroup::new)
         );
 
@@ -205,6 +246,9 @@ public class ModDataComponents {
                     for (MobEffectInstance effect : group.effects()) {
                         MobEffectInstance.STREAM_CODEC.encode(buf, effect);
                     }
+                    buf.writeVarInt(group.essenceAmount());
+                    buf.writeVarInt(group.molassesAmount());
+                    buf.writeBoolean(group.toxic());
                 },
                 buf -> {
                     String type = buf.readUtf();
@@ -216,7 +260,8 @@ public class ModDataComponents {
                     for (int i = 0; i < effectCount; i++) {
                         effects.add(MobEffectInstance.STREAM_CODEC.decode(buf));
                     }
-                    return new BowlTobaccoGroup(type, flavor, base, strength, effects);
+                    return new BowlTobaccoGroup(type, flavor, base, strength, effects,
+                            buf.readVarInt(), buf.readVarInt(), buf.readBoolean());
                 }
         );
 
@@ -227,12 +272,14 @@ public class ModDataComponents {
             BowlTobaccoGroup that = (BowlTobaccoGroup) o;
             return Objects.equals(type, that.type) && Objects.equals(flavor, that.flavor)
                     && Objects.equals(base, that.base) && Float.compare(strength, that.strength) == 0
+                    && essenceAmount == that.essenceAmount && molassesAmount == that.molassesAmount
+                    && toxic == that.toxic
                     && Objects.equals(effects, that.effects);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(type, flavor, base, strength, effects);
+            return Objects.hash(type, flavor, base, strength, effects, essenceAmount, molassesAmount, toxic);
         }
     }
 
@@ -278,36 +325,6 @@ public class ModDataComponents {
             if (types.size() > 1) return false;
             if (types.contains("self_mixed") && bases.size() > 1) return false;
             return true;
-        }
-
-        /** Конвертация regular-групп в TobaccoMixData (flavor -> percentage). */
-        public TobaccoMixData toTobaccoMixData() {
-            if (slotAssignments.isEmpty()) return new TobaccoMixData(Map.of());
-            Map<String, Integer> flavorGrams = new LinkedHashMap<>();
-            for (Map.Entry<Integer, Integer> entry : slotAssignments.entrySet()) {
-                BowlTobaccoGroup group = groups.get(entry.getValue());
-                if (group.isRegular()) {
-                    flavorGrams.merge(group.flavor(), 1, Integer::sum);
-                } else {
-                    flavorGrams.merge(group.flavor(), 1, Integer::sum);
-                }
-            }
-            int totalGrams = flavorGrams.values().stream().mapToInt(Integer::intValue).sum();
-            if (totalGrams == 0) return new TobaccoMixData(Map.of());
-            Map<String, Integer> percentages = new LinkedHashMap<>();
-            for (Map.Entry<String, Integer> entry : flavorGrams.entrySet()) {
-                int pct = (int) Math.round(entry.getValue() * 100.0 / totalGrams);
-                percentages.merge(entry.getKey(), pct, Integer::sum);
-            }
-            int sum = percentages.values().stream().mapToInt(Integer::intValue).sum();
-            if (sum != 100 && !percentages.isEmpty()) {
-                String largest = percentages.entrySet().stream()
-                        .max(Map.Entry.comparingByValue())
-                        .map(Map.Entry::getKey)
-                        .orElse(percentages.keySet().iterator().next());
-                percentages.put(largest, percentages.get(largest) + (100 - sum));
-            }
-            return new TobaccoMixData(percentages);
         }
 
         /** Получить вес каждой группы в граммах. */
@@ -529,9 +546,9 @@ public class ModDataComponents {
     // ─── Charcoal & Calloud Components ───
 
     public enum CharcoalSize {
-        MM_22("22mm", 3, 0.75f, 1200),
-        MM_25("25mm", 4, 1.2f, 1800),
-        MM_27("27mm", 6, 1.5f, 2400);
+        MM_22("22mm", 3, 1.0f, 3600),
+        MM_25("25mm", 4, 1.5f, 6000),
+        MM_27("27mm", 6, 2.0f, 9600);
 
         private final String name;
         private final int volume; // для расчета вместимости каллауда (макс 12)
@@ -673,5 +690,19 @@ public class ModDataComponents {
             () -> DataComponentType.<CharcoalData>builder()
                     .persistent(CharcoalData.CODEC)
                     .networkSynchronized(CharcoalData.STREAM_CODEC)
+                    .build());
+
+    // ─── Модульный кальян ───
+    // Вариант (цвет) колбы/шахты хранится строкой на предмете и в BlockEntity.
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> HOOKAH_BULB_VARIANT = DATA_COMPONENT_TYPES.register("hookah_bulb_variant",
+            () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> HOOKAH_SHAFT_VARIANT = DATA_COMPONENT_TYPES.register("hookah_shaft_variant",
+            () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
                     .build());
 }

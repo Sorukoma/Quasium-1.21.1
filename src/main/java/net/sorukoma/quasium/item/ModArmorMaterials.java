@@ -3,7 +3,6 @@ package net.sorukoma.quasium.item;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -14,7 +13,6 @@ import net.sorukoma.quasium.QuasiumMod;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class ModArmorMaterials {
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS =

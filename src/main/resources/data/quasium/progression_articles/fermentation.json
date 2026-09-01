@@ -1,0 +1,10 @@
+{
+  "title": "quasium.progression.fermentation.title",
+  "hint": "quasium.progression.fermentation.hint",
+  "pages": [
+    { "text": "quasium.progression.fermentation.page1" },
+    { "text": "quasium.progression.fermentation.page2" },
+    { "text": "quasium.progression.fermentation.page3" }
+  ],
+  "unlockCondition": "quasium:progression/fermented_leaves"
+}

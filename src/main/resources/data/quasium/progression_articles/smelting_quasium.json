@@ -1,5 +1,6 @@
 {
   "title": "quasium.progression.smelting_quasium.title",
+  "hint": "quasium.progression.smelting_quasium.hint",
   "pages": [
     { "text": "quasium.progression.smelting_quasium.page1" },
     { "text": "quasium.progression.smelting_quasium.page2" }

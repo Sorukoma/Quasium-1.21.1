@@ -16,12 +16,23 @@
         "recipe": "quasium:quasiumingot_from_smelting_rawquasium"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "smelted_quasium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:quasiumingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_raw_quasium"
+      "has_raw_quasium",
+      "smelted_quasium"
     ]
   ],
   "rewards": {

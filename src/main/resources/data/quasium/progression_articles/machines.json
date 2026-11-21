@@ -1,0 +1,13 @@
+{
+  "title": "quasium.progression.machines.title",
+  "hint": "quasium.progression.machines.hint",
+  "category": "draft",
+  "order": 30,
+  "icon": "quasium:pneumatic_hammer",
+  "unlockCondition": "quasium:smokecraft/bellows",
+  "scene": "quasium:draft_machines",
+  "pages": [
+    {"text": "quasium.progression.machines.page2", "recipe": "quasium:flask_charger", "args": ["FLASK_MAX_CHARGES", "CHARGER_SECONDS_PER_CHARGE", "CHARGER_DEMAND", "FLASK_CHARGE_ESSENCE_MULTIPLIER"]},
+    {"text": "quasium.progression.machines.page4", "recipe": "quasium:pneumatic_hammer", "args": ["HAMMER_TICKS_PER_HIT", "HAMMER_DEMAND"]}
+  ]
+}

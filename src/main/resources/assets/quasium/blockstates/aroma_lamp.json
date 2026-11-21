@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "quasium:block/aroma_lamp"
+    },
+    "lit=true": {
+      "model": "quasium:block/aroma_lamp_lit"
+    }
+  }
+}

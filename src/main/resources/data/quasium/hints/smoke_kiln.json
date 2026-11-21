@@ -1,0 +1,93 @@
+{
+  "items": [
+    "quasium:smoke_kiln",
+    "quasium:ember_chunk"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:smoke_kiln[facing=north]",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 100,
+      "icons": [
+        {
+          "item": "minecraft:iron_pickaxe",
+          "pos": [1.1, 1.7, 1.5]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [1.9, 1.7, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:smoke_kiln[facing=north,lit=true]",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "args": [
+        "KILN_ML_PER_ITEM",
+        "KILN_SECONDS_PER_ITEM"
+      ]
+    },
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "minecraft:iron_sword",
+          "pos": [0.9, 1.7, 1.5]
+        },
+        {
+          "item": "minecraft:iron_pickaxe",
+          "pos": [1.5, 1.7, 1.5]
+        },
+        {
+          "item": "minecraft:shears",
+          "pos": [2.1, 1.7, 1.5]
+        }
+      ],
+      "args": [
+        "INFUSION_RESIN_DURABILITY_PCT"
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "minecraft:iron_pickaxe",
+          "pos": [0.9, 1.7, 1.5]
+        },
+        {
+          "item": "minecraft:iron_hoe",
+          "pos": [1.5, 1.7, 1.5]
+        },
+        {
+          "item": "minecraft:iron_sword",
+          "pos": [2.1, 1.7, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "quasium:smoke_kiln[facing=north]",
+          "pos": [1, 0, 1]
+        }
+      ]
+    }
+  ]
+}

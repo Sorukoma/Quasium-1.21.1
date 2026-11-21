@@ -1,0 +1,26 @@
+{
+  "title": "quasium.research.research_mirror_delirium.title",
+  "hint": "quasium.research.research_mirror_delirium.hint",
+  "category": "research_mirror",
+  "order": 20,
+  "icon": "quasium:essence_bottle",
+  "research": {
+    "tier": 4,
+    "notes": [
+      "ash",
+      "menthol"
+    ],
+    "lived": true,
+    "spells": [
+      "quasium:delirium_breath"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mirror_delirium.page1"
+    },
+    {
+      "text": "quasium.research.research_mirror_delirium.page2"
+    }
+  ]
+}

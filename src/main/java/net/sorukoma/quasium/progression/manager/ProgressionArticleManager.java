@@ -32,6 +32,7 @@ public class ProgressionArticleManager extends SimpleJsonResourceReloadListener 
             ResourceLocation id = entry.getKey();
             try {
                 ProgressionArticle article = GSON.fromJson(entry.getValue(), ProgressionArticle.class);
+                article.setId(id);
                 articles.put(id, article);
             } catch (Exception e) {
                 LOGGER.error("Failed to load progression article: {}", id, e);

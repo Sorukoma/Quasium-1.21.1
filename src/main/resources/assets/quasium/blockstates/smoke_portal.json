@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "quasium:block/smoke_portal_ns"
+    },
+    "axis=z": {
+      "model": "quasium:block/smoke_portal_ew"
+    }
+  }
+}

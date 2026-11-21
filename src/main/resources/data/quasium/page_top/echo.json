@@ -1,0 +1,9 @@
+{
+  "volume": 25,
+  "max": 1,
+  "add": {
+    "echo": 1
+  },
+  "unlock": "found",
+  "order": 12
+}

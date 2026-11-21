@@ -1,9 +1,14 @@
 {
   "title": "quasium.progression.heater.title",
   "hint": "quasium.progression.heater.hint",
+  "category": "hookah",
+  "order": 20,
+  "icon": "quasium:heater",
+  "unlockCondition": "quasium:progression/first_tobacco",
+  "scene": "quasium:hookah_coals",
   "pages": [
-    { "text": "quasium.progression.heater.page1" },
-    { "text": "quasium.progression.heater.page2" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_heater"
+    {"text": "quasium.progression.heater.page1", "recipe": "quasium:heater_from_brick_copper_iron"},
+    {"text": "quasium.progression.heater.page2", "items": ["quasium:charcoal_22", "quasium:charcoal_25", "quasium:charcoal_27", "minecraft:charcoal"]},
+    {"text": "quasium.progression.heater.page3"}
+  ]
 }

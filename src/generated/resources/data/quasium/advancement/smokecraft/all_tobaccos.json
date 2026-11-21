@@ -1,0 +1,252 @@
+{
+  "parent": "quasium:progression/first_tobacco",
+  "criteria": {
+    "anise": {
+      "conditions": {
+        "tobacco": "anise"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "apple": {
+      "conditions": {
+        "tobacco": "apple"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "berry": {
+      "conditions": {
+        "tobacco": "berry"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "cherry": {
+      "conditions": {
+        "tobacco": "cherry"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "cinnamon": {
+      "conditions": {
+        "tobacco": "cinnamon"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "coconut": {
+      "conditions": {
+        "tobacco": "coconut"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "coffee": {
+      "conditions": {
+        "tobacco": "coffee"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "grape": {
+      "conditions": {
+        "tobacco": "grape"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "grapefruit": {
+      "conditions": {
+        "tobacco": "grapefruit"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "lemon": {
+      "conditions": {
+        "tobacco": "lemon"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "lime": {
+      "conditions": {
+        "tobacco": "lime"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "mint": {
+      "conditions": {
+        "tobacco": "mint"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "orange": {
+      "conditions": {
+        "tobacco": "orange"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "rose": {
+      "conditions": {
+        "tobacco": "rose"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_ashen": {
+      "conditions": {
+        "tobacco": "self_mixed_ashen"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_bolotnik": {
+      "conditions": {
+        "tobacco": "self_mixed_bolotnik"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_chorus": {
+      "conditions": {
+        "tobacco": "self_mixed_chorus"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_dikar": {
+      "conditions": {
+        "tobacco": "self_mixed_dikar"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_echo": {
+      "conditions": {
+        "tobacco": "self_mixed_echo"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_hybrid": {
+      "conditions": {
+        "tobacco": "self_mixed_hybrid"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_ledyanoy": {
+      "conditions": {
+        "tobacco": "self_mixed_ledyanoy"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_peschanik": {
+      "conditions": {
+        "tobacco": "self_mixed_peschanik"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "self_mixed_primordial": {
+      "conditions": {
+        "tobacco": "self_mixed_primordial"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "vanilla": {
+      "conditions": {
+        "tobacco": "vanilla"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    },
+    "watermelon": {
+      "conditions": {
+        "tobacco": "watermelon"
+      },
+      "trigger": "quasium:pure_tobacco_smoked"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.all_tobaccos.description",
+      "with": [
+        25
+      ]
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "quasium:hookah_bowl"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.all_tobaccos.title"
+    }
+  },
+  "requirements": [
+    [
+      "mint"
+    ],
+    [
+      "berry"
+    ],
+    [
+      "lemon"
+    ],
+    [
+      "lime"
+    ],
+    [
+      "orange"
+    ],
+    [
+      "grapefruit"
+    ],
+    [
+      "apple"
+    ],
+    [
+      "watermelon"
+    ],
+    [
+      "grape"
+    ],
+    [
+      "cherry"
+    ],
+    [
+      "vanilla"
+    ],
+    [
+      "coffee"
+    ],
+    [
+      "cinnamon"
+    ],
+    [
+      "coconut"
+    ],
+    [
+      "rose"
+    ],
+    [
+      "anise"
+    ],
+    [
+      "self_mixed_dikar"
+    ],
+    [
+      "self_mixed_peschanik"
+    ],
+    [
+      "self_mixed_bolotnik"
+    ],
+    [
+      "self_mixed_ledyanoy"
+    ],
+    [
+      "self_mixed_hybrid"
+    ],
+    [
+      "self_mixed_echo"
+    ],
+    [
+      "self_mixed_ashen"
+    ],
+    [
+      "self_mixed_chorus"
+    ],
+    [
+      "self_mixed_primordial"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

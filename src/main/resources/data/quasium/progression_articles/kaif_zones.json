@@ -1,0 +1,47 @@
+{
+  "title": "quasium.progression.kaif_zones.title",
+  "hint": "quasium.progression.kaif_zones.hint",
+  "category": "smokecraft",
+  "order": 10,
+  "icon": "quasium:smoke_jar",
+  "unlockCondition": "quasium:smokecraft/zone_1",
+  "scene": "quasium:kaif_zones",
+  "pages": [
+    {
+      "text": "quasium.progression.kaif_zones.page1",
+      "args": [
+        "ZONE_SMOKER_MEMORY_SEC",
+        "ZONE_RADIUS_T1",
+        "ZONE_AGGRO_REDUCTION_PCT",
+        "ZONE_CAST_DISCOUNT_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.kaif_zones.page2",
+      "args": [
+        "ZONE_RADIUS_T2",
+        "ZONE_KAIF_BONUS_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.kaif_zones.page3",
+      "args": [
+        "NIRVANA_FURNITURE",
+        "ZONE_RADIUS_T3"
+      ]
+    },
+    {
+      "text": "quasium.progression.kaif_zones.page4",
+      "anvil": "quasium:empty_smoke_jar",
+      "args": [
+        "SMOKE_JAR_MINUTES"
+      ]
+    },
+    {
+      "text": "quasium.progression.kaif_zones.page5"
+    },
+    {
+      "text": "quasium.progression.kaif_zones.page6"
+    }
+  ]
+}

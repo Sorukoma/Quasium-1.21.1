@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokecraft/first_scan",
+  "criteria": {
+    "distill": {
+      "conditions": {
+        "event": "distill"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.first_distill.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:distillation_cube"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.first_distill.title"
+    }
+  },
+  "requirements": [
+    [
+      "distill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

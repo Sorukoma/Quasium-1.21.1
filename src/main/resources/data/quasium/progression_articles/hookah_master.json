@@ -1,0 +1,17 @@
+{
+  "title": "quasium.progression.hookah_master.title",
+  "hint": "quasium.progression.hookah_master.hint",
+  "category": "start",
+  "order": 110,
+  "icon": "quasium:essence_press",
+  "unlockCondition": "quasium:progression/obtained_essence",
+  "scene": "quasium:hookah_master",
+  "pages": [
+    {"text": "quasium.progression.hookah_master.page1", "items": ["quasium:essence_press"]},
+    {"text": "quasium.progression.hookah_master.page2", "items": ["quasium:dikar_leaves", "quasium:peschanik_leaves", "quasium:bolotnik_leaves", "quasium:ledyanoy_leaves"], "args": ["LEAVES_BUY_COUNT", "DRIED_LEAVES_BUY_COUNT", "DRIED_LEAVES_PRICE"]},
+    {"text": "quasium.progression.hookah_master.page3", "items": ["minecraft:emerald"], "args": ["THREE_STAR_LEAVES_COUNT", "THREE_STAR_PRICE", "FOUR_STAR_PRICE", "FIVE_STAR_PRICE"]},
+    {"text": "quasium.progression.hookah_master.page4", "items": ["quasium:mint_tobacco", "quasium:apple_tobacco", "quasium:lemon_tobacco"], "args": ["TOBACCO_COMMON_PRICE"]},
+    {"text": "quasium.progression.hookah_master.page5", "items": ["quasium:cinnamon_tobacco", "minecraft:blaze_powder", "minecraft:chorus_fruit", "minecraft:echo_shard"], "args": ["TOBACCO_RARE_PRICE", "BLAZE_POWDER_COUNT", "BLAZE_POWDER_PRICE", "CHORUS_FRUIT_COUNT", "CHORUS_FRUIT_PRICE", "ECHO_SHARD_PRICE"]},
+    {"text": "quasium.progression.hookah_master.page6", "items": ["quasium:essence_bottle", "quasium:hybrid_tobacco_seeds"]}
+  ]
+}

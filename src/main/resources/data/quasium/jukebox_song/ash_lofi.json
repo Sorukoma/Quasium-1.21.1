@@ -1,0 +1,8 @@
+{
+  "sound_event": "quasium:music_disc.ash_lofi",
+  "description": {
+    "translate": "jukebox_song.quasium.ash_lofi"
+  },
+  "length_in_seconds": 92.0,
+  "comparator_output": 13
+}

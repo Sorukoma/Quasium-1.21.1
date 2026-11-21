@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "glass": "quasium:block/note_jar_glass",
+    "lid": "quasium:block/note_jar_lid",
+    "particle": "quasium:block/note_jar_glass"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 4],
+      "to": [12, 13, 12],
+      "faces": {
+        "north": { "uv": [4, 0, 12, 13], "texture": "#glass" },
+        "east": { "uv": [4, 0, 12, 13], "texture": "#glass" },
+        "south": { "uv": [4, 0, 12, 13], "texture": "#glass" },
+        "west": { "uv": [4, 0, 12, 13], "texture": "#glass" },
+        "down": { "uv": [4, 4, 12, 12], "texture": "#glass", "cullface": "down" }
+      }
+    },
+    {
+      "from": [5, 13, 5],
+      "to": [11, 15, 11],
+      "faces": {
+        "north": { "uv": [5, 0, 11, 2], "texture": "#lid" },
+        "east": { "uv": [5, 0, 11, 2], "texture": "#lid" },
+        "south": { "uv": [5, 0, 11, 2], "texture": "#lid" },
+        "west": { "uv": [5, 0, 11, 2], "texture": "#lid" },
+        "up": { "uv": [5, 5, 11, 11], "texture": "#lid" },
+        "down": { "uv": [5, 5, 11, 11], "texture": "#lid" }
+      }
+    }
+  ]
+}

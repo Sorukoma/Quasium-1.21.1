@@ -1,0 +1,123 @@
+{
+  "items": [
+    "quasium:essence_press",
+    "quasium:essence_bottle",
+    "quasium:bonsai_pot",
+    "quasium:lemon_sapling",
+    "quasium:lime_sapling",
+    "quasium:orange_sapling",
+    "quasium:grapefruit_sapling",
+    "quasium:grape_sapling",
+    "quasium:coconut_sapling",
+    "quasium:lemon",
+    "quasium:lime",
+    "quasium:orange",
+    "quasium:grapefruit",
+    "quasium:grape",
+    "quasium:coconut",
+    "quasium:mint_crop_seeds",
+    "quasium:mint_leaves",
+    "quasium:anise_seeds",
+    "quasium:anise",
+    "quasium:lavender_seeds",
+    "quasium:lavender",
+    "quasium:cocoa_crop_seeds",
+    "quasium:cocoa_nibs"
+  ],
+  "floor": 4,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:essence_press",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 130,
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:lemon",
+          "pos": [1.5, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "minecraft:glass_bottle",
+          "pos": [1.1, 1.6, 1.5]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [1.9, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 210,
+      "place": [
+        {
+          "state": "quasium:bonsai_pot",
+          "pos": [3, 0, 1]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [1, 0, 3]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [2, 0, 3]
+        },
+        {
+          "state": "quasium:mint_crop[age=4]",
+          "pos": [1, 1, 3]
+        },
+        {
+          "state": "quasium:mint_crop[age=4]",
+          "pos": [2, 1, 3]
+        }
+      ],
+      "highlight": [
+        [3, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:lemon_sapling",
+          "pos": [3.5, 1.3, 1.5]
+        },
+        {
+          "item": "quasium:mint_leaves",
+          "pos": [2.0, 2.2, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:soaking_bowl",
+          "pos": [0, 0, 2]
+        }
+      ],
+      "highlight": [
+        [0, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [0.5, 1.3, 2.5]
+        }
+      ]
+    }
+  ]
+}

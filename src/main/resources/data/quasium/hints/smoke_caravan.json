@@ -1,0 +1,77 @@
+{
+  "items": [
+    "quasium:smoke_caravan_spawn_egg"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "quasium:smoke_caravan_spawn_egg",
+          "pos": [1.5, 1.4, 1.5]
+        },
+        {
+          "item": "minecraft:trader_llama_spawn_egg",
+          "pos": [0.7, 1.2, 1.5]
+        },
+        {
+          "item": "minecraft:trader_llama_spawn_egg",
+          "pos": [2.3, 1.2, 1.5]
+        },
+        {
+          "item": "minecraft:bell",
+          "pos": [1.5, 2.1, 1.5]
+        }
+      ],
+      "args": [
+        "CARAVAN_DAILY_CHANCE_PCT",
+        "CARAVAN_STAY_MINUTES"
+      ]
+    },
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "minecraft:emerald",
+          "pos": [0.6, 1.3, 1.5]
+        },
+        {
+          "item": "minecraft:apple",
+          "pos": [1.2, 1.3, 1.5]
+        },
+        {
+          "item": "minecraft:sugar",
+          "pos": [1.8, 1.3, 1.5]
+        },
+        {
+          "item": "minecraft:cocoa_beans",
+          "pos": [2.4, 1.3, 1.5]
+        }
+      ],
+      "args": [
+        "CARAVAN_DAILY_FLAVORS",
+        "CARAVAN_FLAVOR_PRICE",
+        "CARAVAN_TOBACCO_OFFERS"
+      ]
+    },
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "quasium:self_mixed_tobacco",
+          "pos": [1.1, 1.3, 1.5]
+        },
+        {
+          "item": "minecraft:emerald",
+          "pos": [1.9, 1.3, 1.5]
+        }
+      ],
+      "args": [
+        "CARAVAN_SELF_MIX_MIN_STARS",
+        "CARAVAN_SELF_MIX_MIN_GRAMS",
+        "CARAVAN_SELF_MIX_PRICE"
+      ]
+    }
+  ]
+}

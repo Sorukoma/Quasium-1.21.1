@@ -1,0 +1,27 @@
+{
+  "title": "quasium.research.research_smoke_focus_two.title",
+  "hint": "quasium.research.research_smoke_focus_two.hint",
+  "category": "research_smoke",
+  "order": 40,
+  "icon": "quasium:focus_upgrade_resonator",
+  "research": {
+    "tier": 3,
+    "notes": [
+      "menthol",
+      "resin"
+    ],
+    "kaif": 40,
+    "perk": "focus_two"
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smoke_focus_two.page1",
+      "args": [
+        "FOCUS_TWO_PCT"
+      ]
+    },
+    {
+      "text": "quasium.research.research_smoke_focus_two.page2"
+    }
+  ]
+}

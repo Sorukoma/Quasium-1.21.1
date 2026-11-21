@@ -1,0 +1,21 @@
+{
+  "title": "quasium.research.research_mind_zen.title",
+  "hint": "quasium.research.research_mind_zen.hint",
+  "category": "research_mind",
+  "order": 50,
+  "icon": "quasium:lounge_cushion",
+  "research": {
+    "tier": 2,
+    "perk": "zen",
+    "insight": 5,
+    "treatises": 0
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mind_zen.page1",
+      "args": [
+        "ZEN_DECAY_PCT"
+      ]
+    }
+  ]
+}

@@ -21,10 +21,10 @@ public class FermentationRecipes {
         tobaccoOutput.set(ModDataComponents.FERMENTED.get(), true);
         recipes.add(new FermentationRecipe(tobaccoInput, tobaccoOutput, 200));
 
-        ItemStack makhorkaInput = new ItemStack(ModItems.MAKHORKA_LEAVES.get());
-        ItemStack makhorkaOutput = new ItemStack(ModItems.MAKHORKA_LEAVES.get());
-        makhorkaOutput.set(ModDataComponents.FERMENTED.get(), true);
-        recipes.add(new FermentationRecipe(makhorkaInput, makhorkaOutput, 200));
+        ItemStack peschanikInput = new ItemStack(ModItems.PESCHANIK_LEAVES.get());
+        ItemStack peschanikOutput = new ItemStack(ModItems.PESCHANIK_LEAVES.get());
+        peschanikOutput.set(ModDataComponents.FERMENTED.get(), true);
+        recipes.add(new FermentationRecipe(peschanikInput, peschanikOutput, 200));
 
         return recipes;
     }

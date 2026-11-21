@@ -1,0 +1,22 @@
+{
+  "tier": 1,
+  "catalyst": {
+    "type": "quasium:gear",
+    "fits": "damageable"
+  },
+  "pedestals": [
+    {
+      "item": "quasium:quasiumingot"
+    }
+  ],
+  "notes": {
+    "resin": 32,
+    "ash": 16
+  },
+  "puffs": 300,
+  "rate": 64,
+  "base": 10,
+  "infuse": {
+    "quasium:smoke_tempered": {}
+  }
+}

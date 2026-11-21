@@ -1,0 +1,84 @@
+{
+  "items": [
+    "quasium:fermentation_barrel"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:fermentation_barrel",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [1.5, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 120,
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [1.5, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "minecraft:sugar",
+          "pos": [1.5, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:fermentation_barrel[fermenting=true]",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:netherite_hammer",
+          "pos": [1.5, 1.7, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:fermentation_barrel",
+          "pos": [1, 0, 1]
+        },
+        {
+          "state": "quasium:soaking_bowl",
+          "pos": [2, 0, 2]
+        }
+      ],
+      "highlight": [
+        [2, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [2.5, 1.2, 2.5]
+        }
+      ]
+    }
+  ]
+}

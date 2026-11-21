@@ -1,0 +1,13 @@
+{
+  "volume": 15,
+  "max": 1,
+  "add": {
+    "pierce": 2
+  },
+  "forms": [
+    "bolt",
+    "beam"
+  ],
+  "unlock": "research:quasium:research_smoke_tops",
+  "order": 10
+}

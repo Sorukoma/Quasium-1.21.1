@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "quasium:block/research_table_top",
+    "bottom": "minecraft:block/dark_oak_planks",
+    "side": "quasium:block/research_table_side",
+    "front": "quasium:block/research_table_front"
+  }
+}

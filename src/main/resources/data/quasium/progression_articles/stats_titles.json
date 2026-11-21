@@ -1,0 +1,20 @@
+{
+  "title": "quasium.progression.stats_titles.title",
+  "hint": "quasium.progression.stats_titles.hint",
+  "category": "kaif",
+  "order": 70,
+  "icon": "minecraft:name_tag",
+  "unlockCondition": "quasium:progression/obtained_kaifometer",
+  "pages": [
+    {
+      "text": "quasium.progression.stats_titles.page1"
+    },
+    {
+      "text": "quasium.progression.stats_titles.page2",
+      "args": [
+        "TITLE_SOMMELIER_FLAVORS",
+        "TITLE_IRON_LUNGS_PUFFS"
+      ]
+    }
+  ]
+}

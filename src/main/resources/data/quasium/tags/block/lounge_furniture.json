@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "quasium:lounge_cushion",
+    "quasium:low_table",
+    "quasium:aroma_lamp",
+    "quasium:glowing_bulb_white",
+    "quasium:glowing_bulb_black",
+    "quasium:glowing_bulb_red",
+    "quasium:glowing_bulb_blue",
+    "quasium:glowing_bulb_amber"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "quasium:item/aroma_vial_liquid",
+    "layer1": "quasium:item/aroma_vial"
+  }
+}

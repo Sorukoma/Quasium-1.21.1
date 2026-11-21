@@ -1,10 +1,16 @@
 {
   "title": "quasium.progression.hookah_bowl.title",
   "hint": "quasium.progression.hookah_bowl.hint",
+  "category": "hookah",
+  "order": 40,
+  "icon": "quasium:hookah_bowl",
+  "unlockCondition": "quasium:progression/first_tobacco",
+  "scene": "quasium:hookah_setup",
   "pages": [
-    { "text": "quasium.progression.hookah_bowl.page1" },
-    { "text": "quasium.progression.hookah_bowl.page2" },
-    { "text": "quasium.progression.hookah_bowl.page3" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_bowl"
+    {"text": "quasium.progression.hookah_bowl.page1", "recipe": "quasium:unfired_hookah_bowl_from_clay"},
+    {"text": "quasium.progression.hookah_bowl.page2", "recipe": "quasium:hookah_bowl_from_smelting_unfired_hookah_bowl"},
+    {"text": "quasium.progression.hookah_bowl.page3", "items": ["quasium:one_gram_tobacco", "quasium:one_gram_self_mixed_tobacco", "quasium:burned_tobacco"]},
+    {"text": "quasium.progression.hookah_bowl.page4"},
+    {"text": "quasium.progression.hookah_bowl.page5"}
+  ]
 }

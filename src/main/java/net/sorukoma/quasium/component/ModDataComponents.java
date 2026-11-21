@@ -204,16 +204,17 @@ public class ModDataComponents {
             List<MobEffectInstance> effects,  // эффекты self_mixed; empty для regular
             int essenceAmount,
             int molassesAmount,
-            boolean toxic      // токсичный самозамес (мутация гибрида) — наносит урон при курении
+            boolean toxic,     // токсичный самозамес (мутация гибрида) — наносит урон при курении
+            int kaifPct
     ) {
         public BowlTobaccoGroup(String type, String flavor, String base, float strength,
                                 List<MobEffectInstance> effects) {
-            this(type, flavor, base, strength, effects, 0, 0, false);
+            this(type, flavor, base, strength, effects, 0, 0, false, 100);
         }
 
         public BowlTobaccoGroup(String type, String flavor, String base, float strength,
                                 List<MobEffectInstance> effects, int essenceAmount, int molassesAmount) {
-            this(type, flavor, base, strength, effects, essenceAmount, molassesAmount, false);
+            this(type, flavor, base, strength, effects, essenceAmount, molassesAmount, false, 100);
         }
 
         public BowlTobaccoGroup {
@@ -232,7 +233,8 @@ public class ModDataComponents {
                         MobEffectInstance.CODEC.listOf().fieldOf("effects").forGetter(BowlTobaccoGroup::effects),
                         Codec.INT.optionalFieldOf("essence_amount", 0).forGetter(BowlTobaccoGroup::essenceAmount),
                         Codec.INT.optionalFieldOf("molasses_amount", 0).forGetter(BowlTobaccoGroup::molassesAmount),
-                        Codec.BOOL.optionalFieldOf("toxic", false).forGetter(BowlTobaccoGroup::toxic)
+                        Codec.BOOL.optionalFieldOf("toxic", false).forGetter(BowlTobaccoGroup::toxic),
+                        Codec.INT.optionalFieldOf("kaif_pct", 100).forGetter(BowlTobaccoGroup::kaifPct)
                 ).apply(instance, BowlTobaccoGroup::new)
         );
 
@@ -249,6 +251,7 @@ public class ModDataComponents {
                     buf.writeVarInt(group.essenceAmount());
                     buf.writeVarInt(group.molassesAmount());
                     buf.writeBoolean(group.toxic());
+                    buf.writeVarInt(group.kaifPct());
                 },
                 buf -> {
                     String type = buf.readUtf();
@@ -261,7 +264,7 @@ public class ModDataComponents {
                         effects.add(MobEffectInstance.STREAM_CODEC.decode(buf));
                     }
                     return new BowlTobaccoGroup(type, flavor, base, strength, effects,
-                            buf.readVarInt(), buf.readVarInt(), buf.readBoolean());
+                            buf.readVarInt(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt());
                 }
         );
 
@@ -273,13 +276,13 @@ public class ModDataComponents {
             return Objects.equals(type, that.type) && Objects.equals(flavor, that.flavor)
                     && Objects.equals(base, that.base) && Float.compare(strength, that.strength) == 0
                     && essenceAmount == that.essenceAmount && molassesAmount == that.molassesAmount
-                    && toxic == that.toxic
+                    && toxic == that.toxic && kaifPct == that.kaifPct
                     && Objects.equals(effects, that.effects);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(type, flavor, base, strength, effects, essenceAmount, molassesAmount, toxic);
+            return Objects.hash(type, flavor, base, strength, effects, essenceAmount, molassesAmount, toxic, kaifPct);
         }
     }
 
@@ -704,5 +707,23 @@ public class ModDataComponents {
             () -> DataComponentType.<String>builder()
                     .persistent(Codec.STRING)
                     .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> NOTE_INFUSION = DATA_COMPONENT_TYPES.register("note_infusion",
+            () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> BOWL_UPGRADE = DATA_COMPONENT_TYPES.register("bowl_upgrade",
+            () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<net.sorukoma.quasium.magic.FocusEssence>>> BOWL_FOCUS = DATA_COMPONENT_TYPES.register("bowl_focus",
+            () -> DataComponentType.<List<net.sorukoma.quasium.magic.FocusEssence>>builder()
+                    .persistent(net.sorukoma.quasium.magic.FocusEssence.LIST_CODEC)
+                    .networkSynchronized(net.sorukoma.quasium.magic.FocusEssence.LIST_STREAM_CODEC)
                     .build());
 }

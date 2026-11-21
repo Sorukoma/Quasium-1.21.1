@@ -1,10 +1,16 @@
 {
   "title": "quasium.progression.quasium_anvil.title",
   "hint": "quasium.progression.quasium_anvil.hint",
+  "category": "quasium",
+  "order": 30,
+  "icon": "quasium:quasium_anvil",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:quasium_anvil",
   "pages": [
-    { "text": "quasium.progression.quasium_anvil.page1" },
-    { "text": "quasium.progression.quasium_anvil.page2" },
-    { "text": "quasium.progression.quasium_anvil.page3" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_anvil"
+    {"text": "quasium.progression.quasium_anvil.page1", "recipe": "quasium:quasium_anvil_from_quasium_blocks"},
+    {"text": "quasium.progression.quasium_anvil.page2", "items": ["quasium:netherite_hammer"]},
+    {"text": "quasium.progression.quasium_anvil.page3", "anvil": "quasium:empty_smoke_jar"},
+    {"text": "quasium.progression.quasium_anvil.page4", "anvil": "quasium:backpack_hookah"},
+    {"text": "quasium.progression.quasium_anvil.page5", "items": ["quasium:calloud_golem", "quasium:clay_golem", "quasium:sommelier_module", "quasium:toolkeeper_module", "quasium:smoke_warden"]}
+  ]
 }

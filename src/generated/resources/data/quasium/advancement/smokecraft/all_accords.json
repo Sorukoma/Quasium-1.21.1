@@ -1,0 +1,159 @@
+{
+  "parent": "quasium:smokecraft/first_accord",
+  "criteria": {
+    "amber": {
+      "conditions": {
+        "event": "accord:amber"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "balm": {
+      "conditions": {
+        "event": "accord:balm"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "caramel": {
+      "conditions": {
+        "event": "accord:caramel"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "collapse": {
+      "conditions": {
+        "event": "accord:collapse"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "ferment": {
+      "conditions": {
+        "event": "accord:ferment"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "fog": {
+      "conditions": {
+        "event": "accord:fog"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "glaze": {
+      "conditions": {
+        "event": "accord:glaze"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "lightness": {
+      "conditions": {
+        "event": "accord:lightness"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "magma": {
+      "conditions": {
+        "event": "accord:magma"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "oblivion": {
+      "conditions": {
+        "event": "accord:oblivion"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "quagmire": {
+      "conditions": {
+        "event": "accord:quagmire"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "rime": {
+      "conditions": {
+        "event": "accord:rime"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "smolder": {
+      "conditions": {
+        "event": "accord:smolder"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "spark": {
+      "conditions": {
+        "event": "accord:spark"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "steam": {
+      "conditions": {
+        "event": "accord:steam"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.all_accords.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:note_block"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.all_accords.title"
+    }
+  },
+  "requirements": [
+    [
+      "spark"
+    ],
+    [
+      "lightness"
+    ],
+    [
+      "rime"
+    ],
+    [
+      "glaze"
+    ],
+    [
+      "oblivion"
+    ],
+    [
+      "caramel"
+    ],
+    [
+      "steam"
+    ],
+    [
+      "magma"
+    ],
+    [
+      "smolder"
+    ],
+    [
+      "balm"
+    ],
+    [
+      "amber"
+    ],
+    [
+      "ferment"
+    ],
+    [
+      "quagmire"
+    ],
+    [
+      "fog"
+    ],
+    [
+      "collapse"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

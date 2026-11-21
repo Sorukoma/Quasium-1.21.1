@@ -1,0 +1,7 @@
+// 1.21.1	2026-11-20T20:27:54.057511486	Machine recipes
+55eb2400f66be55b338f233275d9c6fd2b3cda1e data/quasium/advancement/recipes/misc/essence_pump.json
+32397af86af5e11cfbc35e360abcaa553145caf9 data/quasium/advancement/recipes/misc/flask_charger.json
+1a27134356791fbb9633d55900ab0c69f4db5c67 data/quasium/advancement/recipes/misc/ventilation.json
+5c6547a50e6aeafb6c2610df615cdcebf3296108 data/quasium/recipe/essence_pump.json
+571501b14f237d7ffa1e824b2ed50f610bc4df41 data/quasium/recipe/flask_charger.json
+970748e26e195f1709fc2224a5c4e15aa92fc3d1 data/quasium/recipe/ventilation.json

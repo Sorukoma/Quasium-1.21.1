@@ -1,0 +1,20 @@
+{
+  "form": "ring",
+  "inputs": [
+    {
+      "menthol": 2,
+      "ash": 1
+    }
+  ],
+  "lungs": 75,
+  "grams": 0.6,
+  "cooldown": 1,
+  "action": "portal",
+  "color": "#9A7BFF",
+  "params": {
+    "speed": 0.8,
+    "range": 16,
+    "duration": 60,
+    "pair_cooldown": 60
+  }
+}

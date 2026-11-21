@@ -10,7 +10,7 @@ import net.sorukoma.quasium.component.ModDataComponents;
 import org.jetbrains.annotations.Nullable;
 
 public record PacketHookahPuffData(BlockPos blockPos, float totalHeat,
-                                   int totalTobaccoWeight, @Nullable ModDataComponents.HookahBowlContents bowlContents) implements CustomPacketPayload {
+                                   int totalTobaccoWeight, int warmup, @Nullable ModDataComponents.HookahBowlContents bowlContents) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<PacketHookahPuffData> ID =
             new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "hookah_puff_data"));
     public static final StreamCodec<RegistryFriendlyByteBuf, PacketHookahPuffData> STREAM_CODEC = StreamCodec.of(
@@ -21,6 +21,7 @@ public record PacketHookahPuffData(BlockPos blockPos, float totalHeat,
         buf.writeBlockPos(pkt.blockPos);
         buf.writeFloat(pkt.totalHeat);
         buf.writeInt(pkt.totalTobaccoWeight);
+        buf.writeVarInt(pkt.warmup);
         buf.writeBoolean(pkt.bowlContents != null);
         if (pkt.bowlContents != null) {
             ModDataComponents.HookahBowlContents.STREAM_CODEC.encode(buf, pkt.bowlContents);
@@ -31,9 +32,10 @@ public record PacketHookahPuffData(BlockPos blockPos, float totalHeat,
         BlockPos blockPos = buf.readBlockPos();
         float totalHeat = buf.readFloat();
         int totalTobaccoWeight = buf.readInt();
+        int warmup = buf.readVarInt();
         boolean hasContents = buf.readBoolean();
         ModDataComponents.HookahBowlContents bowlContents = hasContents ? ModDataComponents.HookahBowlContents.STREAM_CODEC.decode(buf) : null;
-        return new PacketHookahPuffData(blockPos, totalHeat, totalTobaccoWeight, bowlContents);
+        return new PacketHookahPuffData(blockPos, totalHeat, totalTobaccoWeight, warmup, bowlContents);
     }
 
     @Override

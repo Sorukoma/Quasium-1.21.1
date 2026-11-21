@@ -1,0 +1,12 @@
+{
+  "note": "resin",
+  "volume": 25,
+  "cooldown": 8,
+  "target": "foe",
+  "params": {
+    "root_seconds": 3,
+    "player_multiplier": 0.5
+  },
+  "unlock": "research:quasium:research_smoke_heart",
+  "order": 14
+}

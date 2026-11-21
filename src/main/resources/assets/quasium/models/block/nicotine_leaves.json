@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "quasium:block/nicotine_leaves"
+  },
+  "render_type": "minecraft:cutout_mipped"
+}

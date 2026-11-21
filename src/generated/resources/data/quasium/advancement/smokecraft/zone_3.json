@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/zone_1",
+  "criteria": {
+    "zone_3": {
+      "conditions": {
+        "event": "zone_3"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.zone_3.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:music_disc_lofi_kaif_beats"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.zone_3.title"
+    }
+  },
+  "requirements": [
+    [
+      "zone_3"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,lit=false": { "model": "quasium:block/distillation_cube" },
+    "facing=east,lit=false": { "model": "quasium:block/distillation_cube", "y": 90 },
+    "facing=south,lit=false": { "model": "quasium:block/distillation_cube", "y": 180 },
+    "facing=west,lit=false": { "model": "quasium:block/distillation_cube", "y": 270 },
+    "facing=north,lit=true": { "model": "quasium:block/distillation_cube_on" },
+    "facing=east,lit=true": { "model": "quasium:block/distillation_cube_on", "y": 90 },
+    "facing=south,lit=true": { "model": "quasium:block/distillation_cube_on", "y": 180 },
+    "facing=west,lit=true": { "model": "quasium:block/distillation_cube_on", "y": 270 }
+  }
+}

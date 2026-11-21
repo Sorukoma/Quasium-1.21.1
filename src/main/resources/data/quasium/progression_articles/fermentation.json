@@ -1,10 +1,15 @@
 {
   "title": "quasium.progression.fermentation.title",
   "hint": "quasium.progression.fermentation.hint",
+  "category": "start",
+  "order": 50,
+  "icon": "quasium:fermentation_barrel",
+  "unlockCondition": "quasium:progression/fermented_leaves",
+  "scene": "quasium:fermentation",
   "pages": [
-    { "text": "quasium.progression.fermentation.page1" },
-    { "text": "quasium.progression.fermentation.page2" },
-    { "text": "quasium.progression.fermentation.page3" }
-  ],
-  "unlockCondition": "quasium:progression/fermented_leaves"
+    {"text": "quasium.progression.fermentation.page1", "recipe": "quasium:fermentation_barrel_from_planks_and_iron"},
+    {"text": "quasium.progression.fermentation.page2", "items": ["minecraft:sugar"]},
+    {"text": "quasium.progression.fermentation.page3", "recipe": "quasium:netherite_hammer_from_netherite_ingot"},
+    {"text": "quasium.progression.fermentation.page4"}
+  ]
 }

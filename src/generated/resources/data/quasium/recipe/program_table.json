@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "Q": {
+      "item": "quasium:quasiumingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "PRP",
+    "#Q#",
+    "# #"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:program_table"
+  }
+}

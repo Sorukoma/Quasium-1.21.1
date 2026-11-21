@@ -1,0 +1,23 @@
+{
+  "form": "cloud",
+  "inputs": [
+    {
+      "nectar": 1,
+      "dew": 1
+    },
+    {
+      "vanilla": 1
+    }
+  ],
+  "lungs": 60,
+  "grams": 0.4,
+  "cooldown": 12,
+  "action": "healing",
+  "color": "#FFE6A0",
+  "params": {
+    "throw": 6,
+    "radius": 3,
+    "duration": 8,
+    "effect_seconds": 3
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "form": "cone",
+  "inputs": [
+    {
+      "nectar": 1,
+      "resin": 1,
+      "dew": 1
+    }
+  ],
+  "lungs": 50,
+  "grams": 0.4,
+  "cooldown": 3,
+  "action": "sprout",
+  "color": "#7FD66B",
+  "params": {
+    "length": 4,
+    "width": 2,
+    "crop_chance": 0.3,
+    "sapling_chance": 0.1
+  }
+}

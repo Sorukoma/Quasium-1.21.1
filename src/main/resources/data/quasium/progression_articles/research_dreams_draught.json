@@ -1,0 +1,28 @@
+{
+  "title": "quasium.research.research_dreams_draught.title",
+  "hint": "quasium.research.research_dreams_draught.hint",
+  "category": "research_dreams",
+  "order": 20,
+  "icon": "quasium:essence_bottle",
+  "research": {
+    "tier": 3,
+    "notes": [
+      "menthol",
+      "nectar"
+    ],
+    "requires": [
+      "quasium:research_dreams_catcher"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_dreams_draught.page1",
+      "args": [
+        "DREAM_DRAUGHT_ML"
+      ]
+    },
+    {
+      "text": "quasium.research.research_dreams_draught.page2"
+    }
+  ]
+}

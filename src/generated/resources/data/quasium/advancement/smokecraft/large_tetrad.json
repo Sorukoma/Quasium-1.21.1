@@ -1,0 +1,34 @@
+{
+  "parent": "quasium:smokecraft/page_written",
+  "criteria": {
+    "has_large_tetrad": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:large_spell_tetrad"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.large_tetrad.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:large_spell_tetrad"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.large_tetrad.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_large_tetrad"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

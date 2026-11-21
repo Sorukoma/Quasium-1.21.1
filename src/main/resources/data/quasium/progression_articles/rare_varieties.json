@@ -1,0 +1,18 @@
+{
+  "title": "quasium.progression.rare_varieties.title",
+  "hint": "quasium.progression.rare_varieties.hint",
+  "category": "start",
+  "order": 85,
+  "icon": "quasium:echo_seeds",
+  "unlockCondition": "quasium:progression/self_mixed_obtained",
+  "scene": "quasium:rare_varieties",
+  "pages": [
+    {"text": "quasium.progression.rare_varieties.page1", "items": ["minecraft:echo_shard", "minecraft:blaze_powder", "minecraft:chorus_fruit"]},
+    {"text": "quasium.progression.rare_varieties.page2", "items": ["quasium:echo_seeds", "quasium:ashen_seeds", "quasium:chorus_seeds"]},
+    {"text": "quasium.progression.rare_varieties.page3", "items": ["minecraft:sculk", "minecraft:soul_soil", "minecraft:end_stone"]},
+    {"text": "quasium.progression.rare_varieties.page4", "items": ["quasium:echo_leaves"], "args": ["ECHO_MUFFLE_SECONDS"]},
+    {"text": "quasium.progression.rare_varieties.page5", "items": ["quasium:ashen_leaves"], "args": ["ASHEN_FIRE_RESISTANCE_SECONDS", "ASHEN_BREATH_DAMAGE", "ASHEN_BREATH_FIRE_SECONDS"]},
+    {"text": "quasium.progression.rare_varieties.page6", "items": ["quasium:chorus_leaves"], "args": ["CHORUS_TELEPORT_RANGE", "CHORUS_TELEPORT_COOLDOWN_SECONDS"]},
+    {"text": "quasium.progression.rare_varieties.page7", "items": ["quasium:primordial_seeds", "quasium:primordial_leaves"]}
+  ]
+}

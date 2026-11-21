@@ -1,0 +1,73 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "ash"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "ember"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:charcoal"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "quasium:chests/ruined_smoke_portal"
+}

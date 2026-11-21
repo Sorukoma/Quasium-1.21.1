@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "quasium:block/smoke_kiln_top",
+    "bottom": "quasium:block/smoke_kiln_bottom",
+    "side": "quasium:block/smoke_kiln_side",
+    "front": "quasium:block/smoke_kiln_front_on"
+  }
+}

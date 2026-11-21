@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/page_written",
+  "criteria": {
+    "cast_form_spirit": {
+      "conditions": {
+        "event": "cast_form:spirit"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.spirit_cast.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:phantom_membrane"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.spirit_cast.title"
+    }
+  },
+  "requirements": [
+    [
+      "cast_form_spirit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

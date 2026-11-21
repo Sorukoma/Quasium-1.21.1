@@ -1,0 +1,24 @@
+{
+  "rules": [
+    {"tag": "c:ores/coal", "priority": 110, "notes": {"ember": 2, "resin": 1}},
+    {"tag": "c:ores/iron", "priority": 110, "notes": {"ash": 2, "resin": 1}},
+    {"tag": "c:ores/copper", "priority": 110, "notes": {"ember": 1, "menthol": 1, "resin": 1}},
+    {"tag": "c:ores/gold", "priority": 110, "notes": {"nectar": 2, "resin": 1}},
+    {"tag": "c:ores/redstone", "priority": 110, "notes": {"ember": 2, "resin": 1}},
+    {"tag": "c:ores/lapis", "priority": 110, "notes": {"dew": 2, "resin": 1}},
+    {"tag": "c:ores/diamond", "priority": 110, "notes": {"menthol": 3, "resin": 1}},
+    {"tag": "c:ores/emerald", "priority": 110, "notes": {"nectar": 2, "menthol": 1, "resin": 1}},
+    {"tag": "c:ores/quartz", "priority": 110, "notes": {"menthol": 1, "ember": 1, "ash": 1}},
+    {"tag": "c:ores/netherite_scrap", "priority": 110, "notes": {"ash": 3, "ember": 1}},
+    {"tag": "c:ores", "priority": 100, "notes": {"resin": 2, "ash": 1}},
+    {"tag": "c:raw_materials", "priority": 100, "notes": {"ash": 2, "ember": 1}},
+    {"tag": "c:gems/diamond", "priority": 110, "notes": {"menthol": 4}},
+    {"tag": "c:gems/emerald", "priority": 110, "notes": {"nectar": 3, "menthol": 1}},
+    {"tag": "c:gems/lapis", "priority": 110, "notes": {"dew": 3}},
+    {"tag": "c:gems", "priority": 100, "notes": {"menthol": 2, "nectar": 1}},
+    {"tag": "c:dusts", "priority": 100, "notes": {"ash": 1, "ember": 1}},
+    {"tag": "c:ingots", "priority": 60, "fallback": true, "notes": {"ash": 1, "ember": 1}},
+    {"tag": "c:nuggets", "priority": 60, "fallback": true, "notes": {"ash": 1}},
+    {"tag": "c:storage_blocks", "priority": 60, "fallback": true, "notes": {"ash": 2, "resin": 1}}
+  ]
+}

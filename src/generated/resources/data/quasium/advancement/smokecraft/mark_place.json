@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "mark_place": {
+      "conditions": {
+        "event": "mark_place"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.mark_place.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:heat_mark"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.mark_place.title"
+    }
+  },
+  "requirements": [
+    [
+      "mark_place"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

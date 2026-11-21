@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/bellows",
+  "criteria": {
+    "cart_cast": {
+      "conditions": {
+        "event": "cart_cast"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.cart_cast.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:minecart"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.cart_cast.title"
+    }
+  },
+  "requirements": [
+    [
+      "cart_cast"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

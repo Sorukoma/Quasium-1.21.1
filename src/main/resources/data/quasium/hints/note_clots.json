@@ -1,0 +1,128 @@
+{
+  "items": [
+    "quasium:menthol_clot",
+    "quasium:ember_clot",
+    "quasium:nectar_clot",
+    "quasium:dew_clot",
+    "quasium:resin_clot",
+    "quasium:ash_clot"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:ember_clot[charges=4]",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "args": [
+        "CLOT_ML"
+      ]
+    },
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "quasium:ember_clot[charges=3]",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        }
+      ],
+      "icons": [
+        {
+          "item": "minecraft:glass_bottle",
+          "pos": [
+            1.0,
+            1.4,
+            1.5
+          ]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            2.0,
+            1.4,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:ember_clot[charges=1]",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            1.5,
+            1.4,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:ember_clot[charges=4]",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:iron_pickaxe",
+          "pos": [
+            1.0,
+            1.4,
+            1.5
+          ]
+        },
+        {
+          "item": "quasium:ember_clot",
+          "pos": [
+            2.0,
+            1.4,
+            1.5
+          ]
+        }
+      ]
+    }
+  ]
+}

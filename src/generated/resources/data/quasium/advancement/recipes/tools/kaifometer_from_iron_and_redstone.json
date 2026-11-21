@@ -1,21 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron": {
+    "has_kaifometer": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:iron_ingot"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_redstone": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:redstone"
+            "items": "quasium:kaifometer"
           }
         ]
       },
@@ -26,13 +16,19 @@
         "recipe": "quasium:kaifometer_from_iron_and_redstone"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "reached_kaif_1": {
+      "conditions": {
+        "min_kaif_level": 1
+      },
+      "trigger": "quasium:kaif_level"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_iron",
-      "has_redstone"
+      "reached_kaif_1",
+      "has_kaifometer"
     ]
   ],
   "rewards": {

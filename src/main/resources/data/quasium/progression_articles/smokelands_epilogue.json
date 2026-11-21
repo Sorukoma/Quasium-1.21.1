@@ -1,0 +1,13 @@
+{
+  "title": "quasium.progression.smokelands_epilogue.title",
+  "hint": "quasium.progression.smokelands_epilogue.hint",
+  "category": "quasium",
+  "order": 200,
+  "icon": "quasium:progression_book",
+  "unlockCondition": "quasium:smokelands/epilogue",
+  "secret": true,
+  "pages": [
+    {"text": "quasium.progression.smokelands_epilogue.page1", "args": ["RESPAWN_DAYS"]},
+    {"text": "quasium.progression.smokelands_epilogue.page2"}
+  ]
+}

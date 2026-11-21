@@ -1,0 +1,17 @@
+{
+  "title": "quasium.progression.smoke_rings.title",
+  "hint": "quasium.progression.smoke_rings.hint",
+  "category": "smokecraft",
+  "order": 40,
+  "icon": "minecraft:firework_star",
+  "unlockCondition": "quasium:smokecraft/first_cast",
+  "scene": "quasium:smoke_rings",
+  "pages": [
+    {"text": "quasium.progression.smoke_rings.page1", "args": ["RING_WINDOW_MS", "RING_PERFECT_MS", "RING_PERFECT_POWER_PCT"]},
+    {"text": "quasium.progression.smoke_rings.page2", "args": ["RING_COMBO_WINDOW_SEC", "RING_COMBO_KAIF", "RING_COMBO_INSIGHT"]},
+    {"text": "quasium.progression.smoke_rings.page3", "args": ["RING_LENS_POWER_PCT"]},
+    {"text": "quasium.progression.smoke_rings.page4"},
+    {"text": "quasium.progression.smoke_rings.page5"},
+    {"text": "quasium.progression.smoke_rings.page6", "args": ["TRICK_JELLYFISH_SEC"]}
+  ]
+}

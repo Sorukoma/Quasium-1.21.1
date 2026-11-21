@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:glowing_bulb_black"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "zone_1": {
+      "conditions": {
+        "event": "zone_1"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "zone_1"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:glowing_bulb_black"
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "items": [
+    "quasium:dream_catcher"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "minecraft:red_bed[facing=south,part=head]",
+          "pos": [
+            2,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "minecraft:red_bed[facing=south,part=foot]",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:dream_catcher",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          3,
+          0,
+          3
+        ]
+      ],
+      "args": [
+        "DREAM_CATCHER_RADIUS"
+      ]
+    },
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            3.5,
+            1.6,
+            3.5
+          ]
+        }
+      ],
+      "args": [
+        "DREAM_CATCHER_ML_PER_NIGHT",
+        "DREAM_CATCHER_CAP_ML"
+      ]
+    },
+    {
+      "duration": 120,
+      "icons": [
+        {
+          "item": "minecraft:glass_bottle",
+          "pos": [
+            3.5,
+            1.6,
+            3.5
+          ]
+        }
+      ]
+    }
+  ]
+}

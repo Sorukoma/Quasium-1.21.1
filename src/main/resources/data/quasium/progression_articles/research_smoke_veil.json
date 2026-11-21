@@ -1,0 +1,30 @@
+{
+  "title": "quasium.research.research_smoke_veil.title",
+  "hint": "quasium.research.research_smoke_veil.hint",
+  "category": "research_smoke",
+  "order": 80,
+  "icon": "quasium:smoke_jar",
+  "research": {
+    "tier": 3,
+    "notes": [
+      "ash",
+      "dew"
+    ],
+    "kaif": 40,
+    "requires": [
+      "quasium:research_smoke_bases"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smoke_veil.page1"
+    },
+    {
+      "text": "quasium.research.research_smoke_veil.page2",
+      "args": [
+        "RING_PERFECT_POWER_PCT",
+        "RING_LENS_POWER_PCT"
+      ]
+    }
+  ]
+}

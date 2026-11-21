@@ -1,0 +1,120 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_bowl": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:unfired_hookah_bowl",
+              "quasium:hookah_bowl"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_briquette": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:raw_briquette"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_calloud": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:calloud"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_charcoal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:charcoal_22",
+              "quasium:charcoal_25",
+              "quasium:charcoal_27"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_flavored_tobacco": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#quasium:flavored_tobaccos"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_heater": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:heater"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_self_mixed": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:self_mixed_tobacco"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tobacco_gram": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:one_gram_tobacco",
+              "quasium:one_gram_self_mixed_tobacco"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.first_tobacco.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:mint_tobacco"
+    },
+    "title": {
+      "translate": "advancements.quasium.first_tobacco.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_flavored_tobacco",
+      "has_self_mixed",
+      "has_tobacco_gram",
+      "has_briquette",
+      "has_charcoal",
+      "has_heater",
+      "has_calloud",
+      "has_bowl"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

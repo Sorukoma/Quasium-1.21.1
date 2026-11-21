@@ -1,0 +1,19 @@
+{
+  "tier": 2,
+  "catalyst": {
+    "item": "minecraft:coal_block"
+  },
+  "notes": {
+    "ember": 64,
+    "ash": 16
+  },
+  "puffs": 600,
+  "rate": 128,
+  "kaif": {
+    "min": 40
+  },
+  "base": 20,
+  "result": {
+    "id": "quasium:eternal_coal"
+  }
+}

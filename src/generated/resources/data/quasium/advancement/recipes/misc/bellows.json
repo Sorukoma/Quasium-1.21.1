@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "distill": {
+      "conditions": {
+        "event": "distill"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:bellows"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "distill"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:bellows"
+    ]
+  }
+}

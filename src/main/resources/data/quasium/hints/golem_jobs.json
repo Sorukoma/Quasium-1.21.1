@@ -1,0 +1,242 @@
+{
+  "items": [
+    "quasium:zone_mark",
+    "quasium:toolkeeper_module"
+  ],
+  "floor": 7,
+  "steps": [
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:zone_mark",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1],
+        [5, 0, 1],
+        [1, 0, 5],
+        [5, 0, 5]
+      ],
+      "icons": [
+        {
+          "item": "quasium:golem_staff",
+          "pos": [1.5, 1.3, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "minecraft:oak_log",
+          "pos": [4, 0, 4]
+        },
+        {
+          "state": "minecraft:oak_log",
+          "pos": [4, 1, 4]
+        },
+        {
+          "state": "minecraft:oak_log",
+          "pos": [4, 2, 4]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [3, 2, 3]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [3, 2, 4]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [3, 2, 5]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [4, 2, 3]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [4, 2, 5]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [5, 2, 3]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [5, 2, 4]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [5, 2, 5]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [3, 3, 4]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [4, 3, 3]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [4, 3, 4]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [4, 3, 5]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [5, 3, 4]
+        }
+      ],
+      "highlight": [
+        [4, 0, 4]
+      ],
+      "icons": [
+        {
+          "item": "quasium:clay_golem",
+          "pos": [2.5, 0.8, 4.5]
+        },
+        {
+          "item": "minecraft:iron_axe",
+          "pos": [2.5, 1.7, 4.5]
+        },
+        {
+          "item": "minecraft:oak_sapling",
+          "pos": [3.5, 0.4, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "minecraft:cow_spawn_egg",
+          "pos": [2.5, 0.5, 1.5]
+        },
+        {
+          "item": "minecraft:sheep_spawn_egg",
+          "pos": [3.5, 0.5, 2.0]
+        },
+        {
+          "item": "minecraft:pig_spawn_egg",
+          "pos": [2.0, 0.5, 2.5]
+        },
+        {
+          "item": "quasium:clay_golem",
+          "pos": [1.5, 0.8, 3.0]
+        },
+        {
+          "item": "minecraft:iron_sword",
+          "pos": [1.5, 1.7, 3.0]
+        },
+        {
+          "item": "minecraft:shears",
+          "pos": [3.5, 1.3, 2.0]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [6, 0, 1]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [6, 1, 1]
+        },
+        {
+          "state": "quasium:drying_shelf[facing=west]",
+          "pos": [5, 1, 1]
+        },
+        {
+          "state": "quasium:fermentation_barrel",
+          "pos": [5, 0, 2]
+        }
+      ],
+      "highlight": [
+        [5, 1, 1],
+        [5, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [5.5, 2.2, 1.5]
+        },
+        {
+          "item": "quasium:clay_golem",
+          "pos": [4.0, 0.8, 2.0]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:fill_mark",
+          "pos": [1, 0, 5]
+        },
+        {
+          "state": "minecraft:barrel[facing=up]",
+          "pos": [0, 0, 5]
+        }
+      ],
+      "highlight": [
+        [1, 0, 5],
+        [0, 0, 5]
+      ],
+      "icons": [
+        {
+          "item": "quasium:toolkeeper_module",
+          "pos": [1.5, 1.4, 4.5]
+        },
+        {
+          "item": "minecraft:iron_axe",
+          "pos": [0.5, 1.3, 5.5]
+        }
+      ]
+    },
+    {
+      "duration": 190,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [5, 0, 5]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [3, 0, 5]
+        }
+      ],
+      "highlight": [
+        [5, 0, 5],
+        [3, 0, 5]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [5.5, 1.4, 5.5]
+        },
+        {
+          "item": "quasium:clay_golem",
+          "pos": [3.5, 1.0, 5.5]
+        },
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [3.5, 1.9, 5.0]
+        }
+      ],
+      "args": [
+        "GOLEM_SMOKE_CUSHION_REACH",
+        "GOLEMS_PER_HOOKAH"
+      ]
+    }
+  ]
+}

@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.sorukoma.quasium.block.entity.EssencePressBlockEntity;
 import net.sorukoma.quasium.component.ModDataComponents;
 import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.mind.dream.Dreams;
 import net.sorukoma.quasium.item.ModItemTags;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,7 +50,7 @@ public class EssencePressBlock extends BaseEntityBlock {
             if (e.getEssenceAmount() > 0) {
                 ItemStack out = new ItemStack(ModItems.ESSENCE_BOTTLE.get());
                 out.set(ModDataComponents.ESSENCE_TYPE.get(), e.getEssenceType());
-                out.set(ModDataComponents.ESSENCE_AMOUNT.get(), e.getEssenceAmount());
+                out.set(ModDataComponents.ESSENCE_AMOUNT.get(), Dreams.inspired(player, e.getEssenceAmount()));
                 player.getInventory().placeItemBackInInventory(out);
                 e.consumeEssence();
                 if (!player.isCreative()) heldItem.shrink(1);

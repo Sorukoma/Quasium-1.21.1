@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.essence_press.title",
+  "hint": "quasium.progression.essence_press.hint",
+  "category": "start",
+  "order": 70,
+  "icon": "quasium:essence_press",
+  "unlockCondition": "quasium:progression/obtained_essence",
+  "scene": "quasium:essence_press",
+  "pages": [
+    {"text": "quasium.progression.essence_press.page1", "recipe": "quasium:essence_press"},
+    {"text": "quasium.progression.essence_press.page2", "items": ["minecraft:fern", "minecraft:sweet_berries", "minecraft:apple", "minecraft:melon_slice", "minecraft:glow_berries", "minecraft:sugar", "minecraft:cocoa_beans", "minecraft:blaze_powder"]},
+    {"text": "quasium.progression.essence_press.page3", "items": ["quasium:lemon", "quasium:lime", "quasium:orange", "quasium:grapefruit", "quasium:grape", "quasium:coconut", "quasium:anise", "quasium:lavender"]},
+    {"text": "quasium.progression.essence_press.page4"}
+  ]
+}

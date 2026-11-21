@@ -1,0 +1,79 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "brass": "quasium:block/lounge_brass",
+    "particle": "#glass"
+  },
+  "elements": [
+    {
+      "from": [5, 0, 5],
+      "to": [11, 1, 11],
+      "faces": {
+        "north": { "uv": [0, 6, 6, 7], "texture": "#brass" },
+        "east": { "uv": [0, 6, 6, 7], "texture": "#brass" },
+        "south": { "uv": [0, 6, 6, 7], "texture": "#brass" },
+        "west": { "uv": [0, 6, 6, 7], "texture": "#brass" },
+        "down": { "uv": [0, 7, 6, 13], "texture": "#brass", "cullface": "down" }
+      }
+    },
+    {
+      "from": [4, 1, 4],
+      "to": [12, 8, 12],
+      "faces": {
+        "north": { "uv": [0, 0, 8, 7], "texture": "#glass" },
+        "east": { "uv": [0, 0, 8, 7], "texture": "#glass" },
+        "south": { "uv": [0, 0, 8, 7], "texture": "#glass" },
+        "west": { "uv": [0, 0, 8, 7], "texture": "#glass" },
+        "up": { "uv": [8, 0, 16, 8], "texture": "#glass" },
+        "down": { "uv": [8, 0, 16, 8], "texture": "#glass" }
+      }
+    },
+    {
+      "from": [5, 8, 5],
+      "to": [11, 9, 11],
+      "faces": {
+        "north": { "uv": [0, 7, 6, 8], "texture": "#glass" },
+        "east": { "uv": [0, 7, 6, 8], "texture": "#glass" },
+        "south": { "uv": [0, 7, 6, 8], "texture": "#glass" },
+        "west": { "uv": [0, 7, 6, 8], "texture": "#glass" },
+        "up": { "uv": [0, 8, 6, 14], "texture": "#glass" }
+      }
+    },
+    {
+      "from": [6, 9, 6],
+      "to": [10, 12, 10],
+      "faces": {
+        "north": { "uv": [6, 8, 10, 11], "texture": "#glass" },
+        "east": { "uv": [6, 8, 10, 11], "texture": "#glass" },
+        "south": { "uv": [6, 8, 10, 11], "texture": "#glass" },
+        "west": { "uv": [6, 8, 10, 11], "texture": "#glass" }
+      }
+    },
+    {
+      "from": [5, 12, 5],
+      "to": [11, 13, 11],
+      "faces": {
+        "north": { "uv": [0, 6, 6, 7], "texture": "#brass" },
+        "east": { "uv": [0, 6, 6, 7], "texture": "#brass" },
+        "south": { "uv": [0, 6, 6, 7], "texture": "#brass" },
+        "west": { "uv": [0, 6, 6, 7], "texture": "#brass" },
+        "up": { "uv": [0, 7, 6, 13], "texture": "#brass" },
+        "down": { "uv": [0, 7, 6, 13], "texture": "#brass" }
+      }
+    },
+    {
+      "from": [5.5, 2, 5.5],
+      "to": [10.5, 7, 10.5],
+      "neoforge_data": { "block_light": 15, "sky_light": 15, "ambient_occlusion": false },
+      "faces": {
+        "north": { "uv": [10, 8, 15, 13], "texture": "#glass" },
+        "east": { "uv": [10, 8, 15, 13], "texture": "#glass" },
+        "south": { "uv": [10, 8, 15, 13], "texture": "#glass" },
+        "west": { "uv": [10, 8, 15, 13], "texture": "#glass" },
+        "up": { "uv": [10, 8, 15, 13], "texture": "#glass" },
+        "down": { "uv": [10, 8, 15, 13], "texture": "#glass" }
+      }
+    }
+  ]
+}

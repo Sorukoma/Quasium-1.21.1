@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "quasium:block/distillation_cube_top",
+    "bottom": "quasium:block/distillation_cube_bottom",
+    "side": "quasium:block/distillation_cube_side",
+    "front": "quasium:block/distillation_cube_front_on"
+  }
+}

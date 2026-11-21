@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "quasium:dew_clot",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "charges": "4"
+          }
+        },
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "quasium:dew_clot"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "quasium:blocks/dew_clot"
+}

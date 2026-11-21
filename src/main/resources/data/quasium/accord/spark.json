@@ -1,0 +1,11 @@
+{
+  "first": "menthol",
+  "second": "ember",
+  "color": "#B8E8FF",
+  "params": {
+    "jumps": 2,
+    "damage": 2,
+    "wet_multiplier": 2,
+    "reach": 5
+  }
+}

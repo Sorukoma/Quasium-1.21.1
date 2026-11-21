@@ -1,0 +1,16 @@
+{
+  "title": "quasium.progression.clay_golem.title",
+  "hint": "quasium.progression.clay_golem.hint",
+  "category": "golems",
+  "order": 30,
+  "icon": "quasium:clay_golem",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:golems",
+  "pages": [
+    {"text": "quasium.progression.clay_golem.page1", "anvil": "quasium:clay_golem", "args": ["CLAY_GOLEM_HEALTH", "CLAY_GOLEM_STACKS"]},
+    {"text": "quasium.progression.clay_golem.page2"},
+    {"text": "quasium.progression.clay_golem.page5", "args": ["CLAY_GUARD_RADIUS", "CLAY_GUARD_DAMAGE", "CLAY_GUARD_ATTACK_TICKS"]},
+    {"text": "quasium.progression.clay_golem.page3", "args": ["CLAY_UPGRADE_ML_PER_CHARGE", "CLAY_UPGRADE_ML_PER_TASK", "CLAY_MENTHOL_SPEED_PCT", "CLAY_NECTAR_EXTRA_STACKS", "CLAY_RESIN_EXTRA_HEALTH"]},
+    {"text": "quasium.progression.clay_golem.page4", "anvil": "quasium:sommelier_module"}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "shape": "bolt",
+  "volume": 25,
+  "params": {
+    "range": 32,
+    "speed": 1.2
+  },
+  "unlock": "start",
+  "order": 1
+}

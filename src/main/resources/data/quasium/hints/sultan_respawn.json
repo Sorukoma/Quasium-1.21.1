@@ -1,0 +1,399 @@
+{
+  "items": [
+    "quasium:ash_of_time"
+  ],
+  "floor": 9,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            1,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            2,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            3,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            3,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:sultan_throne",
+          "pos": [
+            2,
+            1,
+            2
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          1,
+          2
+        ]
+      ],
+      "args": [
+        "RESPAWN_DAYS"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            6
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            7
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            6,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            6,
+            0,
+            6
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            6,
+            0,
+            7
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            7,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            7,
+            0,
+            6
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            7,
+            0,
+            7
+          ]
+        },
+        {
+          "state": "quasium:ritual_brazier",
+          "pos": [
+            6,
+            1,
+            6
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            4,
+            1,
+            6
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            8,
+            1,
+            6
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            6,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            6,
+            1,
+            8
+          ]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            4,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            8,
+            1,
+            8
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          4,
+          1,
+          6
+        ],
+        [
+          8,
+          1,
+          6
+        ],
+        [
+          6,
+          1,
+          4
+        ],
+        [
+          6,
+          1,
+          8
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:petrified_smoke",
+          "pos": [
+            4.5,
+            2.3,
+            6.5
+          ]
+        },
+        {
+          "item": "quasium:petrified_smoke",
+          "pos": [
+            8.5,
+            2.3,
+            6.5
+          ]
+        },
+        {
+          "item": "quasium:petrified_smoke",
+          "pos": [
+            6.5,
+            2.3,
+            4.5
+          ]
+        },
+        {
+          "item": "quasium:petrified_smoke",
+          "pos": [
+            6.5,
+            2.3,
+            8.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:ritual_brazier[lit=true]",
+          "pos": [
+            6,
+            1,
+            6
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          6,
+          1,
+          6
+        ],
+        [
+          2,
+          1,
+          2
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:ash_of_time",
+          "pos": [
+            6.5,
+            2.4,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            5,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            7,
+            1,
+            8
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            4,
+            1,
+            7
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          5,
+          1,
+          4
+        ],
+        [
+          7,
+          1,
+          8
+        ],
+        [
+          4,
+          1,
+          7
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dream_quartz",
+          "pos": [
+            5.5,
+            2.3,
+            4.5
+          ]
+        },
+        {
+          "item": "quasium:eternal_coal",
+          "pos": [
+            7.5,
+            2.3,
+            8.5
+          ]
+        },
+        {
+          "item": "quasium:ash_of_time",
+          "pos": [
+            4.5,
+            2.3,
+            7.5
+          ]
+        }
+      ]
+    }
+  ]
+}

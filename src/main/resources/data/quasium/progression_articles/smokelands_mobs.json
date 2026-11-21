@@ -1,0 +1,13 @@
+{
+  "title": "quasium.progression.smokelands_mobs.title",
+  "hint": "quasium.progression.smokelands_mobs.hint",
+  "category": "quasium",
+  "order": 150,
+  "icon": "quasium:tar_slime_spawn_egg",
+  "unlockCondition": "quasium:smokelands/root",
+  "pages": [
+    {"text": "quasium.progression.smokelands_mobs.page1", "args": ["DYMNIK_EVOLVE_SECONDS", "EVOLVE_DENSITY", "GAREVSHCHIK_EVOLVE_SECONDS"]},
+    {"text": "quasium.progression.smokelands_mobs.page2", "items": ["quasium:mist_phantom_spawn_egg"], "args": ["MIST_PHANTOM_HEALTH", "MIST_PHANTOM_DAMAGE", "MIST_PHANTOM_NAUSEA_SECONDS"]},
+    {"text": "quasium.progression.smokelands_mobs.page3", "items": ["quasium:tar_slime_spawn_egg"], "args": ["TAR_SLIME_HEALTH", "TAR_SLIME_SLOWNESS_LEVEL", "TAR_SLIME_SLOWNESS_SECONDS"]}
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "items": [
+    "quasium:essence_pump",
+    "quasium:auto_distiller"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:bellows[facing=east]",
+          "pos": [0, 0, 1]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true,north=true]",
+          "pos": [1, 0, 1]
+        },
+        {
+          "state": "quasium:auto_distiller",
+          "pos": [1, 0, 0]
+        },
+        {
+          "state": "quasium:distillation_cube[facing=north,lit=true]",
+          "pos": [2, 0, 0]
+        }
+      ],
+      "highlight": [
+        [1, 0, 0]
+      ],
+      "args": [
+        "DISTILLER_SPEED_MULTIPLIER"
+      ]
+    },
+    {
+      "duration": 190,
+      "place": [
+        {
+          "state": "quasium:copper_pipe[west=true,east=true,north=true]",
+          "pos": [1, 0, 1]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true]",
+          "pos": [2, 0, 1]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,south=true]",
+          "pos": [3, 0, 1]
+        },
+        {
+          "state": "quasium:essence_pump",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [3, 0, 3]
+        }
+      ],
+      "highlight": [
+        [3, 0, 2]
+      ]
+    }
+  ]
+}

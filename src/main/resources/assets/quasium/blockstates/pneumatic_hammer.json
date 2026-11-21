@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "striking=false": {
+      "model": "quasium:block/pneumatic_hammer"
+    },
+    "striking=true": {
+      "model": "quasium:block/pneumatic_hammer_striking"
+    }
+  }
+}

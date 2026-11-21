@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.sorukoma.quasium.compat.CreateDivingProtection;
+import net.sorukoma.quasium.selection.SelectionConfig;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +23,7 @@ import java.util.UUID;
 public class ToxicSmokeEntity extends Entity {
     private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(ToxicSmokeEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> FREEZING = SynchedEntityData.defineId(ToxicSmokeEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> BURNING = SynchedEntityData.defineId(ToxicSmokeEntity.class, EntityDataSerializers.BOOLEAN);
 
     private final Set<UUID> hitEntities = new HashSet<>();
     private int lifetimeTicks = 24;
@@ -41,10 +43,15 @@ public class ToxicSmokeEntity extends Entity {
         entityData.set(FREEZING, freezing);
     }
 
+    public void setBurning(boolean burning) {
+        entityData.set(BURNING, burning);
+    }
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(DAMAGE, 0f);
         builder.define(FREEZING, false);
+        builder.define(BURNING, false);
     }
 
     @Override
@@ -54,16 +61,20 @@ public class ToxicSmokeEntity extends Entity {
         setPos(getX() + motion.x, getY() + motion.y, getZ() + motion.z);
 
         if (level() instanceof ServerLevel serverLevel) {
+            boolean burning = entityData.get(BURNING);
             if (entityData.get(FREEZING)) {
                 serverLevel.sendParticles(ParticleTypes.SNOWFLAKE, getX(), getY(), getZ(), 3, 0.12, 0.12, 0.12, 0.01);
+            } else if (burning) {
+                serverLevel.sendParticles(ParticleTypes.FLAME, getX(), getY(), getZ(), 3, 0.12, 0.12, 0.12, 0.01);
             } else {
                 serverLevel.sendParticles(ParticleTypes.WITCH, getX(), getY(), getZ(), 3, 0.12, 0.12, 0.12, 0.01);
             }
             Player owner = ownerUUID == null ? null : level().getPlayerByUUID(ownerUUID);
             for (LivingEntity target : level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(0.65))) {
                 if (target == owner || !hitEntities.add(target.getUUID())) continue;
-                float damage = CreateDivingProtection.absorbDamage(target, entityData.get(DAMAGE));
-                if (damage > 0f) target.hurt(level().damageSources().drown(), damage);
+                float damage = burning ? entityData.get(DAMAGE) : CreateDivingProtection.absorbDamage(target, entityData.get(DAMAGE));
+                if (damage > 0f) target.hurt(burning ? level().damageSources().inFire() : level().damageSources().drown(), damage);
+                if (burning) target.igniteForSeconds(SelectionConfig.ASHEN_BREATH_FIRE_SECONDS.get());
                 if (entityData.get(FREEZING)) target.setTicksFrozen(Math.max(target.getTicksFrozen(), 180));
             }
         }
@@ -77,6 +88,7 @@ public class ToxicSmokeEntity extends Entity {
         if (tag.hasUUID("OwnerUUID")) ownerUUID = tag.getUUID("OwnerUUID");
         entityData.set(DAMAGE, tag.getFloat("Damage"));
         entityData.set(FREEZING, tag.getBoolean("Freezing"));
+        entityData.set(BURNING, tag.getBoolean("Burning"));
     }
 
     @Override
@@ -85,6 +97,7 @@ public class ToxicSmokeEntity extends Entity {
         if (ownerUUID != null) tag.putUUID("OwnerUUID", ownerUUID);
         tag.putFloat("Damage", entityData.get(DAMAGE));
         tag.putBoolean("Freezing", entityData.get(FREEZING));
+        tag.putBoolean("Burning", entityData.get(BURNING));
     }
 
     @Override public boolean isPickable() { return false; }

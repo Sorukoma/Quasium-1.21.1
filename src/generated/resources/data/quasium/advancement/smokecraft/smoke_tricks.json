@@ -1,0 +1,60 @@
+{
+  "parent": "quasium:smokecraft/ring_combo_5",
+  "criteria": {
+    "ghost": {
+      "conditions": {
+        "event": "trick_ghost"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "jellyfish": {
+      "conditions": {
+        "event": "trick_jellyfish"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "ring": {
+      "conditions": {
+        "event": "trick_ring"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "tornado": {
+      "conditions": {
+        "event": "trick_tornado"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.smoke_tricks.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:wind_charge"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.smoke_tricks.title"
+    }
+  },
+  "requirements": [
+    [
+      "ring"
+    ],
+    [
+      "ghost"
+    ],
+    [
+      "jellyfish"
+    ],
+    [
+      "tornado"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

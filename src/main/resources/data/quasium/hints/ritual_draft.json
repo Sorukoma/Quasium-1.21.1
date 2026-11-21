@@ -1,0 +1,261 @@
+{
+  "floor": 9,
+  "steps": [
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            3,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            3,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            4,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            4,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            4,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:ritual_brazier[lit=true]",
+          "pos": [
+            4,
+            1,
+            4
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          4,
+          1,
+          4
+        ]
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            3.3,
+            2.4,
+            3.3
+          ]
+        },
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            5.7,
+            2.4,
+            3.3
+          ]
+        },
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            4.5,
+            2.4,
+            5.8
+          ]
+        }
+      ],
+      "args": [
+        "PULSE_MS_T1"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:copper_pipe[east=true,west=true]",
+          "pos": [
+            5,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:copper_pipe[east=true,west=true]",
+          "pos": [
+            6,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:copper_pipe[east=true,west=true]",
+          "pos": [
+            7,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:bellows[facing=west]",
+          "pos": [
+            8,
+            1,
+            4
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          5,
+          1,
+          4
+        ],
+        [
+          6,
+          1,
+          4
+        ],
+        [
+          7,
+          1,
+          4
+        ]
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            3.3,
+            2.4,
+            3.3
+          ]
+        },
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            5.7,
+            2.4,
+            3.3
+          ]
+        },
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            4.5,
+            2.4,
+            5.8
+          ]
+        },
+        {
+          "item": "quasium:quasiumingot",
+          "pos": [
+            4.5,
+            3.2,
+            4.5
+          ]
+        }
+      ],
+      "args": [
+        "GROUP_PLAYERS",
+        "GROUP_WINDOW_SEC",
+        "GROUP_BONUS"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            7,
+            1,
+            7
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          7,
+          1,
+          7
+        ]
+      ],
+      "args": [
+        "JAR_RADIUS"
+      ]
+    }
+  ]
+}

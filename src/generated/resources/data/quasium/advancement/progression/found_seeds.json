@@ -1,21 +1,11 @@
 {
   "parent": "quasium:root",
   "criteria": {
-    "has_makhorka_seeds": {
-      "conditions": {
-        "items": [
-          {
-            "items": "quasium:peschanik_seeds"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_tobacco_seeds": {
       "conditions": {
         "items": [
           {
-            "items": "quasium:dikar_seeds"
+            "items": "#quasium:tobacco_seeds"
           }
         ]
       },
@@ -36,8 +26,7 @@
   },
   "requirements": [
     [
-      "has_tobacco_seeds",
-      "has_makhorka_seeds"
+      "has_tobacco_seeds"
     ]
   ],
   "sends_telemetry_event": true

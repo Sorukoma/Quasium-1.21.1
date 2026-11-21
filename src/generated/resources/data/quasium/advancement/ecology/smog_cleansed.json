@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:ecology/smoky_air",
+  "criteria": {
+    "smog_cleansed": {
+      "conditions": {
+        "event": "smog_cleansed"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ecology.smog_cleansed.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "quasium:lavender"
+    },
+    "title": {
+      "translate": "advancements.quasium.ecology.smog_cleansed.title"
+    }
+  },
+  "requirements": [
+    [
+      "smog_cleansed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

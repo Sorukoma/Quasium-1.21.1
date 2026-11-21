@@ -1,0 +1,270 @@
+{
+  "items": [
+    "quasium:dymnik_spawn_egg",
+    "quasium:garevshchik_spawn_egg"
+  ],
+  "floor": 7,
+  "steps": [
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [
+            2,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:hookah_block",
+          "pos": [
+            4,
+            0,
+            3
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          3
+        ],
+        [
+          4,
+          0,
+          3
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:kaifometer",
+          "pos": [
+            3.5,
+            1.8,
+            3.5
+          ]
+        }
+      ],
+      "args": [
+        "DENSITY_PER_CAST",
+        "ZONE_DENSITY_PER_MINUTE"
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            2.5,
+            1.8,
+            3.5
+          ]
+        },
+        {
+          "item": "quasium:distillation_cube",
+          "pos": [
+            4.5,
+            1.8,
+            3.5
+          ]
+        }
+      ],
+      "args": [
+        "BONUS_THRESHOLD",
+        "BONUS_KAIF_PCT",
+        "BONUS_HOLD_PCT",
+        "BONUS_CUBE_PCT"
+      ]
+    },
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "minecraft:gray_dye",
+          "pos": [
+            3.5,
+            2.0,
+            3.5
+          ]
+        }
+      ],
+      "args": [
+        "DENSITY_MAX",
+        "SMOG_ONSET_MINUTES"
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "quasium:dymnik_spawn_egg",
+          "pos": [
+            2.5,
+            1.9,
+            3.5
+          ]
+        },
+        {
+          "item": "quasium:garevshchik_spawn_egg",
+          "pos": [
+            4.5,
+            1.9,
+            3.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 200,
+      "place": [
+        {
+          "state": "quasium:aroma_lamp[lit=true]",
+          "pos": [
+            3,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "minecraft:oak_log",
+          "pos": [
+            5,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "minecraft:oak_log",
+          "pos": [
+            5,
+            1,
+            5
+          ]
+        },
+        {
+          "state": "minecraft:oak_leaves[persistent=true]",
+          "pos": [
+            5,
+            2,
+            5
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          3,
+          0,
+          5
+        ],
+        [
+          5,
+          1,
+          5
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:lavender",
+          "pos": [
+            3.5,
+            1.2,
+            5.5
+          ]
+        }
+      ],
+      "args": [
+        "LAVENDER_DENSITY_PER_MINUTE"
+      ]
+    },
+    {
+      "duration": 220,
+      "place": [
+        {
+          "state": "minecraft:composter",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "minecraft:hay_block",
+          "pos": [
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [
+            3,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:samovar[facing=south,lit=true]",
+          "pos": [
+            4,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [
+            5,
+            0,
+            1
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:villager_spawn_egg",
+          "pos": [
+            1.5,
+            1.8,
+            1.5
+          ]
+        },
+        {
+          "item": "quasium:teapot",
+          "pos": [
+            4.5,
+            1.9,
+            1.5
+          ]
+        },
+        {
+          "item": "minecraft:emerald",
+          "pos": [
+            2.5,
+            1.6,
+            1.5
+          ]
+        }
+      ],
+      "args": [
+        "VILLAGER_COUGH_SMOG",
+        "TEA_PARTY_MINUTES"
+      ]
+    }
+  ]
+}

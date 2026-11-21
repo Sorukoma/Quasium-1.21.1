@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "quasium:block/hookah_log"
+    },
+    "axis=z": {
+      "model": "quasium:block/hookah_log_horizontal",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "quasium:block/hookah_log_horizontal",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

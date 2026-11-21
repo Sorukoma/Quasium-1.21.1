@@ -1,0 +1,13 @@
+{
+  "title": "quasium.progression.kaif_ranks.title",
+  "hint": "quasium.progression.kaif_ranks.hint",
+  "category": "kaif",
+  "order": 20,
+  "icon": "minecraft:experience_bottle",
+  "unlockCondition": "quasium:kaif/kaif_level_20",
+  "pages": [
+    {"text": "quasium.progression.kaif_ranks.page1"},
+    {"text": "quasium.progression.kaif_ranks.page2"},
+    {"text": "quasium.progression.kaif_ranks.page3", "args": ["KAIF_PER_CAST", "KAIF_PER_CAST_KILL", "RING_COMBO_KAIF"]}
+  ]
+}

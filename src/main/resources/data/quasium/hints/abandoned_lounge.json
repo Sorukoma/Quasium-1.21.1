@@ -1,0 +1,195 @@
+{
+  "items": [
+    "quasium:lore_page",
+    "quasium:secret_recipe"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 190,
+      "place": [
+        {
+          "state": "minecraft:deepslate_bricks",
+          "pos": [0, 0, 4]
+        },
+        {
+          "state": "minecraft:cracked_deepslate_bricks",
+          "pos": [1, 0, 4]
+        },
+        {
+          "state": "minecraft:deepslate_tiles",
+          "pos": [2, 0, 4]
+        },
+        {
+          "state": "minecraft:deepslate_bricks",
+          "pos": [3, 0, 4]
+        },
+        {
+          "state": "minecraft:cracked_deepslate_bricks",
+          "pos": [4, 0, 4]
+        },
+        {
+          "state": "minecraft:cracked_deepslate_bricks",
+          "pos": [0, 1, 4]
+        },
+        {
+          "state": "minecraft:deepslate_tiles",
+          "pos": [1, 1, 4]
+        },
+        {
+          "state": "minecraft:deepslate_bricks",
+          "pos": [2, 1, 4]
+        },
+        {
+          "state": "minecraft:cracked_deepslate_bricks",
+          "pos": [3, 1, 4]
+        },
+        {
+          "state": "minecraft:deepslate_tiles",
+          "pos": [4, 1, 4]
+        },
+        {
+          "state": "minecraft:cracked_deepslate_bricks",
+          "pos": [0, 0, 0]
+        },
+        {
+          "state": "minecraft:deepslate_tiles",
+          "pos": [0, 0, 1]
+        },
+        {
+          "state": "minecraft:deepslate_bricks",
+          "pos": [0, 0, 2]
+        },
+        {
+          "state": "minecraft:cracked_deepslate_bricks",
+          "pos": [0, 0, 3]
+        },
+        {
+          "state": "minecraft:deepslate_tiles",
+          "pos": [0, 1, 0]
+        },
+        {
+          "state": "minecraft:deepslate_bricks",
+          "pos": [0, 1, 1]
+        },
+        {
+          "state": "minecraft:cracked_deepslate_bricks",
+          "pos": [0, 1, 2]
+        },
+        {
+          "state": "minecraft:deepslate_tiles",
+          "pos": [0, 1, 3]
+        },
+        {
+          "state": "quasium:hookah_block",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [2, 0, 1]
+        },
+        {
+          "state": "minecraft:bone_block[axis=x]",
+          "pos": [1, 0, 3]
+        },
+        {
+          "state": "minecraft:cobweb",
+          "pos": [1, 1, 3]
+        },
+        {
+          "state": "minecraft:cobweb",
+          "pos": [4, 1, 3]
+        },
+        {
+          "state": "quasium:aroma_lamp[lit=false]",
+          "pos": [1, 0, 0]
+        },
+        {
+          "state": "minecraft:chest[facing=north]",
+          "pos": [3, 0, 3]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "highlight": [
+        [3, 0, 3]
+      ],
+      "icons": [
+        {
+          "item": "quasium:lore_page",
+          "pos": [2.9, 1.4, 3.5]
+        },
+        {
+          "item": "quasium:lore_page",
+          "pos": [3.3, 1.5, 3.5]
+        },
+        {
+          "item": "quasium:self_mixed_tobacco",
+          "pos": [3.8, 1.4, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "highlight": [
+        [3, 0, 3]
+      ],
+      "icons": [
+        {
+          "item": "quasium:modular_hookah_jade",
+          "pos": [2.6, 1.4, 3.5]
+        },
+        {
+          "item": "quasium:modular_hookah_violet",
+          "pos": [3.1, 1.5, 3.5]
+        },
+        {
+          "item": "quasium:modular_hookah_gold",
+          "pos": [3.6, 1.5, 3.5]
+        },
+        {
+          "item": "quasium:secret_recipe",
+          "pos": [4.1, 1.4, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "quasium:lore_page",
+          "pos": [2.1, 2.0, 2.5]
+        },
+        {
+          "item": "quasium:progression_book",
+          "pos": [2.9, 2.0, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "quasium:secret_recipe",
+          "pos": [2.1, 2.0, 2.5]
+        },
+        {
+          "item": "quasium:soaking_bowl",
+          "pos": [2.9, 2.0, 2.5]
+        }
+      ],
+      "args": [
+        "SECRET_MIX_KAIF_BONUS_PCT"
+      ]
+    }
+  ]
+}

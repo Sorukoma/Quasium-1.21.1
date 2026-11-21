@@ -1,0 +1,21 @@
+{
+  "form": "ring",
+  "inputs": [
+    {
+      "menthol": 1,
+      "nectar": 1
+    },
+    {
+      "lemon": 1
+    }
+  ],
+  "lungs": 60,
+  "grams": 0.4,
+  "cooldown": 5,
+  "action": "step",
+  "color": "#CFFFF0",
+  "params": {
+    "speed": 1.2,
+    "range": 24
+  }
+}

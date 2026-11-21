@@ -10,6 +10,9 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.sorukoma.quasium.client.gui.ProgressionBookScreen;
 import net.sorukoma.quasium.item.ModItems;
 import net.sorukoma.quasium.network.PacketHookahPuffDataClientHandler;
+import net.sorukoma.quasium.progression.ConfigArgs;
+
+import java.util.Map;
 
 @EventBusSubscriber(modid = "quasium", value = Dist.CLIENT)
 public class ClientEvents {
@@ -24,6 +27,8 @@ public class ClientEvents {
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
         OverdoseHallucinationHandler.clientTick();
+        RecipeGate.tick();
+        RingTiming.tick(Minecraft.getInstance());
     }
 
     @SubscribeEvent
@@ -43,6 +48,7 @@ public class ClientEvents {
         ClientHookahInputHandler.setConnectedHookahPos(null);
         ClientHookahInputHandler.setConnectedToBackpack(false);
         ClientOverdoseData.reset();
+        RingTiming.forget();
     }
 
     private static void resetClientState() {
@@ -52,5 +58,7 @@ public class ClientEvents {
         PacketHookahPuffDataClientHandler.clearAllData();
         net.sorukoma.quasium.network.PacketBackpackHookahPuffDataClientHandler.clearData();
         ClientOverdoseData.reset();
+        RingTiming.forget();
+        ConfigArgs.useServerValues(Map.of());
     }
 }

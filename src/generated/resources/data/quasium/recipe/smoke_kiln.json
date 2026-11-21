@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bricks"
+    },
+    "C": {
+      "item": "minecraft:campfire"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "quasium:copper_pipe"
+    }
+  },
+  "pattern": [
+    "BIB",
+    "BPB",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:smoke_kiln"
+  }
+}

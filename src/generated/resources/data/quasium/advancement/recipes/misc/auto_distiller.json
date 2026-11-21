@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:auto_distiller"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "researched": {
+      "conditions": {
+        "event": "research:research_notes_pump"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "researched"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:auto_distiller"
+    ]
+  }
+}

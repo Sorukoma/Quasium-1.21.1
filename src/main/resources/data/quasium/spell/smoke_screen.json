@@ -1,0 +1,20 @@
+{
+  "form": "cloud",
+  "inputs": [
+    {
+      "ash": 1,
+      "dew": 1
+    }
+  ],
+  "lungs": 75,
+  "grams": 0.6,
+  "cooldown": 10,
+  "action": "screen",
+  "color": "#8C8C8C",
+  "params": {
+    "throw": 12,
+    "radius": 3,
+    "duration": 10,
+    "blind_seconds": 2
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "note": "nectar",
+  "volume": 15,
+  "cooldown": 2,
+  "target": "foe",
+  "params": {
+    "slow_level": 2,
+    "effect_seconds": 4
+  },
+  "unlock": "research:quasium:research_smoke_heart",
+  "order": 8
+}

@@ -1,0 +1,18 @@
+{
+  "title": "quasium.progression.leaf_quality.title",
+  "hint": "quasium.progression.leaf_quality.hint",
+  "category": "start",
+  "order": 35,
+  "icon": "quasium:dikar_leaves",
+  "unlockCondition": "quasium:progression/obtained_tallow",
+  "scene": "quasium:leaf_quality",
+  "pages": [
+    {"text": "quasium.progression.leaf_quality.page1"},
+    {"text": "quasium.progression.leaf_quality.page2", "items": ["minecraft:shears"], "args": ["EXACT_MATURE_WINDOW_SECONDS"]},
+    {"text": "quasium.progression.leaf_quality.page3", "items": ["minecraft:water_bucket"]},
+    {"text": "quasium.progression.leaf_quality.page4", "items": ["minecraft:beehive", "minecraft:bee_nest"], "args": ["HIVE_RADIUS"]},
+    {"text": "quasium.progression.leaf_quality.page5", "items": ["quasium:fermentation_barrel"]},
+    {"text": "quasium.progression.leaf_quality.page6", "items": ["quasium:self_mixed_tobacco"], "args": ["KAIF_MULTIPLIER_PCT"]},
+    {"text": "quasium.progression.leaf_quality.page7", "items": ["quasium:distillation_cube"], "args": ["DISTILL_BONUS_ML"]}
+  ]
+}

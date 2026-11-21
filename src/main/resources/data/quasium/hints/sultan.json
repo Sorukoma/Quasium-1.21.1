@@ -1,0 +1,256 @@
+{
+  "items": [
+    "quasium:sultan_throne",
+    "quasium:sultan_of_smoke_spawn_egg"
+  ],
+  "floor": 7,
+  "steps": [
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            2,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            2,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            3,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            3,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            4,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            4,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            4,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:smolder",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:smolder",
+          "pos": [
+            5,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:smolder",
+          "pos": [
+            1,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:smolder",
+          "pos": [
+            5,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:menthol_mosaic",
+          "pos": [
+            0,
+            -1,
+            3
+          ]
+        },
+        {
+          "state": "quasium:ember_mosaic",
+          "pos": [
+            6,
+            -1,
+            3
+          ]
+        },
+        {
+          "state": "quasium:nectar_mosaic",
+          "pos": [
+            3,
+            -1,
+            0
+          ]
+        },
+        {
+          "state": "quasium:dew_mosaic",
+          "pos": [
+            3,
+            -1,
+            6
+          ]
+        },
+        {
+          "state": "quasium:resin_mosaic",
+          "pos": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_mosaic",
+          "pos": [
+            6,
+            -1,
+            6
+          ]
+        },
+        {
+          "state": "quasium:sultan_throne",
+          "pos": [
+            3,
+            1,
+            3
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          3,
+          1,
+          3
+        ]
+      ]
+    },
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "minecraft:firework_star",
+          "pos": [
+            2.5,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "item": "minecraft:firework_star",
+          "pos": [
+            4.5,
+            3.0,
+            3.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "minecraft:spider_eye",
+          "pos": [
+            1.5,
+            1.5,
+            1.5
+          ]
+        },
+        {
+          "item": "minecraft:spider_eye",
+          "pos": [
+            5.5,
+            1.5,
+            5.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "highlight": [
+        [
+          3,
+          1,
+          3
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            3.5,
+            3.2,
+            3.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "minecraft:iron_sword",
+          "pos": [
+            3.5,
+            3.2,
+            3.5
+          ]
+        }
+      ]
+    }
+  ]
+}

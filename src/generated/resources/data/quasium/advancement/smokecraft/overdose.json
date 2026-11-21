@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "overdose": {
+      "conditions": {
+        "event": "overdose"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.overdose.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:burned_tobacco"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.overdose.title"
+    }
+  },
+  "requirements": [
+    [
+      "overdose"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

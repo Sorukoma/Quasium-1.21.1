@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "quasium:block/glowing_bulb_white"
+    }
+  }
+}

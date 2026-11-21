@@ -1,34 +1,60 @@
 package net.sorukoma.quasium.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.util.TriState;
+import net.sorukoma.quasium.block.entity.TobaccoCropBlockEntity;
+import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.item.TobaccoVarieties;
+import net.sorukoma.quasium.particle.ModParticles;
+import net.sorukoma.quasium.selection.SelectionConfig;
+import net.sorukoma.quasium.selection.SelectionRegistry;
+import net.sorukoma.quasium.selection.genetics.Lineage;
+import net.sorukoma.quasium.selection.quality.Aphids;
+import net.sorukoma.quasium.selection.quality.LeafQuality;
 
 import java.util.List;
 
-import net.sorukoma.quasium.block.entity.TobaccoCropBlockEntity;
-import net.sorukoma.quasium.component.ModDataComponents;
-
-public abstract class TobaccoCropBlock extends CropBlock implements net.minecraft.world.level.block.EntityBlock {
-
+public abstract class TobaccoCropBlock extends CropBlock implements EntityBlock {
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
-    public static final net.minecraft.world.level.block.state.properties.BooleanProperty WATERED = net.minecraft.world.level.block.state.properties.BooleanProperty.create("watered");
+    public static final BooleanProperty WATERED = BooleanProperty.create("watered");
     public static final IntegerProperty MUTATION = IntegerProperty.create("mutation", 0, 6);
+    public static final BooleanProperty APHIDS = BooleanProperty.create("aphids");
     private static final int SHEARED_AGE = 3;
+    private static final VoxelShape[] SHAPE_BY_AGE = {
+            Block.box(0, 0, 0, 16, 3, 16), Block.box(0, 0, 0, 16, 5, 16), Block.box(0, 0, 0, 16, 8, 16),
+            Block.box(0, 0, 0, 16, 11, 16), Block.box(0, 0, 0, 16, 14, 16)};
 
     public static int mutationCode(String mutation) {
         return switch (mutation) {
@@ -54,24 +80,11 @@ public abstract class TobaccoCropBlock extends CropBlock implements net.minecraf
         };
     }
 
-    /**
-     * Шанс дропа дополнительных семян при стрижке ножницами. 0.0 = нет дропа, 0.5 = 50%.
-     * Override в subclass для настройки. Ищите MAKHORKA_SHEAR_SEED_DROP_CHANCE в RegularTobaccoCropBlock.
-     */
-    protected float getShearSeedDropChance() {
-        return 0.0F;
-    }
-
-    /** Предмет, дропающийся при стрижке (в дополнение к листьям). null = нет дропа. */
-    protected net.minecraft.world.item.Item getShearSeedDropItem() {
-        return null;
-    }
-
     public TobaccoCropBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
                 .setValue(AGE, 0).setValue(WATERED, false)
-                .setValue(MUTATION, 0));
+                .setValue(MUTATION, 0).setValue(APHIDS, false));
     }
 
     @Override
@@ -85,66 +98,116 @@ public abstract class TobaccoCropBlock extends CropBlock implements net.minecraf
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(AGE, WATERED, MUTATION);
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE_BY_AGE[getAge(state)];
     }
 
     @Override
-    public net.minecraft.world.level.block.entity.BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(AGE, WATERED, MUTATION, APHIDS);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new TobaccoCropBlockEntity(pos, state);
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos) {
-        return state.is(net.minecraft.tags.BlockTags.DIRT)
-                || state.is(net.minecraft.tags.BlockTags.SAND)
-                || state.getBlock() instanceof net.minecraft.world.level.block.FarmBlock;
+    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND) || state.getBlock() instanceof FarmBlock
+                || state.is(TobaccoVarieties.soil(getVariety()));
     }
 
-    /**
-     * Без проверки освещённости: дикие кусты ставятся worldgen-фичей, а на этапе генерации
-     * чанка свет ещё не рассчитан, поэтому светозависимый CropBlock.canSurvive отсёк бы их все.
-     * Ограничение по свету остаётся только в randomTick (рост), но не в выживании.
-     */
     @Override
-    protected boolean canSurvive(BlockState state, net.minecraft.world.level.LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos below = pos.below();
         BlockState belowState = level.getBlockState(below);
-        net.neoforged.neoforge.common.util.TriState soilDecision =
-                belowState.canSustainPlant(level, below, net.minecraft.core.Direction.UP, state);
+        TriState soilDecision = belowState.canSustainPlant(level, below, Direction.UP, state);
         if (!soilDecision.isDefault()) return soilDecision.isTrue();
         return mayPlaceOn(belowState, level, below);
     }
 
     @Override
-    protected void randomTick(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, RandomSource random) {
-        if (level.getBlockEntity(pos) instanceof TobaccoCropBlockEntity be && !be.isInitialized()) {
-            be.initWild(random);
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!level.isAreaLoaded(pos, 1)) return;
+        if (level.getBlockEntity(pos) instanceof TobaccoCropBlockEntity crop) {
+            crop.initWild(random);
+            state = Aphids.dailyRoll(level, pos, state, crop, random);
         }
-        int attempts = state.getValue(MUTATION) == mutationCode("fast_growth") ? 2 : 1;
-        if (state.getValue(WATERED) && random.nextFloat() < 0.2f) attempts++;
-        for (int i = 0; i < attempts; i++) {
-            super.randomTick(state, level, pos, random);
-            state = level.getBlockState(pos);
-            if (state.getValue(AGE) == getMaxAge()) break;
+        BlockState before = state;
+        if (random.nextInt(100) < growthPct(state, level)) {
+            int attempts = state.getValue(MUTATION) == mutationCode("fast_growth") ? 2 : 1;
+            if (state.getValue(WATERED) && random.nextFloat() < 0.2f) attempts++;
+            for (int i = 0; i < attempts && !isMaxAge(state); i++) state = growStep(state, level, pos, random);
         }
+        noteRipening(level, pos, before, state);
         if (state.getValue(WATERED) && random.nextFloat() < 0.2f) {
             level.setBlock(pos, state.setValue(WATERED, false), 2);
         }
     }
 
-    public String getVariety() {
-        return "dikar";
+    private BlockState growStep(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (level.getRawBrightness(pos, 0) < 9) return state;
+        float speed = getGrowthSpeed(state, level, pos);
+        if (!CommonHooks.canCropGrow(level, pos, state, random.nextInt((int) (25.0F / speed) + 1) == 0)) return state;
+        BlockState grown = state.setValue(AGE, getAge(state) + 1);
+        level.setBlock(pos, grown, 2);
+        CommonHooks.fireCropGrowPost(level, pos, state);
+        return grown;
     }
 
-    protected abstract net.minecraft.world.item.Item getSeedsItem();
+    @Override
+    public void growCrops(Level level, BlockPos pos, BlockState state) {
+        if (level.random.nextInt(100) >= growthPct(state, level)) return;
+        BlockState grown = state.setValue(AGE, Math.min(getMaxAge(), getAge(state) + getBonemealAgeIncrease(level)));
+        level.setBlock(pos, grown, 2);
+        noteRipening(level, pos, state, grown);
+    }
 
-    protected abstract net.minecraft.world.item.Item getLeavesItem();
+    public void growStage(Level level, BlockPos pos, BlockState state) {
+        BlockState grown = state.setValue(AGE, getAge(state) + 1);
+        level.setBlockAndUpdate(pos, grown);
+        noteRipening(level, pos, state, grown);
+    }
+
+    public int growthPct(BlockState state, Level level) {
+        return Aphids.growthPct(state.getValue(APHIDS), TobaccoVarieties.growthPct(getVariety(), level));
+    }
+
+    private void noteRipening(Level level, BlockPos pos, BlockState before, BlockState after) {
+        if (isMaxAge(before) || !isMaxAge(after)) return;
+        if (level.getBlockEntity(pos) instanceof TobaccoCropBlockEntity crop) crop.markMature(level.getGameTime());
+    }
+
+    public boolean isExactMature(Level level, BlockPos pos) {
+        return isMaxAge(level.getBlockState(pos)) && level.getBlockEntity(pos) instanceof TobaccoCropBlockEntity crop
+                && crop.ripeWithin(level.getGameTime(), SelectionConfig.EXACT_MATURE_WINDOW_SECONDS.get() * 20L);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (!state.getValue(APHIDS) || random.nextInt(3) != 0) return;
+        level.addParticle(ModParticles.APHID.get(), pos.getX() + 0.2 + random.nextDouble() * 0.6,
+                pos.getY() + 0.15 + random.nextDouble() * 0.5, pos.getZ() + 0.2 + random.nextDouble() * 0.6, 0, 0.01, 0);
+    }
+
+    public String getVariety() {
+        return TobaccoVarieties.DIKAR;
+    }
+
+    protected abstract Item getSeedsItem();
+
+    protected abstract Item getLeavesItem();
+
+    @Override
+    protected ItemLike getBaseSeedId() {
+        return getSeedsItem();
+    }
 
     protected int getShearYield(BlockState state, Level level, BlockPos pos) {
         int yield = level.getBlockEntity(pos) instanceof TobaccoCropBlockEntity be
                 ? be.getYieldStars()
-                : net.sorukoma.quasium.item.TobaccoVarieties.yield(getVariety());
+                : TobaccoVarieties.yield(getVariety());
         if (state.getValue(MUTATION) == mutationCode("double_yield")) yield *= 2;
         return yield;
     }
@@ -154,18 +217,20 @@ public abstract class TobaccoCropBlock extends CropBlock implements net.minecraf
             leaves.set(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), be.getStrengthStars());
             leaves.set(ModDataComponents.TOBACCO_YIELD_STARS.get(), be.getYieldStars());
             leaves.set(ModDataComponents.TOBACCO_QUALITY_STARS.get(), be.getQualityStars());
+            Lineage.apply(leaves, be.lineage());
         } else {
-            leaves.set(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), net.sorukoma.quasium.item.TobaccoVarieties.strength(getVariety()));
-            leaves.set(ModDataComponents.TOBACCO_YIELD_STARS.get(), net.sorukoma.quasium.item.TobaccoVarieties.yield(getVariety()));
-            leaves.set(ModDataComponents.TOBACCO_QUALITY_STARS.get(), net.sorukoma.quasium.item.TobaccoVarieties.quality(getVariety()));
+            leaves.set(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), TobaccoVarieties.strength(getVariety()));
+            leaves.set(ModDataComponents.TOBACCO_YIELD_STARS.get(), TobaccoVarieties.yield(getVariety()));
+            leaves.set(ModDataComponents.TOBACCO_QUALITY_STARS.get(), TobaccoVarieties.quality(getVariety()));
         }
+        leaves.set(SelectionRegistry.LEAF_QUALITY.get(), LeafQuality.atHarvest(level, pos, state));
         String mutation = mutationName(state.getValue(MUTATION));
         if (!mutation.isEmpty()) leaves.set(ModDataComponents.TOBACCO_MUTATION.get(), mutation);
     }
 
     @Override
-    protected net.minecraft.world.ItemInteractionResult useItemOn(ItemStack heldItem, BlockState state, Level level, BlockPos pos,
-                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack heldItem, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (heldItem.is(Items.WATER_BUCKET)) {
             if (!level.isClientSide && state.getValue(AGE) < getMaxAge()) {
                 level.setBlock(pos, state.setValue(WATERED, true), 2);
@@ -175,40 +240,51 @@ public abstract class TobaccoCropBlock extends CropBlock implements net.minecraf
                 }
                 level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 0.7f, 1.1f);
             }
-            return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
+
+        if (Aphids.fumigate(heldItem, state, level, pos, player, hand)) return ItemInteractionResult.sidedSuccess(level.isClientSide);
 
         if (state.getValue(AGE) == getMaxAge() && heldItem.is(Items.SHEARS)) {
             if (!level.isClientSide) {
-                int count = getShearYield(state, level, pos);
-                if (level.random.nextFloat() < 0.1F) {
-                    count++;
-                }
-                ItemStack leaves = new ItemStack(getLeavesItem(), count);
-                applyLeafData(leaves, state, level, pos);
-                Block.popResourceFromFace(level, pos, hitResult.getDirection(), leaves);
-
-                float seedChance = getShearSeedDropChance();
-                net.minecraft.world.item.Item seedDropItem = getShearSeedDropItem();
-                if (seedChance > 0.0F && seedDropItem != null && level.random.nextFloat() < seedChance) {
-                    Block.popResourceFromFace(level, pos, hitResult.getDirection(), new ItemStack(seedDropItem, 1));
-                }
-
+                shearLeaves(state, level, pos).forEach(drop -> Block.popResourceFromFace(level, pos, hitResult.getDirection(), drop));
                 heldItem.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-
-                level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
-
-                level.setBlockAndUpdate(pos, state.setValue(AGE, SHEARED_AGE));
             }
-            return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
         return super.useItemOn(heldItem, state, level, pos, player, hand, hitResult);
     }
 
+    public List<ItemStack> shearLeaves(BlockState state, Level level, BlockPos pos) {
+        int count = getShearYield(state, level, pos);
+        if (level.random.nextFloat() < 0.1F) count++;
+        ItemStack leaves = new ItemStack(getLeavesItem(), count);
+        applyLeafData(leaves, state, level, pos);
+        level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.setBlockAndUpdate(pos, state.setValue(AGE, SHEARED_AGE));
+        if (level.getBlockEntity(pos) instanceof TobaccoCropBlockEntity crop) crop.forgetMaturity();
+        return List.of(leaves);
+    }
+
+    public ItemStack seedsWithGenes(BlockState state, TobaccoCropBlockEntity crop, int count) {
+        ItemStack seeds = new ItemStack(getSeedsItem(), count);
+        seeds.set(ModDataComponents.TOBACCO_VARIETY.get(), getVariety());
+        seeds.set(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), crop.getStrengthStars());
+        seeds.set(ModDataComponents.TOBACCO_YIELD_STARS.get(), crop.getYieldStars());
+        seeds.set(ModDataComponents.TOBACCO_QUALITY_STARS.get(), crop.getQualityStars());
+        String mutation = mutationName(state.getValue(MUTATION));
+        if (!mutation.isEmpty()) seeds.set(ModDataComponents.TOBACCO_MUTATION.get(), mutation);
+        Lineage.apply(seeds, crop.lineage());
+        return seeds;
+    }
+
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
-        int age = state.getValue(AGE);
-        int count = age == getMaxAge() ? 2 : 1;
+        int count = state.getValue(AGE) == getMaxAge() ? 2 : 1;
+        if (builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof TobaccoCropBlockEntity crop
+                && Lineage.isHybrid(crop.lineage())) {
+            return List.of(seedsWithGenes(state, crop, count));
+        }
         return List.of(new ItemStack(getSeedsItem(), count));
     }
 }

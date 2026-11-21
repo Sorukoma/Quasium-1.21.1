@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/hybrid_first",
+  "criteria": {
+    "hybrid_wild_pairs": {
+      "conditions": {
+        "event": "hybrid_wild_pairs"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.hybrid_wild_pairs.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "quasium:hybrid_tobacco_leaves"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.hybrid_wild_pairs.title"
+    }
+  },
+  "requirements": [
+    [
+      "hybrid_wild_pairs"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

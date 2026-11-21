@@ -1,0 +1,19 @@
+{
+  "title": "quasium.progression.lounge.title",
+  "hint": "quasium.progression.lounge.hint",
+  "category": "kaif",
+  "order": 50,
+  "icon": "quasium:lounge_cushion",
+  "unlockCondition": "quasium:smokecraft/zone_1",
+  "scene": "quasium:kaif_zones",
+  "reward": "quasium:music_disc_lofi_kaif_beats",
+  "pages": [
+    {"text": "quasium.progression.lounge.page1", "recipe": "quasium:lounge_cushion", "args": ["SEATED_KAIF_DECAY_PCT"]},
+    {"text": "quasium.progression.lounge.page2", "recipe": "quasium:low_table"},
+    {"text": "quasium.progression.lounge.page3", "recipe": "quasium:aroma_lamp", "args": ["AROMA_LAMP_CAPACITY", "AROMA_LAMP_SECONDS_PER_ML", "ZONE_RADIUS_T1"]},
+    {"text": "quasium.progression.lounge.page4"},
+    {"text": "quasium.progression.lounge.page5", "recipe": "quasium:glowing_bulb_amber", "args": ["NIRVANA_FURNITURE"]},
+    {"text": "quasium.progression.lounge.page6", "args": ["ZONE_JUKEBOX_BONUS_RADIUS", "REWARD_COPY_INSIGHT"]},
+    {"text": "quasium.progression.lounge.page7"}
+  ]
+}

@@ -12,6 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.selection.SelectionRegistry;
+import net.sorukoma.quasium.selection.quality.LeafQuality;
 import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
@@ -77,6 +79,7 @@ public class SelfMixedTobaccoItem extends Item {
         if (source.has(ModDataComponents.ESSENCE_AMOUNT.get())) {
             target.set(ModDataComponents.ESSENCE_AMOUNT.get(), source.get(ModDataComponents.ESSENCE_AMOUNT.get()));
         }
+        target.copyFrom(source, SelectionRegistry.LEAF_QUALITY.get(), SelectionRegistry.KAIF_PCT.get());
         if (source.has(ModDataComponents.TOXIC.get())) {
             target.set(ModDataComponents.TOXIC.get(), source.get(ModDataComponents.TOXIC.get()));
         }
@@ -97,6 +100,8 @@ public class SelfMixedTobaccoItem extends Item {
             String base = stack.get(ModDataComponents.TOBACCO_BASE.get());
             tooltipComponents.add(Component.translatable("quasium.tooltip.tobacco_base", Component.translatable("quasium.base." + base)).withStyle(ChatFormatting.GOLD));
         }
+
+        LeafQuality.appendTooltip(stack, tooltipComponents);
 
         // Масса
         if (stack.has(ModDataComponents.TOBACCO_WEIGHT.get())) {

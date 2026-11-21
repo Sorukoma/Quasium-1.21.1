@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "quasium:mixing_table",
+    "quasium:low_table",
+    "quasium:bellows",
+    "quasium:drying_shelf",
+    "quasium:fermentation_barrel",
+    "quasium:essence_press",
+    "quasium:wooden_tobacco_pole",
+    "quasium:golem_feeder",
+    "quasium:research_table",
+    "quasium:dream_catcher",
+    "quasium:hookah_log",
+    "quasium:hose_vine",
+    "quasium:program_table"
+  ]
+}

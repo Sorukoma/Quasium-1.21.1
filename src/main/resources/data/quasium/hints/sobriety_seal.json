@@ -1,0 +1,110 @@
+{
+  "items": [
+    "quasium:sobriety_seal"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "quasium:quasium_anvil[facing=north]",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:quartz",
+          "pos": [
+            1.9,
+            1.6,
+            2.5
+          ]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            2.7,
+            1.6,
+            2.5
+          ]
+        },
+        {
+          "item": "quasium:netherite_hammer",
+          "pos": [
+            3.5,
+            1.6,
+            2.5
+          ]
+        }
+      ],
+      "args": [
+        "NOTE_BOTTLE_CAPACITY",
+        "SEAL_ANVIL_HITS",
+        "SEAL_CRAFT_MAX_KAIF"
+      ]
+    },
+    {
+      "duration": 180,
+      "remove": [
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "place": [
+        {
+          "state": "quasium:sobriety_seal",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "args": [
+        "SEAL_RADIUS"
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            1.6,
+            1.4,
+            2.5
+          ]
+        },
+        {
+          "item": "quasium:one_gram_tobacco",
+          "pos": [
+            3.4,
+            1.4,
+            2.5
+          ]
+        }
+      ]
+    }
+  ]
+}

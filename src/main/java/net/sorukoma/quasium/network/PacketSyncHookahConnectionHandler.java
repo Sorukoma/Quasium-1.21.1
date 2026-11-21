@@ -3,6 +3,7 @@ package net.sorukoma.quasium.network;
 import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.sorukoma.quasium.client.ClientHookahInputHandler;
+import net.sorukoma.quasium.client.RingTiming;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
@@ -14,14 +15,9 @@ public class PacketSyncHookahConnectionHandler {
             Minecraft minecraft = Minecraft.getInstance();
             if (minecraft.player == null) return;
 
-            payload.connectedHookahPos().ifPresentOrElse(
-                    pos -> {
-                        ClientHookahInputHandler.setConnectedHookahPos(pos);
-                    },
-                    () -> {
-                        ClientHookahInputHandler.setConnectedHookahPos(null);
-                    }
-            );
+            boolean wasConnected = ClientHookahInputHandler.getConnectedHookahPos() != null;
+            ClientHookahInputHandler.setConnectedHookahPos(payload.connectedHookahPos().orElse(null));
+            if (wasConnected && payload.connectedHookahPos().isEmpty()) RingTiming.stoppedByServer();
         });
     }
 }

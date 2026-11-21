@@ -1,0 +1,103 @@
+{
+  "items": [
+    "quasium:modular_hookah_white",
+    "quasium:modular_hookah_black",
+    "quasium:modular_hookah_red",
+    "quasium:modular_hookah_blue",
+    "quasium:modular_hookah_amber",
+    "quasium:modular_hookah_jade",
+    "quasium:modular_hookah_violet",
+    "quasium:modular_hookah_gold",
+    "quasium:modular_shaft_white",
+    "quasium:modular_shaft_black",
+    "quasium:modular_shaft_red",
+    "quasium:modular_shaft_blue",
+    "quasium:modular_shaft_amber"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:modular_hookah_blue",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:water_bucket",
+          "pos": [1.5, 1.4, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "quasium:modular_shaft_blue",
+          "pos": [1.5, 1.5, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "quasium:hookah_diffuser",
+          "pos": [1.5, 1.5, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [1.1, 1.6, 1.5]
+        },
+        {
+          "item": "quasium:calloud",
+          "pos": [1.9, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [1.5, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:modular_hookah_jade",
+          "pos": [0, 0, 0]
+        },
+        {
+          "state": "quasium:modular_hookah_violet",
+          "pos": [2, 0, 0]
+        },
+        {
+          "state": "quasium:modular_hookah_gold",
+          "pos": [2, 0, 2]
+        }
+      ],
+      "highlight": [
+        [0, 0, 0],
+        [2, 0, 0],
+        [2, 0, 2]
+      ]
+    }
+  ]
+}

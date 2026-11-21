@@ -1,0 +1,14 @@
+{
+  "title": "quasium.progression.aphids.title",
+  "hint": "quasium.progression.aphids.hint",
+  "category": "start",
+  "order": 37,
+  "icon": "minecraft:poppy",
+  "unlockCondition": "quasium:progression/obtained_tallow",
+  "scene": "quasium:aphids",
+  "pages": [
+    {"text": "quasium.progression.aphids.page1", "args": ["APHID_DAILY_CHANCE_PCT", "APHID_GROWTH_PCT"]},
+    {"text": "quasium.progression.aphids.page2", "items": ["minecraft:poppy", "minecraft:dandelion", "minecraft:cornflower"], "args": ["APHID_FLOWER_RADIUS", "APHID_FLOWER_REDUCTION_PCT"]},
+    {"text": "quasium.progression.aphids.page3", "items": ["quasium:essence_bottle"], "args": ["APHID_CURE_EMBER_ML"]}
+  ]
+}

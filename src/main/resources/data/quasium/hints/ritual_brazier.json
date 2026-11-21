@@ -1,0 +1,333 @@
+{
+  "items": [
+    "quasium:ritual_brazier",
+    "quasium:ritual_pedestal"
+  ],
+  "floor": 9,
+  "steps": [
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            3,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            3,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            4,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            4,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            4,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:quasium_block",
+          "pos": [
+            5,
+            0,
+            5
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          3,
+          0,
+          3
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          3,
+          0,
+          5
+        ],
+        [
+          4,
+          0,
+          3
+        ],
+        [
+          4,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          5
+        ],
+        [
+          5,
+          0,
+          3
+        ],
+        [
+          5,
+          0,
+          4
+        ],
+        [
+          5,
+          0,
+          5
+        ]
+      ]
+    },
+    {
+      "duration": 110,
+      "place": [
+        {
+          "state": "quasium:ritual_brazier",
+          "pos": [
+            4,
+            1,
+            4
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          4,
+          1,
+          4
+        ]
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            4,
+            1,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            1,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            7,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:ritual_pedestal",
+          "pos": [
+            4,
+            1,
+            7
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          4,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          4
+        ],
+        [
+          7,
+          1,
+          4
+        ],
+        [
+          4,
+          1,
+          7
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:quasiumingot",
+          "pos": [
+            4.5,
+            2.4,
+            1.5
+          ]
+        },
+        {
+          "item": "quasium:dream_quartz",
+          "pos": [
+            1.5,
+            2.4,
+            4.5
+          ]
+        }
+      ],
+      "args": [
+        "PEDESTAL_MIN_DISTANCE",
+        "PEDESTAL_MAX_DISTANCE",
+        "MAX_PEDESTALS"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            7,
+            1,
+            1
+          ]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            1,
+            1,
+            7
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          7,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          7
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            1.5,
+            2.2,
+            1.5
+          ]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            7.5,
+            2.2,
+            1.5
+          ]
+        }
+      ],
+      "args": [
+        "JAR_RADIUS"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:ritual_brazier[lit=true]",
+          "pos": [
+            4,
+            1,
+            4
+          ]
+        }
+      ],
+      "icons": [
+        {
+          "item": "minecraft:coal_block",
+          "pos": [
+            4.5,
+            2.5,
+            4.5
+          ]
+        },
+        {
+          "item": "minecraft:flint_and_steel",
+          "pos": [
+            5.6,
+            2.3,
+            4.5
+          ]
+        }
+      ]
+    }
+  ]
+}

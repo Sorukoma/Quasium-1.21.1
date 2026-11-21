@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:ecology/smoky_air",
+  "criteria": {
+    "garevshchik_kill": {
+      "conditions": {
+        "event": "garevshchik_kill"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ecology.garevshchik_kill.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:garevshchik_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.quasium.ecology.garevshchik_kill.title"
+    }
+  },
+  "requirements": [
+    [
+      "garevshchik_kill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,10 @@
+{
+  "first": "resin",
+  "second": "ash",
+  "color": "#4A3A2A",
+  "params": {
+    "pull_down": 1.5,
+    "fall_multiplier": 1.5,
+    "effect_seconds": 4
+  }
+}

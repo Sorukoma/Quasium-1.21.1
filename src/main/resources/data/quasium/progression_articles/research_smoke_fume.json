@@ -1,0 +1,21 @@
+{
+  "title": "quasium.research.research_smoke_fume.title",
+  "hint": "quasium.research.research_smoke_fume.hint",
+  "category": "research_smoke",
+  "order": 10,
+  "icon": "quasium:burned_tobacco",
+  "research": {
+    "tier": 1,
+    "spells": [
+      "quasium:fume"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smoke_fume.page1"
+    },
+    {
+      "text": "quasium.research.research_smoke_fume.page2"
+    }
+  ]
+}

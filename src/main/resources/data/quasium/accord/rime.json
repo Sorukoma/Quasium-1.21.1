@@ -1,0 +1,10 @@
+{
+  "first": "menthol",
+  "second": "dew",
+  "color": "#CFF4FF",
+  "params": {
+    "freeze_seconds": 1.5,
+    "ice_radius": 2,
+    "ice_seconds": 10
+  }
+}

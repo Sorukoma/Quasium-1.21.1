@@ -1,0 +1,11 @@
+{
+  "note": "nectar",
+  "volume": 25,
+  "cooldown": 10,
+  "target": "support",
+  "params": {
+    "heal": 4
+  },
+  "unlock": "note:nectar",
+  "order": 7
+}

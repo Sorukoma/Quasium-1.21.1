@@ -1,0 +1,49 @@
+{
+  "has_precipitation": false,
+  "temperature": 1.0,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 7234918,
+    "sky_color": 5919320,
+    "water_color": 7234918,
+    "water_fog_color": 7234918,
+    "particle": {
+      "options": {
+        "type": "minecraft:white_ash"
+      },
+      "probability": 0.006
+    },
+    "ambient_sound": "quasium:smokelands_ambience"
+  },
+  "spawners": {
+    "ambient": [
+      {
+        "type": "quasium:draft_wisp",
+        "weight": 6,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ]
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [
+      "quasium:smoke_geode"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "quasium:ash_cactus_patch",
+      "quasium:ash_clots",
+      "quasium:resin_clots"
+    ],
+    []
+  ]
+}

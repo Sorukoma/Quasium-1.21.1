@@ -1,0 +1,35 @@
+{
+  "title": "quasium.research.research_smog_seal.title",
+  "hint": "quasium.research.research_smog_seal.hint",
+  "category": "research_smog",
+  "order": 20,
+  "icon": "quasium:sobriety_seal",
+  "scene": "quasium:sobriety_seal",
+  "research": {
+    "tier": 3,
+    "notes": [
+      "dew",
+      "menthol"
+    ],
+    "requires": [
+      "quasium:research_smog_ventilation"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smog_seal.page1",
+      "args": [
+        "NOTE_BOTTLE_CAPACITY",
+        "SEAL_CRAFT_MAX_KAIF",
+        "SEAL_RADIUS"
+      ],
+      "anvil": "quasium:sobriety_seal"
+    },
+    {
+      "text": "quasium.research.research_smog_seal.page2"
+    },
+    {
+      "text": "quasium.research.research_smog_seal.page3"
+    }
+  ]
+}

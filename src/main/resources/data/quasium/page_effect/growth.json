@@ -1,0 +1,12 @@
+{
+  "note": "nectar",
+  "volume": 20,
+  "cooldown": 3,
+  "target": "world",
+  "params": {
+    "crop_chance": 0.3,
+    "sapling_chance": 0.1
+  },
+  "unlock": "research:quasium:research_notes_overtones",
+  "order": 9
+}

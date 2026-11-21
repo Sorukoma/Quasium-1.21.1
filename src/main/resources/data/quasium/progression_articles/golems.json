@@ -1,0 +1,17 @@
+{
+  "title": "quasium.progression.golems.title",
+  "hint": "quasium.progression.golems.hint",
+  "category": "golems",
+  "order": 10,
+  "icon": "quasium:harvest_mark",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:golems",
+  "pages": [
+    {"text": "quasium.progression.golems.page1", "items": ["quasium:calloud_golem", "quasium:clay_golem", "quasium:smoke_warden"]},
+    {"text": "quasium.progression.golems.page2", "recipe": "quasium:harvest_mark", "args": ["MARKS_PER_CHUNK", "GOLEM_MARK_RADIUS"]},
+    {"text": "quasium.progression.golems.page3", "recipe": "quasium:fill_mark"},
+    {"text": "quasium.progression.golems.page4", "recipe": "quasium:guard_mark", "args": ["CLAY_GUARD_RADIUS"]},
+    {"text": "quasium.progression.golems.page5", "recipe": "quasium:heat_mark"},
+    {"text": "quasium.progression.golems.paths"}
+  ]
+}

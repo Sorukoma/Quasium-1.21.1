@@ -1,0 +1,13 @@
+{
+  "title": "quasium.progression.draft_wisp.title",
+  "hint": "quasium.progression.draft_wisp.hint",
+  "category": "quasium",
+  "order": 160,
+  "icon": "quasium:wisp_flute",
+  "unlockCondition": "quasium:smokelands/root",
+  "scene": "quasium:draft_wisp",
+  "pages": [
+    {"text": "quasium.progression.draft_wisp.page1", "items": ["minecraft:honey_bottle", "quasium:wisp_flute"], "args": ["WISP_HEALTH"]},
+    {"text": "quasium.progression.draft_wisp.page2", "args": ["WISP_LIGHT", "WISP_ZONE_RADIUS", "WISP_ORE_GLOW_RADIUS"]}
+  ]
+}

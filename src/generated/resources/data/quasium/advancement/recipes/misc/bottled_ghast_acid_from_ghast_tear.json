@@ -1,11 +1,31 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ghast_tear": {
+    "has_glycerin": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:ghast_tear"
+            "items": "quasium:glycerin_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_molasses": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:molasses_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tallow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:tallow"
           }
         ]
       },
@@ -21,7 +41,9 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_ghast_tear"
+      "has_tallow",
+      "has_glycerin",
+      "has_molasses"
     ]
   ],
   "rewards": {

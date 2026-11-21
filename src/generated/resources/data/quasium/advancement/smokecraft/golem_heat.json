@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/mark_place",
+  "criteria": {
+    "golem_heat": {
+      "conditions": {
+        "event": "golem_heat"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.golem_heat.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:charcoal"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.golem_heat.title"
+    }
+  },
+  "requirements": [
+    [
+      "golem_heat"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

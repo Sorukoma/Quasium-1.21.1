@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:progression/self_mixed_obtained",
+  "criteria": {
+    "echo_warden": {
+      "conditions": {
+        "event": "echo_warden"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.echo_warden.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:echo_leaves"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.echo_warden.title"
+    }
+  },
+  "requirements": [
+    [
+      "echo_warden"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

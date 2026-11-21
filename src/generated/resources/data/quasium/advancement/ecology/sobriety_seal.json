@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:ecology/tea_path",
+  "criteria": {
+    "sobriety_seal": {
+      "conditions": {
+        "event": "sobriety_seal"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ecology.sobriety_seal.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:sobriety_seal"
+    },
+    "title": {
+      "translate": "advancements.quasium.ecology.sobriety_seal.title"
+    }
+  },
+  "requirements": [
+    [
+      "sobriety_seal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

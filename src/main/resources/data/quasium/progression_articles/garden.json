@@ -1,0 +1,22 @@
+{
+  "title": "quasium.progression.garden.title",
+  "hint": "quasium.progression.garden.hint",
+  "category": "start",
+  "order": 60,
+  "icon": "quasium:lemon",
+  "unlockCondition": "quasium:progression/obtained_fruit",
+  "scene": "quasium:essence_press",
+  "pages": [
+    {"text": "quasium.progression.garden.page1", "recipe": "quasium:bonsai_pot_from_bricks_and_dirt"},
+    {"text": "quasium.progression.garden.page2", "recipe": "quasium:lemon_sapling_from_oak_sapling"},
+    {"text": "quasium.progression.garden.page3", "recipe": "quasium:lime_sapling_from_oak_sapling"},
+    {"text": "quasium.progression.garden.page4", "recipe": "quasium:orange_sapling_from_oak_sapling"},
+    {"text": "quasium.progression.garden.page5", "recipe": "quasium:grapefruit_sapling_from_oak_sapling"},
+    {"text": "quasium.progression.garden.page6", "recipe": "quasium:grape_sapling_from_azalea"},
+    {"text": "quasium.progression.garden.page7", "recipe": "quasium:coconut_sapling_from_jungle_sapling"},
+    {"text": "quasium.progression.garden.page8", "recipe": "quasium:lavender_seeds_from_lilac"},
+    {"text": "quasium.progression.garden.page9", "recipe": "quasium:cocoa_seeds_from_cocoa_beans"},
+    {"text": "quasium.progression.garden.page10", "recipe": "quasium:mint_seeds_from_fern"},
+    {"text": "quasium.progression.garden.page11", "recipe": "quasium:anise_seeds_from_wheat_seeds"}
+  ]
+}

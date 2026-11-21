@@ -18,6 +18,8 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.sorukoma.quasium.mind.MindConfig;
+import net.sorukoma.quasium.progression.ConfigArgs;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -93,6 +95,7 @@ public class OverdoseHallucinationHandler {
 
     private static final List<PhantomEntity> phantomEntities = new ArrayList<>();
     private static long nextPhantomSpawnTick = 0;
+    private static long hauntedUntil = 0;
     private static long nextSoundSpawnTick = 0;
     private static List<ResourceLocation> cachedAvailableSounds = null;
     // Dynamically populated from all registered EntityTypes (vanilla + mods)
@@ -149,9 +152,24 @@ public class OverdoseHallucinationHandler {
         return cachedEntityTypes;
     }
 
+    public static void haunt(int ticks) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null) hauntedUntil = mc.level.getGameTime() + ticks;
+    }
+
+    private static boolean active() {
+        Minecraft mc = Minecraft.getInstance();
+        boolean haunted = mc.level != null && mc.level.getGameTime() < hauntedUntil;
+        return (ClientOverdoseData.isOverdosed() || haunted) && ConfigArgs.synced(MindConfig.HALLUCINATION_INTENSITY_PCT) > 0;
+    }
+
+    private static int maxPhantoms() {
+        return Math.max(1, Math.round(MAX_CONCURRENT_PHANTOMS * ConfigArgs.synced(MindConfig.HALLUCINATION_INTENSITY_PCT) / 100f));
+    }
+
     public static void clientTick() {
-        if (!ClientOverdoseData.isOverdosed()) {
-            clearHallucinations();
+        if (!active()) {
+            if (!phantomEntities.isEmpty() || nextPhantomSpawnTick != 0) clearHallucinations();
             return;
         }
 
@@ -162,7 +180,7 @@ public class OverdoseHallucinationHandler {
         RandomSource random = mc.level.random;
 
         // Spawn new phantom entities on timer
-        if (currentTick >= nextPhantomSpawnTick && phantomEntities.size() < MAX_CONCURRENT_PHANTOMS) {
+        if (currentTick >= nextPhantomSpawnTick && phantomEntities.size() < maxPhantoms()) {
             spawnPhantomEntity(mc, currentTick, random);
             nextPhantomSpawnTick = currentTick + random.nextIntBetweenInclusive(
                     MIN_HALLUCINATION_INTERVAL_TICKS, MAX_HALLUCINATION_INTERVAL_TICKS);
@@ -180,7 +198,7 @@ public class OverdoseHallucinationHandler {
     }
 
     public static void renderPhantoms(RenderLevelStageEvent event) {
-        if (!ClientOverdoseData.isOverdosed() || phantomEntities.isEmpty()) return;
+        if (!active() || phantomEntities.isEmpty()) return;
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_ENTITIES) return;
 
         Minecraft mc = Minecraft.getInstance();

@@ -1,0 +1,9 @@
+{
+  "first": "dew",
+  "second": "resin",
+  "color": "#6A5A3A",
+  "params": {
+    "slow_level": 4,
+    "effect_seconds": 4
+  }
+}

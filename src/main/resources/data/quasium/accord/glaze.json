@@ -1,0 +1,9 @@
+{
+  "first": "menthol",
+  "second": "resin",
+  "color": "#B0D8E0",
+  "params": {
+    "radius": 3,
+    "effect_seconds": 6
+  }
+}

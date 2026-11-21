@@ -66,7 +66,7 @@ public class SoakingCategory implements IRecipeCategory<SoakingRecipes.SoakingRe
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SoakingRecipes.SoakingRecipe recipe, mezz.jei.api.recipe.IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 0, 9)
-                .addItemStack(recipe.fermentedLeaves());
+                .addItemStacks(recipe.fermentedLeaves());
         if (recipe.essences() != null && !recipe.essences().isEmpty()) {
             builder.addSlot(RecipeIngredientRole.INPUT, 0, 31)
                     .addItemStacks(recipe.essences());

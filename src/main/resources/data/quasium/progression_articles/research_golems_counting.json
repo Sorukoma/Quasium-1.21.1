@@ -1,0 +1,15 @@
+{
+  "title": "quasium.research.research_golems_counting.title",
+  "hint": "quasium.research.research_golems_counting.hint",
+  "category": "research_golems",
+  "order": 10,
+  "icon": "minecraft:repeater",
+  "research": {
+    "tier": 1
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_golems_counting.page1"
+    }
+  ]
+}

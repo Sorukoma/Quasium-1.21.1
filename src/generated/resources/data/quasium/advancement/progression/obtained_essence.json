@@ -1,0 +1,58 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "has_essence": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:essence_press",
+              "quasium:essence_bottle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_harvest": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:lemon",
+              "quasium:lime",
+              "quasium:orange",
+              "quasium:grapefruit",
+              "quasium:grape",
+              "quasium:coconut",
+              "quasium:anise",
+              "quasium:mint_leaves",
+              "quasium:lavender",
+              "quasium:cocoa_nibs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.obtained_essence.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:essence_bottle"
+    },
+    "title": {
+      "translate": "advancements.quasium.obtained_essence.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_harvest",
+      "has_essence"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

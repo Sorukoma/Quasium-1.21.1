@@ -1,0 +1,262 @@
+{
+  "items": [
+    "quasium:tea_seeds",
+    "quasium:tea_leaf",
+    "quasium:dried_tea",
+    "quasium:samovar",
+    "quasium:teapot",
+    "quasium:tea_cup",
+    "quasium:cup_of_tea"
+  ],
+  "floor": 7,
+  "steps": [
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "minecraft:farmland",
+          "pos": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "minecraft:farmland",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "minecraft:farmland",
+          "pos": [
+            3,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "minecraft:farmland",
+          "pos": [
+            4,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:tea_bush[age=0]",
+          "pos": [
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "state": "quasium:tea_bush[age=1]",
+          "pos": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "state": "quasium:tea_bush[age=2]",
+          "pos": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "state": "quasium:tea_bush[age=3]",
+          "pos": [
+            4,
+            1,
+            2
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          4,
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "duration": 150,
+      "highlight": [
+        [
+          4,
+          1,
+          2
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:tea_leaf",
+          "pos": [
+            4.5,
+            2.4,
+            2.5
+          ]
+        }
+      ],
+      "args": [
+        "TEA_LEAVES_PER_HARVEST"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:drying_shelf[facing=south]",
+          "pos": [
+            2,
+            0,
+            4
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          4
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:tea_leaf",
+          "pos": [
+            1.9,
+            1.5,
+            4.5
+          ]
+        },
+        {
+          "item": "quasium:dried_tea",
+          "pos": [
+            3.1,
+            1.5,
+            4.5
+          ]
+        }
+      ],
+      "args": [
+        "TEA_DRYING_SECONDS"
+      ]
+    },
+    {
+      "duration": 200,
+      "place": [
+        {
+          "state": "quasium:samovar[facing=south,lit=true]",
+          "pos": [
+            4,
+            0,
+            4
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          4,
+          0,
+          4
+        ]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:water_bucket",
+          "pos": [
+            3.6,
+            1.8,
+            4.5
+          ]
+        },
+        {
+          "item": "quasium:dried_tea",
+          "pos": [
+            4.4,
+            1.8,
+            4.5
+          ]
+        },
+        {
+          "item": "minecraft:charcoal",
+          "pos": [
+            5.2,
+            1.8,
+            4.5
+          ]
+        }
+      ],
+      "args": [
+        "SAMOVAR_WATER_ML",
+        "SAMOVAR_LEAVES_PER_POT",
+        "SAMOVAR_BREW_SECONDS"
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:teapot",
+          "pos": [
+            3.9,
+            1.8,
+            4.5
+          ]
+        },
+        {
+          "item": "quasium:tea_cup",
+          "pos": [
+            4.7,
+            1.6,
+            4.5
+          ]
+        }
+      ],
+      "args": [
+        "TEAPOT_CUPS"
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "quasium:cup_of_tea",
+          "pos": [
+            4.5,
+            1.8,
+            4.5
+          ]
+        }
+      ],
+      "args": [
+        "VIGOR_SECONDS",
+        "TEA_KAIF",
+        "VIGOR_WITHDRAWAL_MULTIPLIER"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "items": [
+    "quasium:tallow",
+    "quasium:bottled_ghast_acid",
+    "quasium:glycerin_bottle",
+    "quasium:molasses_bottle"
+  ],
+  "floor": 4,
+  "steps": [
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [0, 0, 3]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [1, 0, 3]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [0, 1, 3]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [1, 1, 3]
+        },
+        {
+          "state": "quasium:drying_shelf[facing=north]",
+          "pos": [0, 1, 2]
+        }
+      ],
+      "highlight": [
+        [0, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:rotten_flesh",
+          "pos": [0.5, 2.3, 2.4]
+        },
+        {
+          "item": "quasium:tallow",
+          "pos": [1.5, 2.3, 2.4]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "minecraft:brewing_stand",
+          "pos": [2, 0, 1]
+        }
+      ],
+      "highlight": [
+        [2, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:tallow",
+          "pos": [2.5, 1.7, 1.5]
+        },
+        {
+          "item": "quasium:bottled_ghast_acid",
+          "pos": [3.3, 0.6, 1.5]
+        },
+        {
+          "item": "minecraft:blaze_powder",
+          "pos": [1.7, 0.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 100,
+      "highlight": [
+        [2, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:glycerin_bottle",
+          "pos": [2.5, 1.7, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "minecraft:crafting_table",
+          "pos": [3, 0, 3]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:molasses_bottle",
+          "pos": [3.5, 1.7, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:soaking_bowl",
+          "pos": [3, 0, 0]
+        }
+      ],
+      "highlight": [
+        [3, 0, 0]
+      ],
+      "icons": [
+        {
+          "item": "quasium:molasses_bottle",
+          "pos": [3.5, 1.3, 0.5]
+        }
+      ]
+    }
+  ]
+}

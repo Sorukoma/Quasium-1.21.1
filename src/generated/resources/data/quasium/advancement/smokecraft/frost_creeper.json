@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/first_cast",
+  "criteria": {
+    "kill:frost_breath:creeper": {
+      "conditions": {
+        "event": "kill:frost_breath:creeper"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.frost_creeper.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:snowball"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.frost_creeper.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill:frost_breath:creeper"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

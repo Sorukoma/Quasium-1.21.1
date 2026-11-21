@@ -11,10 +11,16 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
+import net.minecraft.world.item.Items;
 import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.selection.SelectionRegistry;
+import net.sorukoma.quasium.item.EssenceBottleItem;
 import net.sorukoma.quasium.item.ModItems;
 import net.sorukoma.quasium.item.SelfMixedTobaccoItem;
+import net.sorukoma.quasium.magic.FocusEssence;
+import net.sorukoma.quasium.magic.Spells;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +52,13 @@ public class HookahBowlMenu extends AbstractContainerMenu {
     private static final int GRID_Y_START = 18;
     private static final int SLOT_SIZE = 18;
 
+    public static final int FOCUS_START = 56;
+    public static final int FOCUS_END = FOCUS_START + FocusEssence.MAX_SLOTS;
+    public static final int FOCUS_X_START = 62;
+    public static final int FOCUS_Y = 107;
+    private ItemStackHandler focusSlots;
+    private List<FocusEssence> openedFocus = List.of();
+
     public HookahBowlMenu(int containerId, Inventory playerInventory, InteractionHand hand, ModDataComponents.HookahBowlContents contents) {
         super(ModMenuTypes.HOOKAH_BOWL_MENU.get(), containerId);
         this.hand = hand;
@@ -64,17 +77,15 @@ public class HookahBowlMenu extends AbstractContainerMenu {
         populateHandlerFromContents(handler, contents);
         this.bowlSlots = handler;
 
-        for (int row = 0; row < GRID_ROWS; row++) {
-            for (int col = 0; col < GRID_COLS; col++) {
-                int slotIndex = row * GRID_COLS + col;
-                int x = GRID_X_START + col * SLOT_SIZE;
-                int y = GRID_Y_START + row * SLOT_SIZE;
-                this.addSlot(new BowlSlot(bowlSlots, slotIndex, x, y));
-            }
-        }
-
+        addBowlGrid();
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
+        addFocusSlots(new ItemStackHandler(FocusEssence.MAX_SLOTS) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                updateBowlItem();
+            }
+        });
     }
 
     public HookahBowlMenu(int containerId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
@@ -91,17 +102,75 @@ public class HookahBowlMenu extends AbstractContainerMenu {
         populateHandlerFromContents(handler, contents);
         this.bowlSlots = handler;
 
-        for (int row = 0; row < GRID_ROWS; row++) {
-            for (int col = 0; col < GRID_COLS; col++) {
-                int slotIndex = row * GRID_COLS + col;
-                int x = GRID_X_START + col * SLOT_SIZE;
-                int y = GRID_Y_START + row * SLOT_SIZE;
-                this.addSlot(new BowlSlot(bowlSlots, slotIndex, x, y));
-            }
-        }
-
+        addBowlGrid();
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
+        addFocusSlots(new ItemStackHandler(FocusEssence.MAX_SLOTS));
+    }
+
+    private void addBowlGrid() {
+        for (int row = 0; row < GRID_ROWS; row++) {
+            for (int col = 0; col < GRID_COLS; col++) {
+                int slotIndex = (GRID_ROWS - 1 - row) * GRID_COLS + col;
+                addSlot(new BowlSlot(bowlSlots, slotIndex, GRID_X_START + col * SLOT_SIZE, GRID_Y_START + row * SLOT_SIZE));
+            }
+        }
+    }
+
+    private void addFocusSlots(ItemStackHandler handler) {
+        List<FocusEssence> focus = Spells.focusOf(openedStack);
+        openedFocus = focus;
+        for (int i = 0; i < FocusEssence.MAX_SLOTS && i < focus.size(); i++) {
+            FocusEssence entry = focus.get(i);
+            if (entry.essence().isBlank()) continue;
+            handler.setStackInSlot(i, entry.ml() > 0
+                    ? EssenceBottleItem.of(entry.essence(), entry.ml())
+                    : new ItemStack(Items.GLASS_BOTTLE));
+        }
+        this.focusSlots = handler;
+        for (int i = 0; i < FocusEssence.MAX_SLOTS; i++) {
+            addSlot(new FocusSlot(handler, i, FOCUS_X_START + i * SLOT_SIZE, FOCUS_Y));
+        }
+    }
+
+    private class FocusSlot extends SlotItemHandler {
+        FocusSlot(ItemStackHandler handler, int index, int x, int y) {
+            super(handler, index, x, y);
+        }
+
+        @Override
+        public boolean mayPlace(@NotNull ItemStack stack) {
+            return !isHeated && stack.getItem() instanceof EssenceBottleItem && EssenceBottleItem.amountOf(stack) > 0;
+        }
+
+        @Override
+        public boolean mayPickup(@NotNull Player player) {
+            return !isHeated;
+        }
+
+        @Override
+        public int getMaxStackSize() {
+            return 1;
+        }
+
+        @Override
+        public int getMaxStackSize(@NotNull ItemStack stack) {
+            return 1;
+        }
+    }
+
+    public List<FocusEssence> currentFocus() {
+        List<FocusEssence> focus = new ArrayList<>();
+        for (int i = 0; i < FocusEssence.MAX_SLOTS; i++) {
+            ItemStack stack = focusSlots.getStackInSlot(i);
+            if (stack.is(Items.GLASS_BOTTLE) && i < openedFocus.size() && !openedFocus.get(i).essence().isBlank()) {
+                focus.add(new FocusEssence(openedFocus.get(i).essence(), 0));
+                continue;
+            }
+            String essence = EssenceBottleItem.typeOf(stack);
+            focus.add(essence.isBlank() ? new FocusEssence("", 0) : new FocusEssence(essence, EssenceBottleItem.amountOf(stack)));
+        }
+        return focus;
     }
 
     private class BowlSlot extends SlotItemHandler {
@@ -168,6 +237,7 @@ public class HookahBowlMenu extends AbstractContainerMenu {
                 slotItem.set(ModDataComponents.ESSENCE_AMOUNT.get(), group.essenceAmount());
                 slotItem.set(ModDataComponents.MOLASSES_AMOUNT.get(), group.molassesAmount());
                 if (group.toxic()) slotItem.set(ModDataComponents.TOXIC.get(), true);
+                slotItem.set(SelectionRegistry.KAIF_PCT.get(), group.kaifPct());
             }
             if (isHeated) {
                 slotItem.set(ModDataComponents.HEATED_MARKER.get(), true);
@@ -199,23 +269,8 @@ public class HookahBowlMenu extends AbstractContainerMenu {
                 continue;
             }
 
-            ModDataComponents.BowlTobaccoGroup groupData;
-            if (slotStack.is(ModItems.ONE_GRAM_TOBACCO.get()) && slotStack.has(ModDataComponents.TOBACCO_FLAVOR.get())) {
-                String flavor = slotStack.get(ModDataComponents.TOBACCO_FLAVOR.get());
-                groupData = new ModDataComponents.BowlTobaccoGroup("regular", flavor, "regular", 0.0f, List.of());
-            } else if (slotStack.is(ModItems.ONE_GRAM_SELF_MIXED_TOBACCO.get()) && slotStack.has(ModDataComponents.TOBACCO_BASE.get())) {
-                String base = slotStack.get(ModDataComponents.TOBACCO_BASE.get());
-                float strength = slotStack.getOrDefault(ModDataComponents.TOBACCO_DAMAGE.get(), 0f);
-                List<MobEffectInstance> effects = slotStack.getOrDefault(ModDataComponents.SELF_MIXED_EFFECTS.get(), List.of());
-                int essenceAmount = slotStack.getOrDefault(ModDataComponents.ESSENCE_AMOUNT.get(), 0);
-                int molassesAmount = slotStack.getOrDefault(ModDataComponents.MOLASSES_AMOUNT.get(), 0);
-                String flavor = slotStack.getOrDefault(ModDataComponents.ESSENCE_TYPE.get(), "mixed");
-                boolean toxic = slotStack.getOrDefault(ModDataComponents.TOXIC.get(), false);
-                groupData = new ModDataComponents.BowlTobaccoGroup("self_mixed", flavor, base, strength, effects,
-                        essenceAmount, molassesAmount, toxic);
-            } else {
-                continue;
-            }
+            ModDataComponents.BowlTobaccoGroup groupData = groupOf(slotStack);
+            if (groupData == null) continue;
 
             int groupIdx = -1;
             for (int g = 0; g < groups.size(); g++) {
@@ -238,6 +293,20 @@ public class HookahBowlMenu extends AbstractContainerMenu {
 
         ModDataComponents.HookahBowlContents newContents = new ModDataComponents.HookahBowlContents(groups, slotAssignments, burnedSlots, newHeated);
         bowlItem.set(ModDataComponents.HOOKAH_BOWL_CONTENTS.get(), newContents);
+        if (focusSlots != null) bowlItem.set(ModDataComponents.BOWL_FOCUS.get(), currentFocus());
+    }
+
+    @Nullable
+    public static ModDataComponents.BowlTobaccoGroup groupOf(ItemStack gram) {
+        if (gram.is(ModItems.ONE_GRAM_TOBACCO.get()) && gram.has(ModDataComponents.TOBACCO_FLAVOR.get())) {
+            return new ModDataComponents.BowlTobaccoGroup("regular", gram.get(ModDataComponents.TOBACCO_FLAVOR.get()), "regular", 0.0f, List.of());
+        }
+        if (!gram.is(ModItems.ONE_GRAM_SELF_MIXED_TOBACCO.get()) || !gram.has(ModDataComponents.TOBACCO_BASE.get())) return null;
+        List<MobEffectInstance> effects = gram.getOrDefault(ModDataComponents.SELF_MIXED_EFFECTS.get(), List.of());
+        return new ModDataComponents.BowlTobaccoGroup("self_mixed", gram.getOrDefault(ModDataComponents.ESSENCE_TYPE.get(), "mixed"),
+                gram.get(ModDataComponents.TOBACCO_BASE.get()), gram.getOrDefault(ModDataComponents.TOBACCO_DAMAGE.get(), 0f), effects,
+                gram.getOrDefault(ModDataComponents.ESSENCE_AMOUNT.get(), 0), gram.getOrDefault(ModDataComponents.MOLASSES_AMOUNT.get(), 0),
+                gram.getOrDefault(ModDataComponents.TOXIC.get(), false), gram.getOrDefault(SelectionRegistry.KAIF_PCT.get(), 100));
     }
 
     private ItemStack findBowlItem(Player player) {
@@ -276,7 +345,16 @@ public class HookahBowlMenu extends AbstractContainerMenu {
         ItemStack stack = slot.getItem();
         result = stack.copy();
 
-        if (index >= BOWL_SLOTS_START && index < BOWL_SLOTS_START + BOWL_SLOTS_COUNT) {
+        if (index >= FOCUS_START && index < FOCUS_END) {
+            if (!this.moveItemStackTo(stack, PLAYER_INV_START, HOTBAR_END, true)) {
+                return ItemStack.EMPTY;
+            }
+        } else if (index >= PLAYER_INV_START && index < HOTBAR_END && !isHeated
+                && stack.getItem() instanceof EssenceBottleItem && EssenceBottleItem.amountOf(stack) > 0) {
+            if (!this.moveItemStackTo(stack, FOCUS_START, FOCUS_END, false)) {
+                return ItemStack.EMPTY;
+            }
+        } else if (index >= BOWL_SLOTS_START && index < BOWL_SLOTS_START + BOWL_SLOTS_COUNT) {
             if (isHeated && !stack.isEmpty() && !stack.is(ModItems.BURNED_TOBACCO.get())) {
                 // Несгоревший табак из нагретой чаши: уничтожаем и не переносим в инвентарь.
                 slot.setByPlayer(ItemStack.EMPTY);

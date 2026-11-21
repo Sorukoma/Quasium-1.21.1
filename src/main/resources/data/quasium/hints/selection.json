@@ -1,0 +1,110 @@
+{
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "quasium:dikar_crop[age=4]",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "quasium:dikar_crop[age=4]",
+          "pos": [3, 1, 2]
+        },
+        {
+          "state": "quasium:wooden_tobacco_pole",
+          "pos": [2, 1, 2]
+        }
+      ],
+      "highlight": [
+        [1, 1, 2],
+        [3, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:barrier",
+          "pos": [2.5, 2.4, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:peschanik_crop[age=4]",
+          "pos": [3, 1, 2]
+        }
+      ],
+      "highlight": [
+        [3, 1, 2]
+      ]
+    },
+    {
+      "duration": 200,
+      "place": [
+        {
+          "state": "quasium:dikar_crop[age=3]",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "quasium:peschanik_crop[age=3]",
+          "pos": [3, 1, 2]
+        }
+      ],
+      "highlight": [
+        [2, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hybrid_tobacco_seeds",
+          "pos": [2.2, 2.3, 2.5]
+        },
+        {
+          "item": "quasium:dikar_seeds",
+          "pos": [2.8, 2.3, 2.5]
+        }
+      ],
+      "args": [
+        "MUTATION_QUALITY_BONUS_PCT"
+      ]
+    },
+    {
+      "duration": 170,
+      "highlight": [
+        [2, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hybrid_tobacco_seeds",
+          "pos": [2.5, 2.4, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "quasium:progression_book",
+          "pos": [2.1, 2.3, 2.5]
+        },
+        {
+          "item": "quasium:hybrid_tobacco_seeds",
+          "pos": [2.9, 2.3, 2.5]
+        }
+      ]
+    }
+  ]
+}

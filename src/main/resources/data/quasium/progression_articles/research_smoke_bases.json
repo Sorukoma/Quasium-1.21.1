@@ -1,0 +1,24 @@
+{
+  "title": "quasium.research.research_smoke_bases.title",
+  "hint": "quasium.research.research_smoke_bases.hint",
+  "category": "research_smoke",
+  "order": 60,
+  "icon": "minecraft:wind_charge",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "resin"
+    ],
+    "requires": [
+      "quasium:research_smoke_heart"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smoke_bases.page1"
+    },
+    {
+      "text": "quasium.research.research_smoke_bases.page2"
+    }
+  ]
+}

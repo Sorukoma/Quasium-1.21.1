@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -21,17 +22,30 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.sorukoma.quasium.block.entity.SoakingBowlBlockEntity;
 import net.sorukoma.quasium.block.entity.ModBlockEntities;
 import net.sorukoma.quasium.component.ModDataComponents;
 import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.item.SelfMixedTobaccoItem;
 import net.sorukoma.quasium.item.TobaccoVarieties;
+import net.sorukoma.quasium.selection.genetics.Genetics;
+import net.sorukoma.quasium.selection.variety.SeedSoaking;
 import org.jetbrains.annotations.Nullable;
 
 public class SoakingBowlBlock extends BaseEntityBlock {
+    private static final VoxelShape SHAPE = Shapes.join(box(3, 0, 3, 13, 4, 13), box(4, 1, 4, 12, 4, 12), BooleanOp.ONLY_FIRST);
 
     public SoakingBowlBlock(BlockBehaviour.Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
     @Override
@@ -54,15 +68,7 @@ public class SoakingBowlBlock extends BaseEntityBlock {
                 player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.full"), true);
                 return ItemInteractionResult.CONSUME;
             }
-            bowlEntity.setMakhorka(false);
-            bowlEntity.setVariety(TobaccoVarieties.getVariety(heldItem));
-            bowlEntity.setLeafStars(
-                    heldItem.getOrDefault(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), 0),
-                    heldItem.getOrDefault(ModDataComponents.TOBACCO_YIELD_STARS.get(), 0),
-                    heldItem.getOrDefault(ModDataComponents.TOBACCO_QUALITY_STARS.get(), 0));
-            bowlEntity.setLeafToxic("toxic".equals(heldItem.getOrDefault(ModDataComponents.TOBACCO_MUTATION.get(), "")));
-            bowlEntity.setOverdried(heldItem.getOrDefault(ModDataComponents.DRYING_STAGE.get(), 0) >= 3);
-            bowlEntity.setTobaccoGrams(1);
+            bowlEntity.addLeaf(heldItem);
             if (!player.isCreative()) heldItem.shrink(1);
             player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.added_tobacco", 30), true);
             bowlEntity.setChanged();
@@ -72,6 +78,23 @@ public class SoakingBowlBlock extends BaseEntityBlock {
         // Свежие (неферментированные) листья замешивать нельзя — только ферментированные.
         if (TobaccoVarieties.isLeaf(heldItem) && !heldItem.has(ModDataComponents.FERMENTED.get())) {
             player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.needs_fermented"), true);
+            return ItemInteractionResult.CONSUME;
+        }
+
+        if (SeedSoaking.isCatalyst(heldItem)) {
+            String outcome = catalystProblem(bowlEntity, heldItem, player);
+            if (outcome == null) {
+                boolean mix = SeedSoaking.sprout(heldItem, bowlEntity.getVariety(), Genetics.MIN_STARS).getItem() instanceof SelfMixedTobaccoItem;
+                bowlEntity.setCatalyst(heldItem.copyWithCount(1));
+                if (!player.isCreative()) heldItem.shrink(1);
+                outcome = mix ? "mix_catalyst_added" : "catalyst_added";
+            }
+            player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl." + outcome), true);
+            return ItemInteractionResult.CONSUME;
+        }
+
+        if ((heldItem.is(ModItems.MOLASSES_BOTTLE.get()) || heldItem.is(ModItems.ESSENCE_BOTTLE.get())) && !bowlEntity.getCatalyst().isEmpty()) {
+            player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.catalyst_liquid"), true);
             return ItemInteractionResult.CONSUME;
         }
 
@@ -148,6 +171,15 @@ public class SoakingBowlBlock extends BaseEntityBlock {
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
+    @Nullable
+    private static String catalystProblem(SoakingBowlBlockEntity bowl, ItemStack catalyst, Player player) {
+        if (bowl.getTobaccoGrams() < 1) return "catalyst_no_leaves";
+        if (!bowl.getCatalyst().isEmpty()) return "catalyst_full";
+        if (bowl.getMolassesMb() + bowl.getEssenceMb() > 0) return "catalyst_liquid";
+        if (!SeedSoaking.knows(player, catalyst)) return "catalyst_unknown";
+        return SeedSoaking.sprout(catalyst, bowl.getVariety(), Genetics.MIN_STARS).isEmpty() ? "catalyst_wrong" : null;
+    }
+
     public static java.util.List<MobEffectInstance> createEssenceEffects(String flavor) {
         java.util.List<MobEffectInstance> effects = new java.util.ArrayList<>();
         for (String type : flavor.split("\\+")) {
@@ -194,6 +226,8 @@ public class SoakingBowlBlock extends BaseEntityBlock {
                 player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_toxic"), true);
             } else if (bowlEntity.isReady()) {
                 player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_ideal"), true);
+            } else if (!bowlEntity.getCatalyst().isEmpty()) {
+                player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_needs_stirring"), true);
             } else if (ratio < 0.15f) {
                 player.displayClientMessage(Component.translatable("quasium.message.soaking_bowl.status_dry"), true);
             } else if (ratio > 0.25f) {

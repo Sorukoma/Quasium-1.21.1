@@ -1,0 +1,161 @@
+{
+  "items": [
+    "quasium:echo_seeds",
+    "quasium:echo_leaves",
+    "quasium:ashen_seeds",
+    "quasium:ashen_leaves",
+    "quasium:chorus_seeds",
+    "quasium:chorus_leaves",
+    "quasium:primordial_seeds",
+    "quasium:primordial_leaves"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "quasium:soaking_bowl",
+          "pos": [2, 0, 2]
+        }
+      ],
+      "highlight": [
+        [2, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [2.1, 1.2, 2.5]
+        },
+        {
+          "item": "minecraft:echo_shard",
+          "pos": [2.9, 1.2, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "minecraft:echo_shard",
+          "pos": [0.6, 1.4, 1.5]
+        },
+        {
+          "item": "quasium:echo_seeds",
+          "pos": [1.1, 1.4, 1.5]
+        },
+        {
+          "item": "minecraft:blaze_powder",
+          "pos": [1.9, 1.4, 1.5]
+        },
+        {
+          "item": "quasium:ashen_seeds",
+          "pos": [2.4, 1.4, 1.5]
+        },
+        {
+          "item": "minecraft:chorus_fruit",
+          "pos": [3.2, 1.4, 1.5]
+        },
+        {
+          "item": "quasium:chorus_seeds",
+          "pos": [3.7, 1.4, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 190,
+      "place": [
+        {
+          "state": "minecraft:sculk",
+          "pos": [0, 0, 2]
+        },
+        {
+          "state": "quasium:echo_crop[age=4]",
+          "pos": [0, 1, 2]
+        },
+        {
+          "state": "minecraft:soul_soil",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "quasium:ashen_crop[age=4]",
+          "pos": [2, 1, 2]
+        },
+        {
+          "state": "minecraft:end_stone",
+          "pos": [4, 0, 2]
+        },
+        {
+          "state": "quasium:chorus_crop[age=4]",
+          "pos": [4, 1, 2]
+        }
+      ],
+      "highlight": [
+        [0, 0, 2],
+        [2, 0, 2],
+        [4, 0, 2]
+      ]
+    },
+    {
+      "duration": 180,
+      "highlight": [
+        [0, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:sculk_sensor",
+          "pos": [0.5, 2.3, 2.5]
+        }
+      ],
+      "args": [
+        "ECHO_MUFFLE_SECONDS"
+      ]
+    },
+    {
+      "duration": 180,
+      "highlight": [
+        [2, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:fire_charge",
+          "pos": [2.5, 2.3, 2.5]
+        }
+      ],
+      "args": [
+        "ASHEN_FIRE_RESISTANCE_SECONDS",
+        "ASHEN_BREATH_DAMAGE",
+        "ASHEN_BREATH_FIRE_SECONDS"
+      ]
+    },
+    {
+      "duration": 170,
+      "highlight": [
+        [4, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:ender_pearl",
+          "pos": [4.5, 2.3, 2.5]
+        }
+      ],
+      "args": [
+        "CHORUS_TELEPORT_RANGE",
+        "CHORUS_TELEPORT_COOLDOWN_SECONDS"
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:primordial_seeds",
+          "pos": [2.1, 2.3, 1.5]
+        },
+        {
+          "item": "quasium:primordial_leaves",
+          "pos": [2.9, 2.3, 1.5]
+        }
+      ]
+    }
+  ]
+}

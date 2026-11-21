@@ -1,0 +1,165 @@
+{
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [0, 0, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [1, 0, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [2, 0, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [3, 0, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [4, 0, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [0, 1, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [1, 1, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [2, 1, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [3, 1, 4]
+        },
+        {
+          "state": "minecraft:oak_planks",
+          "pos": [4, 1, 4]
+        },
+        {
+          "state": "quasium:essence_press",
+          "pos": [2, 0, 3]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [1, 0, 3]
+        },
+        {
+          "state": "quasium:low_table",
+          "pos": [3, 0, 3]
+        },
+        {
+          "state": "quasium:hookah_block",
+          "pos": [3, 0, 2]
+        }
+      ],
+      "highlight": [
+        [2, 0, 3]
+      ]
+    },
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [1.6, 1.8, 2.0]
+        },
+        {
+          "item": "minecraft:emerald",
+          "pos": [2.4, 1.8, 2.0]
+        }
+      ],
+      "args": [
+        "LEAVES_BUY_COUNT",
+        "DRIED_LEAVES_BUY_COUNT",
+        "DRIED_LEAVES_PRICE"
+      ]
+    },
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "quasium:bolotnik_leaves",
+          "pos": [1.4, 1.8, 2.0]
+        },
+        {
+          "item": "minecraft:emerald",
+          "pos": [2.1, 1.8, 2.0]
+        },
+        {
+          "item": "minecraft:emerald",
+          "pos": [2.6, 1.9, 2.0]
+        }
+      ],
+      "args": [
+        "THREE_STAR_LEAVES_COUNT",
+        "THREE_STAR_PRICE",
+        "FOUR_STAR_PRICE",
+        "FIVE_STAR_PRICE"
+      ]
+    },
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "quasium:mint_tobacco",
+          "pos": [0.5, 1.9, 2.0]
+        },
+        {
+          "item": "quasium:apple_tobacco",
+          "pos": [1.3, 1.9, 2.0]
+        },
+        {
+          "item": "quasium:cinnamon_tobacco",
+          "pos": [2.1, 1.9, 2.0]
+        },
+        {
+          "item": "minecraft:blaze_powder",
+          "pos": [2.9000000000000004, 1.9, 2.0]
+        },
+        {
+          "item": "minecraft:chorus_fruit",
+          "pos": [3.7, 1.9, 2.0]
+        },
+        {
+          "item": "minecraft:echo_shard",
+          "pos": [4.5, 1.9, 2.0]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "minecraft:chest[facing=north]",
+          "pos": [0, 0, 3]
+        }
+      ],
+      "highlight": [
+        [0, 0, 3]
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [0.1, 1.3, 2.5]
+        },
+        {
+          "item": "quasium:hybrid_tobacco_seeds",
+          "pos": [0.5, 1.4, 2.5]
+        },
+        {
+          "item": "quasium:modular_hookah_jade",
+          "pos": [0.9, 1.3, 2.5]
+        }
+      ]
+    }
+  ]
+}

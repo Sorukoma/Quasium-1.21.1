@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "P": {
+      "item": "quasium:copper_pipe"
+    },
+    "Q": {
+      "item": "quasium:quasiumingot"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "pattern": [
+    "QCQ",
+    "CRC",
+    "QPQ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:quasium_fan"
+  }
+}

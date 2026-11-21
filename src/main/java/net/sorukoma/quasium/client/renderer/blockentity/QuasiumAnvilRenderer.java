@@ -18,6 +18,8 @@ public class QuasiumAnvilRenderer implements BlockEntityRenderer<QuasiumAnvilBlo
     private static final float ITEM_SPACING = 0.08F;
     private static final float ITEM_SCALE = 0.5F;
     private static final float TILT_X = -90.0F;
+    private static final float STACK_SHIFT = 0.12F;
+    private static final float STACK_LIFT = 0.06F;
 
     public QuasiumAnvilRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -54,6 +56,12 @@ public class QuasiumAnvilRenderer implements BlockEntityRenderer<QuasiumAnvilBlo
             Minecraft.getInstance().getItemRenderer().renderStatic(
                     item, ItemDisplayContext.FIXED, combinedLight, combinedOverlay,
                     poseStack, bufferSource, entity.getLevel(), 0);
+            if (item.getCount() > 1) {
+                poseStack.translate(STACK_SHIFT, STACK_SHIFT, STACK_LIFT);
+                Minecraft.getInstance().getItemRenderer().renderStatic(
+                        item, ItemDisplayContext.FIXED, combinedLight, combinedOverlay,
+                        poseStack, bufferSource, entity.getLevel(), 1);
+            }
 
             poseStack.popPose();
         }

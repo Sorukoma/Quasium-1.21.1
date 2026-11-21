@@ -1,0 +1,4 @@
+// 1.21.1	2026-10-08T19:45:19.6592166	Ritual brazier loot
+ae6e4afd3acf01055531d1e898040dbb4ca72196 data/quasium/loot_table/blocks/dream_catcher.json
+20122e5f33d116826bc5c6845e6fa83e0e00403a data/quasium/loot_table/blocks/ritual_brazier.json
+4b8bec00053ab08a47cb4d494caad2755045356f data/quasium/loot_table/blocks/ritual_pedestal.json

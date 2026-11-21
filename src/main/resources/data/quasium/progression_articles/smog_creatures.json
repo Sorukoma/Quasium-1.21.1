@@ -1,0 +1,42 @@
+{
+  "title": "quasium.progression.smog_creatures.title",
+  "hint": "quasium.progression.smog_creatures.hint",
+  "category": "smokecraft",
+  "order": 70,
+  "icon": "quasium:dymnik_spawn_egg",
+  "unlockCondition": "quasium:ecology/smoky_air",
+  "scene": "quasium:smog",
+  "pages": [
+    {
+      "text": "quasium.progression.smog_creatures.page1",
+      "items": [
+        "quasium:dymnik_spawn_egg"
+      ],
+      "args": [
+        "DYMNIK_MIN_SMOG",
+        "DYMNIK_CAP_PER_LEVEL",
+        "DYMNIK_STEAL_RADIUS",
+        "DYMNIK_STEAL_KAIF_PER_SECOND",
+        "DYMNIK_SUNBURN_SECONDS",
+        "DYMNIK_ASH_ML"
+      ]
+    },
+    {
+      "text": "quasium.progression.smog_creatures.page2",
+      "items": [
+        "quasium:garevshchik_spawn_egg"
+      ],
+      "args": [
+        "GAREVSHCHIK_MIN_SMOG",
+        "GAREVSHCHIK_CAP",
+        "GAREVSHCHIK_HEALTH",
+        "GAREVSHCHIK_DAMAGE",
+        "GAREVSHCHIK_BLINDNESS_SECONDS",
+        "GAREVSHCHIK_EMBER_ML"
+      ]
+    },
+    {
+      "text": "quasium.progression.smog_creatures.page3"
+    }
+  ]
+}

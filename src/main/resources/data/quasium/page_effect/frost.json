@@ -1,0 +1,15 @@
+{
+  "note": "menthol",
+  "volume": 20,
+  "cooldown": 1.5,
+  "target": "foe",
+  "params": {
+    "damage": 2,
+    "slow_level": 3,
+    "slow_seconds": 4,
+    "freeze_seconds": 3,
+    "fire_mob_multiplier": 2
+  },
+  "unlock": "note:menthol",
+  "order": 1
+}

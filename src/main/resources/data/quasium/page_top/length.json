@@ -1,0 +1,11 @@
+{
+  "volume": 10,
+  "max": 1,
+  "scale": {
+    "duration": 1.5,
+    "lifetime": 1.5,
+    "seconds": 1.5
+  },
+  "unlock": "start",
+  "order": 4
+}

@@ -1,0 +1,16 @@
+{
+  "title": "quasium.progression.golem_staff.title",
+  "hint": "quasium.progression.golem_staff.hint",
+  "category": "golems",
+  "order": 50,
+  "icon": "quasium:golem_staff",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:golems",
+  "pages": [
+    {"text": "quasium.progression.golem_staff.page1", "recipe": "quasium:golem_staff"},
+    {"text": "quasium.progression.golem_staff.page2"},
+    {"text": "quasium.progression.golem_staff.page3", "args": ["MARK_LINK_RADIUS", "MARK_MAX_LINKS"]},
+    {"text": "quasium.progression.golem_staff.page4", "args": ["GOLEM_MARK_RADIUS", "GOLEM_MARK_RADIUS"]},
+    {"text": "quasium.progression.golem_staff.feeder"}
+  ]
+}

@@ -1,9 +1,18 @@
 {
   "title": "quasium.progression.quasium_armor.title",
   "hint": "quasium.progression.quasium_armor.hint",
+  "category": "quasium",
+  "order": 40,
+  "icon": "quasium:quasium_chestplate",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:quasium_anvil",
   "pages": [
-    { "text": "quasium.progression.quasium_armor.page1" },
-    { "text": "quasium.progression.quasium_armor.page2" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_armor"
+    {"text": "quasium.progression.quasium_armor.page1", "items": ["quasium:quasium_helmet", "quasium:quasium_chestplate", "quasium:quasium_leggings", "quasium:quasium_boots"]},
+    {"text": "quasium.progression.quasium_armor.page2", "args": ["QUASIUM_ARMOR_DODGE_PCT", "QUASIUM_ARMOR_HAZE_CHARGES", "QUASIUM_ARMOR_HAZE_HIT_PCT", "QUASIUM_ARMOR_HAZE_SECONDS", "QUASIUM_ARMOR_HAZE_MIN_KAIF"]},
+    {"text": "quasium.progression.quasium_armor.page3"},
+    {"text": "item.quasium.quasium_helmet", "anvil": "quasium:quasium_helmet"},
+    {"text": "item.quasium.quasium_chestplate", "anvil": "quasium:quasium_chestplate"},
+    {"text": "item.quasium.quasium_leggings", "anvil": "quasium:quasium_leggings"},
+    {"text": "item.quasium.quasium_boots", "anvil": "quasium:quasium_boots"}
+  ]
 }

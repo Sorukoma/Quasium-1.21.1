@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "quasium:essence_ingredients/mint"
+    },
+    {
+      "tag": "quasium:essence_ingredients/mint"
+    }
+  ],
+  "result": {
+    "components": {
+      "quasium:essence_type": "mint"
+    },
+    "count": 1,
+    "id": "quasium:aroma_vial"
+  }
+}

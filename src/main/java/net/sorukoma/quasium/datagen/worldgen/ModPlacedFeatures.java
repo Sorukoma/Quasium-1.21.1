@@ -27,9 +27,11 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> PATCH_PESCHANIK = createKey("patch_peschanik");
     public static final ResourceKey<PlacedFeature> PATCH_BOLOTNIK = createKey("patch_bolotnik");
     public static final ResourceKey<PlacedFeature> PATCH_LEDYANOY = createKey("patch_ledyanoy");
+    public static final ResourceKey<PlacedFeature> QUASIUM_GEODE = createKey("quasium_geode");
 
     /** Пятно кустов в среднем раз в N чанков. Чем больше — тем реже. */
     private static final int PATCH_RARITY = 12;
+    private static final int GEODE_RARITY = 48;
 
     private static ResourceKey<PlacedFeature> createKey(String name) {
         return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, name));
@@ -56,6 +58,12 @@ public class ModPlacedFeatures {
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.PATCH_BOLOTNIK), patchPlacement()));
         context.register(PATCH_LEDYANOY, new PlacedFeature(
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.PATCH_LEDYANOY), patchPlacement()));
+        context.register(QUASIUM_GEODE, new PlacedFeature(configuredFeatures.getOrThrow(ModConfiguredFeatures.QUASIUM_GEODE), List.of(
+                RarityFilter.onAverageOnceEvery(GEODE_RARITY),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(-58), VerticalAnchor.absolute(-10)),
+                BiomeFilter.biome()
+        )));
     }
 
     private static List<PlacementModifier> patchPlacement() {

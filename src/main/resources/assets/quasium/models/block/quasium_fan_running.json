@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "quasium:block/quasium_fan_front_running",
+    "side": "quasium:block/quasium_fan_side",
+    "top": "quasium:block/quasium_fan_top"
+  }
+}

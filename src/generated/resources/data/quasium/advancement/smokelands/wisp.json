@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokelands/root",
+  "criteria": {
+    "wisp_tamed": {
+      "conditions": {
+        "event": "wisp_tamed"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokelands.wisp.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:wisp_flute"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.wisp.title"
+    }
+  },
+  "requirements": [
+    [
+      "wisp_tamed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

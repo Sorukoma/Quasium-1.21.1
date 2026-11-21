@@ -1,6 +1,8 @@
 package net.sorukoma.quasium.block.entity;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -19,14 +21,24 @@ import net.sorukoma.quasium.block.TobaccoPoleBlock;
 import net.sorukoma.quasium.component.ModDataComponents;
 import net.sorukoma.quasium.item.ModItems;
 import net.sorukoma.quasium.item.TobaccoVarieties;
+import net.sorukoma.quasium.selection.SelectionConfig;
+import net.sorukoma.quasium.selection.genetics.Genetics;
+import net.sorukoma.quasium.selection.genetics.Lineage;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TobaccoPoleBlockEntity extends BlockEntity {
+    private static final Logger LOGGER = LogUtils.getLogger();
+
     private int progress;
     private int totalTime;
     private ItemStack result = ItemStack.EMPTY;
     private boolean crossing;
     private boolean matured;
+    private boolean cloned;
 
     public TobaccoPoleBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.TOBACCO_POLE_BE.get(), pos, state);
@@ -37,34 +49,24 @@ public class TobaccoPoleBlockEntity extends BlockEntity {
     public int getTotalTime() { return totalTime; }
     public boolean isCrossing() { return crossing; }
     public boolean isMatured() { return matured; }
+    public boolean holdsClone() { return cloned; }
 
-    /** Пытается начать новое скрещивание, если рядом есть пара зрелых растений. */
     private void tryStartCrossing() {
         if (level == null || crossing || matured) return;
         BlockPos[] parents = findParents();
         if (parents == null) return;
-        TobaccoCropBlock first = (TobaccoCropBlock) level.getBlockState(parents[0]).getBlock();
-        TobaccoCropBlock second = (TobaccoCropBlock) level.getBlockState(parents[1]).getBlock();
-        BlockState firstState = level.getBlockState(parents[0]);
-        BlockState secondState = level.getBlockState(parents[1]);
-        String firstVariety = first.getVariety();
-        String secondVariety = second.getVariety();
         TobaccoPoleBlock pole = (TobaccoPoleBlock) getBlockState().getBlock();
-        // Скрещивание "потребляет" зрелость родителей вне зависимости от исхода.
-        level.setBlock(parents[0], firstState.setValue(TobaccoCropBlock.AGE, 3), 3);
-        level.setBlock(parents[1], secondState.setValue(TobaccoCropBlock.AGE, 3), 3);
+        ItemStack offspring = level.random.nextFloat() > pole.getSuccessChance() ? ItemStack.EMPTY : offspring(parents, pole);
+        for (BlockPos parent : parents) {
+            level.setBlock(parent, level.getBlockState(parent).setValue(TobaccoCropBlock.AGE, 3), 3);
+        }
         progress = 0;
         totalTime = 1200 + level.random.nextInt(1201);
         crossing = true;
-        if (level.random.nextFloat() > pole.getSuccessChance()) {
-            result = ItemStack.EMPTY;
-        } else {
-            result = createOffspring(firstVariety, secondVariety, firstState, secondState, pole.getMutationChance());
-        }
+        result = offspring;
         sync();
     }
 
-    /** Отмечает BE изменённым и рассылает обновление клиенту, чтобы рендерер видел семя/прогресс. */
     private void sync() {
         setChanged();
         if (level != null && !level.isClientSide) {
@@ -72,18 +74,51 @@ public class TobaccoPoleBlockEntity extends BlockEntity {
         }
     }
 
-    private ItemStack createOffspring(String first, String second, BlockState firstState, BlockState secondState, float mutationChance) {
+    private ItemStack offspring(BlockPos[] parents, TobaccoPoleBlock pole) {
+        TobaccoCropBlockEntity first = crop(parents[0]);
+        TobaccoCropBlockEntity second = crop(parents[1]);
+        double averageQuality = (first.getQualityStars() + second.getQualityStars()) / 2.0;
+        double chance = Genetics.hybridChance(pole.getMutationChance(), averageQuality, SelectionConfig.MUTATION_QUALITY_BONUS_PCT.get());
+        LOGGER.debug("Tobacco pole at {}: hybrid chance {} for {} x {}", worldPosition, chance,
+                Lineage.key(first.lineage()), Lineage.key(second.lineage()));
+        cloned = level.random.nextDouble() >= chance;
+        if (cloned) {
+            BlockPos parent = parents[level.random.nextInt(2)];
+            BlockState state = level.getBlockState(parent);
+            return ((TobaccoCropBlock) state.getBlock()).seedsWithGenes(state, crop(parent), 1);
+        }
+        return hybridSeed(first, second, level.getBlockState(parents[0]), level.getBlockState(parents[1]), pole.getMutationChance());
+    }
+
+    private ItemStack hybridSeed(TobaccoCropBlockEntity first, TobaccoCropBlockEntity second, BlockState firstState, BlockState secondState,
+                                 float mutationChance) {
+        boolean firstHybrid = Lineage.isHybrid(first.lineage());
+        boolean secondHybrid = Lineage.isHybrid(second.lineage());
+        int strength = cross(first.getStrengthStars(), firstHybrid, second.getStrengthStars(), secondHybrid);
+        int yield = cross(first.getYieldStars(), firstHybrid, second.getYieldStars(), secondHybrid);
+        int quality = cross(first.getQualityStars(), firstHybrid, second.getQualityStars(), secondHybrid);
+        String mutation = inheritMutation(mutationOf(firstState), mutationOf(secondState), mutationChance);
+        if ("double_yield".equals(mutation)) yield = Math.min(5, yield + 1);
+        if ("concentrated".equals(mutation)) strength = Math.min(5, strength + 1);
+        if ("premium_quality".equals(mutation)) quality = Math.min(5, quality + 1);
         ItemStack seed = ModItems.HYBRID_TOBACCO_SEEDS.get().getDefaultInstance();
-        int strength = average(TobaccoVarieties.strength(first), TobaccoVarieties.strength(second));
-        int yield = average(TobaccoVarieties.yield(first), TobaccoVarieties.yield(second));
-        int quality = average(TobaccoVarieties.quality(first), TobaccoVarieties.quality(second));
-        if (level.random.nextFloat() < 0.2f) strength = Math.min(5, strength + 1);
-        if (level.random.nextFloat() < 0.1f) quality = Math.max(1, quality - 1);
-        String firstMutation = mutationOf(firstState);
-        String secondMutation = mutationOf(secondState);
+        seed.set(ModDataComponents.TOBACCO_VARIETY.get(), TobaccoVarieties.HYBRID);
+        seed.set(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), strength);
+        seed.set(ModDataComponents.TOBACCO_YIELD_STARS.get(), yield);
+        seed.set(ModDataComponents.TOBACCO_QUALITY_STARS.get(), quality);
+        if (!mutation.isEmpty()) seed.set(ModDataComponents.TOBACCO_MUTATION.get(), mutation);
+        Lineage.apply(seed, Lineage.merge(first.lineage(), second.lineage()));
+        return seed;
+    }
+
+    private int cross(int first, boolean firstHybrid, int second, boolean secondHybrid) {
+        int roll = Genetics.roll(level.random);
+        if (firstHybrid == secondHybrid) return Genetics.inherit(first, second, roll);
+        return firstHybrid ? Genetics.recombine(first, second, roll) : Genetics.recombine(second, first, roll);
+    }
+
+    private String inheritMutation(String firstMutation, String secondMutation, float mutationChance) {
         String mutation = "";
-        // Малый шанс "токсичной" мутации: гибрид даёт лист/смесь, наносящий урон при курении.
-        // Наследуется от родителя-токсика с повышенным шансом, либо изредка появляется спонтанно.
         boolean parentToxic = "toxic".equals(firstMutation) || "toxic".equals(secondMutation);
         if (parentToxic && level.random.nextFloat() < 0.5f) {
             mutation = "toxic";
@@ -106,51 +141,52 @@ public class TobaccoPoleBlockEntity extends BlockEntity {
             case 3 -> "concentrated";
             default -> "premium_quality";
         };
-        if ("double_yield".equals(mutation)) yield = Math.min(5, yield + 1);
-        if ("concentrated".equals(mutation)) strength = Math.min(5, strength + 1);
-        if ("premium_quality".equals(mutation)) quality = Math.min(5, quality + 1);
-        seed.set(ModDataComponents.TOBACCO_VARIETY.get(), "hybrid");
-        seed.set(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), strength);
-        seed.set(ModDataComponents.TOBACCO_YIELD_STARS.get(), yield);
-        seed.set(ModDataComponents.TOBACCO_QUALITY_STARS.get(), quality);
-        if (!mutation.isEmpty()) seed.set(ModDataComponents.TOBACCO_MUTATION.get(), mutation);
-        return seed;
+        return mutation;
     }
 
     private static String mutationOf(BlockState state) {
         return TobaccoCropBlock.mutationName(state.getValue(TobaccoCropBlock.MUTATION));
     }
 
-
-    private ItemStack seedFor(String variety) {
-        return switch (variety) {
-            case TobaccoVarieties.PESCHANIK -> ModItems.PESCHANIK_SEEDS.get().getDefaultInstance();
-            case TobaccoVarieties.BOLOTNIK -> ModItems.BOLOTNIK_SEEDS.get().getDefaultInstance();
-            case TobaccoVarieties.LEDYANOY -> ModItems.LEDYANOY_SEEDS.get().getDefaultInstance();
-            default -> ModItems.DIKAR_SEEDS.get().getDefaultInstance();
-        };
-    }
-
-    private static int average(int first, int second) {
-        return Math.max(1, Math.min(5, Math.round((first + second) / 2.0f)));
+    public boolean sameParentsOnly() {
+        List<BlockPos[]> pairs = maturePairs();
+        return !pairs.isEmpty() && pairs.stream().noneMatch(this::differ);
     }
 
     @Nullable
     private BlockPos[] findParents() {
-        if (level == null) return null;
-        for (net.minecraft.core.Direction direction : net.minecraft.core.Direction.Plane.HORIZONTAL) {
+        return maturePairs().stream().filter(this::differ).findFirst().orElse(null);
+    }
+
+    private boolean differ(BlockPos[] pair) {
+        return !Lineage.key(crop(pair[0]).lineage()).equals(Lineage.key(crop(pair[1]).lineage()));
+    }
+
+    private List<BlockPos[]> maturePairs() {
+        List<BlockPos[]> pairs = new ArrayList<>();
+        if (level == null) return pairs;
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockPos firstPos = worldPosition.relative(direction);
-            BlockPos secondPos = worldPosition.relative(direction.getOpposite());
-            if (isMatureCrop(firstPos) && isMatureCrop(secondPos)) return new BlockPos[]{firstPos, secondPos};
-            secondPos = worldPosition.relative(direction.getOpposite(), 2);
-            if (isMatureCrop(firstPos) && isMatureCrop(secondPos)) return new BlockPos[]{firstPos, secondPos};
+            if (!isMatureCrop(firstPos)) continue;
+            for (int distance = 1; distance <= 2; distance++) {
+                BlockPos secondPos = worldPosition.relative(direction.getOpposite(), distance);
+                if (isMatureCrop(secondPos)) {
+                    pairs.add(new BlockPos[]{firstPos, secondPos});
+                    break;
+                }
+            }
         }
-        return null;
+        return pairs;
+    }
+
+    private TobaccoCropBlockEntity crop(BlockPos pos) {
+        return (TobaccoCropBlockEntity) level.getBlockEntity(pos);
     }
 
     private boolean isMatureCrop(BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        return state.getBlock() instanceof TobaccoCropBlock crop && state.getValue(TobaccoCropBlock.AGE) == crop.getMaxAge();
+        return state.getBlock() instanceof TobaccoCropBlock crop && crop.isMaxAge(state)
+                && level.getBlockEntity(pos) instanceof TobaccoCropBlockEntity;
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, TobaccoPoleBlockEntity entity) {
@@ -197,6 +233,7 @@ public class TobaccoPoleBlockEntity extends BlockEntity {
         // Сбрасываем состояние, чтобы жёрдочка могла начать новое скрещивание.
         result = ItemStack.EMPTY;
         matured = false;
+        cloned = false;
         crossing = false;
         progress = 0;
         totalTime = 0;
@@ -207,15 +244,15 @@ public class TobaccoPoleBlockEntity extends BlockEntity {
     @Override public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
         CompoundTag tag = new CompoundTag();
         tag.putInt("progress", progress); tag.putInt("totalTime", totalTime);
-        tag.putBoolean("crossing", crossing); tag.putBoolean("matured", matured);
+        tag.putBoolean("crossing", crossing); tag.putBoolean("matured", matured); tag.putBoolean("cloned", cloned);
         if (!result.isEmpty()) tag.put("result", result.saveOptional(provider));
         return tag;
     }
     @Override protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) { tag.merge(getUpdateTag(provider)); super.saveAdditional(tag, provider); }
     @Override protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadAdditional(tag, provider); progress = tag.getInt("progress"); totalTime = tag.getInt("totalTime");
-        crossing = tag.getBoolean("crossing"); matured = tag.getBoolean("matured");
-        result = tag.contains("result") ? ItemStack.parse(provider, tag.getCompound("result")).orElse(ItemStack.EMPTY) : ItemStack.EMPTY;
+        crossing = tag.getBoolean("crossing"); matured = tag.getBoolean("matured"); cloned = tag.getBoolean("cloned");
+        result = ItemStack.parseOptional(provider, tag.getCompound("result"));
     }
     @Nullable @Override public Packet<ClientGamePacketListener> getUpdatePacket() { return ClientboundBlockEntityDataPacket.create(this); }
 }

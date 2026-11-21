@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "kiln_infuse": {
+      "conditions": {
+        "event": "kiln_infuse"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.kiln_infuse.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:iron_sword"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.kiln_infuse.title"
+    }
+  },
+  "requirements": [
+    [
+      "kiln_infuse"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,13 @@
+{
+  "note": "resin",
+  "volume": 20,
+  "cooldown": 4,
+  "target": "foe",
+  "params": {
+    "slow_level": 2,
+    "effect_seconds": 3,
+    "pull_down": 0.8
+  },
+  "unlock": "note:resin",
+  "order": 13
+}

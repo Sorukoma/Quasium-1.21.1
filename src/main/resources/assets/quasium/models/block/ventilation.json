@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "quasium:block/ventilation_fan",
+    "side": "quasium:block/ventilation_grille"
+  }
+}

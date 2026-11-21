@@ -1,0 +1,30 @@
+{
+  "title": "quasium.research.research_draft_boiler.title",
+  "hint": "quasium.research.research_draft_boiler.hint",
+  "category": "research_draft",
+  "order": 10,
+  "icon": "quasium:smoke_boiler",
+  "scene": "quasium:smoke_boiler",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "ember"
+    ],
+    "kaif": 20,
+    "recipes": [
+      "quasium:smoke_boiler"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_draft_boiler.page1",
+      "recipe": "quasium:smoke_boiler",
+      "args": [
+        "BOILER_DRAFT",
+        "BOILER_WATER_CAPACITY",
+        "BOILER_WATER_ML_PER_SECOND",
+        "BOILER_DENSITY_PER_MINUTE"
+      ]
+    }
+  ]
+}

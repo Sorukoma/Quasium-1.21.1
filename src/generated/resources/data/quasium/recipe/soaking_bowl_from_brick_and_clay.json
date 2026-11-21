@@ -10,9 +10,8 @@
     }
   },
   "pattern": [
-    " B ",
-    "BCB",
-    " B "
+    "B B",
+    "BCB"
   ],
   "result": {
     "count": 1,

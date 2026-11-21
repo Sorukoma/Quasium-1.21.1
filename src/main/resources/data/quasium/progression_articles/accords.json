@@ -1,0 +1,68 @@
+{
+  "title": "quasium.progression.accords.title",
+  "hint": "quasium.progression.accords.hint",
+  "category": "smokecraft",
+  "order": 34,
+  "icon": "minecraft:note_block",
+  "unlockCondition": "quasium:smokecraft/first_accord",
+  "scene": "quasium:accords",
+  "pages": [
+    {
+      "text": "quasium.progression.accords.page1"
+    },
+    {
+      "text": "quasium.progression.accords.page2"
+    },
+    {
+      "text": "quasium.progression.accords.page3"
+    },
+    {
+      "text": "quasium.progression.accords.page4"
+    },
+    {
+      "text": "quasium.progression.accords.spark"
+    },
+    {
+      "text": "quasium.progression.accords.lightness"
+    },
+    {
+      "text": "quasium.progression.accords.rime"
+    },
+    {
+      "text": "quasium.progression.accords.glaze"
+    },
+    {
+      "text": "quasium.progression.accords.oblivion"
+    },
+    {
+      "text": "quasium.progression.accords.caramel"
+    },
+    {
+      "text": "quasium.progression.accords.steam"
+    },
+    {
+      "text": "quasium.progression.accords.magma"
+    },
+    {
+      "text": "quasium.progression.accords.smolder"
+    },
+    {
+      "text": "quasium.progression.accords.balm"
+    },
+    {
+      "text": "quasium.progression.accords.amber"
+    },
+    {
+      "text": "quasium.progression.accords.ferment"
+    },
+    {
+      "text": "quasium.progression.accords.quagmire"
+    },
+    {
+      "text": "quasium.progression.accords.fog"
+    },
+    {
+      "text": "quasium.progression.accords.collapse"
+    }
+  ]
+}

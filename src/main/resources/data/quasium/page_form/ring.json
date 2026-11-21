@@ -1,0 +1,10 @@
+{
+  "shape": "ring",
+  "volume": 35,
+  "params": {
+    "speed": 0.8,
+    "range": 16
+  },
+  "unlock": "research:quasium:research_smoke_veil",
+  "order": 8
+}

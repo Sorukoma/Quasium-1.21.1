@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "dream": {
+      "conditions": {
+        "event": "dream"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.dream.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:red_bed"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.dream.title"
+    }
+  },
+  "requirements": [
+    [
+      "dream"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

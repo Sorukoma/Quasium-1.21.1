@@ -1,0 +1,49 @@
+{
+  "title": "quasium.progression.research.title",
+  "hint": "quasium.progression.research.hint",
+  "category": "smokecraft",
+  "order": 50,
+  "icon": "quasium:research_table",
+  "unlockCondition": "quasium:smokecraft/first_scan",
+  "scene": "quasium:research_table",
+  "pages": [
+    {
+      "text": "quasium.progression.research.page1",
+      "recipe": "quasium:research_table",
+      "args": [
+        "TREATISE_INSIGHT",
+        "TREATISE_SECONDS"
+      ]
+    },
+    {
+      "text": "quasium.progression.research.page2"
+    },
+    {
+      "text": "quasium.progression.research.page3",
+      "args": [
+        "TIER_TREATISES",
+        "TIER_INSIGHT",
+        "TIER_NOTE_ML"
+      ]
+    },
+    {
+      "text": "quasium.progression.research.page4",
+      "args": [
+        "LIVED_KAIF"
+      ]
+    },
+    {
+      "text": "quasium.progression.research.page5",
+      "args": [
+        "SCHOOL_DISCOUNT_PCT",
+        "SCHOOL_DISCOUNT_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.research.page6",
+      "args": [
+        "PERCEPTION_MIRROR"
+      ]
+    }
+  ]
+}

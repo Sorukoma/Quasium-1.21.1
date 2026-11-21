@@ -1,9 +1,14 @@
 {
   "title": "quasium.progression.smelting_quasium.title",
   "hint": "quasium.progression.smelting_quasium.hint",
+  "category": "quasium",
+  "order": 20,
+  "icon": "quasium:quasiumingot",
+  "unlockCondition": "quasium:smelt_raw_quasium",
+  "scene": "quasium:quasium_ore",
   "pages": [
-    { "text": "quasium.progression.smelting_quasium.page1" },
-    { "text": "quasium.progression.smelting_quasium.page2" }
-  ],
-  "unlockCondition": "quasium:smelt_raw_quasium"
+    {"text": "quasium.progression.smelting_quasium.page1", "recipe": "quasium:quasiumingot_from_smelting_rawquasium"},
+    {"text": "quasium.progression.smelting_quasium.page2", "recipe": "quasium:quasiumingot_from_blasting_rawquasium"},
+    {"text": "quasium.progression.smelting_quasium.page3", "recipe": "quasium:undried_quasium_block_from_quasium_ingots"}
+  ]
 }

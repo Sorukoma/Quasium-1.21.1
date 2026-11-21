@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:apple"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "PAP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:golem_feeder"
+  }
+}

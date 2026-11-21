@@ -3,6 +3,12 @@
   "criteria": {
     "mined_quasium_ore": {
       "trigger": "quasium:quasium_ore_mined"
+    },
+    "reached_kaif_10": {
+      "conditions": {
+        "min_kaif_level": 10
+      },
+      "trigger": "quasium:kaif_level"
     }
   },
   "display": {
@@ -19,6 +25,7 @@
   },
   "requirements": [
     [
+      "reached_kaif_10",
       "mined_quasium_ore"
     ]
   ],

@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:kaif/kaif_level_30",
+  "criteria": {
+    "geode": {
+      "conditions": {
+        "event": "geode"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.geode.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:quasium_cluster"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.geode.title"
+    }
+  },
+  "requirements": [
+    [
+      "geode"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

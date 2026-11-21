@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokelands/root",
+  "criteria": {
+    "smokelands_enter": {
+      "conditions": {
+        "event": "smokelands_enter"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokelands.enter.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:ash_sand"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.enter.title"
+    }
+  },
+  "requirements": [
+    [
+      "smokelands_enter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

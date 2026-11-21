@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/cactus",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "quasium:block/ash_cactus_side",
+    "side": "quasium:block/ash_cactus_side",
+    "top": "quasium:block/ash_cactus_top",
+    "bottom": "quasium:block/ash_cactus_bottom"
+  }
+}

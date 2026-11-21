@@ -1,0 +1,33 @@
+{
+  "parent": "quasium:smokecraft/first_scan",
+  "criteria": {
+    "bestiary_drop": {
+      "conditions": {
+        "event": "bestiary_drop"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.bestiary.description"
+    },
+    "icon": {
+      "components": {
+        "quasium:essence_amount": 2,
+        "quasium:essence_type": "menthol"
+      },
+      "count": 1,
+      "id": "quasium:essence_bottle"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.bestiary.title"
+    }
+  },
+  "requirements": [
+    [
+      "bestiary_drop"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

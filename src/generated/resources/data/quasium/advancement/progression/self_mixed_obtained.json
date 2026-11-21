@@ -1,6 +1,19 @@
 {
   "parent": "quasium:root",
   "criteria": {
+    "has_essence_or_molasses": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:essence_bottle",
+              "quasium:molasses_bottle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_self_mixed": {
       "conditions": {
         "items": [
@@ -36,6 +49,7 @@
   },
   "requirements": [
     [
+      "has_essence_or_molasses",
       "has_self_mixed",
       "has_soaking_bowl"
     ]

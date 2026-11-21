@@ -1,0 +1,18 @@
+{
+  "form": "ring",
+  "inputs": [
+    {
+      "resin": 1,
+      "dew": 1,
+      "menthol": 1
+    }
+  ],
+  "lungs": 60,
+  "grams": 0.4,
+  "cooldown": 12,
+  "action": "shield",
+  "color": "#A0C8FF",
+  "params": {
+    "duration": 10
+  }
+}

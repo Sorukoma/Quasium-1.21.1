@@ -2,6 +2,7 @@ package net.sorukoma.quasium.item;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -10,6 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.magic.FocusEssence;
+import net.sorukoma.quasium.magic.Spell;
+import net.sorukoma.quasium.magic.Spells;
+import net.sorukoma.quasium.mind.ClientMind;
 import net.sorukoma.quasium.screen.HookahBowlMenu;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.SimpleMenuProvider;
@@ -90,5 +95,20 @@ public class HookahBowlItem extends Item {
         } else {
             pTooltipComponents.add(Component.translatable("gui.quasium.empty").withStyle(ChatFormatting.DARK_GRAY));
         }
+        appendFocus(pStack, pTooltipComponents);
+    }
+
+    private static void appendFocus(ItemStack bowl, List<Component> tooltip) {
+        List<FocusEssence> focus = Spells.focusOf(bowl);
+        if (focus.stream().allMatch(FocusEssence::isEmpty)) return;
+        for (FocusEssence entry : focus) {
+            if (entry.isEmpty()) continue;
+            tooltip.add(Component.translatable("quasium.tooltip.focus_essence",
+                    Component.translatable("item.quasium.essence_bottle." + entry.essence()), entry.ml()).withStyle(ChatFormatting.DARK_PURPLE));
+        }
+        ResourceLocation spell = Spells.forBowl(bowl, ClientMind.knownSpells());
+        tooltip.add(spell == null
+                ? Component.translatable("quasium.tooltip.focus_no_spell").withStyle(ChatFormatting.DARK_GRAY)
+                : Component.translatable("quasium.tooltip.focus_spell", Spell.displayName(spell)).withStyle(ChatFormatting.LIGHT_PURPLE));
     }
 }

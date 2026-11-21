@@ -1,0 +1,18 @@
+{
+  "title": "quasium.research.research_mind_sommelier.title",
+  "hint": "quasium.research.research_mind_sommelier.hint",
+  "category": "research_mind",
+  "order": 30,
+  "icon": "quasium:mint_tobacco",
+  "research": {
+    "tier": 2,
+    "perk": "sommelier",
+    "insight": 4,
+    "treatises": 0
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mind_sommelier.page1"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "quasium:block/ritual_brazier"
+    },
+    "lit=true": {
+      "model": "quasium:block/ritual_brazier_lit"
+    }
+  }
+}

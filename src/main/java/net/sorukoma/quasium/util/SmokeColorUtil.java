@@ -9,8 +9,20 @@ import java.util.Map;
  * Используется для цветного DUST-оверлея поверх стандартного белого дыма кальяна.
  */
 public final class SmokeColorUtil {
+    public static final int SICK = 0xB9C93A;
 
     private SmokeColorUtil() {}
+
+    public static float sickness(float windowShare, int fromPct) {
+        return Math.clamp((windowShare * 100f - fromPct) / (100f - fromPct), 0f, 1f);
+    }
+
+    public static int blend(int from, int to, float share) {
+        int red = Math.round(((from >> 16) & 0xFF) * (1 - share) + ((to >> 16) & 0xFF) * share);
+        int green = Math.round(((from >> 8) & 0xFF) * (1 - share) + ((to >> 8) & 0xFF) * share);
+        int blue = Math.round((from & 0xFF) * (1 - share) + (to & 0xFF) * share);
+        return (red << 16) | (green << 8) | blue;
+    }
 
     /** Цвет дыма для конкретного флавора обычного табака. */
     public static int colorForFlavor(String flavor) {

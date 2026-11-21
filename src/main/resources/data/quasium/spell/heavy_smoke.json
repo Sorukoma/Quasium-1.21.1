@@ -1,0 +1,21 @@
+{
+  "form": "cloud",
+  "inputs": [
+    {
+      "resin": 1,
+      "ash": 1
+    }
+  ],
+  "lungs": 75,
+  "grams": 0.6,
+  "cooldown": 8,
+  "action": "heavy",
+  "color": "#5A4A3A",
+  "params": {
+    "throw": 12,
+    "radius": 3,
+    "duration": 6,
+    "effect_seconds": 2,
+    "slow_level": 2
+  }
+}

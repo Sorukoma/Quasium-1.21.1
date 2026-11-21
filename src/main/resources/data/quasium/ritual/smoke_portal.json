@@ -1,0 +1,30 @@
+{
+  "tier": 4,
+  "catalyst": {
+    "item": "quasium:quasium_block"
+  },
+  "pedestals": [
+    {
+      "item": "quasium:quasium_block"
+    },
+    {
+      "item": "quasium:quasium_block"
+    },
+    {
+      "item": "quasium:quasium_block"
+    }
+  ],
+  "notes": {
+    "menthol": 64,
+    "ash": 32
+  },
+  "puffs": 1000,
+  "rate": 256,
+  "kaif": {
+    "min": 60
+  },
+  "base": 30,
+  "result": {
+    "id": "quasium:smoke_portal_activator"
+  }
+}

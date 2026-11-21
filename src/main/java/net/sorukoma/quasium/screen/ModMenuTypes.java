@@ -27,6 +27,18 @@ public class ModMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<CalloudMenu>> CALLOUD_MENU =
             MENUS.register("calloud_menu", () -> IMenuTypeExtension.create((id, inv, buf) -> new CalloudMenu(id, inv, buf)));
 
+    public static final DeferredHolder<MenuType<?>, MenuType<DistillationCubeMenu>> DISTILLATION_CUBE_MENU =
+            MENUS.register("distillation_cube_menu", () -> IMenuTypeExtension.create(DistillationCubeMenu::new));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<GolemMenu>> GOLEM_MENU =
+            MENUS.register("golem_menu", () -> IMenuTypeExtension.create(GolemMenu::new));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<GolemFeederMenu>> GOLEM_FEEDER_MENU =
+            MENUS.register("golem_feeder_menu", () -> IMenuTypeExtension.create((id, inv, buf) -> new GolemFeederMenu(id, inv)));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<ProgramTableMenu>> PROGRAM_TABLE_MENU =
+            MENUS.register("program_table_menu", () -> IMenuTypeExtension.create(ProgramTableMenu::new));
+
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
     }

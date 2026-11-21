@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": {
+      "item": "minecraft:white_terracotta"
+    }
+  },
+  "pattern": [
+    "W W",
+    " W "
+  ],
+  "result": {
+    "count": 4,
+    "id": "quasium:tea_cup"
+  }
+}

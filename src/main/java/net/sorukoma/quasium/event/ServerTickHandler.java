@@ -29,16 +29,7 @@ public class ServerTickHandler {
                     state.saveToPlayer();
                 }
             } else {
-                // Player doesn't have backpack hookah - clean up state if exists
-                BackpackHookahState existingState = BackpackHookahState.getState(player.getUUID());
-                if (existingState != null) {
-                    if (existingState.isPuffing()) {
-                        existingState.stopPuffing();
-                    }
-                    existingState.drops();
-                    existingState.resetState();
-                    BackpackHookahState.removeState(player.getUUID());
-                }
+                BackpackHookahState.takenOff(player);
             }
         }
     }

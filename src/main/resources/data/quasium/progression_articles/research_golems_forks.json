@@ -1,0 +1,24 @@
+{
+  "title": "quasium.research.research_golems_forks.title",
+  "hint": "quasium.research.research_golems_forks.hint",
+  "category": "research_golems",
+  "order": 20,
+  "icon": "minecraft:comparator",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "nectar"
+    ],
+    "requires": [
+      "quasium:research_golems_counting"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_golems_forks.page1"
+    },
+    {
+      "text": "quasium.research.research_golems_forks.page2"
+    }
+  ]
+}

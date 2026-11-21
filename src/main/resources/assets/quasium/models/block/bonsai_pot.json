@@ -2,7 +2,6 @@
   "parent": "minecraft:block/flower_pot",
   "textures": {
     "particle": "minecraft:block/terracotta",
-    "side": "minecraft:block/terracotta",
-    "top": "minecraft:block/terracotta"
+    "flowerpot": "minecraft:block/terracotta"
   }
 }

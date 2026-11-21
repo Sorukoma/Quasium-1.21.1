@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "quasium:block/essence_pump_top",
+    "bottom": "quasium:block/fitting_copper",
+    "side": "quasium:block/essence_pump_side"
+  }
+}

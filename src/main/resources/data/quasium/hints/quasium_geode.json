@@ -1,0 +1,230 @@
+{
+  "items": [
+    "quasium:quasium_crust",
+    "quasium:budding_quasium",
+    "quasium:small_quasium_bud",
+    "quasium:medium_quasium_bud",
+    "quasium:large_quasium_bud",
+    "quasium:quasium_cluster"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "minecraft:deepslate",
+          "pos": [0, 0, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [1, 0, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [2, 0, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [3, 0, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [4, 0, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [0, 1, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [1, 1, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [2, 1, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [3, 1, 3]
+        },
+        {
+          "state": "minecraft:deepslate",
+          "pos": [4, 1, 3]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:kaifometer",
+          "pos": [2.5, 2.4, 2.2]
+        }
+      ],
+      "args": [
+        "GEODE_REVEAL_KAIF"
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [0, 0, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [1, 0, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [2, 0, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [3, 0, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [4, 0, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [0, 1, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [1, 1, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [2, 1, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [3, 1, 3]
+        },
+        {
+          "state": "quasium:quasium_crust",
+          "pos": [4, 1, 3]
+        }
+      ],
+      "highlight": [
+        [1, 1, 3],
+        [3, 0, 3]
+      ],
+      "args": [
+        "GEODE_REVEAL_KAIF",
+        "GEODE_HUM_RADIUS"
+      ]
+    },
+    {
+      "duration": 200,
+      "place": [
+        {
+          "state": "minecraft:calcite",
+          "pos": [0, 0, 3]
+        },
+        {
+          "state": "quasium:budding_quasium",
+          "pos": [1, 0, 3]
+        },
+        {
+          "state": "quasium:budding_quasium",
+          "pos": [2, 0, 3]
+        },
+        {
+          "state": "quasium:budding_quasium",
+          "pos": [3, 0, 3]
+        },
+        {
+          "state": "quasium:budding_quasium",
+          "pos": [4, 0, 3]
+        },
+        {
+          "state": "quasium:small_quasium_bud[facing=north]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "quasium:medium_quasium_bud[facing=north]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "quasium:large_quasium_bud[facing=north]",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "quasium:quasium_cluster[facing=north]",
+          "pos": [4, 0, 2]
+        }
+      ],
+      "highlight": [
+        [1, 0, 2],
+        [2, 0, 2],
+        [3, 0, 2],
+        [4, 0, 2]
+      ]
+    },
+    {
+      "duration": 190,
+      "highlight": [
+        [4, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:rawquasium",
+          "pos": [3.6, 1.0, 1.6]
+        },
+        {
+          "item": "quasium:rawquasium",
+          "pos": [4.1, 1.2, 1.6]
+        },
+        {
+          "item": "quasium:rawquasium",
+          "pos": [4.6, 1.0, 1.6]
+        }
+      ],
+      "args": [
+        "CLUSTER_DROP_MIN_KAIF",
+        "CLUSTER_DROP_MIN",
+        "CLUSTER_DROP_MAX"
+      ]
+    },
+    {
+      "duration": 170,
+      "highlight": [
+        [1, 0, 3]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:piston",
+          "pos": [1.5, 1.4, 1.8]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "minecraft:chest[facing=north]",
+          "pos": [0, 0, 1]
+        }
+      ],
+      "highlight": [
+        [0, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [0.1, 1.3, 1.5]
+        },
+        {
+          "item": "quasium:lore_page",
+          "pos": [0.5, 1.4, 1.5]
+        },
+        {
+          "item": "quasium:secret_recipe",
+          "pos": [0.9, 1.3, 1.5]
+        }
+      ]
+    }
+  ]
+}

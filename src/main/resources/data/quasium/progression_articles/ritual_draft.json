@@ -1,0 +1,77 @@
+{
+  "title": "quasium.progression.ritual_draft.title",
+  "hint": "quasium.progression.ritual_draft.hint",
+  "category": "smokecraft",
+  "order": 70,
+  "icon": "quasium:hookah_pipe",
+  "unlockCondition": "quasium:ritual/brazier",
+  "scene": "quasium:ritual_draft",
+  "pages": [
+    {
+      "text": "quasium.progression.ritual_draft.page1",
+      "items": [
+        "quasium:hookah_pipe"
+      ],
+      "args": [
+        "PULSE_MS_T1",
+        "PULSE_MS_T4"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_draft.streak",
+      "args": [
+        "WINDOW_MS_T1",
+        "WINDOW_MS_T4",
+        "STREAK_HITS",
+        "STREAK_MAX_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_draft.page3",
+      "args": [
+        "HIT_RELIEF",
+        "MISS_PENALTY",
+        "EMPTY_PULSE_PENALTY",
+        "KAIF_DIVISOR",
+        "DRIFT_DIVISOR"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_draft.page2",
+      "items": [
+        "quasium:bellows",
+        "quasium:copper_pipe"
+      ],
+      "args": [
+        "NETWORK_SPEED_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_draft.page5",
+      "args": [
+        "GROUP_PLAYERS",
+        "GROUP_WINDOW_SEC",
+        "GROUP_BONUS"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_draft.page6",
+      "items": [
+        "quasium:focus_upgrade_filter"
+      ],
+      "args": [
+        "FILTER_BONUS"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_draft.page4",
+      "args": [
+        "RITUAL_BREAK_THRESHOLD",
+        "FAIL_NOTE_RETURN_PCT",
+        "FAIL_KAIF_LOSS",
+        "FAIL_DENSITY",
+        "RITUAL_DENSITY"
+      ]
+    }
+  ]
+}

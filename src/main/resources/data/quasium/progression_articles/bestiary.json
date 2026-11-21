@@ -1,0 +1,25 @@
+{
+  "title": "quasium.progression.bestiary.title",
+  "hint": "quasium.progression.bestiary.hint",
+  "category": "smokecraft",
+  "order": 25,
+  "icon": "minecraft:phantom_membrane",
+  "unlockCondition": "quasium:smokecraft/first_scan",
+  "pages": [
+    {
+      "text": "quasium.progression.bestiary.page1",
+      "args": [
+        "SCAN_KAIF_MOB"
+      ]
+    },
+    {
+      "text": "quasium.progression.bestiary.page2"
+    },
+    {
+      "text": "quasium.progression.bestiary.page3"
+    },
+    {
+      "text": "quasium.progression.bestiary.page4"
+    }
+  ]
+}

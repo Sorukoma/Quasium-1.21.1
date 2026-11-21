@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokelands/root",
+  "criteria": {
+    "storm_survived": {
+      "conditions": {
+        "event": "storm_survived"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokelands.storm.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:ash_cactus"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.storm.title"
+    }
+  },
+  "requirements": [
+    [
+      "storm_survived"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

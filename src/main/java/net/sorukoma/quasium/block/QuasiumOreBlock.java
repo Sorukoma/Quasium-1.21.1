@@ -78,7 +78,7 @@ public class QuasiumOreBlock extends Block {
         return List.of(new ItemStack(ModItems.RAWQUASIUM.get(), count));
     }
 
-    private static boolean hasSilkTouch(Player player, ItemStack tool) {
+    public static boolean hasSilkTouch(Player player, ItemStack tool) {
         if (!(player.level() instanceof ServerLevel serverLevel)) return false;
         HolderLookup.RegistryLookup<Enchantment> registryLookup =
                 serverLevel.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);

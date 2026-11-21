@@ -1,0 +1,52 @@
+{
+  "title": "quasium.progression.ritual_artifacts.title",
+  "hint": "quasium.progression.ritual_artifacts.hint",
+  "category": "smokecraft",
+  "order": 80,
+  "icon": "quasium:eternal_coal",
+  "unlockCondition": "quasium:ritual/brazier",
+  "pages": [
+    {
+      "text": "quasium.progression.ritual_artifacts.page1",
+      "ritual": "quasium:dream_quartz"
+    },
+    {
+      "text": "quasium.progression.ritual_artifacts.page2",
+      "ritual": "quasium:eternal_coal",
+      "args": [
+        "ETERNAL_COAL_GRAMS_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_artifacts.page3",
+      "ritual": "quasium:bottomless_flask",
+      "args": [
+        "BOTTOMLESS_FLASK_KAIF_PER_CAST"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_artifacts.page5",
+      "ritual": "quasium:smoke_portal"
+    },
+    {
+      "text": "quasium.progression.ritual_artifacts.page6",
+      "items": [
+        "quasium:void_pipe"
+      ],
+      "args": [
+        "VOID_PIPE_END_CITY_PCT",
+        "VOID_PIPE_LOW_BOWL_GRAMS",
+        "VOID_PIPE_HP_PER_CAST"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_artifacts.page7",
+      "recipe": "quasium:signal_pipe",
+      "args": [
+        "SIGNAL_PIPE_HEIGHT",
+        "SIGNAL_PIPE_MAX_CHARS",
+        "SIGNAL_PIPE_COOLDOWN_SEC"
+      ]
+    }
+  ]
+}

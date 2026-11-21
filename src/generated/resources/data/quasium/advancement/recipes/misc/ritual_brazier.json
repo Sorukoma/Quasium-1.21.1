@@ -1,0 +1,50 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brazier": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:ritual_brazier"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_quasium_anvil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:quasium_anvil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:ritual_brazier"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "zone_2": {
+      "conditions": {
+        "event": "zone_2"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_quasium_anvil",
+      "zone_2",
+      "has_brazier"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:ritual_brazier"
+    ]
+  }
+}

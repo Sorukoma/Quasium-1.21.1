@@ -1,0 +1,13 @@
+{
+  "note": "ember",
+  "volume": 20,
+  "cooldown": 1.5,
+  "target": "foe",
+  "params": {
+    "damage": 3,
+    "burn_seconds": 4,
+    "wet_multiplier": 0.5
+  },
+  "unlock": "note:ember",
+  "order": 4
+}

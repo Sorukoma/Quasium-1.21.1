@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=south,powered=false,pumping=false": {
+      "model": "quasium:block/bellows"
+    },
+    "facing=south,powered=true,pumping=false": {
+      "model": "quasium:block/bellows"
+    },
+    "facing=south,powered=false,pumping=true": {
+      "model": "quasium:block/bellows_pumping"
+    },
+    "facing=south,powered=true,pumping=true": {
+      "model": "quasium:block/bellows_pumping"
+    },
+    "facing=west,powered=false,pumping=false": {
+      "model": "quasium:block/bellows",
+      "y": 90
+    },
+    "facing=west,powered=true,pumping=false": {
+      "model": "quasium:block/bellows",
+      "y": 90
+    },
+    "facing=west,powered=false,pumping=true": {
+      "model": "quasium:block/bellows_pumping",
+      "y": 90
+    },
+    "facing=west,powered=true,pumping=true": {
+      "model": "quasium:block/bellows_pumping",
+      "y": 90
+    },
+    "facing=north,powered=false,pumping=false": {
+      "model": "quasium:block/bellows",
+      "y": 180
+    },
+    "facing=north,powered=true,pumping=false": {
+      "model": "quasium:block/bellows",
+      "y": 180
+    },
+    "facing=north,powered=false,pumping=true": {
+      "model": "quasium:block/bellows_pumping",
+      "y": 180
+    },
+    "facing=north,powered=true,pumping=true": {
+      "model": "quasium:block/bellows_pumping",
+      "y": 180
+    },
+    "facing=east,powered=false,pumping=false": {
+      "model": "quasium:block/bellows",
+      "y": 270
+    },
+    "facing=east,powered=true,pumping=false": {
+      "model": "quasium:block/bellows",
+      "y": 270
+    },
+    "facing=east,powered=false,pumping=true": {
+      "model": "quasium:block/bellows_pumping",
+      "y": 270
+    },
+    "facing=east,powered=true,pumping=true": {
+      "model": "quasium:block/bellows_pumping",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokecraft/first_cast",
+  "criteria": {
+    "smoke_step": {
+      "conditions": {
+        "event": "smoke_step"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.smoke_step.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:ender_pearl"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.smoke_step.title"
+    }
+  },
+  "requirements": [
+    [
+      "smoke_step"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

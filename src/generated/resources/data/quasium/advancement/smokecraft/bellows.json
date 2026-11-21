@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "bellows": {
+      "conditions": {
+        "event": "bellows"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.bellows.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:bellows"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.bellows.title"
+    }
+  },
+  "requirements": [
+    [
+      "bellows"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

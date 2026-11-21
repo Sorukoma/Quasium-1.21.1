@@ -1,7 +1,7 @@
 package net.sorukoma.quasium.item;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -29,20 +29,7 @@ public class BackpackHookahItem extends Item implements ICurioItem {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        Player player = slotContext.entity() instanceof Player p ? p : null;
-        if (player != null && !player.level().isClientSide()) {
-            // Drop contents and reset state when removed from Curios slot
-            net.sorukoma.quasium.data.BackpackHookahState state =
-                    net.sorukoma.quasium.data.BackpackHookahState.getState(player.getUUID());
-            if (state != null) {
-                if (state.isPuffing()) {
-                    state.stopPuffing();
-                }
-                state.drops();
-                state.resetState();
-                net.sorukoma.quasium.data.BackpackHookahState.removeState(player.getUUID());
-            }
-        }
+        if (slotContext.entity() instanceof ServerPlayer player) net.sorukoma.quasium.data.BackpackHookahState.takenOff(player);
     }
 
     @Override

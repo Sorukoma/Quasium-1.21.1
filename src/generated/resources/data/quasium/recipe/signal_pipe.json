@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "quasium:copper_pipe"
+    },
+    {
+      "item": "quasium:copper_pipe"
+    },
+    {
+      "item": "minecraft:campfire"
+    },
+    {
+      "item": "quasium:quasiumingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:signal_pipe"
+  }
+}

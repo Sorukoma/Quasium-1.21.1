@@ -1,5 +1,6 @@
 package net.sorukoma.quasium.recipe;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -7,10 +8,12 @@ import net.minecraft.world.item.Items;
 import net.sorukoma.quasium.block.ModBlocks;
 import net.sorukoma.quasium.item.ModItemTags;
 import net.sorukoma.quasium.item.ModItems;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -20,9 +23,13 @@ public class DryingRecipes {
     private static boolean initialized = false;
 
     public record DryingRecipe(Predicate<ItemStack> inputPredicate, Supplier<Item> displayInput,
-                               Supplier<Item> output, int dryingTime) {
+                               Supplier<Item> output, IntSupplier ticks, @Nullable ResourceLocation gate) {
         public boolean matches(ItemStack stack) {
             return inputPredicate.test(stack);
+        }
+
+        public int dryingTime() {
+            return ticks.getAsInt();
         }
     }
 
@@ -44,12 +51,16 @@ public class DryingRecipes {
     }
 
     public static void add(Supplier<Item> input, Supplier<Item> output, int dryingTime) {
-        recipes.add(new DryingRecipe(stack -> stack.is(input.get()), input, output, dryingTime));
+        add(input, output, () -> dryingTime, null);
+    }
+
+    public static void add(Supplier<Item> input, Supplier<Item> output, IntSupplier ticks, @Nullable ResourceLocation gate) {
+        recipes.add(new DryingRecipe(stack -> stack.is(input.get()), input, output, ticks, gate));
     }
 
     public static void addTag(TagKey<Item> inputTag, Supplier<Item> displayInput,
                               Supplier<Item> output, int dryingTime) {
-        recipes.add(new DryingRecipe(stack -> stack.is(inputTag), displayInput, output, dryingTime));
+        recipes.add(new DryingRecipe(stack -> stack.is(inputTag), displayInput, output, () -> dryingTime, null));
     }
 
     public static DryingRecipe find(ItemStack stack) {

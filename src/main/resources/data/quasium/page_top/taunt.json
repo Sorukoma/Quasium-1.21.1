@@ -1,0 +1,12 @@
+{
+  "volume": 10,
+  "max": 1,
+  "add": {
+    "taunt": 3
+  },
+  "forms": [
+    "spirit"
+  ],
+  "unlock": "research:quasium:research_mirror_spiritism",
+  "order": 14
+}

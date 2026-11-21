@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.abandoned_lounge.title",
+  "hint": "quasium.progression.abandoned_lounge.hint",
+  "category": "quasium",
+  "order": 50,
+  "icon": "minecraft:skeleton_skull",
+  "unlockCondition": "quasium:quasium_ore/mined_with_kaif",
+  "scene": "quasium:abandoned_lounge",
+  "pages": [
+    {"text": "quasium.progression.abandoned_lounge.page1", "items": ["minecraft:deepslate_bricks", "quasium:hookah_block", "quasium:lounge_cushion", "minecraft:cobweb"], "args": ["LOUNGE_MAP_PRICE"]},
+    {"text": "quasium.progression.abandoned_lounge.page2", "items": ["quasium:lore_page", "quasium:self_mixed_tobacco"]},
+    {"text": "quasium.progression.abandoned_lounge.page3", "items": ["quasium:modular_hookah_jade", "quasium:modular_hookah_violet", "quasium:modular_hookah_gold", "quasium:secret_recipe"]},
+    {"text": "quasium.progression.abandoned_lounge.page4", "items": ["quasium:lore_page", "quasium:progression_book"]}
+  ]
+}

@@ -12,8 +12,10 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
@@ -22,8 +24,13 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.sorukoma.quasium.advancements.triggers.QuasiumModAdvancements;
 import net.sorukoma.quasium.block.entity.HookahBlockEntity;
 import net.sorukoma.quasium.block.entity.ModBlockEntities;
 import net.sorukoma.quasium.block.entity.ModularHookahBlockEntity;
@@ -78,20 +85,27 @@ public class ModularHookahBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    // Форма колбы (тело ~4..12 по XZ, высота до 10 пикс) — не полный куб.
-    private static final net.minecraft.world.phys.shapes.VoxelShape SHAPE =
-            net.minecraft.world.level.block.Block.box(3, 0, 3, 13, 12, 13);
+    @Override
+    protected boolean canBeReplaced(BlockState state, Fluid fluid) {
+        return false;
+    }
+
+    private static final VoxelShape BULB = Shapes.or(Block.box(4, 0, 4, 12, 6, 12), Block.box(5, 6, 5, 11, 8, 11),
+            Block.box(6.5, 8, 6.5, 9.5, 10, 9.5));
+    private static final VoxelShape WITH_SHAFT = Shapes.or(BULB, Block.box(7, 5, 7, 9, 14, 9));
+    private static final VoxelShape WITH_BOWL = Shapes.or(WITH_SHAFT, Block.box(7, 14, 7, 9, 15, 9), Block.box(6, 15, 6, 10, 17, 10));
+    private static final VoxelShape WITH_CALLOUD = Shapes.or(WITH_BOWL, Block.box(6, 17, 6, 10, 19.5, 10));
 
     @Override
-    protected net.minecraft.world.phys.shapes.VoxelShape getShape(BlockState state, net.minecraft.world.level.BlockGetter level,
-                                                                  BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext ctx) {
-        return SHAPE;
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (!(level.getBlockEntity(pos) instanceof ModularHookahBlockEntity hookah) || !hookah.hasShaft()) return BULB;
+        if (hookah.getItemHandler().getStackInSlot(1).isEmpty()) return WITH_SHAFT;
+        return hookah.getItemHandler().getStackInSlot(0).isEmpty() ? WITH_BOWL : WITH_CALLOUD;
     }
 
     @Override
-    protected net.minecraft.world.phys.shapes.VoxelShape getCollisionShape(BlockState state, net.minecraft.world.level.BlockGetter level,
-                                                                           BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext ctx) {
-        return SHAPE;
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return BULB;
     }
 
     // Не затемнять окружение: пропускать небесный свет и не давать полное AO-затенение.
@@ -126,6 +140,9 @@ public class ModularHookahBlock extends BaseEntityBlock {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hit) {
+        if (stack.is(ModItems.EMPTY_SMOKE_JAR.get()) || stack.is(ModItems.KAIFOMETER.get()) || stack.is(ModItems.HOOKAH_PIPE.get())) {
+            return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        }
         if (level.isClientSide()) {
             return ItemInteractionResult.SUCCESS;
         }
@@ -281,7 +298,7 @@ public class ModularHookahBlock extends BaseEntityBlock {
 
         // ПКМ без предмета/без shift, когда собрано — открыть GUI (углей/чаши/аксессуаров).
         if (!player.isShiftKeyDown() && be.hasShaft() && player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.openMenu(be, pos);
+            open(serverPlayer, be, pos);
             return true;
         }
 
@@ -299,10 +316,15 @@ public class ModularHookahBlock extends BaseEntityBlock {
             return InteractionResult.CONSUME;
         }
         if (be.hasShaft()) {
-            ((ServerPlayer) player).openMenu(be, pos);
+            open((ServerPlayer) player, be, pos);
             return InteractionResult.CONSUME;
         }
         return InteractionResult.PASS;
+    }
+
+    private static void open(ServerPlayer player, ModularHookahBlockEntity be, BlockPos pos) {
+        QuasiumModAdvancements.HOOKAH_OPENED.get().trigger(player);
+        player.openMenu(be, pos);
     }
 
     @Override
@@ -316,7 +338,10 @@ public class ModularHookahBlock extends BaseEntityBlock {
                         c -> c.getHookahBlockPos() != null && c.getHookahBlockPos().equals(pos));
                 for (HookahConnectionEntity c : attached) {
                     Player p = level.getPlayerByUUID(c.getAttachedPlayerUUID());
-                    if (p != null) c.stopPuffing(be, p);
+                    if (p != null) {
+                        c.stopPuffing(be, p);
+                        p.displayClientMessage(Component.translatable("quasium.message.pipe_detached_broken"), true);
+                    }
                     c.discard();
                 }
                 // Дропаем чашу/каллауд/аксессуары.

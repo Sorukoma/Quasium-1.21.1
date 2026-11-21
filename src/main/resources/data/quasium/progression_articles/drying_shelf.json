@@ -1,9 +1,16 @@
 {
   "title": "quasium.progression.drying_shelf.title",
   "hint": "quasium.progression.drying_shelf.hint",
+  "category": "start",
+  "order": 40,
+  "icon": "quasium:drying_shelf",
+  "unlockCondition": "quasium:progression/obtained_tallow",
+  "scene": "quasium:drying_shelf",
   "pages": [
-    { "text": "quasium.progression.drying_shelf.page1" },
-    { "text": "quasium.progression.drying_shelf.page2" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_tallow"
+    {"text": "quasium.progression.drying_shelf.page1", "recipe": "quasium:drying_shelf_from_planks_and_sticks"},
+    {"text": "quasium.progression.drying_shelf.page2", "items": ["quasium:dikar_leaves", "quasium:hybrid_tobacco_leaves"]},
+    {"text": "quasium.progression.drying_shelf.page3", "items": ["minecraft:rotten_flesh", "quasium:tallow", "quasium:undried_quasium_block"]},
+    {"text": "quasium.progression.drying_shelf.fries", "recipe": "quasium:fries_from_potatoes_and_tallow", "args": ["FRIES_MUNCHIES_MIN_KAIF", "FRIES_KAIF_HOLD_SECONDS"]},
+    {"text": "quasium.progression.drying_shelf.jerky", "items": ["quasium:beef_jerky", "quasium:pork_jerky", "quasium:chicken_jerky", "quasium:mutton_jerky", "quasium:rabbit_jerky", "quasium:cod_jerky", "quasium:salmon_jerky"]}
+  ]
 }

@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokelands/root",
+  "criteria": {
+    "sultan_doused": {
+      "conditions": {
+        "event": "sultan_doused"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokelands.sultan_doused.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:essence_bottle"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.sultan_doused.title"
+    }
+  },
+  "requirements": [
+    [
+      "sultan_doused"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "filled=false": {
+      "model": "quasium:block/golem_feeder"
+    },
+    "filled=true": {
+      "model": "quasium:block/golem_feeder_filled"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "quasium:block/aroma_lamp",
+  "textures": {
+    "side": "quasium:block/aroma_lamp_side_lit"
+  }
+}

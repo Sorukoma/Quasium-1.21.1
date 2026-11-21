@@ -11,6 +11,7 @@
               "Name": "quasium:bolotnik_crop",
               "Properties": {
                 "age": "0",
+                "aphids": "false",
                 "mutation": "0",
                 "watered": "false"
               }

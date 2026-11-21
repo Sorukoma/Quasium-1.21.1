@@ -1,0 +1,35 @@
+{
+  "items": [
+    "quasium:smoke_boiler"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:smoke_boiler[facing=north,lit=true]",
+          "pos": [0, 0, 2]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true]",
+          "pos": [3, 0, 2]
+        }
+      ],
+      "highlight": [
+        [0, 0, 2]
+      ],
+      "args": [
+        "BOILER_DRAFT"
+      ]
+    }
+  ]
+}

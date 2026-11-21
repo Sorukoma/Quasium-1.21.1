@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:ritual/first_ritual",
+  "criteria": {
+    "ritual_eternal_coal": {
+      "conditions": {
+        "event": "ritual:eternal_coal"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.eternal_coal.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:eternal_coal"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.eternal_coal.title"
+    }
+  },
+  "requirements": [
+    [
+      "ritual_eternal_coal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

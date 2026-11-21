@@ -1,0 +1,26 @@
+{
+  "form": "cone",
+  "inputs": [
+    {
+      "menthol": 2,
+      "dew": 1
+    },
+    {
+      "mint": 1
+    }
+  ],
+  "lungs": 50,
+  "grams": 0.4,
+  "cooldown": 1.5,
+  "action": "frost",
+  "color": "#9FE8FF",
+  "params": {
+    "length": 5,
+    "width": 2,
+    "damage": 2,
+    "slow_level": 3,
+    "slow_seconds": 4,
+    "freeze_seconds": 3,
+    "fire_mob_multiplier": 2
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "shape": "beam",
+  "volume": 30,
+  "params": {
+    "range": 24
+  },
+  "unlock": "start",
+  "order": 2
+}

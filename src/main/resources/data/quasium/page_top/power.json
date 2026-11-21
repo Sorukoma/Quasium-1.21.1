@@ -1,0 +1,10 @@
+{
+  "volume": 15,
+  "max": 2,
+  "note_cost": 1,
+  "scale": {
+    "power": 1.5
+  },
+  "unlock": "start",
+  "order": 1
+}

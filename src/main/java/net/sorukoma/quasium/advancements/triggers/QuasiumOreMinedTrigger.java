@@ -2,6 +2,7 @@ package net.sorukoma.quasium.advancements.triggers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.CriterionValidator;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
@@ -18,6 +19,10 @@ public class QuasiumOreMinedTrigger extends SimpleCriterionTrigger<QuasiumOreMin
 
     public void trigger(ServerPlayer player) {
         this.trigger(player, instance -> true);
+    }
+
+    public static Criterion<TriggerInstance> mined() {
+        return new Criterion<>(QuasiumModAdvancements.QUASIUM_ORE_MINED.get(), new TriggerInstance(Optional.empty()));
     }
 
     public record TriggerInstance(Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance {

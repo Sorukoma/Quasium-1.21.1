@@ -1,0 +1,13 @@
+{
+  "note": "ember",
+  "volume": 25,
+  "cooldown": 4,
+  "target": "foe",
+  "params": {
+    "damage": 4,
+    "radius": 2,
+    "knockback": 1.2
+  },
+  "unlock": "research:quasium:research_smoke_heart",
+  "order": 5
+}

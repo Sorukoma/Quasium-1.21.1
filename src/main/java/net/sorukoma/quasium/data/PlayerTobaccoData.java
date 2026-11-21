@@ -1,8 +1,11 @@
 package net.sorukoma.quasium.data;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.sorukoma.quasium.mind.MindConfig;
+import net.sorukoma.quasium.mind.MindData;
 import net.sorukoma.quasium.network.TobaccoDataSyncPacket;
 
 import java.util.Arrays;
@@ -16,6 +19,8 @@ public class PlayerTobaccoData {
     private static final String TRIED_FLAVORS_KEY = "QuasiumTriedFlavors";
     private static final String TRIED_SELF_MIXED_STRENGTHS_KEY = "QuasiumTriedSelfMixedStrengths";
     private static final String FLAVOR_PREFERENCES_KEY = "QuasiumTriedFlavorPreferences";
+    private static final String TOLERANCE_KEY = "QuasiumTolerance";
+    private static final String SESSION_GRAMS_KEY = "QuasiumToleranceGrams";
 
     public static Map<String, Boolean> getFlavorPreferences(Player player) {
         Map<String, Boolean> result = new LinkedHashMap<>();
@@ -89,6 +94,34 @@ public class PlayerTobaccoData {
         player.getPersistentData().putString(TRIED_SELF_MIXED_STRENGTHS_KEY,
                 strengths.stream().map(f -> String.format("%.1f", f)).collect(Collectors.joining(",")));
         syncToClient(player);
+    }
+
+    public static int tolerance(Player player, String flavor) {
+        return player.getPersistentData().getCompound(TOLERANCE_KEY).getInt(flavor);
+    }
+
+    public static CompoundTag toleranceTag(Player player) {
+        return player.getPersistentData().getCompound(TOLERANCE_KEY).copy();
+    }
+
+    public static void addTolerance(Player player, String flavor, int amount) {
+        CompoundTag tolerances = player.getPersistentData().getCompound(TOLERANCE_KEY);
+        int value = Math.max(0, Math.min(MindConfig.TOLERANCE_CAP.getAsInt(), tolerances.getInt(flavor) + amount));
+        if (value == 0) tolerances.remove(flavor);
+        else tolerances.putInt(flavor, value);
+        player.getPersistentData().put(TOLERANCE_KEY, tolerances);
+        MindData.changed(player);
+    }
+
+    public static int addSessionGrams(Player player, String flavor, float grams) {
+        CompoundTag sessions = player.getPersistentData().getCompound(SESSION_GRAMS_KEY);
+        float total = sessions.getFloat(flavor) + grams;
+        int sessionGrams = MindConfig.TOLERANCE_SESSION_GRAMS.getAsInt();
+        int done = (int) (total / sessionGrams);
+        sessions.putFloat(flavor, total - done * sessionGrams);
+        player.getPersistentData().put(SESSION_GRAMS_KEY, sessions);
+        if (done > 0) addTolerance(player, flavor, done * MindConfig.TOLERANCE_PER_SESSION.getAsInt());
+        return done;
     }
 
     private static void syncToClient(Player player) {

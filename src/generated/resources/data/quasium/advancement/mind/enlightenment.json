@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:kaif/kaif_level_30",
+  "criteria": {
+    "enlightenment": {
+      "conditions": {
+        "event": "enlightenment"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.enlightenment.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:glowstone_dust"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.enlightenment.title"
+    }
+  },
+  "requirements": [
+    [
+      "enlightenment"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

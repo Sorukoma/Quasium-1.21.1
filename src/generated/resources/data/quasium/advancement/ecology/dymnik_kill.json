@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:ecology/smoky_air",
+  "criteria": {
+    "dymnik_kill": {
+      "conditions": {
+        "event": "dymnik_kill"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ecology.dymnik_kill.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:dymnik_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.quasium.ecology.dymnik_kill.title"
+    }
+  },
+  "requirements": [
+    [
+      "dymnik_kill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

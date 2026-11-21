@@ -1,0 +1,249 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "glass": "quasium:block/smoke_jar_glass",
+    "smoke": "quasium:block/smoke_jar_smoke",
+    "cork": "quasium:block/note_jar_lid",
+    "particle": "quasium:block/smoke_jar_glass"
+  },
+  "elements": [
+    {
+      "from": [
+        5.5,
+        0.5,
+        5.5
+      ],
+      "to": [
+        10.5,
+        8.5,
+        10.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            5,
+            8
+          ],
+          "texture": "#smoke"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            5,
+            8
+          ],
+          "texture": "#smoke"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            5,
+            8
+          ],
+          "texture": "#smoke"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            5,
+            8
+          ],
+          "texture": "#smoke"
+        },
+        "up": {
+          "uv": [
+            0,
+            8,
+            5,
+            13
+          ],
+          "texture": "#smoke"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        0,
+        5
+      ],
+      "to": [
+        11,
+        9,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            6,
+            9
+          ],
+          "texture": "#glass"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            6,
+            9
+          ],
+          "texture": "#glass"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            6,
+            9
+          ],
+          "texture": "#glass"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            6,
+            9
+          ],
+          "texture": "#glass"
+        },
+        "up": {
+          "uv": [
+            6,
+            0,
+            12,
+            6
+          ],
+          "texture": "#glass"
+        },
+        "down": {
+          "uv": [
+            6,
+            0,
+            12,
+            6
+          ],
+          "texture": "#glass",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        9,
+        6
+      ],
+      "to": [
+        10,
+        10,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            0,
+            16,
+            1
+          ],
+          "texture": "#glass"
+        },
+        "east": {
+          "uv": [
+            12,
+            0,
+            16,
+            1
+          ],
+          "texture": "#glass"
+        },
+        "south": {
+          "uv": [
+            12,
+            0,
+            16,
+            1
+          ],
+          "texture": "#glass"
+        },
+        "west": {
+          "uv": [
+            12,
+            0,
+            16,
+            1
+          ],
+          "texture": "#glass"
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        10,
+        6.5
+      ],
+      "to": [
+        9.5,
+        12,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            0,
+            8,
+            2
+          ],
+          "texture": "#cork"
+        },
+        "east": {
+          "uv": [
+            5,
+            0,
+            8,
+            2
+          ],
+          "texture": "#cork"
+        },
+        "south": {
+          "uv": [
+            5,
+            0,
+            8,
+            2
+          ],
+          "texture": "#cork"
+        },
+        "west": {
+          "uv": [
+            5,
+            0,
+            8,
+            2
+          ],
+          "texture": "#cork"
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            8,
+            8
+          ],
+          "texture": "#cork"
+        }
+      }
+    }
+  ]
+}

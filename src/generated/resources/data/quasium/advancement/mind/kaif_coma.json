@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/overdose",
+  "criteria": {
+    "kaif_coma": {
+      "conditions": {
+        "event": "kaif_coma"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.kaif_coma.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:smokeland_hook"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.kaif_coma.title"
+    }
+  },
+  "requirements": [
+    [
+      "kaif_coma"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

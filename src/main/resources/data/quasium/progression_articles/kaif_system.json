@@ -1,10 +1,14 @@
 {
   "title": "quasium.progression.kaif_system.title",
   "hint": "quasium.progression.kaif_system.hint",
+  "category": "kaif",
+  "order": 10,
+  "icon": "quasium:kaifometer",
+  "unlockCondition": "quasium:progression/obtained_kaifometer",
   "pages": [
-    { "text": "quasium.progression.kaif_system.page1" },
-    { "text": "quasium.progression.kaif_system.page2" },
-    { "text": "quasium.progression.kaif_system.page3" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_kaifometer"
+    {"text": "quasium.progression.kaif_system.page1", "args": ["KAIF_PER_SECOND_SMOKING"]},
+    {"text": "quasium.progression.kaif_system.page2", "args": ["SEATED_KAIF_DECAY_PCT"]},
+    {"text": "quasium.progression.kaif_system.page3", "recipe": "quasium:kaifometer_from_iron_and_redstone"},
+    {"text": "quasium.progression.kaif_system.page4", "args": ["SCAN_KAIF_ITEM", "SCAN_KAIF_MOB"]}
+  ]
 }

@@ -1,0 +1,158 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "menthol"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "ember"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "nectar"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "dew"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "resin"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "ash"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:lore_page": 2
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:lore_page"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.25,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "quasium:secret_recipe"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "quasium:chests/quasium_geode"
+}

@@ -1,0 +1,70 @@
+{
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [1.5, 1.9, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 120,
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "minecraft:firework_star",
+          "pos": [1.5, 2.0, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "args": [
+        "RING_COMBO_WINDOW_SEC",
+        "RING_COMBO_KAIF"
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [1.5, 1.9, 1.5]
+        }
+      ],
+      "args": [
+        "RING_PERFECT_POWER_PCT"
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "minecraft:firework_star",
+          "pos": [1.5, 2.0, 1.5]
+        },
+        {
+          "item": "minecraft:water_bucket",
+          "pos": [2.4, 0.5, 1.5]
+        }
+      ],
+      "args": [
+        "TRICK_JELLYFISH_SEC"
+      ]
+    }
+  ]
+}

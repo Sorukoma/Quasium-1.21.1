@@ -28,6 +28,9 @@ public class QuasiumEmiCategories {
     public static final EmiRecipeCategory ESSENCE = new EmiRecipeCategory(
             id("essence"), EmiStack.of(ModBlocks.ESSENCE_PRESS_ITEM.get()));
 
+    public static final EmiRecipeCategory DISTILLATION = new EmiRecipeCategory(
+            id("distillation"), EmiStack.of(ModBlocks.DISTILLATION_CUBE_ITEM.get()));
+
     private static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, path);
     }

@@ -1,0 +1,21 @@
+{
+  "title": "quasium.progression.golem_care.title",
+  "hint": "quasium.progression.golem_care.hint",
+  "category": "golems",
+  "order": 40,
+  "icon": "minecraft:golden_apple",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:golems",
+  "pages": [
+    {"text": "quasium.progression.golem_care.page1"},
+    {"text": "quasium.progression.golem_care.page2", "args": ["GOLEM_HUNGER_MINUTES", "GOLEM_JOB_COST_PCT"]},
+    {"text": "quasium.progression.golem_care.page3", "items": ["minecraft:apple", "quasium:fries", "minecraft:golden_apple", "minecraft:enchanted_golden_apple"], "args": ["GOLEM_APPLE_PCT"]},
+    {"text": "quasium.progression.golem_care.feeder", "recipe": "quasium:golem_feeder"},
+    {"text": "quasium.progression.golem_care.meals"},
+    {"text": "quasium.progression.golem_care.queue"},
+    {"text": "quasium.progression.golem_care.page4", "args": ["GOLEM_PET_PCT", "GOLEM_PET_COOLDOWN_SECONDS"]},
+    {"text": "quasium.progression.golem_care.page5"},
+    {"text": "quasium.progression.golem_care.smoke", "items": ["quasium:hookah_pipe", "quasium:lounge_cushion"], "args": ["ZONE_SMOKER_MEMORY_SEC", "GOLEM_SMOKE_CUSHION_REACH", "GOLEM_SMOKE_PULL_SECONDS", "GOLEM_SMOKE_ROUND_SECONDS", "GOLEMS_PER_HOOKAH", "GOLEMS_PER_HOOKAH", "NIRVANA_FURNITURE"]},
+    {"text": "quasium.progression.golem_care.page6"}
+  ]
+}

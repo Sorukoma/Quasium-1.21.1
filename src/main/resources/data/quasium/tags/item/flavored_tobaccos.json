@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "quasium:mint_tobacco",
+    "quasium:berry_tobacco",
+    "quasium:lemon_tobacco",
+    "quasium:lime_tobacco",
+    "quasium:orange_tobacco",
+    "quasium:grapefruit_tobacco",
+    "quasium:apple_tobacco",
+    "quasium:watermelon_tobacco",
+    "quasium:grape_tobacco",
+    "quasium:cherry_tobacco",
+    "quasium:vanilla_tobacco",
+    "quasium:coffee_tobacco",
+    "quasium:cinnamon_tobacco",
+    "quasium:coconut_tobacco",
+    "quasium:rose_tobacco",
+    "quasium:anise_tobacco"
+  ]
+}

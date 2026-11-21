@@ -20,6 +20,7 @@ public class PacketBackpackHookahPuffDataClientHandler {
             cachedData = new ClientBackpackHookahData(
                     payload.totalHeat(),
                     payload.totalTobaccoWeight(),
+                    payload.warmup(),
                     payload.bowlContents()
             );
         });
@@ -37,6 +38,7 @@ public class PacketBackpackHookahPuffDataClientHandler {
     public record ClientBackpackHookahData(
             float totalHeat,
             int totalTobaccoWeight,
+            int warmup,
             @Nullable ModDataComponents.HookahBowlContents bowlContents
     ) {}
 }

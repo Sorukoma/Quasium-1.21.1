@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "cast": {
+      "conditions": {
+        "event": "cast"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.first_cast.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:hookah_pipe"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.first_cast.title"
+    }
+  },
+  "requirements": [
+    [
+      "cast"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

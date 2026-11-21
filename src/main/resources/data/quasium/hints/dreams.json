@@ -1,0 +1,97 @@
+{
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:kaifometer",
+          "pos": [
+            1.5,
+            1.9,
+            1.5
+          ]
+        }
+      ],
+      "args": [
+        "DREAM_KAIF"
+      ]
+    },
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "minecraft:red_bed",
+          "pos": [
+            1.5,
+            1.9,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:essence_press",
+          "pos": [
+            0,
+            0,
+            2
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          0,
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:deepslate_quasium_ore",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "minecraft:ender_eye",
+          "pos": [
+            1.5,
+            1.9,
+            1.5
+          ]
+        }
+      ]
+    }
+  ]
+}

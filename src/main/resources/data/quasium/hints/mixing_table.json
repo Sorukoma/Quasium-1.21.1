@@ -1,0 +1,70 @@
+{
+  "items": [
+    "quasium:mixing_table",
+    "quasium:focus_upgrade_collimator",
+    "quasium:focus_upgrade_condenser",
+    "quasium:focus_upgrade_cooler",
+    "quasium:focus_upgrade_filter",
+    "quasium:focus_upgrade_resonator",
+    "quasium:focus_upgrade_splitter"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:mixing_table[facing=north]",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [1.1, 1.8, 1.5]
+        },
+        {
+          "item": "quasium:focus_upgrade_collimator",
+          "pos": [1.9, 1.8, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [1.5, 1.8, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "quasium:focus_upgrade_condenser",
+          "pos": [1.1, 1.8, 1.5]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [1.9, 1.8, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 120,
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [1.5, 1.8, 1.5]
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,24 @@
 {
   "parent": "quasium:root",
   "criteria": {
+    "has_hookah": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:hookah_block",
+              "quasium:modular_hookah_amber",
+              "quasium:modular_hookah_black",
+              "quasium:modular_hookah_blue",
+              "quasium:modular_hookah_red",
+              "quasium:modular_hookah_white",
+              "quasium:hookah_minecart"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "hookah_opened": {
       "trigger": "quasium:hookah_opened"
     }
@@ -19,7 +37,8 @@
   },
   "requirements": [
     [
-      "hookah_opened"
+      "hookah_opened",
+      "has_hookah"
     ]
   ],
   "sends_telemetry_event": true

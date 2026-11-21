@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:note_filter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "researched": {
+      "conditions": {
+        "event": "research:research_notes_sorting"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "researched"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:note_filter"
+    ]
+  }
+}

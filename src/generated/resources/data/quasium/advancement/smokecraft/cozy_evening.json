@@ -1,0 +1,31 @@
+{
+  "parent": "quasium:smokecraft/zone_1",
+  "criteria": {
+    "cozy_evening": {
+      "conditions": {
+        "event": "cozy_evening"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.cozy_evening.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "minecraft:lantern"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.cozy_evening.title"
+    }
+  },
+  "requirements": [
+    [
+      "cozy_evening"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

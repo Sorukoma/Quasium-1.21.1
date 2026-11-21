@@ -1,10 +1,15 @@
 {
   "title": "quasium.progression.backpack_hookah.title",
   "hint": "quasium.progression.backpack_hookah.hint",
+  "category": "hookah",
+  "order": 70,
+  "icon": "quasium:backpack_hookah",
+  "unlockCondition": "quasium:progression/obtained_backpack_hookah",
+  "scene": "quasium:mobile_hookahs",
   "pages": [
-    { "text": "quasium.progression.backpack_hookah.page1" },
-    { "text": "quasium.progression.backpack_hookah.page2" },
-    { "text": "quasium.progression.backpack_hookah.page3" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_backpack_hookah"
+    {"text": "quasium.progression.backpack_hookah.page1", "anvil": "quasium:backpack_hookah"},
+    {"text": "quasium.progression.backpack_hookah.page2"},
+    {"text": "quasium.progression.backpack_hookah.page3"},
+    {"text": "quasium.progression.backpack_hookah.page4"}
+  ]
 }

@@ -1,0 +1,30 @@
+{
+  "title": "quasium.progression.patch_0_7.title",
+  "category": "patch_notes",
+  "order": 50,
+  "icon": "quasium:samovar",
+  "pages": [
+    {"text": "quasium.progression.patch_0_7.date"},
+    {"text": "quasium.progression.patch_0_7.summary"},
+    {"text": "quasium.progression.patch_notes.new"},
+    {"text": "quasium.progression.patch_0_7.new_1"},
+    {"text": "quasium.progression.patch_0_7.new_2"},
+    {"text": "quasium.progression.patch_0_7.new_3"},
+    {"text": "quasium.progression.patch_0_7.new_4"},
+    {"text": "quasium.progression.patch_0_7.new_5"},
+    {"text": "quasium.progression.patch_0_7.new_6"},
+    {"text": "quasium.progression.patch_0_7.new_7"},
+    {"text": "quasium.progression.patch_0_7.new_8"},
+    {"text": "quasium.progression.patch_0_7.new_9"},
+    {"text": "quasium.progression.patch_0_7.new_10"},
+    {"text": "quasium.progression.patch_0_7.new_11"},
+    {"text": "quasium.progression.patch_0_7.new_12"},
+    {"text": "quasium.progression.patch_0_7.new_13"},
+    {"text": "quasium.progression.patch_0_7.new_14"},
+    {"text": "quasium.progression.patch_0_7.new_15"},
+    {"text": "quasium.progression.patch_notes.changed"},
+    {"text": "quasium.progression.patch_0_7.changed_1"},
+    {"text": "quasium.progression.patch_notes.fixed"},
+    {"text": "quasium.progression.patch_0_7.fixed_1"}
+  ]
+}

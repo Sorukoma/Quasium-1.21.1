@@ -1,0 +1,9 @@
+{
+  "shape": "pulse",
+  "volume": 35,
+  "params": {
+    "radius": 4
+  },
+  "unlock": "research:quasium:research_smoke_bases",
+  "order": 5
+}

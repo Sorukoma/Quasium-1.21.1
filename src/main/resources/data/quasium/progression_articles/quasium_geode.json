@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.quasium_geode.title",
+  "hint": "quasium.progression.quasium_geode.hint",
+  "category": "quasium",
+  "order": 15,
+  "icon": "quasium:quasium_cluster",
+  "unlockCondition": "quasium:kaif/kaif_level_30",
+  "scene": "quasium:quasium_geode",
+  "pages": [
+    {"text": "quasium.progression.quasium_geode.page1", "items": ["minecraft:deepslate", "quasium:quasium_crust"], "args": ["GEODE_REVEAL_KAIF", "GEODE_HUM_RADIUS"]},
+    {"text": "quasium.progression.quasium_geode.page2", "items": ["minecraft:calcite", "quasium:budding_quasium", "quasium:small_quasium_bud", "quasium:medium_quasium_bud", "quasium:large_quasium_bud", "quasium:quasium_cluster"]},
+    {"text": "quasium.progression.quasium_geode.page3", "items": ["quasium:rawquasium"], "args": ["CLUSTER_DROP_MIN_KAIF", "CLUSTER_DROP_MIN", "CLUSTER_DROP_MAX"]},
+    {"text": "quasium.progression.quasium_geode.page4", "items": ["quasium:essence_bottle", "quasium:lore_page", "quasium:secret_recipe"]}
+  ]
+}

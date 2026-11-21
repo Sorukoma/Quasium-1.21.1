@@ -1,0 +1,12 @@
+{
+  "note": "ember",
+  "volume": 20,
+  "cooldown": 30,
+  "target": "world",
+  "params": {
+    "radius": 16,
+    "glow_seconds": 10
+  },
+  "unlock": "research:quasium:research_notes_overtones",
+  "order": 6
+}

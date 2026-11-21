@@ -1,0 +1,9 @@
+{
+  "first": "menthol",
+  "second": "nectar",
+  "color": "#E8FFF0",
+  "params": {
+    "lift": 0.8,
+    "effect_seconds": 6
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "quasium.research.research_mirror_spiritism.title",
+  "hint": "quasium.research.research_mirror_spiritism.hint",
+  "category": "research_mirror",
+  "order": 5,
+  "icon": "minecraft:phantom_membrane",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "ash"
+    ],
+    "requires": [
+      "quasium:research_smoke_bases"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mirror_spiritism.page1"
+    },
+    {
+      "text": "quasium.research.research_mirror_spiritism.page2"
+    }
+  ]
+}

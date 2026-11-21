@@ -1,0 +1,65 @@
+{
+  "items": [
+    "quasium:flask_charger",
+    "quasium:pneumatic_hammer"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 210,
+      "place": [
+        {
+          "state": "quasium:bellows[facing=east]",
+          "pos": [0, 0, 2]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,north=true,south=true]",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "quasium:flask_charger",
+          "pos": [3, 0, 1]
+        },
+        {
+          "state": "quasium:hookah_block",
+          "pos": [3, 0, 0]
+        }
+      ],
+      "highlight": [
+        [3, 0, 1]
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:copper_pipe[west=true,north=true,south=true,up=true]",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "quasium:copper_pipe[down=true,south=true]",
+          "pos": [3, 1, 2]
+        },
+        {
+          "state": "quasium:quasium_anvil[facing=north]",
+          "pos": [3, 0, 3]
+        },
+        {
+          "state": "quasium:pneumatic_hammer",
+          "pos": [3, 1, 3]
+        }
+      ],
+      "highlight": [
+        [3, 1, 3]
+      ]
+    }
+  ]
+}

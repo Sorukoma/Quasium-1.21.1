@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:ritual/first_ritual",
+  "criteria": {
+    "ritual_group": {
+      "conditions": {
+        "event": "ritual_group"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.group.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:campfire"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.group.title"
+    }
+  },
+  "requirements": [
+    [
+      "ritual_group"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

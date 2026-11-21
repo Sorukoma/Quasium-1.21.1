@@ -1,0 +1,21 @@
+// 1.21.1	2026-11-21T00:09:58.042988647	Smoke mark recipes
+e39bf0f8b116210f6f313a0d2a3489df51abb37b data/quasium/advancement/recipes/misc/fill_mark.json
+662573d7e68c0fb73d0452a68cad3c7e54e1b806 data/quasium/advancement/recipes/misc/golem_feeder.json
+20696561eb042c996b576c8083acf09d0d095d90 data/quasium/advancement/recipes/misc/guard_mark.json
+1235cc395d207b1d28e63cffd2020b72b2b203f6 data/quasium/advancement/recipes/misc/harvest_mark.json
+40ca97940b7946420bf00c854eb591a319625eef data/quasium/advancement/recipes/misc/heat_mark.json
+61734afc319a0dff0518ba46cf23096636fea315 data/quasium/advancement/recipes/misc/program_table.json
+feef407d403e6cc4689f5877daedd547fac1da54 data/quasium/advancement/recipes/misc/zone_mark.json
+0188a69790a6b41aeef8884cd08b66c92b191085 data/quasium/advancement/recipes/tools/golem_staff.json
+e4e9435cc93c723343c5f1d5fd637fbc55c3d388 data/quasium/advancement/recipes/tools/place_marker.json
+a4d242c945e8ccedfd0980e9d5cdf8d8de2922e1 data/quasium/advancement/recipes/tools/program_card.json
+7fe752db0f98491cdcaf7d5a98bbe09d6c684152 data/quasium/recipe/fill_mark.json
+7cbe12b9533e5845d7366f30f16b16dfce36feb7 data/quasium/recipe/golem_feeder.json
+62aa055a47887f40462dedbf5852daa213f660d0 data/quasium/recipe/golem_staff.json
+7860dd46060deaa195ea63c699ae6cf1b3ef2d92 data/quasium/recipe/guard_mark.json
+78b3e21bcae45f1808055a80888257ee1af2fc6d data/quasium/recipe/harvest_mark.json
+5c3d2f7a88c390b1b8057c39503100f2e6ffde15 data/quasium/recipe/heat_mark.json
+b7949163e1547cadb2963c4e29fe38aa3dab8d6a data/quasium/recipe/place_marker.json
+8be3dff4d7bb7b797ef5c7ca54e7de088e89912e data/quasium/recipe/program_card.json
+76af551e5863f82a3989fa75c43d00b8bd78ea04 data/quasium/recipe/program_table.json
+1c3939fc44249c1ff677c415a8afbbcad1ab23e6 data/quasium/recipe/zone_mark.json

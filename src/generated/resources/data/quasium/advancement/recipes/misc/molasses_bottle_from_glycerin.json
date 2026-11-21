@@ -11,6 +11,26 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_molasses": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:molasses_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tallow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:tallow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "quasium:molasses_bottle_from_glycerin"
@@ -21,7 +41,9 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_glycerin"
+      "has_tallow",
+      "has_glycerin",
+      "has_molasses"
     ]
   ],
   "rewards": {

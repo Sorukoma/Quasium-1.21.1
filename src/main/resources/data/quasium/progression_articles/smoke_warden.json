@@ -1,0 +1,14 @@
+{
+  "title": "quasium.progression.smoke_warden.title",
+  "hint": "quasium.progression.smoke_warden.hint",
+  "category": "golems",
+  "order": 60,
+  "icon": "quasium:smoke_warden",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:smoke_warden",
+  "pages": [
+    {"text": "quasium.progression.smoke_warden.page1", "recipe": "quasium:warden_blank"},
+    {"text": "quasium.progression.smoke_warden.page2", "anvil": "quasium:smoke_warden", "args": ["WARDEN_MAX_HEALTH", "WARDEN_REPAIR_HEALTH", "WARDEN_INVENTORY", "WARDEN_SHOTS_PER_COAL"]},
+    {"text": "quasium.progression.smoke_warden.page3", "args": ["WARDEN_FIRE_TICKS", "WARDEN_FIRE_RANGE", "WARDEN_DAMAGE", "WARDEN_POISON_SECONDS", "WARDEN_SLOW_SECONDS"]}
+  ]
+}

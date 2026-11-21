@@ -1,0 +1,21 @@
+{
+  "tier": 2,
+  "catalyst": {
+    "type": "quasium:gear",
+    "fits": "boots"
+  },
+  "notes": {
+    "menthol": 48,
+    "nectar": 16
+  },
+  "puffs": 600,
+  "rate": 128,
+  "kaif": {
+    "min": 40
+  },
+  "base": 20,
+  "infuse": {
+    "quasium:smokestep": {},
+    "minecraft:enchantment_glint_override": true
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "items": [
+    "quasium:soaking_bowl",
+    "quasium:self_mixed_tobacco",
+    "quasium:one_gram_self_mixed_tobacco"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "quasium:soaking_bowl",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [1.5, 1.2, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [1.1, 1.3, 1.5]
+        },
+        {
+          "item": "quasium:molasses_bottle",
+          "pos": [1.9, 1.3, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "minecraft:stick",
+          "pos": [1.5, 1.3, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 120,
+      "icons": [
+        {
+          "item": "minecraft:bowl",
+          "pos": [1.1, 1.3, 1.5]
+        },
+        {
+          "item": "quasium:self_mixed_tobacco",
+          "pos": [1.9, 1.3, 1.5]
+        }
+      ]
+    }
+  ]
+}

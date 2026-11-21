@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "quasium:block/dream_quartz_cluster"
+    },
+    "facing=down": {
+      "model": "quasium:block/dream_quartz_cluster",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "quasium:block/dream_quartz_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "quasium:block/dream_quartz_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=east": {
+      "model": "quasium:block/dream_quartz_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west": {
+      "model": "quasium:block/dream_quartz_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

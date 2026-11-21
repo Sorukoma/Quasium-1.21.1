@@ -1,0 +1,7 @@
+{
+  "type": "quasium:smoke_ruins",
+  "biomes": "#quasium:has_structure/smoke_ruins",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "beard_thin"
+}

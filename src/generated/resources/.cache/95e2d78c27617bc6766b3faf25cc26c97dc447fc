@@ -1,0 +1,9 @@
+// 1.21.1	2026-10-09T07:23:53.1314261	Selection loot tables
+77097c37c1c073b29598b9577bf02a8f0a5c8ecc data/quasium/loot_table/blocks/large_quasium_bud.json
+238e16904419383e03c63b5826209c33d9612004 data/quasium/loot_table/blocks/medium_quasium_bud.json
+3a7d2c7b460331adbd395e82185760ed25017eb9 data/quasium/loot_table/blocks/quasium_crust.json
+e1f9ab14da7eab3951b78e0da3c55dbcd23027ac data/quasium/loot_table/blocks/small_quasium_bud.json
+32e43498c451be99b85006465fd8dd82774223f6 data/quasium/loot_table/chests/abandoned_lounge.json
+e7a646391c9c631090975c181a591a5b9c0d67d2 data/quasium/loot_table/chests/hookah_hut.json
+da1bd049e59856c8108e0da4fd562da8ac120be6 data/quasium/loot_table/chests/quasium_geode.json
+19f19023cbe2923b248208a535601da817869dab data/quasium/loot_table/chests/ruined_smoke_portal.json

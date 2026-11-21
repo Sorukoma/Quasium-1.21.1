@@ -1,0 +1,25 @@
+{
+  "title": "quasium.research.research_dreams_control.title",
+  "hint": "quasium.research.research_dreams_control.hint",
+  "category": "research_mind",
+  "order": 70,
+  "icon": "minecraft:ender_eye",
+  "research": {
+    "tier": 4,
+    "notes": [
+      "dew",
+      "nectar"
+    ],
+    "lived": true,
+    "perk": "dream_control"
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_dreams_control.page1",
+      "args": [
+        "WEIGHT_LUCID",
+        "WEIGHT_LUCID_CONTROLLED"
+      ]
+    }
+  ]
+}

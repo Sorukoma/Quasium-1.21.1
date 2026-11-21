@@ -1,0 +1,13 @@
+{
+  "title": "quasium.progression.overdose.title",
+  "hint": "quasium.progression.overdose.hint",
+  "category": "kaif",
+  "order": 40,
+  "icon": "quasium:burned_tobacco",
+  "unlockCondition": "quasium:smokecraft/overdose",
+  "pages": [
+    {"text": "quasium.progression.overdose.page1", "args": ["OVERDOSE_WINDOW_MINUTES", "OVERDOSE_THRESHOLD_GRAMS"]},
+    {"text": "quasium.progression.overdose.page2", "args": ["OVERDOSE_WINDOW_MINUTES"]},
+    {"text": "quasium.progression.overdose.page3", "args": ["SICK_SMOKE_FROM_PCT", "SICK_COUGH_FROM_PCT", "OVERDOSE_WINDOW_MINUTES"]}
+  ]
+}

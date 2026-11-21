@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "front": "quasium:block/smoke_boiler_front",
+    "side": "quasium:block/smoke_boiler_side",
+    "top": "quasium:block/smoke_boiler_top",
+    "bottom": "quasium:block/smoke_boiler_bottom"
+  }
+}

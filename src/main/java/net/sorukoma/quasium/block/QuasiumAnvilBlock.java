@@ -4,9 +4,8 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -17,6 +16,7 @@ import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -33,15 +33,25 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.sorukoma.quasium.data.PlayerKaifData;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.sorukoma.quasium.block.entity.QuasiumAnvilBlockEntity;
 import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.mind.research.Research;
 import net.sorukoma.quasium.recipe.AnvilRecipes;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class QuasiumAnvilBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    private static final Map<Direction, VoxelShape> SHAPES = BlockShapes.horizontal(Direction.SOUTH, Shapes.or(
+            Block.box(2, 0, 2, 14, 4, 14), Block.box(4, 4, 3, 12, 5, 13), Block.box(6, 5, 4, 10, 10, 12), Block.box(3, 10, 0, 13, 16, 16)));
 
     public QuasiumAnvilBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -57,6 +67,11 @@ public class QuasiumAnvilBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction direction = context.getHorizontalDirection();
         return this.defaultBlockState().setValue(FACING, direction.getClockWise());
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPES.get(state.getValue(FACING));
     }
 
     @Override
@@ -119,66 +134,57 @@ public class QuasiumAnvilBlock extends BaseEntityBlock {
         BlockEntity entity = level.getBlockEntity(pos);
         if (!(entity instanceof QuasiumAnvilBlockEntity anvilEntity)) return ItemInteractionResult.FAIL;
 
-        // Hit with netherite hammer
         if (heldItem.getItem() == ModItems.NETHERITE_HAMMER.get()) {
             AnvilRecipes.AnvilRecipe recipe = anvilEntity.getCurrentRecipe();
-            if (recipe == null) {
-                player.displayClientMessage(Component.translatable("block.quasium.quasium_anvil.no_recipe"), true);
-                return ItemInteractionResult.CONSUME;
-            }
-
-            int playerKaif = PlayerKaifData.getKaifValue(player);
-            if (playerKaif < recipe.kaifLevel()) {
-                player.displayClientMessage(Component.translatable("block.quasium.quasium_anvil.low_kaif", recipe.kaifLevel()), true);
-                return ItemInteractionResult.CONSUME;
-            }
-
-            int currentHits = anvilEntity.getHitCount();
-            if (currentHits >= recipe.hitsRequired()) {
-                return ItemInteractionResult.CONSUME;
-            }
-
-            // Damage hammer
             EquipmentSlot slot = hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
-            heldItem.hurtAndBreak(1, player, slot);
-            // Play vanilla anvil sound
-            level.playSound(null, pos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
-
-            anvilEntity.incrementHitCount();
-
-            int newHits = anvilEntity.getHitCount();
-            if (newHits >= recipe.hitsRequired()) {
-                // Craft complete
-                ItemStack result = new ItemStack(recipe.output().get());
-                for (int i = 0; i < anvilEntity.getItemHandler().getSlots(); i++) {
-                    anvilEntity.getItemHandler().setStackInSlot(i, ItemStack.EMPTY);
-                }
-                player.getInventory().placeItemBackInInventory(result);
-                anvilEntity.resetHitCount();
-                player.displayClientMessage(Component.translatable("block.quasium.quasium_anvil.craft_complete"), true);
-            } else {
-                player.displayClientMessage(Component.translatable("block.quasium.quasium_anvil.hit_progress", newHits, recipe.hitsRequired()), true);
+            QuasiumAnvilBlockEntity.Strike strike = anvilEntity.strike(player, () -> heldItem.hurtAndBreak(1, player, slot),
+                    result -> player.getInventory().placeItemBackInInventory(result));
+            switch (strike) {
+                case NO_RECIPE -> player.displayClientMessage(noRecipe(anvilEntity.getItemHandler()), true);
+                case UNSTUDIED -> player.displayClientMessage(Component.translatable("block.quasium.quasium_anvil.unstudied",
+                        Research.title(recipe.research().toString())), true);
+                case LOW_KAIF -> player.displayClientMessage(recipe.refusal(), true);
+                case HIT -> player.displayClientMessage(Component.translatable("block.quasium.quasium_anvil.hit_progress",
+                        anvilEntity.getHitCount(), recipe.hitsRequired()), true);
+                case CRAFTED -> player.displayClientMessage(Component.translatable("block.quasium.quasium_anvil.craft_complete"), true);
             }
-
             return ItemInteractionResult.CONSUME;
         }
 
-        // Insert items into slots
-        if (!heldItem.isEmpty()) {
-            for (int i = 0; i < 3; i++) {
-                ItemStack slotItem = anvilEntity.getItemHandler().getStackInSlot(i);
-                if (slotItem.isEmpty()) {
-                    anvilEntity.getItemHandler().setStackInSlot(i, heldItem.copyWithCount(1));
-                    if (!player.isCreative()) heldItem.shrink(1);
-                    anvilEntity.resetHitCount();
-                    return ItemInteractionResult.CONSUME;
-                }
-            }
+        if (heldItem.isEmpty()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (insert(anvilEntity.getItemHandler(), heldItem, player)) anvilEntity.resetHitCount();
+        return ItemInteractionResult.CONSUME;
+    }
+
+    private static Component noRecipe(ItemStackHandler slots) {
+        List<Component> stacks = new ArrayList<>();
+        for (int slot = 0; slot < slots.getSlots(); slot++) {
+            ItemStack stack = slots.getStackInSlot(slot);
+            if (!stack.isEmpty()) stacks.add(counted(stack, stack.getCount()));
+        }
+        if (stacks.isEmpty()) return Component.translatable("block.quasium.quasium_anvil.no_recipe");
+        return Component.translatable("block.quasium.quasium_anvil.no_recipe_for", ComponentUtils.formatList(stacks, Component.literal(", ")));
+    }
+
+    private static Component counted(ItemStack stack, int count) {
+        return Component.translatable("block.quasium.quasium_anvil.stacked", stack.getHoverName(), count);
+    }
+
+    private static boolean insert(ItemStackHandler slots, ItemStack held, Player player) {
+        int top = slots.getSlots() - 1;
+        while (top >= 0 && slots.getStackInSlot(top).isEmpty()) top--;
+        ItemStack last = top < 0 ? ItemStack.EMPTY : slots.getStackInSlot(top);
+        if (!last.isEmpty() && ItemStack.isSameItemSameComponents(last, held) && last.getCount() < last.getMaxStackSize()) {
+            slots.setStackInSlot(top, last.copyWithCount(last.getCount() + 1));
+            player.displayClientMessage(counted(last, last.getCount() + 1), true);
+        } else if (top < slots.getSlots() - 1) {
+            slots.setStackInSlot(top + 1, held.copyWithCount(1));
+        } else {
             player.displayClientMessage(Component.translatable("block.quasium.quasium_anvil.full"), true);
-            return ItemInteractionResult.CONSUME;
+            return false;
         }
-
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!player.isCreative()) held.shrink(1);
+        return true;
     }
 
     @Override

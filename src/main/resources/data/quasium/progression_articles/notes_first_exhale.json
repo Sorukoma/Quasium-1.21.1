@@ -1,0 +1,18 @@
+{
+  "title": "quasium.progression.notes_first_exhale.title",
+  "hint": "quasium.progression.notes_first_exhale.hint",
+  "category": "smokecraft",
+  "order": 20,
+  "icon": "quasium:distillation_cube",
+  "unlockCondition": "quasium:smokecraft/first_scan",
+  "scene": "quasium:distillation",
+  "pages": [
+    {"text": "quasium.progression.notes_first_exhale.page1", "args": ["SCAN_KAIF_ITEM", "SCAN_KAIF_MOB"]},
+    {"text": "quasium.progression.notes_first_exhale.page2", "args": ["INSIGHT_PER_ITEM", "INSIGHT_PER_BLOCK", "INSIGHT_PER_MOB", "INSIGHT_CAP", "DERIVED_RECIPE_PCT", "DERIVED_NOTE_CAP"]},
+    {"text": "quasium.progression.notes_first_exhale.page3", "recipe": "quasium:distillation_cube", "args": ["DISTILL_WATER_CAPACITY", "DISTILL_WATER_PER_ITEM", "NOTE_BUFFER_CAPACITY", "NOTE_BOTTLE_CAPACITY"]},
+    {"text": "quasium.progression.notes_first_exhale.page4", "recipe": "quasium:note_jar", "args": ["NOTE_JAR_CAPACITY"]},
+    {"text": "quasium.progression.notes_first_exhale.page5", "args": ["ESSENCE_PER_CAST"]},
+    {"text": "quasium.progression.notes_first_exhale.page6", "args": ["LUNG_CAPACITY_MB", "HOLD_CHARGE_PER_SEC_PCT", "HOLD_MAX_MULTIPLIER_PCT", "HOLD_COUGH_AFTER_SEC", "COUGH_KAIF_LOSS", "PUFF_FILL_MB"]},
+    {"text": "quasium.progression.notes_first_exhale.page7"}
+  ]
+}

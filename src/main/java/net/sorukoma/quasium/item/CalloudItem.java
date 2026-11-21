@@ -22,6 +22,10 @@ public class CalloudItem extends Item {
         super(properties);
     }
 
+    public boolean burnsForever() {
+        return false;
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);

@@ -1,0 +1,34 @@
+{
+  "title": "quasium.progression.overdose_stages.title",
+  "hint": "quasium.progression.overdose_stages.hint",
+  "category": "kaif",
+  "order": 42,
+  "icon": "minecraft:fermented_spider_eye",
+  "unlockCondition": "quasium:smokecraft/overdose",
+  "pages": [
+    {
+      "text": "quasium.progression.overdose_stages.page1",
+      "args": [
+        "OVERDOSE_WINDOW_MINUTES",
+        "OVERDOSE_THRESHOLD_GRAMS",
+        "OVERDOSE_STAGE2_GRAMS",
+        "OVERDOSE_STAGE3_GRAMS"
+      ]
+    },
+    {
+      "text": "quasium.progression.overdose_stages.page2",
+      "args": [
+        "PHANTOM_STEAL_PER_SECOND",
+        "PHANTOM_STEAL_RADIUS"
+      ]
+    },
+    {
+      "text": "quasium.progression.overdose_stages.page3",
+      "args": [
+        "COMA_SECONDS",
+        "COMA_FOOD_LOSS",
+        "COMA_WAKE_KAIF"
+      ]
+    }
+  ]
+}

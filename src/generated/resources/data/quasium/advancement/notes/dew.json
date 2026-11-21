@@ -1,0 +1,23 @@
+{
+  "criteria": {
+    "has_dew": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:essence_type": "dew"
+            },
+            "items": "quasium:essence_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_dew"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

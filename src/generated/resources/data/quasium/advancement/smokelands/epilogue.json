@@ -1,0 +1,84 @@
+{
+  "parent": "quasium:smokelands/sultan",
+  "criteria": {
+    "lore_page_1": {
+      "conditions": {
+        "event": "lore_page_1"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "lore_page_2": {
+      "conditions": {
+        "event": "lore_page_2"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "lore_page_3": {
+      "conditions": {
+        "event": "lore_page_3"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "lore_page_4": {
+      "conditions": {
+        "event": "lore_page_4"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "lore_page_5": {
+      "conditions": {
+        "event": "lore_page_5"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "lore_page_6": {
+      "conditions": {
+        "event": "lore_page_6"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "sultan_defeated": {
+      "conditions": {
+        "event": "sultan_defeated"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokelands.epilogue.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "quasium:progression_book"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.epilogue.title"
+    }
+  },
+  "requirements": [
+    [
+      "sultan_defeated"
+    ],
+    [
+      "lore_page_1"
+    ],
+    [
+      "lore_page_2"
+    ],
+    [
+      "lore_page_3"
+    ],
+    [
+      "lore_page_4"
+    ],
+    [
+      "lore_page_5"
+    ],
+    [
+      "lore_page_6"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

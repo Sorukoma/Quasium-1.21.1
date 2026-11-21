@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:ritual/brazier",
+  "criteria": {
+    "ritual_start": {
+      "conditions": {
+        "event": "ritual_start"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.start.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:flint_and_steel"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.start.title"
+    }
+  },
+  "requirements": [
+    [
+      "ritual_start"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,80 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fermented_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:fermented": true
+            },
+            "items": "#quasium:tobacco_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_harvest": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:lemon",
+              "quasium:lime",
+              "quasium:orange",
+              "quasium:grapefruit",
+              "quasium:grape",
+              "quasium:coconut",
+              "quasium:anise",
+              "quasium:mint_leaves",
+              "quasium:lavender",
+              "quasium:cocoa_nibs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_planting": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:bonsai_pot",
+              "quasium:lemon_sapling",
+              "quasium:lime_sapling",
+              "quasium:orange_sapling",
+              "quasium:grapefruit_sapling",
+              "quasium:grape_sapling",
+              "quasium:coconut_sapling",
+              "quasium:mint_crop_seeds",
+              "quasium:anise_seeds",
+              "quasium:lavender_seeds",
+              "quasium:cocoa_crop_seeds"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:aroma_vial_lime"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_fermented_leaves",
+      "has_harvest",
+      "has_planting"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:aroma_vial_lime"
+    ]
+  }
+}

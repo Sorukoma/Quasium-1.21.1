@@ -1,0 +1,21 @@
+{
+  "title": "quasium.research.research_mind_stone_face.title",
+  "hint": "quasium.research.research_mind_stone_face.hint",
+  "category": "research_mind",
+  "order": 40,
+  "icon": "minecraft:stone",
+  "research": {
+    "tier": 2,
+    "perk": "stone_face",
+    "insight": 4,
+    "treatises": 0
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mind_stone_face.page1",
+      "args": [
+        "STONE_FACE_GRAMS"
+      ]
+    }
+  ]
+}

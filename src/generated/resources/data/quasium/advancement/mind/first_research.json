@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:mind/treatise",
+  "criteria": {
+    "research": {
+      "conditions": {
+        "event": "research"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.first_research.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:research_table"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.first_research.title"
+    }
+  },
+  "requirements": [
+    [
+      "research"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

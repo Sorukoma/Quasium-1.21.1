@@ -1,0 +1,179 @@
+{
+  "items": [
+    "quasium:place_marker",
+    "quasium:program_table",
+    "quasium:program_card"
+  ],
+  "floor": 7,
+  "steps": [
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:program_table[facing=east]",
+          "pos": [0, 0, 5]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [2, 0, 1]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [2, 0, 3]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [3, 0, 1]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [3, 0, 3]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [4, 0, 1]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [4, 0, 2]
+        },
+        {
+          "state": "minecraft:stone",
+          "pos": [4, 0, 3]
+        }
+      ],
+      "highlight": [
+        [2, 0, 1],
+        [4, 0, 3]
+      ],
+      "icons": [
+        {
+          "item": "quasium:place_marker",
+          "pos": [2.5, 1.3, 1.5]
+        },
+        {
+          "item": "quasium:place_marker",
+          "pos": [4.5, 1.3, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 190,
+      "place": [
+        {
+          "state": "minecraft:chest[facing=west]",
+          "pos": [6, 0, 5]
+        }
+      ],
+      "highlight": [
+        [0, 0, 5]
+      ],
+      "icons": [
+        {
+          "item": "quasium:place_marker",
+          "pos": [0.5, 2.6, 5.5]
+        },
+        {
+          "item": "minecraft:iron_pickaxe",
+          "pos": [0.5, 2.0, 5.5]
+        },
+        {
+          "item": "minecraft:chest",
+          "pos": [0.5, 1.4, 5.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "remove": [
+        [2, 0, 3],
+        [3, 0, 3],
+        [2, 0, 2],
+        [3, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:clay_golem",
+          "pos": [1.6, 0.8, 4.0]
+        },
+        {
+          "item": "minecraft:iron_pickaxe",
+          "pos": [1.6, 1.7, 4.0]
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "pos": [2.5, 0.5, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "remove": [
+        [2, 0, 1],
+        [3, 0, 1],
+        [4, 0, 1],
+        [4, 0, 2],
+        [4, 0, 3]
+      ],
+      "highlight": [
+        [6, 0, 5]
+      ],
+      "icons": [
+        {
+          "item": "quasium:clay_golem",
+          "pos": [5.0, 0.8, 4.4]
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "pos": [6.5, 1.4, 5.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "highlight": [
+        [0, 0, 5]
+      ],
+      "icons": [
+        {
+          "item": "quasium:golem_staff",
+          "pos": [0.5, 1.4, 5.5]
+        },
+        {
+          "item": "quasium:clay_golem",
+          "pos": [1.6, 0.8, 4.0]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:program_table[facing=east]",
+          "pos": [0, 0, 1]
+        }
+      ],
+      "highlight": [
+        [0, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:program_card",
+          "pos": [0.5, 1.4, 5.5]
+        },
+        {
+          "item": "quasium:program_card",
+          "pos": [0.5, 1.4, 1.5]
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,7 @@ package net.sorukoma.quasium.item;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -10,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.sorukoma.quasium.QuasiumMod;
 import net.sorukoma.quasium.block.ModBlocks;
 import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.ritual.armor.QuasiumArmorItem;
 
 import java.util.List;
 import java.util.Map;
@@ -41,12 +43,20 @@ public class ModItems {
     public static final DeferredItem<Item> BOLOTNIK_SEEDS = registerVarietySeeds("bolotnik", () -> ModBlocks.BOLOTNIK_CROP.get());
     public static final DeferredItem<Item> LEDYANOY_SEEDS = registerVarietySeeds("ledyanoy", () -> ModBlocks.LEDYANOY_CROP.get());
     public static final DeferredItem<Item> HYBRID_TOBACCO_SEEDS = registerVarietySeeds("hybrid_tobacco", () -> ModBlocks.HYBRID_TOBACCO_CROP.get());
+    public static final DeferredItem<Item> ECHO_SEEDS = registerVarietySeeds("echo", () -> ModBlocks.ECHO_CROP.get());
+    public static final DeferredItem<Item> ASHEN_SEEDS = registerVarietySeeds("ashen", () -> ModBlocks.ASHEN_CROP.get());
+    public static final DeferredItem<Item> CHORUS_SEEDS = registerVarietySeeds("chorus", () -> ModBlocks.CHORUS_CROP.get());
+    public static final DeferredItem<Item> PRIMORDIAL_SEEDS = registerVarietySeeds("primordial", () -> ModBlocks.PRIMORDIAL_CROP.get());
 
     public static final DeferredItem<Item> DIKAR_LEAVES = registerVarietyLeaves("dikar");
     public static final DeferredItem<Item> PESCHANIK_LEAVES = registerVarietyLeaves("peschanik");
     public static final DeferredItem<Item> BOLOTNIK_LEAVES = registerVarietyLeaves("bolotnik");
     public static final DeferredItem<Item> LEDYANOY_LEAVES = registerVarietyLeaves("ledyanoy");
     public static final DeferredItem<Item> HYBRID_TOBACCO_LEAVES = registerVarietyLeaves("hybrid_tobacco");
+    public static final DeferredItem<Item> ECHO_LEAVES = registerVarietyLeaves("echo");
+    public static final DeferredItem<Item> ASHEN_LEAVES = registerVarietyLeaves("ashen");
+    public static final DeferredItem<Item> CHORUS_LEAVES = registerVarietyLeaves("chorus");
+    public static final DeferredItem<Item> PRIMORDIAL_LEAVES = registerVarietyLeaves("primordial");
 
     private static DeferredItem<Item> registerVarietySeeds(String name, java.util.function.Supplier<net.minecraft.world.level.block.Block> crop) {
         return ITEMS.register(name + "_seeds", () -> new TobaccoSeedsItem(crop, new Item.Properties()));
@@ -58,9 +68,7 @@ public class ModItems {
 
     // Старые ID оставлены для совместимости с уже созданными мирами.
     public static final DeferredItem<Item> TOBACCO_SEEDS = DIKAR_SEEDS;
-    public static final DeferredItem<Item> MAKHORKA_SEEDS = PESCHANIK_SEEDS;
     public static final DeferredItem<Item> TOBACCO_LEAVES = DIKAR_LEAVES;
-    public static final DeferredItem<Item> MAKHORKA_LEAVES = PESCHANIK_LEAVES;
 
     public static final DeferredItem<Item> LEMON_SAPLING = ITEMS.register("lemon_sapling",
             () -> new BonsaiSaplingItem(() -> ModBlocks.BONSAI_POT.get(), "lemon", new Item.Properties()));
@@ -83,12 +91,12 @@ public class ModItems {
     public static final DeferredItem<Item> ANISE = ITEMS.register("anise", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> MINT_CROP_SEEDS = ITEMS.register("mint_crop_seeds",
-            () -> new EssenceSeedsItem(() -> ModBlocks.MINT_CROP.get(), new Item.Properties()));
+            () -> new ItemNameBlockItem(ModBlocks.MINT_CROP.get(), new Item.Properties()));
     public static final DeferredItem<Item> MINT_LEAVES = ITEMS.register("mint_leaves", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> LAVENDER = ITEMS.register("lavender", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> COCOA_NIBS = ITEMS.register("cocoa_nibs", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ANISE_SEEDS = ITEMS.register("anise_seeds",
-            () -> new EssenceSeedsItem(() -> ModBlocks.ANISE_CROP.get(), new Item.Properties()));
+            () -> new ItemNameBlockItem(ModBlocks.ANISE_CROP.get(), new Item.Properties()));
     public static final DeferredItem<Item> LAVENDER_SEEDS = ITEMS.register("lavender_seeds",
             () -> new BonsaiSaplingItem(() -> ModBlocks.BONSAI_POT.get(), "lavender", new Item.Properties()));
     public static final DeferredItem<Item> COCOA_CROP_SEEDS = ITEMS.register("cocoa_crop_seeds",
@@ -106,6 +114,11 @@ public class ModItems {
 
     public static final DeferredItem<Item> ESSENCE_BOTTLE = ITEMS.register("essence_bottle",
             () -> new EssenceBottleItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> AROMA_VIAL = ITEMS.register("aroma_vial",
+            () -> new AromaVialItem(new Item.Properties().stacksTo(16)));
+
+    public static final DeferredItem<Item> FRIES = ITEMS.register("fries", () -> new FriesItem(new Item.Properties().food(
+            new FoodProperties.Builder().nutrition(6).saturationModifier(0.6f).build())));
 
     public static final DeferredItem<Item> BEEF_JERKY = registerJerky("beef_jerky", 6, 0.8f, 2400);
     public static final DeferredItem<Item> PORK_JERKY = registerJerky("pork_jerky", 7, 0.9f, 2400);
@@ -116,13 +129,13 @@ public class ModItems {
     public static final DeferredItem<Item> SALMON_JERKY = registerJerky("salmon_jerky", 6, 0.8f, 2000);
 
     public static final DeferredItem<Item> QUASIUM_HELMET = ITEMS.register("quasium_helmet",
-            () -> new ArmorItem(ModArmorMaterials.QUASIUM, ArmorItem.Type.HELMET, new Item.Properties().durability(330)));
+            () -> new QuasiumArmorItem(ArmorItem.Type.HELMET, new Item.Properties().durability(330)));
     public static final DeferredItem<Item> QUASIUM_CHESTPLATE = ITEMS.register("quasium_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.QUASIUM, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(480)));
+            () -> new QuasiumArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(480)));
     public static final DeferredItem<Item> QUASIUM_LEGGINGS = ITEMS.register("quasium_leggings",
-            () -> new ArmorItem(ModArmorMaterials.QUASIUM, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(450)));
+            () -> new QuasiumArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().durability(450)));
     public static final DeferredItem<Item> QUASIUM_BOOTS = ITEMS.register("quasium_boots",
-            () -> new ArmorItem(ModArmorMaterials.QUASIUM, ArmorItem.Type.BOOTS, new Item.Properties().durability(390)));
+            () -> new QuasiumArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().durability(390)));
 
     // Новые предметы табака
     public static final DeferredItem<Item> MINT_TOBACCO = ITEMS.register("mint_tobacco",
@@ -226,6 +239,24 @@ public class ModItems {
     public static final DeferredItem<Item> CALLOUD = ITEMS.register("calloud",
             () -> new CalloudItem(new Item.Properties().stacksTo(1)
                     .component(ModDataComponents.CALLOUD_CONTENTS, new ModDataComponents.CalloudData(List.of(), List.of()))));
+
+    public static final DeferredItem<Item> FOCUS_UPGRADE_RESONATOR = registerUpgrade(net.sorukoma.quasium.magic.FocusUpgrade.RESONATOR);
+    public static final DeferredItem<Item> FOCUS_UPGRADE_COLLIMATOR = registerUpgrade(net.sorukoma.quasium.magic.FocusUpgrade.COLLIMATOR);
+    public static final DeferredItem<Item> FOCUS_UPGRADE_COOLER = registerUpgrade(net.sorukoma.quasium.magic.FocusUpgrade.COOLER);
+    public static final DeferredItem<Item> FOCUS_UPGRADE_SPLITTER = registerUpgrade(net.sorukoma.quasium.magic.FocusUpgrade.SPLITTER);
+    public static final DeferredItem<Item> FOCUS_UPGRADE_CONDENSER = registerUpgrade(net.sorukoma.quasium.magic.FocusUpgrade.CONDENSER);
+    public static final DeferredItem<Item> FOCUS_UPGRADE_FILTER = registerUpgrade(net.sorukoma.quasium.magic.FocusUpgrade.FILTER);
+
+    public static final DeferredItem<Item> EMPTY_SMOKE_JAR = ITEMS.register("empty_smoke_jar",
+            () -> new EmptySmokeJarItem(new Item.Properties().stacksTo(16)));
+
+    public static final DeferredItem<Item> MUSIC_DISC_LOFI_KAIF_BEATS = ITEMS.register("music_disc_lofi_kaif_beats",
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE)
+                    .jukeboxPlayable(net.sorukoma.quasium.magic.KaifZones.LOFI_SONG)));
+
+    private static DeferredItem<Item> registerUpgrade(net.sorukoma.quasium.magic.FocusUpgrade upgrade) {
+        return ITEMS.register("focus_upgrade_" + upgrade.id(), () -> new FocusUpgradeItem(upgrade, new Item.Properties().stacksTo(16)));
+    }
 
     private static DeferredItem<Item> registerJerky(String name, int nutrition, float saturation, int dryingTime) {
         return ITEMS.register(name, () -> new JerkyItem(dryingTime, new Item.Properties().food(

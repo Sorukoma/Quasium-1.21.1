@@ -1,0 +1,43 @@
+{
+  "criteria": {
+    "entered": {
+      "conditions": {
+        "event": "smokelands_enter"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "fell_through": {
+      "conditions": {
+        "event": "smokelands_coma"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "portal_lit": {
+      "conditions": {
+        "event": "smoke_portal_lit"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "background": "quasium:textures/gui/advancements/backgrounds/smokelands.png",
+    "description": {
+      "translate": "advancements.quasium.smokelands.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:petrified_smoke"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "portal_lit",
+      "entered",
+      "fell_through"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

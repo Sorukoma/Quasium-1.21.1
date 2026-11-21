@@ -14,6 +14,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.sorukoma.quasium.block.FermentationBarrelBlock;
 import net.sorukoma.quasium.component.ModDataComponents;
 import net.sorukoma.quasium.item.TobaccoVarieties;
+import net.sorukoma.quasium.selection.quality.LeafQuality;
 import org.jetbrains.annotations.Nullable;
 
 public class FermentationBarrelBlockEntity extends BlockEntity {
@@ -21,6 +22,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
+            if (getStackInSlot(0).isEmpty()) sugarBoosts = 0;
             setChanged();
             if (level != null && !level.isClientSide) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -81,6 +83,17 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
     public boolean isReady() { return ready; }
     public boolean isSpoiled() { return spoiled; }
 
+    public static boolean sameBatch(ItemStack inside, ItemStack leaves) {
+        return inside.isEmpty() || ItemStack.isSameItemSameComponents(withoutDryingCounters(inside), withoutDryingCounters(leaves));
+    }
+
+    private static ItemStack withoutDryingCounters(ItemStack leaves) {
+        ItemStack copy = leaves.copyWithCount(1);
+        copy.remove(ModDataComponents.DRYING_PROGRESS.get());
+        copy.remove(ModDataComponents.DRYING_RATE.get());
+        return copy;
+    }
+
     public ItemStack takeResult() {
         if (!ready || itemHandler.getStackInSlot(0).isEmpty()) return ItemStack.EMPTY;
         ItemStack result = itemHandler.getStackInSlot(0).copy();
@@ -90,7 +103,6 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
         spoiled = false;
         fermentationProgress = 0;
         fermentationTotalTime = 1200;
-        sugarBoosts = 0;
         setChanged();
         return result;
     }
@@ -134,8 +146,9 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
             entity.spoiled = entity.sugarBoosts > 0 && level.random.nextFloat() < 0.15f * entity.sugarBoosts;
             if (!input.isEmpty()) {
                 ItemStack result = input.copy();
-                result.set(ModDataComponents.FERMENTED.get(), true);
+                result.set(ModDataComponents.FERMENTED.get(), !entity.spoiled);
                 if (entity.spoiled) result.set(ModDataComponents.SPOILED.get(), true);
+                if (entity.sugarBoosts == 0) LeafQuality.fermentedClean(result);
                 entity.itemHandler.setStackInSlot(0, result);
             }
             entity.fermenting = false;

@@ -27,7 +27,7 @@ public class PacketDetachPipeToServerHandler {
 
             // Distance validation (sub-level aware so hookahs on moving Sable contraptions still work)
             if (net.sorukoma.quasium.compat.SableCompat.distanceSqrToBlockCenter(player, blockPos) > MAX_DISTANCE_SQ) {
-                LOGGER.warn("Server: Player {} tried to detach pipe from hookah at {} but is too far away.", player.getName().getString(), blockPos);
+                LOGGER.debug("Server: Player {} tried to detach pipe from hookah at {} but is too far away.", player.getName().getString(), blockPos);
                 return;
             }
 
@@ -56,12 +56,12 @@ public class PacketDetachPipeToServerHandler {
                 } else {
                     player.sendSystemMessage(Component.translatable("quasium.message.hookah_missing"));
                     PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.empty()));
-                    LOGGER.error("Server: Hookah Block Entity not found at {} when handling PacketDetachPipeToServer.", blockPos);
+                    LOGGER.debug("Server: Hookah Block Entity not found at {} when handling PacketDetachPipeToServer.", blockPos);
                 }
             } else {
                 player.sendSystemMessage(Component.translatable("quasium.message.hookah_not_loaded"));
                 PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.empty()));
-                LOGGER.error("Server: Block not loaded at {} when handling PacketDetachPipeToServer.", blockPos);
+                LOGGER.debug("Server: Block not loaded at {} when handling PacketDetachPipeToServer.", blockPos);
             }
         });
     }

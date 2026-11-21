@@ -1,0 +1,23 @@
+{
+  "criteria": {
+    "has_nectar": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:essence_type": "nectar"
+            },
+            "items": "quasium:essence_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_nectar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

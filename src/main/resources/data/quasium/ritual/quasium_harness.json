@@ -1,0 +1,30 @@
+{
+  "tier": 3,
+  "catalyst": {
+    "item": "quasium:backpack_hookah"
+  },
+  "pedestals": [
+    {
+      "item": "quasium:quasiumingot"
+    },
+    {
+      "item": "quasium:dream_quartz"
+    }
+  ],
+  "notes": {
+    "resin": 64,
+    "menthol": 32,
+    "ember": 16
+  },
+  "puffs": 900,
+  "rate": 192,
+  "kaif": {
+    "min": 50
+  },
+  "base": 25,
+  "infuse": {
+    "quasium:quasium_harness": {},
+    "minecraft:item_name": "{\"translate\":\"item.quasium.quasium_harness\"}",
+    "minecraft:enchantment_glint_override": true
+  }
+}

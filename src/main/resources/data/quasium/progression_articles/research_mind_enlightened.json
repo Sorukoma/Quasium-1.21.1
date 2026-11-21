@@ -1,0 +1,22 @@
+{
+  "title": "quasium.research.research_mind_enlightened.title",
+  "hint": "quasium.research.research_mind_enlightened.hint",
+  "category": "research_mind",
+  "order": 60,
+  "icon": "minecraft:glowstone_dust",
+  "research": {
+    "tier": 3,
+    "perk": "enlightened",
+    "insight": 8,
+    "treatises": 0
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mind_enlightened.page1",
+      "args": [
+        "INSIGHT_DRIP_KAIF_ENLIGHTENED",
+        "INSIGHT_CAP_ENLIGHTENED"
+      ]
+    }
+  ]
+}

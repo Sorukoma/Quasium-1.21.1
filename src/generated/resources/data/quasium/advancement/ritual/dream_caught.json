@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:ritual/first_ritual",
+  "criteria": {
+    "dream_caught": {
+      "conditions": {
+        "event": "dream_caught"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.dream_caught.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:dream_catcher"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.dream_caught.title"
+    }
+  },
+  "requirements": [
+    [
+      "dream_caught"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

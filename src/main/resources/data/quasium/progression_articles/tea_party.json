@@ -1,0 +1,32 @@
+{
+  "title": "quasium.progression.tea_party.title",
+  "hint": "quasium.progression.tea_party.hint",
+  "category": "kaif",
+  "order": 70,
+  "icon": "quasium:teapot",
+  "unlockCondition": "quasium:ecology/tea_path",
+  "scene": "quasium:tea_party",
+  "pages": [
+    {
+      "text": "quasium.progression.tea_party.page1",
+      "items": [
+        "quasium:samovar",
+        "quasium:lounge_cushion",
+        "quasium:teapot"
+      ],
+      "args": [
+        "TEA_PARTY_CUSHIONS",
+        "TEA_PARTY_RADIUS",
+        "TEA_PARTY_MINUTES"
+      ]
+    },
+    {
+      "text": "quasium.progression.tea_party.page2",
+      "args": [
+        "TEA_PARTY_RADIUS",
+        "TEA_PARTY_KAIF_PER_MINUTE",
+        "TEA_PARTY_SMOG_CLEANSE"
+      ]
+    }
+  ]
+}

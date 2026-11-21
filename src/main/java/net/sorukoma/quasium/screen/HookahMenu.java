@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.sorukoma.quasium.block.entity.HookahBlockEntity;
+import net.sorukoma.quasium.compat.SableCompat;
 import net.sorukoma.quasium.item.CalloudItem;
 import net.sorukoma.quasium.item.ModItems;
 import org.jetbrains.annotations.NotNull;
@@ -149,9 +150,7 @@ public class HookahMenu extends AbstractContainerMenu {
         return blockEntity != null
                 && !blockEntity.isRemoved()
                 && player.level().getBlockEntity(blockEntity.getBlockPos()) == blockEntity
-                && player.distanceToSqr(blockEntity.getBlockPos().getX() + 0.5,
-                        blockEntity.getBlockPos().getY() + 0.5,
-                        blockEntity.getBlockPos().getZ() + 0.5) <= 64.0;
+                && SableCompat.distanceSqrToBlockCenter(player, blockEntity.getBlockPos()) <= 64.0;
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

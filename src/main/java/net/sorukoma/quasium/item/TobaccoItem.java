@@ -51,8 +51,7 @@ public class TobaccoItem extends Item {
         itemstack.set(ModDataComponents.TOBACCO_WEIGHT.get(), newWeight);
 
         // Выдаем 1 грамм табака
-        ItemStack oneGram = new ItemStack(ModItems.ONE_GRAM_TOBACCO.get());
-        oneGram.set(ModDataComponents.TOBACCO_FLAVOR.get(), flavor);
+        ItemStack oneGram = oneGram(flavor);
         if (!pPlayer.getInventory().add(oneGram)) {
             pPlayer.drop(oneGram, false);
         }
@@ -61,6 +60,12 @@ public class TobaccoItem extends Item {
                 SoundEvents.CROP_BREAK, SoundSource.PLAYERS, 0.5F, 1.2F);
 
         return InteractionResultHolder.sidedSuccess(itemstack, false);
+    }
+
+    public static ItemStack oneGram(String flavor) {
+        ItemStack oneGram = new ItemStack(ModItems.ONE_GRAM_TOBACCO.get());
+        oneGram.set(ModDataComponents.TOBACCO_FLAVOR.get(), flavor);
+        return oneGram;
     }
 
     @Override

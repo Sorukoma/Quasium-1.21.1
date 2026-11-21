@@ -1,0 +1,18 @@
+{
+  "form": "pulse",
+  "inputs": [
+    {
+      "ember": 1,
+      "menthol": 1
+    }
+  ],
+  "lungs": 40,
+  "grams": 0.2,
+  "cooldown": 30,
+  "action": "whisper",
+  "color": "#FFB347",
+  "params": {
+    "radius": 16,
+    "glow_seconds": 10
+  }
+}

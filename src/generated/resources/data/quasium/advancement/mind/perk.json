@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:mind/first_research",
+  "criteria": {
+    "perk": {
+      "conditions": {
+        "event": "perk"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.perk.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:experience_bottle"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.perk.title"
+    }
+  },
+  "requirements": [
+    [
+      "perk"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

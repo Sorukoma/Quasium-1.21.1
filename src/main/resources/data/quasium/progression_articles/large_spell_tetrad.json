@@ -1,0 +1,20 @@
+{
+  "title": "quasium.progression.large_spell_tetrad.title",
+  "hint": "quasium.progression.large_spell_tetrad.hint",
+  "category": "smokecraft",
+  "order": 38,
+  "icon": "quasium:large_spell_tetrad",
+  "unlockCondition": "quasium:smokelands/sultan",
+  "scene": "quasium:sultan",
+  "pages": [
+    {
+      "text": "quasium.progression.large_spell_tetrad.page1"
+    },
+    {
+      "text": "quasium.progression.large_spell_tetrad.page2"
+    },
+    {
+      "text": "quasium.progression.large_spell_tetrad.page3"
+    }
+  ]
+}

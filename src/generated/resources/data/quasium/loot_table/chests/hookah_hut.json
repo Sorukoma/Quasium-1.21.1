@@ -1,0 +1,259 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "menthol"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "ember"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "nectar"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "dew"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "resin"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "ash"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 20
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "quasium:dikar_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "quasium:peschanik_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "quasium:bolotnik_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "quasium:ledyanoy_seeds"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:tobacco_variety": "hybrid"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_strength_stars": 4
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_yield_stars": 3
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_quality_stars": 3
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_lineage": [
+                  "dikar",
+                  "peschanik"
+                ]
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:hybrid_tobacco_seeds"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.1,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "quasium:modular_hookah_jade"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "quasium:modular_hookah_violet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "quasium:modular_hookah_gold"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "quasium:chests/hookah_hut"
+}

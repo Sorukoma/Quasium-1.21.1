@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/bellows",
+  "criteria": {
+    "hammer_craft": {
+      "conditions": {
+        "event": "hammer_craft"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.hammer_craft.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:piston"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.hammer_craft.title"
+    }
+  },
+  "requirements": [
+    [
+      "hammer_craft"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

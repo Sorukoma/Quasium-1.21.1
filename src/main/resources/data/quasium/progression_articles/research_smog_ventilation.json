@@ -1,0 +1,28 @@
+{
+  "title": "quasium.research.research_smog_ventilation.title",
+  "hint": "quasium.research.research_smog_ventilation.hint",
+  "category": "research_smog",
+  "order": 10,
+  "icon": "quasium:ventilation",
+  "scene": "quasium:ventilation",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "menthol"
+    ],
+    "recipes": [
+      "quasium:ventilation"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smog_ventilation.page1",
+      "recipe": "quasium:ventilation",
+      "args": [
+        "VENT_DENSITY_PER_MINUTE",
+        "VENT_DEMAND",
+        "VENT_SMOG_MINUTES"
+      ]
+    }
+  ]
+}

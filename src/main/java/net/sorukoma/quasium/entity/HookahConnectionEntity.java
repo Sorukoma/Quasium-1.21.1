@@ -2,10 +2,10 @@ package net.sorukoma.quasium.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -13,8 +13,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.sorukoma.quasium.block.entity.HookahBlockEntity;
-import net.sorukoma.quasium.network.ModPackets;
-import net.sorukoma.quasium.network.PacketStopHookahPuffSoundClient;
+import net.sorukoma.quasium.item.HookahPipeItem;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.sorukoma.quasium.network.PacketSyncHookahConnection;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -37,7 +38,8 @@ public class HookahConnectionEntity extends Entity {
     private BlockPos hookahBlockPos;
 
     // Constants
-    public static final double PIPE_DETACH_DISTANCE_SQ = 2.0 * 2.0; // Квадрат расстояния для отсоединения трубки (2 блока)
+    public static final double PIPE_REACH = 3.5;
+    public static final double PIPE_DETACH_DISTANCE_SQ = PIPE_REACH * PIPE_REACH;
 
     public HookahConnectionEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -76,24 +78,19 @@ public class HookahConnectionEntity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
-        if (pCompound.hasUUID("AttachedPlayerUUID")) {
-            this.attachedPlayerUUID = pCompound.getUUID("AttachedPlayerUUID");
-        }
-        if (pCompound.contains("HookahBlockPos")) {
-            this.hookahBlockPos = NbtUtils.readBlockPos(pCompound, "HookahBlockPos").orElse(null);
-        }
-        this.entityData.set(IS_PUFFING, pCompound.getBoolean("IsPuffing"));
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
-        if (this.attachedPlayerUUID != null) {
-            pCompound.putUUID("AttachedPlayerUUID", this.attachedPlayerUUID);
+    }
+
+    @Override
+    public void onRemovedFromLevel() {
+        super.onRemovedFromLevel();
+        UUID smoker = getAttachedPlayerUUID();
+        if (!level().isClientSide && smoker != null && level().getPlayerByUUID(smoker) instanceof ServerPlayer player) {
+            PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.empty()));
         }
-        if (this.hookahBlockPos != null) {
-            pCompound.put("HookahBlockPos", NbtUtils.writeBlockPos(this.hookahBlockPos));
-        }
-        pCompound.putBoolean("IsPuffing", this.entityData.get(IS_PUFFING));
     }
 
     @Override
@@ -116,29 +113,25 @@ public class HookahConnectionEntity extends Entity {
             BlockEntity blockEntity = this.level().getBlockEntity(this.hookahBlockPos);
             if (!(blockEntity instanceof HookahBlockEntity hookahBlockEntity)) {
                 this.discard(); // Отбрасываем сущность, если блок кальяна не найден или не того типа
-                // Отправляем пакет клиенту, чтобы остановить звук, если он играет
-                ModPackets.sendToClientsTrackingBlock(new PacketStopHookahPuffSoundClient(this.hookahBlockPos, false), blockEntity);
                 return;
             }
 
             // Проверяем дистанцию между игроком и кальяном (sub-level aware для Sable:
             // координаты кальяна на контрапшене лежат в plot-grid, обычная distanceToSqr дала бы мусор)
             if (net.sorukoma.quasium.compat.SableCompat.distanceSqr(player, Vec3.atCenterOf(this.hookahBlockPos)) > PIPE_DETACH_DISTANCE_SQ) {
-                player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("quasium.message.walked_away"));
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("quasium.message.walked_away"), true);
                 this.stopPuffing(hookahBlockEntity, player); // Передаем игрока для спавна дыма
                 this.discard(); // Отбрасываем сущность, если игрок отошел слишком далеко
                 return;
             }
 
-            // Если игрок больше не держит трубку в руке, отсоединяем
-            boolean holdingPipe = player.getMainHandItem().getItem() == net.sorukoma.quasium.item.ModItems.HOOKAH_PIPE.get() ||
-                                  player.getOffhandItem().getItem() == net.sorukoma.quasium.item.ModItems.HOOKAH_PIPE.get();
-            if (!holdingPipe) {
-                player.sendSystemMessage(net.minecraft.network.chat.Component.translatable("quasium.message.let_go"));
-                this.stopPuffing(hookahBlockEntity, player); // Передаем игрока для спавна дыма
+            if (!HookahPipeItem.carriesPipe(player)) {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("quasium.message.let_go"), true);
+                this.stopPuffing(hookahBlockEntity, player);
                 this.discard();
                 return;
             }
+            if (!HookahPipeItem.holdsPipe(player)) this.stopPuffing(hookahBlockEntity, player);
 
             // Обновляем позицию сущности, чтобы она всегда была на кальяне
             this.setPos(this.hookahBlockPos.getX() + 0.5, this.hookahBlockPos.getY() + 0.5, this.hookahBlockPos.getZ() + 0.5);

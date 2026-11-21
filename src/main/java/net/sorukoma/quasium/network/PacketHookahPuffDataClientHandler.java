@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 public class PacketHookahPuffDataClientHandler {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public record ClientHookahData(float totalHeat, int totalTobaccoWeight, @Nullable ModDataComponents.HookahBowlContents bowlContents) {}
+    public record ClientHookahData(float totalHeat, int totalTobaccoWeight, int warmup, @Nullable ModDataComponents.HookahBowlContents bowlContents) {}
 
     private static final Map<BlockPos, ClientHookahData> clientHookahStates = new HashMap<>();
 
@@ -21,6 +21,7 @@ public class PacketHookahPuffDataClientHandler {
             clientHookahStates.put(payload.blockPos(), new ClientHookahData(
                 payload.totalHeat(),
                 payload.totalTobaccoWeight(),
+                payload.warmup(),
                 payload.bowlContents()
             ));
         });

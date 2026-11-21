@@ -1,0 +1,33 @@
+{
+  "parent": "quasium:progression/found_seeds",
+  "criteria": {
+    "aphid_cure": {
+      "conditions": {
+        "event": "aphid_cure"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.aphid_cure.description"
+    },
+    "icon": {
+      "components": {
+        "quasium:essence_amount": 20,
+        "quasium:essence_type": "ember"
+      },
+      "count": 1,
+      "id": "quasium:essence_bottle"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.aphid_cure.title"
+    }
+  },
+  "requirements": [
+    [
+      "aphid_cure"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

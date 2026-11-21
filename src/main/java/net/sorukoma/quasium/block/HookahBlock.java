@@ -10,19 +10,22 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.sorukoma.quasium.advancements.triggers.QuasiumModAdvancements;
 import net.sorukoma.quasium.block.entity.HookahBlockEntity;
 import net.sorukoma.quasium.block.entity.ModBlockEntities;
@@ -36,15 +39,11 @@ import java.util.List;
 
 public class HookahBlock extends BaseEntityBlock {
     private static final Logger LOGGER = LogUtils.getLogger();
+    private static final VoxelShape SHAPE = Shapes.or(Block.box(3.5, 0, 3.5, 12.5, 5, 12.5), Block.box(4.5, 5, 4.5, 11.5, 7, 11.5),
+            Block.box(6, 7, 6, 10, 15, 10), Block.box(3, 15, 3, 13, 17, 13), Block.box(6.5, 17, 6.5, 9.5, 18, 9.5));
 
     public HookahBlock(BlockBehaviour.Properties properties) {
         super(properties);
-    }
-
-    public HookahBlock() {
-        this(BlockBehaviour.Properties.ofFullCopy(Blocks.BREWING_STAND)
-                .sound(SoundType.WOOD)
-                .noOcclusion());
     }
 
     @Override
@@ -53,7 +52,19 @@ public class HookahBlock extends BaseEntityBlock {
     }
 
     @Override
+    protected boolean canBeReplaced(BlockState state, Fluid fluid) {
+        return false;
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+
+    @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+
+        if (pStack.is(ModItems.EMPTY_SMOKE_JAR.get()) || pStack.is(ModItems.KAIFOMETER.get())) return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 
         if (pLevel.isClientSide()) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -132,7 +143,7 @@ public class HookahBlock extends BaseEntityBlock {
                         Player attachedPlayer = pLevel.getPlayerByUUID(connection.getAttachedPlayerUUID());
                         if (attachedPlayer != null) {
                             connection.stopPuffing(hookahBlockEntity, attachedPlayer);
-                            attachedPlayer.sendSystemMessage(Component.translatable("quasium.message.pipe_detached_broken"));
+                            attachedPlayer.displayClientMessage(Component.translatable("quasium.message.pipe_detached_broken"), true);
                         }
                         connection.discard();
                     }

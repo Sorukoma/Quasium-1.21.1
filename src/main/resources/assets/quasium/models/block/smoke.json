@@ -1,0 +1,7 @@
+{
+  "textures": {
+    "particle": "quasium:block/smoke_still",
+    "still": "quasium:block/smoke_still",
+    "flowing": "quasium:block/smoke_flowing"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "rules": [
+    {"tag": "c:foods/golden", "priority": 96, "notes": {"nectar": 4, "ember": 2}},
+    {"tag": "c:foods/food_poisoning", "priority": 94, "notes": {"ash": 2, "resin": 1}},
+    {"tag": "c:foods/raw_meat", "priority": 92, "notes": {"resin": 2, "nectar": 1}},
+    {"tag": "c:foods/cooked_meat", "priority": 92, "notes": {"resin": 2, "ember": 2}},
+    {"tag": "c:foods/raw_fish", "priority": 92, "notes": {"dew": 2, "resin": 1}},
+    {"tag": "c:foods/cooked_fish", "priority": 92, "notes": {"dew": 2, "ember": 1}},
+    {"tag": "c:foods/fruit", "priority": 92, "notes": {"nectar": 2, "dew": 1}},
+    {"tag": "c:foods/berry", "priority": 92, "notes": {"nectar": 2, "dew": 1}},
+    {"tag": "c:foods/vegetable", "priority": 92, "notes": {"resin": 2, "nectar": 1}},
+    {"tag": "c:foods/bread", "priority": 92, "notes": {"resin": 2, "nectar": 1}},
+    {"tag": "c:foods/cookie", "priority": 92, "notes": {"nectar": 2, "resin": 1}},
+    {"tag": "c:foods/candy", "priority": 92, "notes": {"nectar": 3}},
+    {"tag": "c:foods/pie", "priority": 92, "notes": {"nectar": 3, "resin": 1}},
+    {"tag": "c:foods/soup", "priority": 92, "notes": {"dew": 2, "resin": 1}},
+    {"tag": "c:foods/dough", "priority": 92, "notes": {"resin": 1, "nectar": 1}},
+    {"trait": "food", "priority": 40, "fallback": true, "notes": {"resin": 1, "nectar": 1}}
+  ]
+}

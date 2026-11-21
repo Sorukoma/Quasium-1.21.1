@@ -3,22 +3,28 @@ package net.sorukoma.quasium.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.sorukoma.quasium.block.TobaccoCropBlock;
 import net.sorukoma.quasium.item.TobaccoVarieties;
 
-/**
- * Хранит индивидуальные параметры конкретного куста (крепость/урожай/качество в звёздах).
- * Дикие кусты из генерации инициализируются лениво в {@link TobaccoCropBlock#randomTick}
- * с пониженным качеством; кусты, посаженные игроком из семени, получают звёзды семени.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class TobaccoCropBlockEntity extends BlockEntity {
+    private static final long UNKNOWN = -1;
+
     private int strengthStars;
     private int yieldStars;
     private int qualityStars;
     private boolean initialized;
+    private long matureSince = UNKNOWN;
+    private long lastAphidDay = UNKNOWN;
+    private List<String> lineage = List.of();
 
     public TobaccoCropBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.TOBACCO_CROP_BE.get(), pos, state);
@@ -28,7 +34,6 @@ public class TobaccoCropBlockEntity extends BlockEntity {
         return initialized;
     }
 
-    /** Задаёт звёзды явно (посадка игроком из семени с компонентами). */
     public void setStars(int strength, int yieldStars, int quality) {
         this.strengthStars = clamp(strength);
         this.yieldStars = clamp(yieldStars);
@@ -37,10 +42,6 @@ public class TobaccoCropBlockEntity extends BlockEntity {
         setChanged();
     }
 
-    /**
-     * Ленивая инициализация дикого куста: крепость/урожай берутся из базовых
-     * значений сорта, качество занижено — 1 звезда, изредка (15%) 2.
-     */
     public void initWild(RandomSource random) {
         if (initialized) return;
         String variety = varietyOf();
@@ -63,6 +64,36 @@ public class TobaccoCropBlockEntity extends BlockEntity {
         return initialized ? qualityStars : 1;
     }
 
+    public List<String> lineage() {
+        return lineage.isEmpty() ? List.of(varietyOf()) : lineage;
+    }
+
+    public void setLineage(List<String> lineage) {
+        this.lineage = List.copyOf(lineage);
+        setChanged();
+    }
+
+    public void markMature(long gameTime) {
+        matureSince = gameTime;
+        setChanged();
+    }
+
+    public void forgetMaturity() {
+        matureSince = UNKNOWN;
+        setChanged();
+    }
+
+    public boolean ripeWithin(long gameTime, long windowTicks) {
+        return matureSince != UNKNOWN && gameTime - matureSince < windowTicks;
+    }
+
+    public boolean startAphidDay(long day) {
+        if (day == lastAphidDay) return false;
+        lastAphidDay = day;
+        setChanged();
+        return true;
+    }
+
     private String varietyOf() {
         return getBlockState().getBlock() instanceof TobaccoCropBlock crop ? crop.getVariety() : TobaccoVarieties.DIKAR;
     }
@@ -78,6 +109,11 @@ public class TobaccoCropBlockEntity extends BlockEntity {
         tag.putInt("yield", yieldStars);
         tag.putInt("quality", qualityStars);
         tag.putBoolean("initialized", initialized);
+        tag.putLong("matureSince", matureSince);
+        tag.putLong("lastAphidDay", lastAphidDay);
+        ListTag names = new ListTag();
+        lineage.forEach(variety -> names.add(StringTag.valueOf(variety)));
+        tag.put("lineage", names);
     }
 
     @Override
@@ -87,5 +123,11 @@ public class TobaccoCropBlockEntity extends BlockEntity {
         yieldStars = tag.getInt("yield");
         qualityStars = tag.getInt("quality");
         initialized = tag.getBoolean("initialized");
+        matureSince = tag.contains("matureSince") ? tag.getLong("matureSince") : UNKNOWN;
+        lastAphidDay = tag.contains("lastAphidDay") ? tag.getLong("lastAphidDay") : UNKNOWN;
+        List<String> names = new ArrayList<>();
+        ListTag stored = tag.getList("lineage", Tag.TAG_STRING);
+        for (int i = 0; i < stored.size(); i++) names.add(stored.getString(i));
+        lineage = List.copyOf(names);
     }
 }

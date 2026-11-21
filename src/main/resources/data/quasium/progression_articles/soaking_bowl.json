@@ -1,10 +1,18 @@
 {
   "title": "quasium.progression.soaking_bowl.title",
   "hint": "quasium.progression.soaking_bowl.hint",
+  "category": "start",
+  "order": 80,
+  "icon": "quasium:soaking_bowl",
+  "unlockCondition": "quasium:progression/self_mixed_obtained",
+  "scene": "quasium:soaking_bowl",
   "pages": [
-    { "text": "quasium.progression.soaking_bowl.page1" },
-    { "text": "quasium.progression.soaking_bowl.page2" },
-    { "text": "quasium.progression.soaking_bowl.page3" }
-  ],
-  "unlockCondition": "quasium:progression/self_mixed_obtained"
+    {"text": "quasium.progression.soaking_bowl.page1", "recipe": "quasium:soaking_bowl_from_brick_and_clay"},
+    {"text": "quasium.progression.soaking_bowl.page2", "items": ["minecraft:stick", "minecraft:bowl"]},
+    {"text": "quasium.progression.soaking_bowl.page3"},
+    {"text": "quasium.progression.soaking_bowl.page4"},
+    {"text": "quasium.progression.soaking_bowl.page5"},
+    {"text": "quasium.progression.soaking_bowl.page6", "items": ["minecraft:echo_shard", "minecraft:blaze_powder", "minecraft:chorus_fruit"]},
+    {"text": "quasium.progression.soaking_bowl.page7", "items": ["quasium:secret_recipe"], "args": ["SECRET_MIX_KAIF_BONUS_PCT"]}
+  ]
 }

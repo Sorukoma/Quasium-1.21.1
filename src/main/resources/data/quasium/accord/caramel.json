@@ -1,0 +1,9 @@
+{
+  "first": "ember",
+  "second": "nectar",
+  "color": "#E08A30",
+  "params": {
+    "burn_seconds": 4,
+    "spread_radius": 1.5
+  }
+}

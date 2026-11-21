@@ -1,0 +1,197 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "casing": "quasium:block/pneumatic_hammer_casing",
+    "top": "quasium:block/pneumatic_hammer_top",
+    "ram": "quasium:block/pneumatic_hammer_ram",
+    "particle": "quasium:block/pneumatic_hammer_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        9,
+        1
+      ],
+      "to": [
+        15,
+        16,
+        15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#casing",
+          "uv": [
+            1,
+            0,
+            15,
+            7
+          ]
+        },
+        "east": {
+          "texture": "#casing",
+          "uv": [
+            1,
+            0,
+            15,
+            7
+          ]
+        },
+        "south": {
+          "texture": "#casing",
+          "uv": [
+            1,
+            0,
+            15,
+            7
+          ]
+        },
+        "west": {
+          "texture": "#casing",
+          "uv": [
+            1,
+            0,
+            15,
+            7
+          ]
+        },
+        "up": {
+          "texture": "#top",
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ]
+        },
+        "down": {
+          "texture": "#top",
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        8,
+        7
+      ],
+      "to": [
+        9,
+        9,
+        9
+      ],
+      "faces": {
+        "north": {
+          "texture": "#ram",
+          "uv": [
+            0,
+            0,
+            2,
+            1
+          ]
+        },
+        "east": {
+          "texture": "#ram",
+          "uv": [
+            0,
+            0,
+            2,
+            1
+          ]
+        },
+        "south": {
+          "texture": "#ram",
+          "uv": [
+            0,
+            0,
+            2,
+            1
+          ]
+        },
+        "west": {
+          "texture": "#ram",
+          "uv": [
+            0,
+            0,
+            2,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        5,
+        4
+      ],
+      "to": [
+        12,
+        8,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#ram",
+          "uv": [
+            4,
+            0,
+            12,
+            3
+          ]
+        },
+        "east": {
+          "texture": "#ram",
+          "uv": [
+            4,
+            0,
+            12,
+            3
+          ]
+        },
+        "south": {
+          "texture": "#ram",
+          "uv": [
+            4,
+            0,
+            12,
+            3
+          ]
+        },
+        "west": {
+          "texture": "#ram",
+          "uv": [
+            4,
+            0,
+            12,
+            3
+          ]
+        },
+        "up": {
+          "texture": "#ram",
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ]
+        },
+        "down": {
+          "texture": "#ram",
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ]
+        }
+      }
+    }
+  ]
+}

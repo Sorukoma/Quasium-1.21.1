@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "quasium:block/hookah_log_top",
+    "side": "quasium:block/hookah_log"
+  }
+}

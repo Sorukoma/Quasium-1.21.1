@@ -1,0 +1,70 @@
+{
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [1.1, 1.9, 1.5]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [1.9, 1.9, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [1.5, 1.9, 1.5]
+        }
+      ],
+      "args": [
+        "LUNG_CAPACITY_MB"
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [1.5, 1.9, 1.5]
+        }
+      ],
+      "args": [
+        "ESSENCE_PER_CAST"
+      ]
+    },
+    {
+      "duration": 170,
+      "args": [
+        "HOLD_COUGH_AFTER_SEC"
+      ]
+    },
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [0, 0, 2]
+        },
+        {
+          "state": "quasium:glowing_bulb_amber",
+          "pos": [2, 0, 0]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "note": "menthol",
+  "volume": 15,
+  "cooldown": 1,
+  "target": "any",
+  "params": {
+    "push": 3
+  },
+  "unlock": "research:quasium:research_smoke_heart",
+  "order": 2
+}

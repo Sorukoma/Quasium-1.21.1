@@ -1,0 +1,36 @@
+{
+  "parent": "quasium:progression/found_seeds",
+  "criteria": {
+    "leaf_quality_5": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:leaf_quality": 5
+            },
+            "items": "#quasium:tobacco_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.leaf_five_star.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:dikar_leaves"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.leaf_five_star.title"
+    }
+  },
+  "requirements": [
+    [
+      "leaf_quality_5"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

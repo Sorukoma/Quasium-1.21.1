@@ -1,0 +1,21 @@
+// 1.21.1	2026-11-20T20:27:54.054464702	Draft recipes
+6f9671a710fd6026f555baca28f98d68d0db40ef data/quasium/advancement/recipes/misc/auto_distiller.json
+ca544ee339bb0a795661fa51a9b749fdb1705d01 data/quasium/advancement/recipes/misc/bellows.json
+a99dd643d570f3cceacee06b1d94d0305c275399 data/quasium/advancement/recipes/misc/clay_pipe.json
+f9da223099f0318070cddd30cde4c290b999232c data/quasium/advancement/recipes/misc/copper_pipe.json
+1528e9241c2965fcc1c086bbbc0cbbc03cfa2254 data/quasium/advancement/recipes/misc/glass_pipe.json
+ee556f7c67f26e2a432c0d39f578856b070355fb data/quasium/advancement/recipes/misc/note_filter.json
+956f2cba906e05929183f1946fe6cdc8433d51dc data/quasium/advancement/recipes/misc/quasium_pipe.json
+33c63bfac80c4ef412858e54635546838cce6315 data/quasium/advancement/recipes/misc/smoke_sorter.json
+5a7e08ff0503cb3a6ddbc9ad5c668c26c6767c1b data/quasium/advancement/recipes/misc/smoke_splitter.json
+1dcb45ea2d4ddc21a3319c27a141235cd381ca8a data/quasium/advancement/recipes/redstone/smoke_valve.json
+0f1346855224f9bf7a1a3ba158d1fd3e46cccb4d data/quasium/recipe/auto_distiller.json
+0596cdffe67fbcf602bfb872ea7fbb709b2defbb data/quasium/recipe/bellows.json
+3b3a70d7b5159bc139daa94c0790080b2e856366 data/quasium/recipe/clay_pipe.json
+1bd2847e7fb16767546b0d9280a67c1f1a691f4f data/quasium/recipe/copper_pipe.json
+e0220e2fd317bc832ae1c2e9c88e53ee0a810c56 data/quasium/recipe/glass_pipe.json
+8c4de3ab07f031acc1d050df5c0e169931f319f6 data/quasium/recipe/note_filter.json
+31d5f28528cc6a34925c4a27b58167e22aac84f3 data/quasium/recipe/quasium_pipe.json
+911012084e40e1486ab43359a44c7ad24ab4324a data/quasium/recipe/smoke_sorter.json
+1ec068d24b71e4cc907988b08672a69d3c98f7e4 data/quasium/recipe/smoke_splitter.json
+a8ddda76116976086d0925e97c6f31295dbf97d5 data/quasium/recipe/smoke_valve.json

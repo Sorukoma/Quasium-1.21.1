@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "  N",
+    " L ",
+    "L  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:hookah_pipe"
+  }
+}

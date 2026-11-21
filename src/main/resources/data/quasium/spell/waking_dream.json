@@ -1,0 +1,23 @@
+{
+  "form": "cone",
+  "inputs": [
+    {
+      "lavender": 1,
+      "nectar": 1
+    },
+    {
+      "dream": 1
+    }
+  ],
+  "lungs": 60,
+  "grams": 0.4,
+  "cooldown": 10,
+  "action": "dream",
+  "color": "#B06CCF",
+  "params": {
+    "length": 5,
+    "width": 2,
+    "sleep_seconds": 8,
+    "player_seconds": 3
+  }
+}

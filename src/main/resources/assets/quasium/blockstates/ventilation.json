@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "running=false": {
+      "model": "quasium:block/ventilation"
+    },
+    "running=true": {
+      "model": "quasium:block/ventilation_running"
+    }
+  }
+}

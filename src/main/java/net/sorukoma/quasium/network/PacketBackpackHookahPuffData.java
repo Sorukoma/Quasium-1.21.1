@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 public record PacketBackpackHookahPuffData(
         float totalHeat,
         int totalTobaccoWeight,
+        int warmup,
         @Nullable ModDataComponents.HookahBowlContents bowlContents
 ) implements CustomPacketPayload {
     public static final Type<PacketBackpackHookahPuffData> ID =
@@ -25,6 +26,7 @@ public record PacketBackpackHookahPuffData(
     private static void encode(RegistryFriendlyByteBuf buf, PacketBackpackHookahPuffData pkt) {
         buf.writeFloat(pkt.totalHeat);
         buf.writeVarInt(pkt.totalTobaccoWeight);
+        buf.writeVarInt(pkt.warmup);
         buf.writeBoolean(pkt.bowlContents != null);
         if (pkt.bowlContents != null) {
             ModDataComponents.HookahBowlContents.STREAM_CODEC.encode(buf, pkt.bowlContents);
@@ -34,9 +36,10 @@ public record PacketBackpackHookahPuffData(
     private static PacketBackpackHookahPuffData decode(RegistryFriendlyByteBuf buf) {
         float totalHeat = buf.readFloat();
         int totalTobaccoWeight = buf.readVarInt();
+        int warmup = buf.readVarInt();
         boolean hasContents = buf.readBoolean();
         ModDataComponents.HookahBowlContents bowlContents = hasContents ? ModDataComponents.HookahBowlContents.STREAM_CODEC.decode(buf) : null;
-        return new PacketBackpackHookahPuffData(totalHeat, totalTobaccoWeight, bowlContents);
+        return new PacketBackpackHookahPuffData(totalHeat, totalTobaccoWeight, warmup, bowlContents);
     }
 
     @Override

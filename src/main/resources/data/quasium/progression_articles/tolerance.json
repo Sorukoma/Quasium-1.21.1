@@ -1,0 +1,22 @@
+{
+  "title": "quasium.progression.tolerance.title",
+  "hint": "quasium.progression.tolerance.hint",
+  "category": "kaif",
+  "order": 45,
+  "icon": "quasium:mint_tobacco",
+  "unlockCondition": "quasium:progression/first_tobacco",
+  "pages": [
+    {
+      "text": "quasium.progression.tolerance.page1",
+      "args": [
+        "TOLERANCE_SESSION_GRAMS",
+        "TOLERANCE_PER_SESSION",
+        "TOLERANCE_CAP",
+        "TOLERANCE_DECAY_PER_HOUR"
+      ]
+    },
+    {
+      "text": "quasium.progression.tolerance.page2"
+    }
+  ]
+}

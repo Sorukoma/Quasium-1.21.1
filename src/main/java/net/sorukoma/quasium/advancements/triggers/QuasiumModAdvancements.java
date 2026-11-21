@@ -15,6 +15,8 @@ public class QuasiumModAdvancements {
     public static final Supplier<KaifLevelTrigger> KAIF_LEVEL = CRITERION_TRIGGERS.register("kaif_level", KaifLevelTrigger::new);
     public static final Supplier<HookahOpenedTrigger> HOOKAH_OPENED = CRITERION_TRIGGERS.register("hookah_opened", HookahOpenedTrigger::new);
     public static final Supplier<QuasiumOreMinedTrigger> QUASIUM_ORE_MINED = CRITERION_TRIGGERS.register("quasium_ore_mined", QuasiumOreMinedTrigger::new);
+    public static final Supplier<SmokecraftTrigger> SMOKECRAFT = CRITERION_TRIGGERS.register("smokecraft", SmokecraftTrigger::new);
+    public static final Supplier<PureTobaccoSmokedTrigger> PURE_TOBACCO_SMOKED = CRITERION_TRIGGERS.register("pure_tobacco_smoked", PureTobaccoSmokedTrigger::new);
 
     public static void register(IEventBus eventBus) {
         CRITERION_TRIGGERS.register(eventBus);

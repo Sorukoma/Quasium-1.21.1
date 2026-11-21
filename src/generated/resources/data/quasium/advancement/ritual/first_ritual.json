@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:ritual/brazier",
+  "criteria": {
+    "ritual": {
+      "conditions": {
+        "event": "ritual"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.first_ritual.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:dream_quartz"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.first_ritual.title"
+    }
+  },
+  "requirements": [
+    [
+      "ritual"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

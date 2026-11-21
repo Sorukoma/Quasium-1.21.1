@@ -1,0 +1,45 @@
+{
+  "title": "quasium.progression.dreams.title",
+  "hint": "quasium.progression.dreams.hint",
+  "category": "kaif",
+  "order": 55,
+  "icon": "minecraft:red_bed",
+  "unlockCondition": "quasium:kaif/kaif_level_30",
+  "scene": "quasium:dreams",
+  "pages": [
+    {
+      "text": "quasium.progression.dreams.page1",
+      "args": [
+        "DREAM_KAIF",
+        "WEIGHT_INSPIRATION",
+        "WEIGHT_COMPASS",
+        "WEIGHT_RECIPE",
+        "WEIGHT_INSIGHT",
+        "WEIGHT_LUCID"
+      ]
+    },
+    {
+      "text": "quasium.progression.dreams.page2",
+      "args": [
+        "INSPIRATION_PCT",
+        "COMPASS_SECONDS"
+      ]
+    },
+    {
+      "text": "quasium.progression.dreams.page3",
+      "args": [
+        "DREAM_INSIGHT"
+      ]
+    },
+    {
+      "text": "quasium.progression.dreams.page4",
+      "args": [
+        "NIGHTMARE_KAIF",
+        "NIGHTMARE_HALLUCINATION_SECONDS"
+      ]
+    },
+    {
+      "text": "quasium.progression.dreams.page5"
+    }
+  ]
+}

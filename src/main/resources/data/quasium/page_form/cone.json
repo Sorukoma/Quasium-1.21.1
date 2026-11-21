@@ -1,0 +1,10 @@
+{
+  "shape": "cone",
+  "volume": 30,
+  "params": {
+    "length": 5,
+    "width": 2
+  },
+  "unlock": "start",
+  "order": 3
+}

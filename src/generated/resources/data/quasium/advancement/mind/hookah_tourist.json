@@ -1,0 +1,269 @@
+{
+  "parent": "quasium:progression/obtained_backpack_hookah",
+  "criteria": {
+    "arid": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#quasium:hookah_tourist/arid"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "cherry_grove": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "minecraft:cherry_grove"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "deep_dark": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "minecraft:deep_dark"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "jungle": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#c:is_jungle"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "mushroom_fields": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#c:is_mushroom"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "nether": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "dimension": "minecraft:the_nether"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "ocean": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#c:is_ocean"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "peak": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "dimension": "minecraft:overworld",
+                "position": {
+                  "y": {
+                    "min": 200.0
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "smokelands": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "dimension": "quasium:smokelands"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "snowy": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#c:is_snowy"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "swamp": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "#c:is_swamp"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "the_end": {
+      "conditions": {
+        "event": "puff",
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "dimension": "minecraft:the_end"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.hookah_tourist.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "quasium:backpack_hookah"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.hookah_tourist.title"
+    }
+  },
+  "requirements": [
+    [
+      "arid"
+    ],
+    [
+      "snowy"
+    ],
+    [
+      "jungle"
+    ],
+    [
+      "swamp"
+    ],
+    [
+      "mushroom_fields"
+    ],
+    [
+      "cherry_grove"
+    ],
+    [
+      "deep_dark"
+    ],
+    [
+      "ocean"
+    ],
+    [
+      "peak"
+    ],
+    [
+      "nether"
+    ],
+    [
+      "the_end"
+    ],
+    [
+      "smokelands"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

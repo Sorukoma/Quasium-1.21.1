@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.sorukoma.quasium.block.ModBlocks;
 import net.sorukoma.quasium.client.ClientHookahInputHandler;
+import net.sorukoma.quasium.ritual.client.HarnessOverlay;
 import org.joml.Matrix4f;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
@@ -50,6 +51,7 @@ public class BackpackHookahCurioRenderer implements ICurioRenderer {
         blockRenderer.renderSingleBlock(hookahState, poseStack, bufferSource, light, 0);
 
         poseStack.popPose();
+        HarnessOverlay.render(stack, player, poseStack, bufferSource, light);
 
         // Render the pipe line from back to hand if connected
         if (ClientHookahInputHandler.isConnectedToBackpack()) {

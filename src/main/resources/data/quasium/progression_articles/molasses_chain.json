@@ -1,10 +1,15 @@
 {
   "title": "quasium.progression.molasses_chain.title",
   "hint": "quasium.progression.molasses_chain.hint",
+  "category": "start",
+  "order": 90,
+  "icon": "quasium:molasses_bottle",
+  "unlockCondition": "quasium:progression/obtained_glycerin",
+  "scene": "quasium:molasses",
   "pages": [
-    { "text": "quasium.progression.molasses_chain.page1" },
-    { "text": "quasium.progression.molasses_chain.page2" },
-    { "text": "quasium.progression.molasses_chain.page3" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_glycerin"
+    {"text": "quasium.progression.molasses_chain.page1", "items": ["quasium:tallow", "quasium:bottled_ghast_acid", "quasium:glycerin_bottle", "quasium:molasses_bottle"]},
+    {"text": "quasium.progression.molasses_chain.page2", "recipe": "quasium:bottled_ghast_acid_from_ghast_tear"},
+    {"text": "quasium.progression.molasses_chain.page3", "items": ["minecraft:brewing_stand", "quasium:tallow", "quasium:bottled_ghast_acid", "quasium:glycerin_bottle"]},
+    {"text": "quasium.progression.molasses_chain.page4", "recipe": "quasium:molasses_bottle_from_glycerin"}
+  ]
 }

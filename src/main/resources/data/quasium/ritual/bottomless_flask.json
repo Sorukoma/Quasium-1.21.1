@@ -1,0 +1,19 @@
+{
+  "tier": 4,
+  "catalyst": {
+    "item": "minecraft:diamond"
+  },
+  "notes": {
+    "dew": 64,
+    "menthol": 32
+  },
+  "puffs": 1200,
+  "rate": 256,
+  "kaif": {
+    "min": 60
+  },
+  "base": 35,
+  "result": {
+    "id": "quasium:bottomless_flask"
+  }
+}

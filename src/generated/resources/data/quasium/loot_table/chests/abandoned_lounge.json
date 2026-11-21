@@ -1,0 +1,177 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:lore_page": 1
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:lore_page"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:lore_page": 5
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:lore_page"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:item_name": "{\"translate\":\"item.quasium.ancient_mix\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:kaif_pct": 200
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:leaf_quality": 5
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_base": "ancient"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_damage": 1.0
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_quality_stars": 4
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_strength_stars": 5
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_weight": 30
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_yield_stars": 5
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:self_mixed_tobacco"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "quasium:modular_hookah_jade"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "quasium:modular_hookah_violet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "quasium:modular_hookah_gold"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "quasium:secret_recipe",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 3
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:string",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:bone",
+          "weight": 2
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    }
+  ],
+  "random_sequence": "quasium:chests/abandoned_lounge"
+}

@@ -1,25 +1,34 @@
 package net.sorukoma.quasium.client;
 
+import net.minecraft.resources.ResourceLocation;
 import net.sorukoma.quasium.progression.ProgressionArticle;
 
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
-/**
- * Клиентское хранилище статей прогрессии. Статьи определяются в датапаке и грузятся
- * только на серверной стороне (ProgressionArticleManager). На выделенном сервере у
- * клиента нет доступа к серверному менеджеру, поэтому сервер присылает статьи пакетом
- * ProgressionArticlesSyncPacket (при входе игрока и при /reload), а книга прогрессии
- * читает их отсюда. Ключ — заголовок статьи (article.getTitle()).
- */
 public class ClientProgressionData {
-    private static Map<String, ProgressionArticle> articles = new HashMap<>();
+    private static Map<ResourceLocation, ProgressionArticle> articles = Map.of();
+    private static Set<String> claimed = Set.of();
 
-    public static void setArticles(Map<String, ProgressionArticle> newArticles) {
-        articles = newArticles;
+    public static void setArticles(Collection<ProgressionArticle> received) {
+        Map<ResourceLocation, ProgressionArticle> byId = new LinkedHashMap<>();
+        for (ProgressionArticle article : received) {
+            byId.put(article.getId(), article);
+        }
+        articles = byId;
     }
 
-    public static Map<String, ProgressionArticle> getArticles() {
+    public static Map<ResourceLocation, ProgressionArticle> getArticles() {
         return articles;
+    }
+
+    public static void setClaimed(Collection<String> received) {
+        claimed = Set.copyOf(received);
+    }
+
+    public static boolean isClaimed(ResourceLocation article) {
+        return claimed.contains(article.toString());
     }
 }

@@ -1,0 +1,130 @@
+{
+  "items": [
+    "quasium:smoke_warden",
+    "quasium:warden_blank",
+    "quasium:smoke_warden_spawn_egg"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "quasium:smoke_warden",
+          "pos": [2.5, 0.8, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "quasium:smoke_warden",
+          "pos": [2.5, 0.8, 2.5]
+        },
+        {
+          "item": "minecraft:coal",
+          "pos": [2.1, 1.7, 2.5]
+        },
+        {
+          "item": "minecraft:charcoal",
+          "pos": [2.9, 1.7, 2.5]
+        }
+      ],
+      "args": [
+        "WARDEN_INVENTORY",
+        "WARDEN_SHOTS_PER_COAL"
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "quasium:smoke_warden",
+          "pos": [2.5, 0.8, 2.5]
+        },
+        {
+          "item": "minecraft:zombie_head",
+          "pos": [4.5, 0.6, 4.5]
+        }
+      ],
+      "args": [
+        "WARDEN_FIRE_RANGE",
+        "WARDEN_POISON_SECONDS",
+        "WARDEN_SLOW_SECONDS"
+      ]
+    },
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "minecraft:oak_fence[east=true,south=true]",
+          "pos": [1, 0, 1]
+        },
+        {
+          "state": "minecraft:oak_fence[east=true,west=true]",
+          "pos": [2, 0, 1]
+        },
+        {
+          "state": "minecraft:oak_fence[west=true,south=true]",
+          "pos": [3, 0, 1]
+        },
+        {
+          "state": "minecraft:oak_fence[north=true,south=true]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "minecraft:oak_fence[north=true,south=true]",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "minecraft:oak_fence[north=true,east=true]",
+          "pos": [1, 0, 3]
+        },
+        {
+          "state": "minecraft:oak_fence[east=true,west=true]",
+          "pos": [2, 0, 3]
+        },
+        {
+          "state": "minecraft:oak_fence[north=true,west=true]",
+          "pos": [3, 0, 3]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:smoke_warden",
+          "pos": [2.5, 0.8, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 210,
+      "icons": [
+        {
+          "item": "quasium:smoke_warden",
+          "pos": [2.5, 0.8, 2.5]
+        },
+        {
+          "item": "minecraft:clay_ball",
+          "pos": [2.1, 1.7, 2.5]
+        },
+        {
+          "item": "minecraft:paper",
+          "pos": [2.9, 1.7, 2.5]
+        }
+      ],
+      "args": [
+        "WARDEN_REPAIR_HEALTH"
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "quasium:smoke_warden",
+          "pos": [2.5, 0.8, 2.5]
+        }
+      ]
+    }
+  ]
+}

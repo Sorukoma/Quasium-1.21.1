@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "P": {
+      "item": "quasium:copper_pipe"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "C C",
+    "CPC",
+    "CRC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:ventilation"
+  }
+}

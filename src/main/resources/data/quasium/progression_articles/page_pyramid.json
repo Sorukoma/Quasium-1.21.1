@@ -1,0 +1,29 @@
+{
+  "title": "quasium.progression.page_pyramid.title",
+  "hint": "quasium.progression.page_pyramid.hint",
+  "category": "smokecraft",
+  "order": 23,
+  "icon": "quasium:note_jar",
+  "unlockCondition": "quasium:smokecraft/first_scan",
+  "scene": "quasium:page_pyramid",
+  "pages": [
+    {
+      "text": "quasium.progression.page_pyramid.page1"
+    },
+    {
+      "text": "quasium.progression.page_pyramid.page2"
+    },
+    {
+      "text": "quasium.progression.page_pyramid.page3"
+    },
+    {
+      "text": "quasium.progression.page_pyramid.page4"
+    },
+    {
+      "text": "quasium.progression.page_pyramid.page5"
+    },
+    {
+      "text": "quasium.progression.page_pyramid.page6"
+    }
+  ]
+}

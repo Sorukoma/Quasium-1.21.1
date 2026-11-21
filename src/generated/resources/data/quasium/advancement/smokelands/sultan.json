@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokelands/sultan_doused",
+  "criteria": {
+    "sultan_defeated": {
+      "conditions": {
+        "event": "sultan_defeated"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokelands.sultan.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "quasium:sultan_throne"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.sultan.title"
+    }
+  },
+  "requirements": [
+    [
+      "sultan_defeated"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

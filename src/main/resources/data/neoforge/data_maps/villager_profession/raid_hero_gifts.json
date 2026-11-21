@@ -1,0 +1,7 @@
+{
+  "values": {
+    "quasium:hookah_master": {
+      "loot_table": "quasium:gameplay/hero_of_the_village/hookah_master_gift"
+    }
+  }
+}

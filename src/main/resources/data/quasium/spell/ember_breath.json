@@ -1,0 +1,22 @@
+{
+  "form": "beam",
+  "inputs": [
+    {
+      "ember": 1,
+      "ash": 1
+    },
+    {
+      "coffee": 1
+    }
+  ],
+  "lungs": 50,
+  "grams": 0.4,
+  "cooldown": 1.5,
+  "action": "ember",
+  "color": "#FF6B2A",
+  "params": {
+    "range": 24,
+    "damage": 3,
+    "burn_seconds": 4
+  }
+}

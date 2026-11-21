@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:minecart"
+    },
+    {
+      "item": "quasium:hookah_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:hookah_minecart"
+  }
+}

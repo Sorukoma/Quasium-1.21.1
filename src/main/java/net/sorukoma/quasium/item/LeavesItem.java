@@ -6,6 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.selection.genetics.Lineage;
+import net.sorukoma.quasium.selection.quality.LeafQuality;
 
 import java.util.List;
 
@@ -71,10 +73,16 @@ public class LeavesItem extends Item {
         int strength = stack.getOrDefault(ModDataComponents.TOBACCO_STRENGTH_STARS.get(), 0);
         int yield = stack.getOrDefault(ModDataComponents.TOBACCO_YIELD_STARS.get(), 0);
         int quality = stack.getOrDefault(ModDataComponents.TOBACCO_QUALITY_STARS.get(), 0);
+        List<String> lineage = Lineage.of(stack);
+        if (Lineage.isHybrid(lineage)) {
+            tooltipComponents.add(Component.translatable("quasium.tooltip.tobacco_variety",
+                    Lineage.displayName(lineage)).withStyle(ChatFormatting.GREEN));
+        }
         if (strength > 0) {
             tooltipComponents.add(Component.translatable("quasium.tooltip.tobacco_stats",
-                    stars(strength), stars(yield), stars(quality)).withStyle(ChatFormatting.GOLD));
+                    LeafQuality.stars(strength), LeafQuality.stars(yield), LeafQuality.stars(quality)).withStyle(ChatFormatting.GOLD));
         }
+        LeafQuality.appendTooltip(stack, tooltipComponents);
 
         String mutation = stack.getOrDefault(ModDataComponents.TOBACCO_MUTATION.get(), "");
         if (!mutation.isEmpty()) {
@@ -99,10 +107,6 @@ public class LeavesItem extends Item {
                 );
             }
         }
-    }
-
-    private static String stars(int value) {
-        return "★".repeat(Math.max(0, value)) + "☆".repeat(Math.max(0, 5 - value));
     }
 
     /**

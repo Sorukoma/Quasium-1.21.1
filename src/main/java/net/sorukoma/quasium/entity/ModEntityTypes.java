@@ -18,6 +18,7 @@ public class ModEntityTypes {
                     .setShouldReceiveVelocityUpdates(false) // Не нужно обновлять скорость
                     .setTrackingRange(64) // Дальность отслеживания
                     .setUpdateInterval(20) // Обновление каждые 20 тиков (1 секунда)
+                    .noSave()
                     .build("hookah_connection"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ToxicSmokeEntity>> TOXIC_SMOKE =
@@ -26,6 +27,30 @@ public class ModEntityTypes {
                     .setTrackingRange(64)
                     .setUpdateInterval(1)
                     .build("toxic_smoke"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<SmokeCastEntity>> SMOKE_CAST =
+            ENTITY_TYPES.register("smoke_cast", () -> EntityType.Builder.<SmokeCastEntity>of(SmokeCastEntity::new, MobCategory.MISC)
+                    .sized(0.5f, 0.5f)
+                    .noSave()
+                    .clientTrackingRange(8)
+                    .updateInterval(1)
+                    .build("smoke_cast"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<SmokeRingEntity>> SMOKE_RING =
+            ENTITY_TYPES.register("smoke_ring", () -> EntityType.Builder.<SmokeRingEntity>of(SmokeRingEntity::new, MobCategory.MISC)
+                    .sized(0.6f, 0.6f)
+                    .noSave()
+                    .clientTrackingRange(8)
+                    .updateInterval(1)
+                    .build("smoke_ring"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<SmokeTrickEntity>> SMOKE_TRICK =
+            ENTITY_TYPES.register("smoke_trick", () -> EntityType.Builder.<SmokeTrickEntity>of(SmokeTrickEntity::new, MobCategory.MISC)
+                    .sized(0.5f, 0.5f)
+                    .noSave()
+                    .clientTrackingRange(8)
+                    .updateInterval(1)
+                    .build("smoke_trick"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

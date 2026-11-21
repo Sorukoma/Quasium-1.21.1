@@ -1,0 +1,11 @@
+{
+  "note": "dew",
+  "volume": 20,
+  "cooldown": 10,
+  "target": "foe",
+  "params": {
+    "calm_seconds": 6
+  },
+  "unlock": "research:quasium:research_smoke_heart",
+  "order": 11
+}

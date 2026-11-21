@@ -4,6 +4,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.sorukoma.quasium.data.BackpackHookahState;
+import net.sorukoma.quasium.hookah.HookahSignals;
+import net.sorukoma.quasium.item.HookahPipeItem;
 import net.sorukoma.quasium.item.ModItems;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -16,15 +18,14 @@ public class PacketStartPuffingBackpackHandler {
                 player.sendSystemMessage(Component.translatable("quasium.message.no_backpack_hookah"));
                 return;
             }
-            boolean holdingPipe = player.getMainHandItem().is(ModItems.HOOKAH_PIPE.get()) ||
-                    player.getOffhandItem().is(ModItems.HOOKAH_PIPE.get());
-            if (!holdingPipe) {
+            if (!HookahPipeItem.holdsPipe(player) || HookahPipeItem.coolingDown(player)) {
                 return;
             }
             BackpackHookahState state = BackpackHookahState.getOrCreate(player);
-            if (!state.isPuffing()) {
-                state.startPuffing();
-            }
+            if (state.isPuffing()) return;
+            String cold = state.coldReason();
+            if (cold != null) HookahSignals.refuse(player, cold);
+            else state.startPuffing();
         });
     }
 }

@@ -1,0 +1,30 @@
+{
+  "rules": [
+    {"tag": "c:seeds", "priority": 90, "notes": {"resin": 1, "nectar": 1}},
+    {"tag": "c:eggs", "priority": 90, "notes": {"nectar": 1, "resin": 1}},
+    {"tag": "c:slime_balls", "priority": 90, "notes": {"dew": 2, "resin": 1}},
+    {"tag": "c:ender_pearls", "priority": 90, "notes": {"menthol": 3, "resin": 1}},
+    {"tag": "c:nether_stars", "priority": 90, "notes": {"ember": 4, "menthol": 2, "ash": 2}},
+    {"tag": "c:leathers", "priority": 90, "notes": {"resin": 2}},
+    {"tag": "c:rods/breeze", "priority": 90, "notes": {"menthol": 4}},
+    {"tag": "c:netherracks", "priority": 90, "notes": {"ember": 2, "ash": 1}},
+    {"tag": "c:sands", "priority": 90, "notes": {"resin": 1, "ember": 1}},
+    {"tag": "c:gravels", "priority": 90, "notes": {"resin": 1, "ash": 1}},
+    {"tag": "c:cobblestones/mossy", "priority": 95, "notes": {"resin": 2, "dew": 1}},
+    {"tag": "c:cobblestones/deepslate", "priority": 95, "notes": {"resin": 2, "ash": 1}},
+    {"tag": "c:cobblestones/infested", "priority": 95, "notes": {"resin": 2, "ash": 1}},
+    {"tag": "c:cobblestones", "priority": 90, "notes": {"resin": 2}},
+    {"tag": "c:stones", "priority": 90, "notes": {"resin": 2}},
+    {"tag": "c:obsidians/crying", "priority": 95, "notes": {"ember": 2, "dew": 2, "menthol": 1}},
+    {"tag": "c:obsidians", "priority": 90, "notes": {"ember": 2, "dew": 1, "ash": 1}},
+    {"tag": "c:buckets/water", "priority": 95, "notes": {"dew": 4}},
+    {"tag": "c:buckets/lava", "priority": 95, "notes": {"ember": 4}},
+    {"tag": "c:buckets/milk", "priority": 95, "notes": {"nectar": 2, "dew": 2}},
+    {"tag": "c:buckets/powder_snow", "priority": 95, "notes": {"menthol": 2, "dew": 2}},
+    {"tag": "c:buckets/entity_water", "priority": 95, "notes": {"dew": 3, "resin": 1}},
+    {"tag": "c:potions", "priority": 90, "notes": {"dew": 2, "menthol": 1}},
+    {"tag": "minecraft:flowers", "priority": 90, "notes": {"nectar": 2}},
+    {"tag": "minecraft:arrows", "priority": 60, "fallback": true, "notes": {"resin": 1, "menthol": 1}},
+    {"tag": "minecraft:dirt", "priority": 60, "fallback": true, "notes": {"resin": 2}}
+  ]
+}

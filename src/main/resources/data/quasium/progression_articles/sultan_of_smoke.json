@@ -1,0 +1,19 @@
+{
+  "title": "quasium.progression.sultan_of_smoke.title",
+  "hint": "quasium.progression.sultan_of_smoke.hint",
+  "category": "quasium",
+  "order": 180,
+  "icon": "quasium:sultan_throne",
+  "unlockCondition": "quasium:smokelands/root",
+  "scene": "quasium:sultan",
+  "pages": [
+    {"text": "quasium.progression.sultan_of_smoke.page1", "items": ["quasium:sultan_throne"]},
+    {"text": "quasium.progression.sultan_of_smoke.page2"},
+    {"text": "quasium.progression.sultan_of_smoke.page3"},
+    {"text": "quasium.progression.sultan_of_smoke.page4", "items": ["quasium:essence_bottle"]},
+    {"text": "quasium.progression.sultan_of_smoke.page5"},
+    {"text": "quasium.progression.sultan_of_smoke.page6", "items": ["quasium:music_disc_ash_lofi"], "args": ["REWARD_DREAM_QUARTZ", "RESPAWN_DAYS"]},
+    {"text": "quasium.progression.sultan_of_smoke.page7", "items": ["quasium:dream_quartz", "quasium:eternal_coal", "quasium:ash_of_time"]},
+    {"text": "quasium.progression.sultan_of_smoke.page8", "args": ["VOW_DREAM_QUARTZ"]}
+  ]
+}

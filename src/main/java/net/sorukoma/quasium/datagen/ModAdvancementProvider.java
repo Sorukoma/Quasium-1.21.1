@@ -3,437 +3,199 @@ package net.sorukoma.quasium.datagen;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPredicate;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.sorukoma.quasium.QuasiumMod;
-import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.advancements.triggers.SmokecraftTrigger;
 import net.sorukoma.quasium.block.ModBlocks;
-import net.sorukoma.quasium.advancements.triggers.HookahOpenedTrigger;
-import net.sorukoma.quasium.advancements.triggers.KaifLevelTrigger;
-import net.sorukoma.quasium.advancements.triggers.QuasiumOreMinedTrigger;
-import net.sorukoma.quasium.advancements.triggers.QuasiumModAdvancements;
+import net.sorukoma.quasium.golem.MarkBlocks;
+import net.sorukoma.quasium.item.EssenceBottleItem;
+import net.sorukoma.quasium.item.ModItemTags;
+import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.magic.CozyEvening;
+import net.sorukoma.quasium.magic.NoteScanner;
+import net.sorukoma.quasium.magic.NoteType;
+import net.sorukoma.quasium.progression.BookGift;
+import net.sorukoma.quasium.selection.SelectionRegistry;
+import net.sorukoma.quasium.selection.genetics.Genetics;
+import net.sorukoma.quasium.selection.genetics.HybridCollection;
+import net.sorukoma.quasium.selection.quality.Aphids;
+import net.sorukoma.quasium.selection.variety.EchoMuffle;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class ModAdvancementProvider extends AdvancementProvider {
+    private static final ResourceLocation BACKGROUND =
+            ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "textures/gui/advancements/backgrounds/quasium.png");
+
+    public static final ResourceKey<LootTable> BOOK_GIFT = ResourceKey.create(Registries.LOOT_TABLE,
+            ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "gifts/progression_book"));
 
     public ModAdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, existingFileHelper, List.of(new ModAdvancementGenerator()));
+        super(output, lookupProvider, existingFileHelper, List.of(new ModAdvancementGenerator(), new AllTobaccosAdvancement(),
+                new SmokeTricksAdvancement(), new TetradAdvancements()));
+    }
+
+    static void bookGift(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
+        output.accept(BOOK_GIFT, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.PROGRESSION_BOOK.get()))));
     }
 
     private static class ModAdvancementGenerator implements AdvancementGenerator {
         @Override
         public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
-            // Root Advancement
-            AdvancementHolder rootAdvancement = Advancement.Builder.advancement()
-                    .display(
-                            new ItemStack(ModItems.PROGRESSION_BOOK.get()),
-                            Component.translatable("advancements.quasium.root.title"),
-                            Component.translatable("advancements.quasium.root.description"),
-                            ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "textures/item/progression_book.png"),
-                            AdvancementType.TASK,
-                            false,
-                            false,
-                            false
-                    )
-                    .addCriterion("tick", PlayerTrigger.TriggerInstance.tick())
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "root"), existingFileHelper);
+            Map<String, AdvancementHolder> steps = new HashMap<>();
+            for (ProgressionSteps.Step step : ProgressionSteps.all()) {
+                step.advancement().ifPresent(id -> steps.put(id, stepAdvancement(step, id, steps, saver, existingFileHelper)));
+            }
 
-            // ─── Progression: Found Seeds ───
+            AdvancementHolder root = steps.get("root");
+            AdvancementHolder firstCast = steps.get("smokecraft/first_cast");
+            smokecraft(saver, existingFileHelper, firstCast, "frost_creeper",
+                    new ItemStack(Items.SNOWBALL), AdvancementType.GOAL, "kill:frost_breath:creeper");
+            AdvancementHolder firstZone = steps.get("smokecraft/zone_1");
+            smokecraft(saver, existingFileHelper, firstZone, "zone_3",
+                    new ItemStack(ModItems.MUSIC_DISC_LOFI_KAIF_BEATS.get()), AdvancementType.GOAL, "zone_3");
+            smokecraft(firstZone, CozyEvening.EVENT, new ItemStack(Items.LANTERN), AdvancementType.GOAL, true)
+                    .addCriterion(CozyEvening.EVENT, SmokecraftTrigger.on(CozyEvening.EVENT))
+                    .save(saver, smokecraftId(CozyEvening.EVENT), existingFileHelper);
+            smokecraft(saver, existingFileHelper, firstCast, "ring_combo_5",
+                    new ItemStack(Items.FIREWORK_STAR), AdvancementType.GOAL, "ring_combo_5");
+            smokecraft(saver, existingFileHelper, firstCast, "smoke_step",
+                    new ItemStack(Items.ENDER_PEARL), AdvancementType.TASK, "smoke_step");
+            Advancement.Builder allUpgrades = smokecraft(firstCast, "all_upgrades",
+                    new ItemStack(ModItems.FOCUS_UPGRADE_RESONATOR.get()), AdvancementType.CHALLENGE);
+            for (var upgrade : List.of(ModItems.FOCUS_UPGRADE_RESONATOR, ModItems.FOCUS_UPGRADE_COLLIMATOR, ModItems.FOCUS_UPGRADE_COOLER,
+                    ModItems.FOCUS_UPGRADE_SPLITTER, ModItems.FOCUS_UPGRADE_CONDENSER, ModItems.FOCUS_UPGRADE_FILTER)) {
+                allUpgrades.addCriterion(upgrade.getId().getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(upgrade.get()));
+            }
+            allUpgrades.save(saver, smokecraftId("all_upgrades"), existingFileHelper);
+
+            AdvancementHolder bellows = steps.get("smokecraft/bellows");
+            smokecraft(saver, existingFileHelper, bellows, "hammer_craft",
+                    new ItemStack(Items.PISTON), AdvancementType.GOAL, "hammer_craft");
+            smokecraft(saver, existingFileHelper, bellows, "cannon_kill",
+                    new ItemStack(Items.DISPENSER), AdvancementType.GOAL, "cannon_kill");
+            smokecraft(saver, existingFileHelper, bellows, "cart_cast",
+                    new ItemStack(Items.MINECART), AdvancementType.CHALLENGE, "cart_cast");
+            AdvancementHolder firstMark = smokecraft(saver, existingFileHelper, root, "mark_place",
+                    new ItemStack(MarkBlocks.HEAT_MARK_ITEM.get()), AdvancementType.TASK, "mark_place");
+            smokecraft(saver, existingFileHelper, firstMark, "golem_heat",
+                    new ItemStack(Items.CHARCOAL), AdvancementType.GOAL, "golem_heat");
+            smokecraft(saver, existingFileHelper, firstMark, "golem_harvest",
+                    new ItemStack(Items.WHEAT), AdvancementType.GOAL, "golem_harvest");
+            smokecraft(saver, existingFileHelper, firstMark, "warden_kill",
+                    new ItemStack(Items.ZOMBIE_HEAD), AdvancementType.GOAL, "warden_kill");
+            smokecraft(saver, existingFileHelper, root, "kiln_infuse",
+                    new ItemStack(Items.IRON_SWORD), AdvancementType.TASK, "kiln_infuse");
+
             Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.TOBACCO_SEEDS.get()),
-                            Component.translatable("advancements.quasium.found_seeds.title"),
-                            Component.translatable("advancements.quasium.found_seeds.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_tobacco_seeds", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.TOBACCO_SEEDS.get()).build()
-                    ))
-                    .addCriterion("has_makhorka_seeds", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.MAKHORKA_SEEDS.get()).build()
-                    ))
+                    .addCriterion("has_tobacco_seeds", ProgressionSteps.has(ModItemTags.TOBACCO_SEEDS))
+                    .addCriterion("has_herb_seeds", ProgressionSteps.has(ModItems.MINT_CROP_SEEDS, ModItems.ANISE_SEEDS,
+                            ModItems.LAVENDER_SEEDS, ModItems.COCOA_CROP_SEEDS))
+                    .addCriterion("has_mod_item", ProgressionSteps.has(ModItemTags.FIRST_CONTACT))
+                    .addCriterion(BookGift.CONTACT, SmokecraftTrigger.on(BookGift.CONTACT))
                     .requirements(AdvancementRequirements.Strategy.OR)
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/found_seeds"), existingFileHelper);
+                    .rewards(AdvancementRewards.Builder.loot(BOOK_GIFT))
+                    .save(saver, BookGift.ADVANCEMENT, existingFileHelper);
+            selection(steps, saver, existingFileHelper);
+        }
 
-            // ─── Progression: Fermented Leaves ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.TOBACCO_LEAVES.get()),
-                            Component.translatable("advancements.quasium.fermented_leaves.title"),
-                            Component.translatable("advancements.quasium.fermented_leaves.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_fermented_barrel", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModBlocks.FERMENTATION_BARREL_ITEM.get()).build()
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/fermented_leaves"), existingFileHelper);
+        private static void selection(Map<String, AdvancementHolder> steps, Consumer<AdvancementHolder> saver,
+                                      ExistingFileHelper existingFileHelper) {
+            AdvancementHolder seeds = steps.get("progression/found_seeds");
+            AdvancementHolder firstHybrid = smokecraft(saver, existingFileHelper, seeds, "hybrid_first",
+                    new ItemStack(ModItems.HYBRID_TOBACCO_SEEDS.get()), AdvancementType.TASK, HybridCollection.FIRST_HYBRID_EVENT);
+            smokecraft(saver, existingFileHelper, firstHybrid, "hybrid_wild_pairs",
+                    new ItemStack(ModItems.HYBRID_TOBACCO_LEAVES.get()), AdvancementType.CHALLENGE, HybridCollection.WILD_PAIRS_EVENT);
+            smokecraft(saver, existingFileHelper, seeds, "aphid_cure",
+                    EssenceBottleItem.of(NoteType.EMBER.id(), 20), AdvancementType.TASK, Aphids.CURE_EVENT);
+            smokecraft(saver, existingFileHelper, steps.get("kaif/kaif_level_30"), "geode",
+                    new ItemStack(SelectionRegistry.QUASIUM_CLUSTER.get()), AdvancementType.GOAL, "geode");
+            smokecraft(saver, existingFileHelper, steps.get("progression/self_mixed_obtained"), "echo_warden",
+                    new ItemStack(ModItems.ECHO_LEAVES.get()), AdvancementType.GOAL, EchoMuffle.WARDEN_EVENT);
+            smokecraft(saver, existingFileHelper, steps.get("smokecraft/first_scan"), "notes_100",
+                    new ItemStack(ModBlocks.NOTE_JAR_ITEM.get()), AdvancementType.GOAL, NoteScanner.SCHOLAR_EVENT);
 
-            // ─── Progression: Obtained Tallow ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.TALLOW.get()),
-                            Component.translatable("advancements.quasium.obtained_tallow.title"),
-                            Component.translatable("advancements.quasium.obtained_tallow.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_tallow", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.TALLOW.get()).build()
-                    ))
-                    .addCriterion("has_drying_shelf", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModBlocks.DRYING_SHELF_ITEM.get()).build()
-                    ))
-                    .requirements(AdvancementRequirements.Strategy.OR)
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_tallow"), existingFileHelper);
+            AdvancementHolder fiveStars = smokecraft(seeds, "leaf_five_star", new ItemStack(ModItems.DIKAR_LEAVES.get()), AdvancementType.TASK)
+                    .addCriterion("leaf_quality_5", fiveStarLeaves(ItemPredicate.Builder.item().of(ModItemTags.TOBACCO_LEAVES)))
+                    .save(saver, smokecraftId("leaf_five_star"), existingFileHelper);
+            Advancement.Builder allWild = smokecraft(fiveStars, "wild_five_star", new ItemStack(Items.NETHER_STAR), AdvancementType.GOAL);
+            for (var leaves : List.of(ModItems.DIKAR_LEAVES, ModItems.PESCHANIK_LEAVES, ModItems.BOLOTNIK_LEAVES, ModItems.LEDYANOY_LEAVES)) {
+                allWild.addCriterion(leaves.getId().getPath(), fiveStarLeaves(ItemPredicate.Builder.item().of(leaves.get())));
+            }
+            allWild.save(saver, smokecraftId("wild_five_star"), existingFileHelper);
+        }
 
-            // ─── Progression: Obtained Glycerin ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.GLYCERIN_BOTTLE.get()),
-                            Component.translatable("advancements.quasium.obtained_glycerin.title"),
-                            Component.translatable("advancements.quasium.obtained_glycerin.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_glycerin", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.GLYCERIN_BOTTLE.get()).build()
-                    ))
-                    .addCriterion("has_molasses", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.MOLASSES_BOTTLE.get()).build()
-                    ))
-                    .requirements(AdvancementRequirements.Strategy.OR)
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_glycerin"), existingFileHelper);
+        private static Criterion<InventoryChangeTrigger.TriggerInstance> fiveStarLeaves(ItemPredicate.Builder leaves) {
+            return InventoryChangeTrigger.TriggerInstance.hasItems(leaves
+                    .hasComponents(DataComponentPredicate.builder().expect(SelectionRegistry.LEAF_QUALITY.get(), Genetics.MAX_STARS).build()));
+        }
 
-            // ─── Progression: Obtained Charcoal ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.CHARCOAL_25.get()),
-                            Component.translatable("advancements.quasium.obtained_charcoal.title"),
-                            Component.translatable("advancements.quasium.obtained_charcoal.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_charcoal_22", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.CHARCOAL_22.get()).build()
-                    ))
-                    .addCriterion("has_charcoal_25", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.CHARCOAL_25.get()).build()
-                    ))
-                    .addCriterion("has_charcoal_27", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.CHARCOAL_27.get()).build()
-                    ))
-                    .addCriterion("has_briquette", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.RAW_BRIQUETTE.get()).build()
-                    ))
-                    .requirements(AdvancementRequirements.Strategy.OR)
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_charcoal"), existingFileHelper);
+        private static AdvancementHolder stepAdvancement(ProgressionSteps.Step step, String id, Map<String, AdvancementHolder> saved,
+                                                         Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
+            boolean root = id.equals("root");
+            Advancement.Builder builder = Advancement.Builder.advancement()
+                    .display(new ItemStack(step.icon()),
+                            Component.translatable("advancements.quasium." + step.key() + ".title"),
+                            Component.translatable("advancements.quasium." + step.key() + ".description"),
+                            root ? BACKGROUND : null, AdvancementType.TASK, !root, !root, false)
+                    .requirements(AdvancementRequirements.Strategy.OR);
+            if (!root) {
+                AdvancementHolder parent = saved.get(step.parent());
+                if (parent == null) throw new IllegalStateException(id + " is listed before its parent " + step.parent());
+                builder.parent(parent);
+            }
+            step.criteria().forEach(builder::addCriterion);
+            if (step.experience() > 0) builder.rewards(AdvancementRewards.Builder.experience(step.experience()));
+            return builder.save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, id), existingFileHelper);
+        }
 
-            // ─── Progression: Obtained Calloud ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.CALLOUD.get()),
-                            Component.translatable("advancements.quasium.obtained_calloud.title"),
-                            Component.translatable("advancements.quasium.obtained_calloud.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_calloud", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.CALLOUD.get()).build()
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_calloud"), existingFileHelper);
+        private static AdvancementHolder smokecraft(Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper,
+                                                    AdvancementHolder parent, String name, ItemStack icon,
+                                                    AdvancementType type, String event) {
+            return smokecraft(parent, name, icon, type)
+                    .addCriterion(event, SmokecraftTrigger.on(event))
+                    .save(saver, smokecraftId(name), existingFileHelper);
+        }
 
-            // ─── Progression: Obtained Heater ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModBlocks.HEATER_ITEM.get()),
-                            Component.translatable("advancements.quasium.obtained_heater.title"),
-                            Component.translatable("advancements.quasium.obtained_heater.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_heater", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModBlocks.HEATER_ITEM.get()).build()
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_heater"), existingFileHelper);
+        private static Advancement.Builder smokecraft(AdvancementHolder parent, String name, ItemStack icon, AdvancementType type) {
+            return smokecraft(parent, name, icon, type, false);
+        }
 
-            // ─── Progression: Obtained Bowl ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.HOOKAH_BOWL.get()),
-                            Component.translatable("advancements.quasium.obtained_bowl.title"),
-                            Component.translatable("advancements.quasium.obtained_bowl.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_bowl", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.HOOKAH_BOWL.get()).build()
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_bowl"), existingFileHelper);
+        private static Advancement.Builder smokecraft(AdvancementHolder parent, String name, ItemStack icon, AdvancementType type,
+                                                      boolean hidden) {
+            return Advancement.Builder.advancement()
+                    .parent(parent)
+                    .display(icon,
+                            Component.translatable("advancements.quasium.smokecraft." + name + ".title"),
+                            Component.translatable("advancements.quasium.smokecraft." + name + ".description"),
+                            null, type, true, true, hidden);
+        }
 
-            // ─── Progression: Flavored Tobacco ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.MINT_TOBACCO.get()),
-                            Component.translatable("advancements.quasium.flavored_tobacco.title"),
-                            Component.translatable("advancements.quasium.flavored_tobacco.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_mint", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.MINT_TOBACCO.get()).build()
-                    ))
-                    .addCriterion("has_lemon", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.LEMON_TOBACCO.get()).build()
-                    ))
-                    .addCriterion("has_lime", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.LIME_TOBACCO.get()).build()
-                    ))
-                    .addCriterion("has_orange", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.ORANGE_TOBACCO.get()).build()
-                    ))
-                    .addCriterion("has_grapefruit", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.GRAPEFRUIT_TOBACCO.get()).build()
-                    ))
-                    .addCriterion("has_berry", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.BERRY_TOBACCO.get()).build()
-                    ))
-                    .requirements(AdvancementRequirements.Strategy.OR)
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/flavored_tobacco"), existingFileHelper);
-
-            // ─── Progression: Self-Mixed Tobacco ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.SELF_MIXED_TOBACCO.get()),
-                            Component.translatable("advancements.quasium.self_mixed_obtained.title"),
-                            Component.translatable("advancements.quasium.self_mixed_obtained.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_self_mixed", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.SELF_MIXED_TOBACCO.get()).build()
-                    ))
-                    .addCriterion("has_soaking_bowl", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModBlocks.SOAKING_BOWL_ITEM.get()).build()
-                    ))
-                    .requirements(AdvancementRequirements.Strategy.OR)
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/self_mixed_obtained"), existingFileHelper);
-
-            // ─── Progression: Obtained Kaifometer ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.KAIFOMETER.get()),
-                            Component.translatable("advancements.quasium.obtained_kaifometer.title"),
-                            Component.translatable("advancements.quasium.obtained_kaifometer.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_kaifometer", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.KAIFOMETER.get()).build()
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_kaifometer"), existingFileHelper);
-
-            // ─── Progression: Obtained Anvil ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModBlocks.QUASIUM_ANVIL_ITEM.get()),
-                            Component.translatable("advancements.quasium.obtained_anvil.title"),
-                            Component.translatable("advancements.quasium.obtained_anvil.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_anvil", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModBlocks.QUASIUM_ANVIL_ITEM.get()).build()
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_anvil"), existingFileHelper);
-
-            // ─── Progression: Obtained Armor ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.QUASIUM_CHESTPLATE.get()),
-                            Component.translatable("advancements.quasium.obtained_armor.title"),
-                            Component.translatable("advancements.quasium.obtained_armor.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_helmet", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.QUASIUM_HELMET.get()).build()
-                    ))
-                    .addCriterion("has_chestplate", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.QUASIUM_CHESTPLATE.get()).build()
-                    ))
-                    .addCriterion("has_leggings", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.QUASIUM_LEGGINGS.get()).build()
-                    ))
-                    .addCriterion("has_boots", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.QUASIUM_BOOTS.get()).build()
-                    ))
-                    .requirements(AdvancementRequirements.Strategy.OR)
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_armor"), existingFileHelper);
-
-            // ─── Progression: Obtained Backpack Hookah ───
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.BACKPACK_HOOKAH.get()),
-                            Component.translatable("advancements.quasium.obtained_backpack_hookah.title"),
-                            Component.translatable("advancements.quasium.obtained_backpack_hookah.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("has_backpack_hookah", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.BACKPACK_HOOKAH.get()).build()
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "progression/obtained_backpack_hookah"), existingFileHelper);
-
-            // ─── Existing Advancements (keep) ───
-
-            // Smelting Quasium
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.QUASIUMINGOT.get()),
-                            Component.translatable("advancements.quasium.smelt_raw_quasium.title"),
-                            Component.translatable("advancements.quasium.smelt_raw_quasium.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("smelted_quasium", InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(ModItems.QUASIUMINGOT.get()).build()
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "smelt_raw_quasium"), existingFileHelper);
-
-            // Kaif Level 30
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(Items.EMERALD),
-                            Component.translatable("advancements.quasium.kaif_level_30.title"),
-                            Component.translatable("advancements.quasium.kaif_level_30.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("reached_kaif_30", new Criterion<>(
-                            QuasiumModAdvancements.KAIF_LEVEL.get(),
-                            new KaifLevelTrigger.TriggerInstance(Optional.empty(), 30)
-                    ))
-                    .rewards(net.minecraft.advancements.AdvancementRewards.Builder.experience(10))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "kaif/kaif_level_30"), existingFileHelper);
-
-            // Hookah Opened
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.HOOKAH_PIPE.get()),
-                            Component.translatable("advancements.quasium.hookah_opened.title"),
-                            Component.translatable("advancements.quasium.hookah_opened.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("hookah_opened", new Criterion<>(
-                            QuasiumModAdvancements.HOOKAH_OPENED.get(),
-                            new HookahOpenedTrigger.TriggerInstance(Optional.empty())
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "hookah/opened_gui"), existingFileHelper);
-
-            // Quasium Ore Mined
-            Advancement.Builder.advancement()
-                    .parent(rootAdvancement)
-                    .display(
-                            new ItemStack(ModItems.RAWQUASIUM.get()),
-                            Component.translatable("advancements.quasium.quasium_ore_mined.title"),
-                            Component.translatable("advancements.quasium.quasium_ore_mined.description"),
-                            null,
-                            AdvancementType.TASK,
-                            true,
-                            true,
-                            false
-                    )
-                    .addCriterion("mined_quasium_ore", new Criterion<>(
-                            QuasiumModAdvancements.QUASIUM_ORE_MINED.get(),
-                            new QuasiumOreMinedTrigger.TriggerInstance(Optional.empty())
-                    ))
-                    .save(saver, ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "quasium_ore/mined_with_kaif"), existingFileHelper);
+        private static ResourceLocation smokecraftId(String name) {
+            return ResourceLocation.fromNamespaceAndPath(QuasiumMod.MOD_ID, "smokecraft/" + name);
         }
     }
 }

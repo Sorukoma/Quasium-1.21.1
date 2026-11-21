@@ -1,0 +1,7 @@
+{
+  "parent": "quasium:block/glowing_bulb",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "glass": "quasium:block/glowing_bulb_red"
+  }
+}

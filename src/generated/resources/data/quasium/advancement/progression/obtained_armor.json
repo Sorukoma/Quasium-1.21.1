@@ -1,41 +1,16 @@
 {
   "parent": "quasium:root",
   "criteria": {
-    "has_boots": {
+    "has_armor": {
       "conditions": {
         "items": [
           {
-            "items": "quasium:quasium_boots"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_chestplate": {
-      "conditions": {
-        "items": [
-          {
-            "items": "quasium:quasium_chestplate"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_helmet": {
-      "conditions": {
-        "items": [
-          {
-            "items": "quasium:quasium_helmet"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_leggings": {
-      "conditions": {
-        "items": [
-          {
-            "items": "quasium:quasium_leggings"
+            "items": [
+              "quasium:quasium_helmet",
+              "quasium:quasium_chestplate",
+              "quasium:quasium_leggings",
+              "quasium:quasium_boots"
+            ]
           }
         ]
       },
@@ -56,10 +31,7 @@
   },
   "requirements": [
     [
-      "has_helmet",
-      "has_chestplate",
-      "has_leggings",
-      "has_boots"
+      "has_armor"
     ]
   ],
   "sends_telemetry_event": true

@@ -10,6 +10,12 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "reached_kaif_1": {
+      "conditions": {
+        "min_kaif_level": 1
+      },
+      "trigger": "quasium:kaif_level"
     }
   },
   "display": {
@@ -26,6 +32,7 @@
   },
   "requirements": [
     [
+      "reached_kaif_1",
       "has_kaifometer"
     ]
   ],

@@ -1,0 +1,52 @@
+{
+  "title": "quasium.progression.exhale_resources.title",
+  "hint": "quasium.progression.exhale_resources.hint",
+  "category": "smokecraft",
+  "order": 32,
+  "icon": "quasium:hookah_pipe",
+  "unlockCondition": "quasium:smokecraft/first_cast",
+  "pages": [
+    {
+      "text": "quasium.progression.exhale_resources.page1",
+      "args": [
+        "LUNG_CAPACITY_MB",
+        "UPGRADE_CONDENSER_ML",
+        "PUFF_FILL_MB"
+      ]
+    },
+    {
+      "text": "quasium.progression.exhale_resources.page2"
+    },
+    {
+      "text": "quasium.progression.exhale_resources.page3",
+      "args": [
+        "GRAMS_PER_ML",
+        "OVERDOSE_THRESHOLD_GRAMS",
+        "OVERDOSE_WINDOW_MINUTES"
+      ]
+    },
+    {
+      "text": "quasium.progression.exhale_resources.page4",
+      "args": [
+        "OVERFLOW_STEP_ML",
+        "OVERFLOW_STEP_PCT",
+        "OVERFLOW_MAX_STEPS"
+      ]
+    },
+    {
+      "text": "quasium.progression.exhale_resources.page5",
+      "args": [
+        "HOLD_CHARGE_PER_SEC_PCT",
+        "HOLD_MAX_MULTIPLIER_PCT",
+        "HOLD_COUGH_AFTER_SEC",
+        "POWER_CAP_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.exhale_resources.page6"
+    },
+    {
+      "text": "quasium.progression.exhale_resources.page7"
+    }
+  ]
+}

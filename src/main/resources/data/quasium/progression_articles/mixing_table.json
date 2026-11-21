@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.mixing_table.title",
+  "hint": "quasium.progression.mixing_table.hint",
+  "category": "smokecraft",
+  "order": 50,
+  "icon": "quasium:mixing_table",
+  "unlockCondition": "quasium:smokecraft/first_cast",
+  "scene": "quasium:mixing_table",
+  "pages": [
+    {"text": "quasium.progression.mixing_table.page1", "recipe": "quasium:mixing_table"},
+    {"text": "quasium.progression.mixing_table.page2", "items": ["quasium:focus_upgrade_resonator", "quasium:focus_upgrade_collimator", "quasium:focus_upgrade_cooler", "quasium:focus_upgrade_splitter", "quasium:focus_upgrade_condenser", "quasium:focus_upgrade_filter"]},
+    {"text": "quasium.progression.mixing_table.page3", "args": ["UPGRADE_RESONATOR_POWER_PCT", "UPGRADE_COLLIMATOR_RANGE_PCT", "UPGRADE_COLLIMATOR_WIDTH_PCT", "UPGRADE_COOLER_PCT"]},
+    {"text": "quasium.progression.mixing_table.page4", "args": ["UPGRADE_SPLITTER_POWER_PCT", "UPGRADE_CONDENSER_ML"]}
+  ]
+}

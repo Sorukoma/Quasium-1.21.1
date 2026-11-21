@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/first_scan",
+  "criteria": {
+    "notes_100": {
+      "conditions": {
+        "event": "notes_100"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.notes_100.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:note_jar"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.notes_100.title"
+    }
+  },
+  "requirements": [
+    [
+      "notes_100"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

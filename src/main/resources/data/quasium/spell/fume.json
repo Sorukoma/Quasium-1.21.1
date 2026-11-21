@@ -1,0 +1,22 @@
+{
+  "form": "cone",
+  "inputs": [
+    {
+      "ash": 2,
+      "nether": 1
+    }
+  ],
+  "hidden": true,
+  "lungs": 50,
+  "grams": 0.6,
+  "cooldown": 8,
+  "action": "fume",
+  "color": "#6B8E23",
+  "params": {
+    "length": 4,
+    "width": 2,
+    "nausea_seconds": 6,
+    "weakness_seconds": 8,
+    "self_grams": 2
+  }
+}

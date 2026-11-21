@@ -1,0 +1,29 @@
+{
+  "title": "quasium.research.research_smoke_tops.title",
+  "hint": "quasium.research.research_smoke_tops.hint",
+  "category": "research_smoke",
+  "order": 70,
+  "icon": "minecraft:feather",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "menthol"
+    ],
+    "requires": [
+      "quasium:research_smoke_heart"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smoke_tops.page1",
+      "args": [
+        "FAN_COPY_POWER_PCT",
+        "CHAIN_REACH",
+        "CHAIN_POWER_PCT"
+      ]
+    },
+    {
+      "text": "quasium.research.research_smoke_tops.page2"
+    }
+  ]
+}

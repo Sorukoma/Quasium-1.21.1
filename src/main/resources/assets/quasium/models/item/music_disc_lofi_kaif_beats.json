@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "quasium:item/music_disc_lofi_kaif_beats"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "quasium.research.research_smoke_rings.title",
+  "hint": "quasium.research.research_smoke_rings.hint",
+  "category": "research_smoke",
+  "order": 20,
+  "icon": "minecraft:firework_star",
+  "research": {
+    "tier": 2,
+    "perk": "smoke_rings",
+    "insight": 5,
+    "treatises": 0,
+    "requires": [
+      "quasium:research_smoke_fume"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smoke_rings.page1",
+      "args": [
+        "SMOKE_RINGS_COOLDOWN_SECONDS"
+      ]
+    }
+  ]
+}

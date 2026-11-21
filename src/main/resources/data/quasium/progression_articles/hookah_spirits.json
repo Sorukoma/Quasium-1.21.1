@@ -1,0 +1,36 @@
+{
+  "title": "quasium.progression.hookah_spirits.title",
+  "hint": "quasium.progression.hookah_spirits.hint",
+  "category": "smokecraft",
+  "order": 36,
+  "icon": "minecraft:phantom_membrane",
+  "unlockCondition": "quasium:smokecraft/page_written",
+  "scene": "quasium:soaking_bowl",
+  "pages": [
+    {
+      "text": "quasium.progression.hookah_spirits.page1",
+      "items": [
+        "quasium:ashen_leaves",
+        "minecraft:phantom_membrane"
+      ]
+    },
+    {
+      "text": "quasium.progression.hookah_spirits.page2"
+    },
+    {
+      "text": "quasium.progression.hookah_spirits.page3"
+    },
+    {
+      "text": "quasium.progression.hookah_spirits.page4"
+    },
+    {
+      "text": "quasium.progression.hookah_spirits.page5"
+    },
+    {
+      "text": "quasium.progression.hookah_spirits.page6"
+    },
+    {
+      "text": "quasium.progression.hookah_spirits.page7"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": "quasium.research.research_mind_charcoal_burner.title",
+  "hint": "quasium.research.research_mind_charcoal_burner.hint",
+  "category": "research_mind",
+  "order": 20,
+  "icon": "quasium:charcoal_25",
+  "research": {
+    "tier": 1,
+    "perk": "charcoal_burner",
+    "insight": 3,
+    "treatises": 0
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mind_charcoal_burner.page1",
+      "args": [
+        "CHARCOAL_BURNER_PCT"
+      ]
+    }
+  ]
+}

@@ -20,6 +20,16 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_tallow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:tallow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -36,6 +46,7 @@
   },
   "requirements": [
     [
+      "has_tallow",
       "has_glycerin",
       "has_molasses"
     ]

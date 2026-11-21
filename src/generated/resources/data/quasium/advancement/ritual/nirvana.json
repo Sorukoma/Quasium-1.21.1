@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:ritual/first_ritual",
+  "criteria": {
+    "ritual_nirvana": {
+      "conditions": {
+        "event": "ritual_nirvana"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.nirvana.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "quasium:bottomless_flask"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.nirvana.title"
+    }
+  },
+  "requirements": [
+    [
+      "ritual_nirvana"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,21 +1,31 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_planks": {
+    "has_drying_shelf": {
       "conditions": {
         "items": [
           {
-            "items": "#minecraft:planks"
+            "items": "quasium:drying_shelf"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_stick": {
+    "has_leaves": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:stick"
+            "items": "#quasium:tobacco_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tallow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:tallow"
           }
         ]
       },
@@ -31,8 +41,9 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_planks",
-      "has_stick"
+      "has_leaves",
+      "has_tallow",
+      "has_drying_shelf"
     ]
   ],
   "rewards": {

@@ -1,0 +1,24 @@
+{
+  "title": "quasium.research.research_notes_overtones.title",
+  "hint": "quasium.research.research_notes_overtones.hint",
+  "category": "research_notes",
+  "order": 28,
+  "icon": "quasium:note_jar",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "nectar"
+    ],
+    "requires": [
+      "quasium:research_smoke_heart"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_notes_overtones.page1"
+    },
+    {
+      "text": "quasium.research.research_notes_overtones.page2"
+    }
+  ]
+}

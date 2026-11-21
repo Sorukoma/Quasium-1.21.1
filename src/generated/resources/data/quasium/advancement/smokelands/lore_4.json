@@ -1,0 +1,32 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "lore_page_4": {
+      "conditions": {
+        "event": "lore_page_4"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.quasium.smokelands.lore_4.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "quasium:lore_page"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.quasium.smokelands.lore_4.title"
+    }
+  },
+  "requirements": [
+    [
+      "lore_page_4"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

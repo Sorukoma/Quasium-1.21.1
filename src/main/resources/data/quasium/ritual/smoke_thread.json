@@ -1,0 +1,22 @@
+{
+  "tier": 1,
+  "catalyst": {
+    "tag": "quasium:smoke_thread_armor"
+  },
+  "pedestals": [
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "notes": {
+    "menthol": 16,
+    "resin": 8
+  },
+  "puffs": 200,
+  "rate": 64,
+  "base": 10,
+  "infuse": {
+    "quasium:smoke_thread": {},
+    "minecraft:enchantment_glint_override": true
+  }
+}

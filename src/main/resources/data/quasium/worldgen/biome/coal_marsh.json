@@ -1,0 +1,46 @@
+{
+  "has_precipitation": false,
+  "temperature": 1.0,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 4864563,
+    "sky_color": 4141872,
+    "water_color": 4864563,
+    "water_fog_color": 4864563,
+    "particle": {
+      "options": {
+        "type": "minecraft:ash"
+      },
+      "probability": 0.02
+    },
+    "ambient_sound": "quasium:smokelands_ambience"
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "quasium:tar_slime",
+        "weight": 40,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ]
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "quasium:ember_clots",
+      "quasium:dew_clots"
+    ],
+    []
+  ]
+}

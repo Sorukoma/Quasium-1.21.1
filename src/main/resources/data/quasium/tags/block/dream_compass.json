@@ -1,0 +1,14 @@
+{
+  "values": [
+    "quasium:deepslate_quasium_ore",
+    "minecraft:budding_amethyst",
+    {
+      "id": "quasium:quasium_crust",
+      "required": false
+    },
+    {
+      "id": "quasium:budding_quasium",
+      "required": false
+    }
+  ]
+}

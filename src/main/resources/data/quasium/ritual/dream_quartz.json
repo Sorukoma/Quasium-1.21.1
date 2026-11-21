@@ -1,0 +1,18 @@
+{
+  "tier": 1,
+  "catalyst": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "notes": {
+    "menthol": 16,
+    "ash": 16,
+    "ember": 8
+  },
+  "puffs": 300,
+  "rate": 64,
+  "base": 10,
+  "result": {
+    "id": "quasium:dream_quartz",
+    "count": 2
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:mixing_table[facing=north]",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            1.1,
+            1.8,
+            1.5
+          ]
+        },
+        {
+          "item": "minecraft:stone",
+          "pos": [
+            1.9,
+            1.8,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "minecraft:coal",
+          "pos": [
+            1.5,
+            1.8,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "minecraft:obsidian",
+          "pos": [
+            1.1,
+            1.8,
+            1.5
+          ]
+        },
+        {
+          "item": "minecraft:crying_obsidian",
+          "pos": [
+            1.9,
+            1.8,
+            1.5
+          ]
+        }
+      ]
+    }
+  ]
+}

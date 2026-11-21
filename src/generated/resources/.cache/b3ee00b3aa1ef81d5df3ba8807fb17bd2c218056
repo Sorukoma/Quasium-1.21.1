@@ -1,4 +1,7 @@
-// 1.21.1	2026-08-22T23:03:59.674016978	Global Loot Modifiers : quasium
-cdb09fbd181d4d83159f5f2a330e65a41ec64343 data/neoforge/loot_modifiers/global_loot_modifiers.json
-add0f26a6b5b1eb220389bfea440b39a481c0cc4 data/quasium/loot_modifiers/tobacco_seeds_from_short_grass.json
-8e68c353c444527a158b441a9ba2337137d8fe96 data/quasium/loot_modifiers/tobacco_seeds_from_tall_grass.json
+// 1.21.1	2026-11-20T19:43:24.426213217	Global Loot Modifiers : quasium
+c7e14d8382b8a28c76a000e7d60e03da5d5d4cf7 data/neoforge/loot_modifiers/global_loot_modifiers.json
+caffb647879c2bcf62f630ffd2b75fff5e13df2e data/quasium/loot_modifiers/ashen_seeds_in_nether_bridge.json
+e49a55e42924ccacbdc9c087f07aaf65ff032c88 data/quasium/loot_modifiers/bestiary.json
+021ddc2e33ddeb60c59a5ee8a77438d8e4bac4c4 data/quasium/loot_modifiers/chorus_seeds_in_end_city.json
+f3ac3de4f69c9758888e41d3c322ced88b16d7b0 data/quasium/loot_modifiers/tobacco_seeds_from_short_grass.json
+dcf26323e94257043cff6e6e0078c55ae0b1e5b1 data/quasium/loot_modifiers/tobacco_seeds_from_tall_grass.json

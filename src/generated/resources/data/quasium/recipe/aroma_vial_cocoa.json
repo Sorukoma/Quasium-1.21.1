@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "quasium:essence_ingredients/cocoa"
+    },
+    {
+      "tag": "quasium:essence_ingredients/cocoa"
+    }
+  ],
+  "result": {
+    "components": {
+      "quasium:essence_type": "cocoa"
+    },
+    "count": 1,
+    "id": "quasium:aroma_vial"
+  }
+}

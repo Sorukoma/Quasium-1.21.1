@@ -23,14 +23,12 @@ public class SoakingBowlRenderer implements BlockEntityRenderer<SoakingBowlBlock
         if (grams <= 0) return;
 
         poseStack.pushPose();
-        poseStack.translate(0.5, 0.15 + Math.min(grams, 20) * 0.01, 0.5);
+        poseStack.translate(0.5, 1 / 16.0 + 0.01 + Math.min(grams, 20) * 0.0075, 0.5);
         poseStack.mulPose(Axis.XP.rotationDegrees(90f));
         float scale = 0.45f;
         poseStack.scale(scale, scale, scale);
 
-        ItemStack item = entity.isMakhorka()
-                ? new ItemStack(ModItems.MAKHORKA_LEAVES.get())
-                : new ItemStack(ModItems.TOBACCO_LEAVES.get());
+        ItemStack item = new ItemStack(ModItems.TOBACCO_LEAVES.get());
 
         Minecraft.getInstance().getItemRenderer().renderStatic(
                 item, ItemDisplayContext.FIXED, combinedLight, combinedOverlay,

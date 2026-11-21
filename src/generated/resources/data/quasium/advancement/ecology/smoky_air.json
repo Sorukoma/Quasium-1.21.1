@@ -1,0 +1,36 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "density_40": {
+      "conditions": {
+        "event": "density_40"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "smog": {
+      "conditions": {
+        "event": "smog"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ecology.smoky_air.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:campfire"
+    },
+    "title": {
+      "translate": "advancements.quasium.ecology.smoky_air.title"
+    }
+  },
+  "requirements": [
+    [
+      "density_40",
+      "smog"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

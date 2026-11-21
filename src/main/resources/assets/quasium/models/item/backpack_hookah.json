@@ -41,5 +41,8 @@
       "translation": [0, 0, 0],
       "scale": [1, 1, 1]
     }
-  }
+  },
+  "overrides": [
+    {"predicate": {"quasium:artifact": 1}, "model": "quasium:item/quasium_harness"}
+  ]
 }

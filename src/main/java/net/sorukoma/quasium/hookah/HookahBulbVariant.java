@@ -10,7 +10,10 @@ public enum HookahBulbVariant {
     BLACK("black"),
     RED("red"),
     BLUE("blue"),
-    AMBER("amber");
+    AMBER("amber"),
+    JADE("jade"),
+    VIOLET("violet"),
+    GOLD("gold");
 
     private final String name;
 

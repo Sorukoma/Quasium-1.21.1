@@ -1,0 +1,16 @@
+{
+  "shape": "spirit",
+  "volume": 40,
+  "params": {
+    "lifetime": 8,
+    "search": 16,
+    "speed": 0.6,
+    "turn": 8,
+    "count": 1,
+    "extra_grams": 0.3,
+    "spirit_strength": 0.7,
+    "bare_damage": 2
+  },
+  "unlock": "research:quasium:research_mirror_spiritism",
+  "order": 9
+}

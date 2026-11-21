@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "quasium:essence_ingredients/lime"
+    },
+    {
+      "tag": "quasium:essence_ingredients/lime"
+    }
+  ],
+  "result": {
+    "components": {
+      "quasium:essence_type": "lime"
+    },
+    "count": 1,
+    "id": "quasium:aroma_vial"
+  }
+}

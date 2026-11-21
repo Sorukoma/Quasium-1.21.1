@@ -1,0 +1,191 @@
+{
+  "items": [
+    "quasium:hookah_block",
+    "quasium:hookah_bowl",
+    "quasium:unfired_hookah_bowl",
+    "quasium:hookah_pipe",
+    "quasium:hookah_cooler",
+    "quasium:hookah_diffuser",
+    "quasium:hookah_ice_chamber",
+    "quasium:one_gram_tobacco",
+    "quasium:burned_tobacco",
+    "quasium:mint_tobacco",
+    "quasium:berry_tobacco",
+    "quasium:apple_tobacco",
+    "quasium:lemon_tobacco",
+    "quasium:lime_tobacco",
+    "quasium:orange_tobacco",
+    "quasium:grapefruit_tobacco",
+    "quasium:grape_tobacco",
+    "quasium:watermelon_tobacco",
+    "quasium:cherry_tobacco",
+    "quasium:vanilla_tobacco",
+    "quasium:coffee_tobacco",
+    "quasium:cinnamon_tobacco",
+    "quasium:coconut_tobacco",
+    "quasium:rose_tobacco",
+    "quasium:anise_tobacco"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [1.1, 1.9, 1.5]
+        },
+        {
+          "item": "quasium:mint_tobacco",
+          "pos": [1.9, 1.9, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [0.9, 1.9, 1.5]
+        },
+        {
+          "item": "quasium:calloud",
+          "pos": [1.5, 1.9, 1.5]
+        },
+        {
+          "item": "quasium:hookah_cooler",
+          "pos": [2.1, 1.9, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 120,
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [1.5, 1.9, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [1.5, 1.9, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:campfire",
+          "pos": [1.5, 1.8, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "quasium:backpack_hookah",
+          "pos": [1.1, 1.9, 1.5]
+        },
+        {
+          "item": "quasium:hookah_minecart",
+          "pos": [1.9, 1.9, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:lime_dye",
+          "pos": [1.5, 1.9, 1.5]
+        }
+      ],
+      "args": ["SICK_SMOKE_FROM_PCT", "SICK_COUGH_FROM_PCT", "OVERDOSE_WINDOW_MINUTES"]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [1.5, 1.9, 1.5]
+        },
+        {
+          "item": "quasium:mint_tobacco",
+          "pos": [2.6, 2.3, 1.5]
+        },
+        {
+          "item": "quasium:berry_tobacco",
+          "pos": [2.6, 1.65, 1.5]
+        },
+        {
+          "item": "quasium:lemon_tobacco",
+          "pos": [2.6, 1.0, 1.5]
+        },
+        {
+          "item": "quasium:grape_tobacco",
+          "pos": [2.6, 0.35, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [1.5, 1.6, 1.5]
+        },
+        {
+          "item": "minecraft:snowball",
+          "pos": [1.5, 2.6, 1.5]
+        }
+      ],
+      "args": ["TRICK_GHOST_SEC"]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:low_table",
+          "pos": [2, 0, 1]
+        }
+      ],
+      "highlight": [
+        [2, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:wind_charge",
+          "pos": [2.5, 1.2, 1.5]
+        }
+      ],
+      "args": ["TRICK_TABLE_REACH", "TRICK_TORNADO_SEC"]
+    }
+  ]
+}

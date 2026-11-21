@@ -1,0 +1,9 @@
+{
+  "first": "nectar",
+  "second": "dew",
+  "color": "#FFE6A0",
+  "params": {
+    "radius": 4,
+    "regen_seconds": 4
+  }
+}

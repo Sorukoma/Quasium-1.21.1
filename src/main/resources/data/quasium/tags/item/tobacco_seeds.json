@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "quasium:dikar_seeds",
+    "quasium:peschanik_seeds",
+    "quasium:bolotnik_seeds",
+    "quasium:ledyanoy_seeds",
+    "quasium:hybrid_tobacco_seeds",
+    "quasium:echo_seeds",
+    "quasium:ashen_seeds",
+    "quasium:chorus_seeds",
+    "quasium:primordial_seeds"
+  ]
+}

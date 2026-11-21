@@ -1,0 +1,15 @@
+{
+  "volume": 20,
+  "max": 2,
+  "add": {
+    "copies": 1
+  },
+  "forms": [
+    "bolt",
+    "beam",
+    "cone",
+    "cloud"
+  ],
+  "unlock": "research:quasium:research_smoke_tops",
+  "order": 5
+}

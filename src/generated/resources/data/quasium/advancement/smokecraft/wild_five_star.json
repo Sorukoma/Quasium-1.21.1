@@ -1,0 +1,85 @@
+{
+  "parent": "quasium:smokecraft/leaf_five_star",
+  "criteria": {
+    "bolotnik_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:leaf_quality": 5
+            },
+            "items": "quasium:bolotnik_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dikar_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:leaf_quality": 5
+            },
+            "items": "quasium:dikar_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ledyanoy_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:leaf_quality": 5
+            },
+            "items": "quasium:ledyanoy_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "peschanik_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:leaf_quality": 5
+            },
+            "items": "quasium:peschanik_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.wild_five_star.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:nether_star"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.wild_five_star.title"
+    }
+  },
+  "requirements": [
+    [
+      "dikar_leaves"
+    ],
+    [
+      "peschanik_leaves"
+    ],
+    [
+      "bolotnik_leaves"
+    ],
+    [
+      "ledyanoy_leaves"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

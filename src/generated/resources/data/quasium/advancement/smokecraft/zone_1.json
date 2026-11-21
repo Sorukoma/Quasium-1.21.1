@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokecraft/first_cast",
+  "criteria": {
+    "zone_1": {
+      "conditions": {
+        "event": "zone_1"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.zone_1.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:smoke_jar"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.zone_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "zone_1"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

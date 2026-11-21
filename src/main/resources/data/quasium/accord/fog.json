@@ -1,0 +1,9 @@
+{
+  "first": "dew",
+  "second": "ash",
+  "color": "#A0A0A0",
+  "params": {
+    "radius": 4,
+    "fog_seconds": 8
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "parent": "quasium:mind/first_research",
+  "criteria": {
+    "cast_delirium_breath": {
+      "conditions": {
+        "event": "cast:delirium_breath"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "cast_fume": {
+      "conditions": {
+        "event": "cast:fume"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.hidden_spell.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "quasium:burned_tobacco"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.hidden_spell.title"
+    }
+  },
+  "requirements": [
+    [
+      "cast_fume",
+      "cast_delirium_breath"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

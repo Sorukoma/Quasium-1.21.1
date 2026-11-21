@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/mark_place",
+  "criteria": {
+    "golem_harvest": {
+      "conditions": {
+        "event": "golem_harvest"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.golem_harvest.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:wheat"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.golem_harvest.title"
+    }
+  },
+  "requirements": [
+    [
+      "golem_harvest"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

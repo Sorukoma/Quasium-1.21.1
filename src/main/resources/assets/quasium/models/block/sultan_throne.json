@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "quasium:block/sultan_throne_top",
+    "bottom": "quasium:block/sultan_throne_side",
+    "side": "quasium:block/sultan_throne_side"
+  }
+}

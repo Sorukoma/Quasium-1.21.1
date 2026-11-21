@@ -1,0 +1,9 @@
+// 1.21.1	2026-10-08T20:54:34.243272	Ecology recipes
+59466c25a17935874bda85bc4e73506d43371d37 data/quasium/advancement/recipes/decorations/samovar.json
+4bfcb723550b629480d07997f68cc8793eb2ae7a data/quasium/advancement/recipes/misc/teapot.json
+94648e956e6ac7cb41c48cd1b90ab28b512ec44e data/quasium/advancement/recipes/misc/tea_cup.json
+0c046c15bd0b0a6741e53ecd08d847c378d4e2dc data/quasium/advancement/recipes/misc/tea_seeds_from_leaves.json
+478d66018eb9df9e6d4f6d8af19ef652f9d40715 data/quasium/recipe/samovar.json
+bf1d57bf9290338136ad11d3e3689129b2815976 data/quasium/recipe/teapot.json
+44696d5c37dcb38d28d0af1fabb158f23c42667e data/quasium/recipe/tea_cup.json
+c73e6bb92d4c9d88bb4e74d5a58a18ef793fa952 data/quasium/recipe/tea_seeds_from_leaves.json

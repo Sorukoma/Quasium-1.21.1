@@ -1,0 +1,11 @@
+{
+  "note": "ash",
+  "volume": 15,
+  "cooldown": 6,
+  "target": "foe",
+  "params": {
+    "blind_seconds": 3
+  },
+  "unlock": "research:quasium:research_smoke_heart",
+  "order": 17
+}

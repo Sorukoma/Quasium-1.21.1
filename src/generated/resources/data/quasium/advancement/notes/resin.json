@@ -1,0 +1,23 @@
+{
+  "criteria": {
+    "has_resin": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:essence_type": "resin"
+            },
+            "items": "quasium:essence_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_resin"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

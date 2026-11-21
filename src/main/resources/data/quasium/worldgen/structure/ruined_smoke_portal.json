@@ -1,0 +1,8 @@
+{
+  "type": "quasium:ruined_smoke_portal",
+  "biomes": "#minecraft:is_overworld",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "beard_thin",
+  "start_pool": "quasium:ruined_smoke_portal"
+}

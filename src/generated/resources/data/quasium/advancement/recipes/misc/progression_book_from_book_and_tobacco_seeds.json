@@ -1,38 +1,20 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_book": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:book"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "quasium:progression_book_from_book_and_tobacco_seeds"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_tobacco_seeds": {
-      "conditions": {
-        "items": [
-          {
-            "items": "quasium:dikar_seeds"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    "tick": {
+      "trigger": "minecraft:tick"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_book",
-      "has_tobacco_seeds"
+      "tick"
     ]
   ],
   "rewards": {

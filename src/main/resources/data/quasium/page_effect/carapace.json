@@ -1,0 +1,12 @@
+{
+  "note": "resin",
+  "volume": 20,
+  "cooldown": 12,
+  "target": "ally",
+  "params": {
+    "absorption": 4,
+    "effect_seconds": 20
+  },
+  "unlock": "research:quasium:research_notes_overtones",
+  "order": 15
+}

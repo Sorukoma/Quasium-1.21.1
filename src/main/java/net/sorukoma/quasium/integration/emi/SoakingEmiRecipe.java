@@ -26,7 +26,7 @@ public class SoakingEmiRecipe extends BasicEmiRecipe {
                 WIDTH, HEIGHT);
 
         List<EmiIngredient> in = new ArrayList<>();
-        in.add(EmiStack.of(recipe.fermentedLeaves()));
+        in.add(EmiIngredient.of(recipe.fermentedLeaves().stream().map(leaves -> (EmiIngredient) EmiStack.of(leaves)).toList()));
         this.hasEssence = recipe.essences() != null && !recipe.essences().isEmpty();
         if (hasEssence) {
             in.add(EmiIngredient.of(recipe.essences().stream()

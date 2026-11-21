@@ -1,0 +1,62 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "density_40": {
+      "conditions": {
+        "event": "density_40"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "has_tea": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:tea_seeds",
+              "quasium:tea_leaf",
+              "quasium:dried_tea",
+              "quasium:tea_cup",
+              "quasium:cup_of_tea",
+              "quasium:teapot",
+              "quasium:samovar"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "overdose": {
+      "conditions": {
+        "event": "overdose"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "smog": {
+      "conditions": {
+        "event": "smog"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ecology.tea_path.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:tea_leaf"
+    },
+    "title": {
+      "translate": "advancements.quasium.ecology.tea_path.title"
+    }
+  },
+  "requirements": [
+    [
+      "density_40",
+      "smog",
+      "overdose",
+      "has_tea"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:distillation_cube"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "scan": {
+      "conditions": {
+        "event": "scan"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "scan"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:distillation_cube"
+    ]
+  }
+}

@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -74,8 +75,7 @@ public class ClientHookahInputHandler {
             boolean isShiftKeyDown = minecraft.player.isShiftKeyDown();
             boolean isHookahBlock = (blockEntity instanceof net.sorukoma.quasium.block.entity.HookahBlockEntity);
 
-            // Сценарий 1: Прикрепление трубки (Shift + ПКМ с трубкой по кальяну)
-            if (isShiftKeyDown && isHoldingPipe && isHookahBlock) {
+            if (isHoldingPipe && isHookahBlock && !clickedBlockPos.equals(connectedHookahPos)) {
                 PacketDistributor.sendToServer(new PacketAttachPipeToServer(clickedBlockPos)); // Отправляем пакет на сервер
                 minecraft.player.sendSystemMessage(Component.translatable("quasium.message.attempting_attach"));
                 event.setCanceled(true); // Отменяем событие, чтобы серверный HookahBlock.useItemOn не обрабатывал его
@@ -100,9 +100,11 @@ public class ClientHookahInputHandler {
             // Сценарий 3: сборка/вода/GUI модульного кальяна. Ванильный конвейер НЕ вызывает
             // Block.useItemOn при shift+предмет, поэтому шлём собственный пакет на сервер
             // (как для трубки). Обрабатываем ЛКМ-жесты сборки и заливку воды.
-            if (blockEntity instanceof net.sorukoma.quasium.block.entity.ModularHookahBlockEntity) {
+            if (blockEntity instanceof net.sorukoma.quasium.block.entity.ModularHookahBlockEntity && !event.getItemStack().is(ModItems.KAIFOMETER.get())
+                    && !isHoldingPipe) {
                 PacketDistributor.sendToServer(new net.sorukoma.quasium.network.PacketModularHookahInteract(
                         clickedBlockPos, event.getHand() == InteractionHand.MAIN_HAND));
+                event.setCancellationResult(InteractionResult.SUCCESS);
                 event.setCanceled(true);
                 event.setUseItem(TriState.FALSE);
                 event.setUseBlock(TriState.FALSE);

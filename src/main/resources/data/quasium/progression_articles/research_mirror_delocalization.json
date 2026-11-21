@@ -1,0 +1,26 @@
+{
+  "title": "quasium.research.research_mirror_delocalization.title",
+  "hint": "quasium.research.research_mirror_delocalization.hint",
+  "category": "research_mirror",
+  "order": 30,
+  "icon": "minecraft:chorus_fruit",
+  "research": {
+    "tier": 4,
+    "notes": [
+      "dew",
+      "ash"
+    ],
+    "lived": true,
+    "spells": [
+      "quasium:delocalization"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mirror_delocalization.page1"
+    },
+    {
+      "text": "quasium.research.research_mirror_delocalization.page2"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokecraft/first_scan",
+  "criteria": {
+    "treatise": {
+      "conditions": {
+        "event": "treatise"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.treatise.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:treatise"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.treatise.title"
+    }
+  },
+  "requirements": [
+    [
+      "treatise"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

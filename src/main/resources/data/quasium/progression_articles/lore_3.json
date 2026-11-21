@@ -1,0 +1,12 @@
+{
+  "title": "quasium.progression.lore_3.title",
+  "hint": "quasium.progression.lore_3.hint",
+  "category": "quasium",
+  "order": 192,
+  "icon": "quasium:lore_page",
+  "unlockCondition": "quasium:smokelands/lore_3",
+  "secret": true,
+  "pages": [
+    {"text": "quasium.progression.lore_3.page1"}
+  ]
+}

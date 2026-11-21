@@ -1,9 +1,16 @@
 {
   "title": "quasium.progression.regular_tobacco.title",
   "hint": "quasium.progression.regular_tobacco.hint",
+  "category": "start",
+  "order": 100,
+  "icon": "quasium:mint_tobacco",
+  "unlockCondition": "quasium:progression/first_tobacco",
+  "scene": "quasium:aroma_vial",
   "pages": [
-    { "text": "quasium.progression.regular_tobacco.page1" },
-    { "text": "quasium.progression.regular_tobacco.page2" }
-  ],
-  "unlockCondition": "quasium:progression/flavored_tobacco"
+    {"text": "quasium.progression.regular_tobacco.page1", "items": ["quasium:mint_tobacco", "quasium:soaking_bowl"]},
+    {"text": "quasium.progression.regular_tobacco.page2"},
+    {"text": "quasium.progression.regular_tobacco.page3", "recipe": "quasium:aroma_vial_mint"},
+    {"text": "quasium.progression.regular_tobacco.page4"},
+    {"text": "quasium.progression.regular_tobacco.page5", "args": ["ROW_FRESH_PUFFS"]}
+  ]
 }

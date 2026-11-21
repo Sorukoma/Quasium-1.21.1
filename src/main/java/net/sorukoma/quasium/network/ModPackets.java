@@ -6,6 +6,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.sorukoma.quasium.QuasiumMod;
+import net.sorukoma.quasium.golem.GolemBindPacket;
+import net.sorukoma.quasium.golem.GolemFeedPacket;
+import net.sorukoma.quasium.golem.GolemProfile;
+import net.sorukoma.quasium.screen.ProgramEditPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import com.mojang.logging.LogUtils;
@@ -54,6 +58,20 @@ public class ModPackets {
         registrar.playToServer(PacketStopPuffingBackpack.ID, PacketStopPuffingBackpack.STREAM_CODEC, PacketStopPuffingBackpackHandler::handle);
         registrar.playToClient(PacketBackpackHookahPuffData.ID, PacketBackpackHookahPuffData.STREAM_CODEC, PacketBackpackHookahPuffDataClientHandler::handle);
         registrar.playToClient(PacketSyncBackpackPipeConnection.ID, PacketSyncBackpackPipeConnection.STREAM_CODEC, PacketSyncBackpackPipeConnectionHandler::handle);
+        registrar.playToClient(MagicStatePacket.ID, MagicStatePacket.STREAM_CODEC, MagicStatePacket::handle);
+        registrar.playToClient(ScanDataSyncPacket.ID, ScanDataSyncPacket.STREAM_CODEC, ScanDataSyncPacket::handle);
+        registrar.playToClient(OreGlowPacket.ID, OreGlowPacket.STREAM_CODEC, OreGlowPacket::handle);
+        registrar.commonToClient(SmokecraftDataPacket.ID, SmokecraftDataPacket.STREAM_CODEC, SmokecraftDataPacket::handle);
+        registrar.playToClient(ZoneStatePacket.ID, ZoneStatePacket.STREAM_CODEC, ZoneStatePacket::handle);
+        registrar.playToClient(ZoneRingPacket.ID, ZoneRingPacket.STREAM_CODEC, ZoneRingPacket::handle);
+        registrar.playToClient(PipeFlowPacket.ID, PipeFlowPacket.STREAM_CODEC, PipeFlowPacket::handle);
+        registrar.playToServer(ExhalePacket.ID, ExhalePacket.STREAM_CODEC, ExhalePacket::handle);
+        registrar.playToServer(GolemFeedPacket.ID, GolemFeedPacket.STREAM_CODEC, GolemFeedPacket::handle);
+        registrar.playToServer(GolemBindPacket.ID, GolemBindPacket.STREAM_CODEC, GolemBindPacket::handle);
+        registrar.playToServer(ProgramEditPacket.ID, ProgramEditPacket.STREAM_CODEC, ProgramEditPacket::handle);
+        registrar.playToClient(GolemProfile.ID, GolemProfile.STREAM_CODEC, GolemProfile::handle);
+        registrar.playToServer(ClaimBookRewardPacket.ID, ClaimBookRewardPacket.STREAM_CODEC, ClaimBookRewardPacket::handle);
+        registrar.playToClient(ClaimedRewardsPacket.ID, ClaimedRewardsPacket.STREAM_CODEC, ClaimedRewardsPacket::handle);
     }
 
     public static <T extends CustomPacketPayload> void sendToClientsTrackingBlock(T payload, BlockEntity blockEntity) {

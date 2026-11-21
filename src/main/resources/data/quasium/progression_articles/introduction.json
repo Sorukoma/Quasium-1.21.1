@@ -1,8 +1,13 @@
 {
   "title": "quasium.progression.introduction.title",
+  "category": "start",
+  "order": 10,
+  "icon": "quasium:progression_book",
   "pages": [
-    { "text": "quasium.progression.introduction.page1" },
-    { "text": "quasium.progression.introduction.page2" },
-    { "text": "quasium.progression.introduction.page3" }
+    {"text": "quasium.progression.introduction.page1"},
+    {"text": "quasium.progression.introduction.page2"},
+    {"text": "quasium.progression.introduction.page3", "items": ["quasium:dikar_seeds", "quasium:peschanik_seeds", "quasium:bolotnik_seeds", "quasium:ledyanoy_seeds"]},
+    {"text": "quasium.progression.introduction.page4", "recipe": "quasium:progression_book_from_book_and_tobacco_seeds"},
+    {"text": "quasium.progression.introduction.commands"}
   ]
 }

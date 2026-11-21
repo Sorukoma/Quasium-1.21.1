@@ -2,6 +2,7 @@ package net.sorukoma.quasium.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +23,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.item.Items;
 import net.sorukoma.quasium.block.entity.ModBlockEntities;
 import net.sorukoma.quasium.block.entity.TobaccoPoleBlockEntity;
+import net.sorukoma.quasium.selection.genetics.HybridCollection;
+import net.sorukoma.quasium.selection.genetics.Lineage;
 
 public class TobaccoPoleBlock extends BaseEntityBlock {
     private static final VoxelShape SHAPE = Shapes.or(
@@ -51,14 +54,20 @@ public class TobaccoPoleBlock extends BaseEntityBlock {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (level.getBlockEntity(pos) instanceof TobaccoPoleBlockEntity pole) {
+            boolean bred = !pole.holdsClone();
             ItemStack result = pole.takeResult();
             if (!result.isEmpty()) {
+                if (bred && player instanceof ServerPlayer serverPlayer) HybridCollection.discover(serverPlayer, Lineage.of(result));
                 player.getInventory().placeItemBackInInventory(result);
                 return InteractionResult.SUCCESS;
             }
             if (pole.getTotalTime() > 0) {
                 int seconds = Math.max(0, (pole.getTotalTime() - pole.getProgress()) / 20);
                 player.displayClientMessage(net.minecraft.network.chat.Component.translatable("quasium.message.tobacco_pole.progress", seconds), true);
+                return InteractionResult.SUCCESS;
+            }
+            if (pole.sameParentsOnly()) {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("quasium.message.tobacco_pole.same_parents"), true);
                 return InteractionResult.SUCCESS;
             }
         }

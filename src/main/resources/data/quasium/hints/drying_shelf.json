@@ -1,0 +1,113 @@
+{
+  "items": [
+    "quasium:drying_shelf",
+    "quasium:dikar_leaves",
+    "quasium:peschanik_leaves",
+    "quasium:bolotnik_leaves",
+    "quasium:ledyanoy_leaves",
+    "quasium:hybrid_tobacco_leaves",
+    "quasium:beef_jerky",
+    "quasium:chicken_jerky",
+    "quasium:cod_jerky",
+    "quasium:mutton_jerky",
+    "quasium:pork_jerky",
+    "quasium:rabbit_jerky",
+    "quasium:salmon_jerky",
+    "quasium:undried_quasium_block"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [0, 0, 2]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [0, 1, 2]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "minecraft:stone_bricks",
+          "pos": [2, 1, 2]
+        },
+        {
+          "state": "quasium:drying_shelf[facing=north]",
+          "pos": [1, 1, 1]
+        }
+      ],
+      "highlight": [
+        [1, 1, 1]
+      ]
+    },
+    {
+      "duration": 140,
+      "highlight": [
+        [1, 1, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [1.5, 2.2, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "icons": [
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [1.5, 2.2, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "quasium:tallow",
+          "pos": [0.5, 2.2, 1.5]
+        },
+        {
+          "item": "quasium:quasium_block",
+          "pos": [2.5, 2.2, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "highlight": [
+        [1, 1, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:beef_jerky",
+          "pos": [1.1, 2.2, 1.5]
+        },
+        {
+          "item": "quasium:cod_jerky",
+          "pos": [1.9, 2.2, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "highlight": [
+        [1, 1, 1]
+      ]
+    }
+  ]
+}

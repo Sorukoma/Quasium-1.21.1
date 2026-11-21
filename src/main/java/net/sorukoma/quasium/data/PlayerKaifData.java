@@ -44,10 +44,17 @@ public class PlayerKaifData {
     }
 
     public static void addKaif(Player player, int amount) {
-        setKaifValue(player, getKaifValue(player) + amount);
+        change(player, net.sorukoma.quasium.magic.PlayerZones.boostKaif(player, amount));
     }
 
     public static void subtractKaif(Player player, int amount) {
-        setKaifValue(player, getKaifValue(player) - amount);
+        change(player, -amount);
+    }
+
+    private static void change(Player player, int delta) {
+        int before = getKaifValue(player);
+        net.sorukoma.quasium.api.KaifChangeEvent event = net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(
+                new net.sorukoma.quasium.api.KaifChangeEvent(player, before, delta));
+        if (!event.isCanceled()) setKaifValue(player, before + event.delta());
     }
 }

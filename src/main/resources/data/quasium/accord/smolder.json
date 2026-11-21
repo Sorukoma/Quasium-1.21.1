@@ -1,0 +1,9 @@
+{
+  "first": "ember",
+  "second": "ash",
+  "color": "#A04020",
+  "params": {
+    "radius": 3,
+    "burn_seconds": 4
+  }
+}

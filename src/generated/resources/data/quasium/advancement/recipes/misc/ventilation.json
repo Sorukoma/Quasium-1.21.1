@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:ventilation"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "researched": {
+      "conditions": {
+        "event": "research:research_smog_ventilation"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "researched"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:ventilation"
+    ]
+  }
+}

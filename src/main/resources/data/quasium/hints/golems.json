@@ -1,0 +1,233 @@
+{
+  "items": [
+    "quasium:calloud_golem",
+    "quasium:clay_golem",
+    "quasium:calloud_golem_spawn_egg",
+    "quasium:clay_golem_spawn_egg",
+    "quasium:harvest_mark",
+    "quasium:fill_mark",
+    "quasium:guard_mark",
+    "quasium:heat_mark",
+    "quasium:golem_staff",
+    "quasium:sommelier_module",
+    "quasium:golem_feeder"
+  ],
+  "floor": 7,
+  "steps": [
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:calloud_golem",
+          "pos": [2.5, 0.8, 3.5]
+        },
+        {
+          "item": "quasium:clay_golem",
+          "pos": [4.5, 0.8, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:calloud_golem",
+          "pos": [2.5, 0.8, 1.5]
+        },
+        {
+          "item": "quasium:charcoal_25",
+          "pos": [2.5, 1.7, 1.5]
+        }
+      ],
+      "args": [
+        "COAL_GOLEM_RANGE"
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:harvest_mark",
+          "pos": [5, 0, 1]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [4, 0, 0]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [4, 0, 1]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [4, 0, 2]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [5, 0, 0]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [5, 0, 2]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [6, 0, 0]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [6, 0, 1]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [6, 0, 2]
+        },
+        {
+          "state": "minecraft:wheat[age=7]",
+          "pos": [4, 1, 0]
+        },
+        {
+          "state": "minecraft:wheat[age=7]",
+          "pos": [4, 1, 1]
+        },
+        {
+          "state": "minecraft:wheat[age=7]",
+          "pos": [4, 1, 2]
+        },
+        {
+          "state": "minecraft:wheat[age=7]",
+          "pos": [5, 1, 0]
+        },
+        {
+          "state": "minecraft:wheat[age=7]",
+          "pos": [5, 1, 2]
+        },
+        {
+          "state": "minecraft:wheat[age=7]",
+          "pos": [6, 1, 0]
+        },
+        {
+          "state": "minecraft:wheat[age=7]",
+          "pos": [6, 1, 1]
+        },
+        {
+          "state": "minecraft:wheat[age=7]",
+          "pos": [6, 1, 2]
+        }
+      ],
+      "highlight": [
+        [5, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:clay_golem",
+          "pos": [5.5, 1.0, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:fill_mark",
+          "pos": [1, 0, 5]
+        },
+        {
+          "state": "minecraft:chest[facing=north]",
+          "pos": [2, 0, 5]
+        }
+      ],
+      "highlight": [
+        [1, 0, 5],
+        [2, 0, 5]
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:guard_mark",
+          "pos": [5, 0, 5]
+        },
+        {
+          "state": "quasium:heat_mark",
+          "pos": [1, 0, 3]
+        }
+      ],
+      "highlight": [
+        [5, 0, 5],
+        [1, 0, 3]
+      ]
+    },
+    {
+      "duration": 210,
+      "icons": [
+        {
+          "item": "quasium:golem_staff",
+          "pos": [1.5, 1.2, 5.5]
+        }
+      ]
+    },
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "quasium:clay_golem",
+          "pos": [3.5, 0.8, 3.5]
+        },
+        {
+          "item": "minecraft:apple",
+          "pos": [3.5, 1.7, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "quasium:golem_feeder[filled=true]",
+          "pos": [3, 0, 4]
+        }
+      ],
+      "highlight": [
+        [3, 0, 4]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:apple",
+          "pos": [3.5, 1.3, 4.5]
+        },
+        {
+          "item": "minecraft:golden_apple",
+          "pos": [3.5, 1.8, 4.5]
+        }
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "quasium:clay_golem",
+          "pos": [3.5, 0.8, 3.5]
+        },
+        {
+          "item": "quasium:calloud_golem",
+          "pos": [5.5, 0.8, 3.0]
+        },
+        {
+          "item": "minecraft:clock",
+          "pos": [3.5, 2.2, 4.5]
+        }
+      ]
+    }
+  ]
+}

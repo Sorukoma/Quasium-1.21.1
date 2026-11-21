@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/bellows",
+  "criteria": {
+    "cannon_kill": {
+      "conditions": {
+        "event": "cannon_kill"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.cannon_kill.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:dispenser"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.cannon_kill.title"
+    }
+  },
+  "requirements": [
+    [
+      "cannon_kill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

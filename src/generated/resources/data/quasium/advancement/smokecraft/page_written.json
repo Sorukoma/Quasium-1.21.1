@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokecraft/first_scan",
+  "criteria": {
+    "page_written": {
+      "conditions": {
+        "event": "page_written"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.page_written.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:spell_tetrad"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.page_written.title"
+    }
+  },
+  "requirements": [
+    [
+      "page_written"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

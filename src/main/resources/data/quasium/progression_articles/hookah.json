@@ -1,11 +1,21 @@
 {
   "title": "quasium.progression.hookah.title",
   "hint": "quasium.progression.hookah.hint",
+  "category": "hookah",
+  "order": 50,
+  "icon": "quasium:hookah_block",
+  "unlockCondition": "quasium:progression/first_tobacco",
+  "scene": "quasium:hookah_setup",
   "pages": [
-    { "text": "quasium.progression.hookah.page1" },
-    { "text": "quasium.progression.hookah.page2" },
-    { "text": "quasium.progression.hookah.page3" },
-    { "text": "quasium.progression.hookah.page4" }
-  ],
-  "unlockCondition": "quasium:hookah/opened_gui"
+    {"text": "quasium.progression.hookah.page1", "recipe": "quasium:hookah_block"},
+    {"text": "quasium.progression.hookah.pipe", "recipe": "quasium:hookah_pipe"},
+    {"text": "quasium.progression.hookah.page2"},
+    {"text": "quasium.progression.hookah.pull", "args": ["PULL_MIN_MS", "BREATH_RECOVERY_MS"]},
+    {"text": "quasium.progression.hookah.seated"},
+    {"text": "quasium.progression.hookah.page3"},
+    {"text": "quasium.progression.hookah.tricks", "args": ["TRICK_GHOST_SEC", "TRICK_TABLE_REACH", "TRICK_TORNADO_SEC"]},
+    {"text": "quasium.progression.hookah.page4", "recipe": "quasium:hookah_diffuser"},
+    {"text": "quasium.progression.hookah.page5", "recipe": "quasium:hookah_cooler"},
+    {"text": "quasium.progression.hookah.page6", "recipe": "quasium:hookah_ice_chamber"}
+  ]
 }

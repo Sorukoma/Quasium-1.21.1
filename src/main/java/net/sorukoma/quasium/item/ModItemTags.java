@@ -6,7 +6,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public final class ModItemTags {
+    public static final TagKey<Item> TOBACCO_SEEDS = create("tobacco_seeds");
+    public static final TagKey<Item> TOBACCO_LEAVES = create("tobacco_leaves");
+    public static final TagKey<Item> FLAVORED_TOBACCOS = create("flavored_tobaccos");
+    public static final TagKey<Item> FIRST_CONTACT = create("first_contact");
     public static final TagKey<Item> JERKY_INPUTS = create("jerky_inputs");
+    public static final TagKey<Item> NOTES_IGNORED = create("notes_ignored");
     public static final TagKey<Item> RAW_BEEF = create("jerky_inputs/raw_beef");
     public static final TagKey<Item> RAW_PORK = create("jerky_inputs/raw_pork");
     public static final TagKey<Item> RAW_CHICKEN = create("jerky_inputs/raw_chicken");

@@ -1,0 +1,23 @@
+{
+  "rules": [
+    {"trait": "fire_resistant", "priority": 40, "fallback": true, "notes": {"ember": 2, "ash": 1}},
+    {"trait": "music_disc", "priority": 40, "fallback": true, "notes": {"nectar": 2, "menthol": 1}},
+    {"trait": "potion", "priority": 40, "fallback": true, "notes": {"dew": 2, "menthol": 1}},
+    {"trait": "enchanted", "priority": 40, "fallback": true, "notes": {"menthol": 2, "nectar": 1}},
+    {"trait": "armor", "priority": 39, "fallback": true, "notes": {"resin": 1, "ash": 1}},
+    {"trait": "tool", "priority": 38, "fallback": true, "notes": {"resin": 1, "ember": 1}},
+    {"trait": "sound_wood", "priority": 20, "fallback": true, "notes": {"resin": 2}},
+    {"trait": "sound_stone", "priority": 20, "fallback": true, "notes": {"resin": 1, "ash": 1}},
+    {"trait": "sound_metal", "priority": 20, "fallback": true, "notes": {"ash": 1, "ember": 1}},
+    {"trait": "sound_glass", "priority": 20, "fallback": true, "notes": {"menthol": 2}},
+    {"trait": "sound_plant", "priority": 20, "fallback": true, "notes": {"resin": 1, "dew": 1}},
+    {"trait": "sound_earth", "priority": 20, "fallback": true, "notes": {"resin": 1, "ash": 1}},
+    {"trait": "sound_soft", "priority": 20, "fallback": true, "notes": {"resin": 1, "nectar": 1}},
+    {"trait": "sound_cold", "priority": 20, "fallback": true, "notes": {"menthol": 1, "dew": 1}},
+    {"trait": "sound_water", "priority": 20, "fallback": true, "notes": {"dew": 2}},
+    {"trait": "sound_nether", "priority": 20, "fallback": true, "notes": {"ember": 1, "ash": 1}},
+    {"trait": "sound_decay", "priority": 20, "fallback": true, "notes": {"ash": 2}},
+    {"trait": "block", "priority": 1, "fallback": true, "notes": {"resin": 1}},
+    {"trait": "item", "priority": 0, "fallback": true, "notes": {"resin": 1}}
+  ]
+}

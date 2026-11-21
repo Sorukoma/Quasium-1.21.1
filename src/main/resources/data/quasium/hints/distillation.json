@@ -1,0 +1,115 @@
+{
+  "items": [
+    "quasium:distillation_cube",
+    "quasium:note_jar",
+    "quasium:kaifometer"
+  ],
+  "floor": 4,
+  "steps": [
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "quasium:kaifometer",
+          "pos": [1.5, 1.0, 1.5]
+        },
+        {
+          "item": "minecraft:packed_ice",
+          "pos": [2.5, 1.0, 1.5]
+        }
+      ],
+      "args": [
+        "SCAN_KAIF_ITEM",
+        "SCAN_KAIF_MOB"
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:distillation_cube[facing=north]",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:water_bucket",
+          "pos": [1.5, 1.7, 1.5]
+        }
+      ],
+      "args": [
+        "DISTILL_WATER_PER_ITEM",
+        "DISTILL_WATER_CAPACITY"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:distillation_cube[facing=north,lit=true]",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "icons": [
+        {
+          "item": "minecraft:packed_ice",
+          "pos": [1.1, 1.7, 1.5]
+        },
+        {
+          "item": "minecraft:coal",
+          "pos": [1.9, 1.7, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "minecraft:glass_bottle",
+          "pos": [1.1, 1.7, 1.5]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [1.9, 1.7, 1.5]
+        }
+      ],
+      "args": [
+        "NOTE_BUFFER_CAPACITY",
+        "NOTE_BOTTLE_CAPACITY"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:distillation_cube[facing=north]",
+          "pos": [1, 0, 1]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [3, 0, 2]
+        }
+      ],
+      "highlight": [
+        [2, 0, 2],
+        [3, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [2.5, 1.5, 2.5]
+        }
+      ],
+      "args": [
+        "NOTE_JAR_CAPACITY"
+      ]
+    }
+  ]
+}

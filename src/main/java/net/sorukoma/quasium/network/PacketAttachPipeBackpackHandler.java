@@ -7,6 +7,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.sorukoma.quasium.block.entity.HookahBlockEntity;
+import net.sorukoma.quasium.cart.HookahMinecart;
 import net.sorukoma.quasium.entity.HookahConnectionEntity;
 import net.sorukoma.quasium.item.ModItems;
 import net.sorukoma.quasium.network.PacketSyncHookahConnection;
@@ -48,6 +49,7 @@ public class PacketAttachPipeBackpackHandler {
             if (!allPlayerConnections.isEmpty()) {
                 PacketDistributor.sendToPlayer(player, new PacketSyncHookahConnection(Optional.empty()));
             }
+            HookahMinecart.unhookAll(player);
 
             PacketDistributor.sendToPlayer(player, new PacketSyncBackpackPipeConnection(true));
             player.sendSystemMessage(Component.translatable("quasium.message.pipe_attached_backpack"));

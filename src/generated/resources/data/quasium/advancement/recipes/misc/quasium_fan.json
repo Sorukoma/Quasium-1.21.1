@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:quasium_fan"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "researched": {
+      "conditions": {
+        "event": "research:research_draft_quasium_pipes"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "researched"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:quasium_fan"
+    ]
+  }
+}

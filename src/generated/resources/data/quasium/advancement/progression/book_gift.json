@@ -1,0 +1,59 @@
+{
+  "criteria": {
+    "has_herb_seeds": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "quasium:mint_crop_seeds",
+              "quasium:anise_seeds",
+              "quasium:lavender_seeds",
+              "quasium:cocoa_crop_seeds"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_mod_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#quasium:first_contact"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tobacco_seeds": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#quasium:tobacco_seeds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "mod_contact": {
+      "conditions": {
+        "event": "mod_contact"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_tobacco_seeds",
+      "has_herb_seeds",
+      "has_mod_item",
+      "mod_contact"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "quasium:gifts/progression_book"
+    ]
+  },
+  "sends_telemetry_event": true
+}

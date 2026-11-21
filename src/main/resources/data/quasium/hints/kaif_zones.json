@@ -1,0 +1,272 @@
+{
+  "items": [
+    "quasium:smoke_jar",
+    "quasium:empty_smoke_jar",
+    "quasium:lounge_cushion",
+    "quasium:low_table",
+    "quasium:aroma_lamp",
+    "quasium:glowing_bulb_white",
+    "quasium:glowing_bulb_black",
+    "quasium:glowing_bulb_red",
+    "quasium:glowing_bulb_blue",
+    "quasium:glowing_bulb_amber",
+    "quasium:music_disc_lofi_kaif_beats"
+  ],
+  "floor": 7,
+  "steps": [
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          3,
+          0,
+          3
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [
+            3.5,
+            1.9,
+            3.5
+          ]
+        }
+      ],
+      "args": [
+        "ZONE_RADIUS_T1"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:modular_hookah_amber",
+          "pos": [
+            5,
+            0,
+            3
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          5,
+          0,
+          3
+        ]
+      ],
+      "args": [
+        "ZONE_RADIUS_T2"
+      ]
+    },
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [
+            2,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [
+            4,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:low_table",
+          "pos": [
+            3,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:aroma_lamp[lit=true]",
+          "pos": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:glowing_bulb_red",
+          "pos": [
+            5,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:glowing_bulb_blue",
+          "pos": [
+            1,
+            0,
+            5
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          4
+        ],
+        [
+          3,
+          0,
+          5
+        ]
+      ],
+      "args": [
+        "NIRVANA_FURNITURE",
+        "ZONE_RADIUS_T3"
+      ]
+    },
+    {
+      "duration": 170,
+      "args": [
+        "ZONE_CAST_DISCOUNT_PCT",
+        "ZONE_KAIF_BONUS_PCT",
+        "ZONE_AGGRO_REDUCTION_PCT"
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:smoke_jar",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:empty_smoke_jar",
+          "pos": [
+            3.5,
+            1.9,
+            3.5
+          ]
+        }
+      ],
+      "args": [
+        "SMOKE_JAR_MINUTES"
+      ]
+    },
+    {
+      "duration": 120,
+      "place": [
+        {
+          "state": "minecraft:jukebox",
+          "pos": [
+            6,
+            0,
+            6
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          6,
+          0,
+          6
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:music_disc_lofi_kaif_beats",
+          "pos": [
+            6.5,
+            1.6,
+            6.5
+          ]
+        }
+      ],
+      "args": [
+        "ZONE_JUKEBOX_BONUS_RADIUS"
+      ]
+    },
+    {
+      "duration": 160,
+      "highlight": [
+        [
+          6,
+          0,
+          6
+        ],
+        [
+          2,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          4
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:music_disc_lofi_kaif_beats",
+          "pos": [
+            6.5,
+            1.6,
+            6.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "highlight": [
+        [
+          3,
+          0,
+          3
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:kaifometer",
+          "pos": [
+            3.5,
+            1.9,
+            3.5
+          ]
+        }
+      ]
+    }
+  ]
+}

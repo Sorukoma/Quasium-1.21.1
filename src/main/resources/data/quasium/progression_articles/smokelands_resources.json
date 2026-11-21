@@ -1,0 +1,16 @@
+{
+  "title": "quasium.progression.smokelands_resources.title",
+  "hint": "quasium.progression.smokelands_resources.hint",
+  "category": "quasium",
+  "order": 140,
+  "icon": "quasium:dream_quartz_cluster",
+  "unlockCondition": "quasium:smokelands/root",
+  "scene": "quasium:note_clots",
+  "pages": [
+    {"text": "quasium.progression.smokelands_resources.page1", "items": ["quasium:menthol_clot", "quasium:ember_clot", "quasium:nectar_clot", "quasium:dew_clot", "quasium:resin_clot", "quasium:ash_clot"], "args": ["CLOT_ML"]},
+    {"text": "quasium.progression.smokelands_resources.page2", "items": ["quasium:budding_dream_quartz", "quasium:dream_quartz_bud", "quasium:dream_quartz_cluster"]},
+    {"text": "quasium.progression.smokelands_resources.page3", "args": ["PRIMORDIAL_LEAVES_PER_HARVEST"]},
+    {"text": "quasium.progression.smokelands_resources.page4", "recipe": "quasium:ash_sachet"},
+    {"text": "quasium.progression.smokelands_resources.page5", "recipe": "quasium:ash_bricks"}
+  ]
+}

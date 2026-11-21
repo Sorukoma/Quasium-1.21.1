@@ -29,7 +29,10 @@ public class ModBlockEntities {
                             ModBlocks.MODULAR_HOOKAH_BLACK.get(),
                             ModBlocks.MODULAR_HOOKAH_RED.get(),
                             ModBlocks.MODULAR_HOOKAH_BLUE.get(),
-                            ModBlocks.MODULAR_HOOKAH_AMBER.get()).build(null));
+                            ModBlocks.MODULAR_HOOKAH_AMBER.get(),
+                            ModBlocks.MODULAR_HOOKAH_JADE.get(),
+                            ModBlocks.MODULAR_HOOKAH_VIOLET.get(),
+                            ModBlocks.MODULAR_HOOKAH_GOLD.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DryingShelfBlockEntity>> DRYING_SHELF_BE =
             BLOCK_ENTITIES.register("drying_shelf_be", () ->
@@ -65,12 +68,28 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("tobacco_crop_be", () -> BlockEntityType.Builder.of(TobaccoCropBlockEntity::new,
                     ModBlocks.DIKAR_CROP.get(), ModBlocks.PESCHANIK_CROP.get(),
                     ModBlocks.BOLOTNIK_CROP.get(), ModBlocks.LEDYANOY_CROP.get(),
-                    ModBlocks.HYBRID_TOBACCO_CROP.get()).build(null));
+                    ModBlocks.HYBRID_TOBACCO_CROP.get(), ModBlocks.ECHO_CROP.get(), ModBlocks.ASHEN_CROP.get(),
+                    ModBlocks.CHORUS_CROP.get(), ModBlocks.PRIMORDIAL_CROP.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HeaterBlockEntity>> HEATER_BE =
             BLOCK_ENTITIES.register("heater_be", () ->
                     BlockEntityType.Builder.of(HeaterBlockEntity::new,
                             ModBlocks.HEATER.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DistillationCubeBlockEntity>> DISTILLATION_CUBE_BE =
+            BLOCK_ENTITIES.register("distillation_cube_be", () ->
+                    BlockEntityType.Builder.of(DistillationCubeBlockEntity::new,
+                            ModBlocks.DISTILLATION_CUBE.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SmokeJarBlockEntity>> SMOKE_JAR_BE =
+            BLOCK_ENTITIES.register("smoke_jar_be", () ->
+                    BlockEntityType.Builder.of(SmokeJarBlockEntity::new,
+                            ModBlocks.SMOKE_JAR.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<NoteJarBlockEntity>> NOTE_JAR_BE =
+            BLOCK_ENTITIES.register("note_jar_be", () ->
+                    BlockEntityType.Builder.of(NoteJarBlockEntity::new,
+                            ModBlocks.NOTE_JAR.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

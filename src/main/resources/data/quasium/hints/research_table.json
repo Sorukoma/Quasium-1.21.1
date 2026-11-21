@@ -1,0 +1,94 @@
+{
+  "items": [
+    "quasium:research_table",
+    "quasium:treatise"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:research_table[facing=south]",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        }
+      ],
+      "icons": [
+        {
+          "item": "minecraft:paper",
+          "pos": [
+            0.9,
+            1.7,
+            1.5
+          ]
+        },
+        {
+          "item": "minecraft:ink_sac",
+          "pos": [
+            2.1,
+            1.7,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "highlight": [
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:treatise",
+          "pos": [
+            1.5,
+            1.8,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "quasium:kaifometer",
+          "pos": [
+            1.5,
+            1.8,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:progression_book",
+          "pos": [
+            1.1,
+            1.8,
+            1.5
+          ]
+        },
+        {
+          "item": "quasium:treatise",
+          "pos": [
+            1.9,
+            1.8,
+            1.5
+          ]
+        }
+      ]
+    }
+  ]
+}

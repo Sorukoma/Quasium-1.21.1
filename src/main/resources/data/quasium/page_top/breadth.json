@@ -1,0 +1,11 @@
+{
+  "volume": 15,
+  "max": 1,
+  "scale": {
+    "radius": 1.5,
+    "width": 1.5,
+    "height": 1.5
+  },
+  "unlock": "start",
+  "order": 2
+}

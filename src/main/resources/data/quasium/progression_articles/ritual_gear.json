@@ -1,0 +1,54 @@
+{
+  "title": "quasium.progression.ritual_gear.title",
+  "hint": "quasium.progression.ritual_gear.hint",
+  "category": "smokecraft",
+  "order": 90,
+  "icon": "quasium:backpack_hookah",
+  "unlockCondition": "quasium:ritual/brazier",
+  "pages": [
+    {
+      "text": "quasium.progression.ritual_gear.page1",
+      "ritual": "quasium:quasium_harness"
+    },
+    {
+      "text": "quasium.progression.ritual_gear.page2",
+      "args": [
+        "HARNESS_LUNG_PCT",
+        "HARNESS_RING_COOLDOWN_PCT",
+        "HARNESS_LINK_RADIUS"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_gear.page3",
+      "ritual": "quasium:smoke_carapace",
+      "args": [
+        "CARAPACE_CHARGE_CAP",
+        "CARAPACE_NOVA_PCT",
+        "CARAPACE_NOVA_RADIUS"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_gear.page4",
+      "ritual": "quasium:smokestep_boots",
+      "args": [
+        "SMOKESTEP_DASH_COOLDOWN_SEC",
+        "SMOKESTEP_FALL_DAMAGE_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_gear.page5",
+      "ritual": "quasium:smoke_thread",
+      "args": [
+        "SMOKE_THREAD_DODGE_PCT",
+        "SMOKE_THREAD_DODGE_CAP_PCT"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_gear.page6",
+      "ritual": "quasium:smoke_temper",
+      "args": [
+        "SMOKE_TEMPER_DURABILITY_PCT"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.6,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "quasium:unread_lore_page"
+            }
+          ],
+          "name": "quasium:lore_page"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "quasium:optional_item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 8.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "quasium:dream_quartz"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.25,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "quasium:optional_item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "quasium:primordial_seeds"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.15,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:item_name": "{\"translate\":\"item.quasium.ancient_mix\"}"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:kaif_pct": 200
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:leaf_quality": 5
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_base": "ancient"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_damage": 1.0
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_quality_stars": 4
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_strength_stars": 5
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_weight": 30
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:tobacco_yield_stars": 5
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:self_mixed_tobacco"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.05,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "quasium:music_disc_ash_lofi"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.2,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "quasium:ancient_flask"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.25,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "decoration": "minecraft:red_x",
+              "destination": "quasium:on_sultan_maps",
+              "function": "minecraft:exploration_map",
+              "skip_existing_chunks": false
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "translate": "item.quasium.sultan_map"
+              },
+              "target": "item_name"
+            }
+          ],
+          "name": "minecraft:map"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.2,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:page": {
+                  "form": "beam",
+                  "hearts": [
+                    "heat"
+                  ],
+                  "name": "@quasium:first_embers",
+                  "tops": [
+                    "echo"
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:torn_page"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:page": {
+                  "form": "bolt",
+                  "hearts": [
+                    "frost"
+                  ],
+                  "name": "@quasium:first_frost",
+                  "tops": [
+                    "echo"
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:torn_page"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:page": {
+                  "form": "cone",
+                  "hearts": [
+                    "choke",
+                    "blind"
+                  ],
+                  "name": "@quasium:first_ash",
+                  "tops": [
+                    "echo"
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:torn_page"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:page": {
+                  "form": "cloud",
+                  "hearts": [
+                    "healing"
+                  ],
+                  "name": "@quasium:first_nectar",
+                  "tops": [
+                    "echo"
+                  ]
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:torn_page"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "quasium:ash_sand"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:bone"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:charcoal"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    }
+  ],
+  "random_sequence": "quasium:chests/smoke_ruins"
+}

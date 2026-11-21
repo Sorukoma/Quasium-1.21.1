@@ -1,0 +1,48 @@
+{
+  "title": "quasium.progression.tea.title",
+  "hint": "quasium.progression.tea.hint",
+  "category": "kaif",
+  "order": 60,
+  "icon": "quasium:cup_of_tea",
+  "unlockCondition": "quasium:ecology/tea_path",
+  "scene": "quasium:tea",
+  "pages": [
+    {
+      "text": "quasium.progression.tea.page1",
+      "recipe": "quasium:tea_seeds_from_leaves",
+      "args": [
+        "TEA_LEAVES_PER_HARVEST"
+      ]
+    },
+    {
+      "text": "quasium.progression.tea.page2",
+      "recipe": "quasium:samovar",
+      "args": [
+        "TEA_DRYING_SECONDS",
+        "SAMOVAR_WATER_CAPACITY"
+      ]
+    },
+    {
+      "text": "quasium.progression.tea.page3",
+      "recipe": "quasium:teapot",
+      "args": [
+        "SAMOVAR_LEAVES_PER_POT",
+        "SAMOVAR_BREW_SECONDS",
+        "SAMOVAR_WATER_ML",
+        "TEAPOT_CUPS"
+      ]
+    },
+    {
+      "text": "quasium.progression.tea.page4",
+      "recipe": "quasium:tea_cup"
+    },
+    {
+      "text": "quasium.progression.tea.page5",
+      "args": [
+        "VIGOR_SECONDS",
+        "TEA_KAIF",
+        "VIGOR_WITHDRAWAL_MULTIPLIER"
+      ]
+    }
+  ]
+}

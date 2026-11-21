@@ -1,0 +1,22 @@
+{
+  "form": "cone",
+  "inputs": [
+    {
+      "menthol": 1,
+      "ash": 1,
+      "dew": 1
+    }
+  ],
+  "hidden": true,
+  "lungs": 80,
+  "grams": 0.6,
+  "cooldown": 20,
+  "action": "delocalize",
+  "color": "#58B8C8",
+  "params": {
+    "length": 5,
+    "width": 2,
+    "scatter": 12,
+    "self_grams": 2
+  }
+}

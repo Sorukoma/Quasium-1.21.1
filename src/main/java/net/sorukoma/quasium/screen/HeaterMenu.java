@@ -4,6 +4,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -16,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class HeaterMenu extends AbstractContainerMenu {
     private final HeaterBlockEntity blockEntity;
+    private final DataSlot fuel = DataSlot.standalone();
 
     public HeaterMenu(int containerId, Inventory playerInventory, FriendlyByteBuf buf) {
         this(containerId, playerInventory, (HeaterBlockEntity) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
@@ -53,6 +55,7 @@ public class HeaterMenu extends AbstractContainerMenu {
         for (int col = 0; col < 9; col++) {
             this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 142));
         }
+        addDataSlot(fuel);
     }
 
     public HeaterMenu(int containerId, Inventory playerInventory) {
@@ -61,11 +64,22 @@ public class HeaterMenu extends AbstractContainerMenu {
 
     public HeaterBlockEntity getBlockEntity() { return blockEntity; }
 
+    public int fuelTicks() {
+        return fuel.get();
+    }
+
+    @Override
+    public void broadcastChanges() {
+        fuel.set(blockEntity.getFuelBurnTimeRemaining());
+        super.broadcastChanges();
+    }
+
     @Override
     public boolean stillValid(Player player) {
         // SableCompat: учитывает sub-level Sable, чтобы GUI нагревателя на движущемся
         // контрапшене не закрывался мгновенно из-за координат plot-grid.
-        return blockEntity != null && net.sorukoma.quasium.compat.SableCompat.distanceSqrToBlockCenter(player, blockEntity.getBlockPos()) <= 64.0;
+        return blockEntity != null && !blockEntity.isRemoved()
+                && net.sorukoma.quasium.compat.SableCompat.distanceSqrToBlockCenter(player, blockEntity.getBlockPos()) <= 64.0;
     }
 
     @Override

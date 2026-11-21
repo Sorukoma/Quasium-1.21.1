@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/cross","render_type":"cutout","textures":{"cross":"quasium:block/hybrid_tobacco_crop_stage4"}}
+{"parent":"quasium:block/crop_cross","render_type":"cutout","textures":{"cross":"quasium:block/hybrid_tobacco_crop_stage4"}}

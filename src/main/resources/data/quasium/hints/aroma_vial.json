@@ -1,0 +1,72 @@
+{
+  "items": [
+    "quasium:aroma_vial"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "minecraft:glass_bottle",
+          "pos": [0.7, 1.2, 1.5]
+        },
+        {
+          "item": "quasium:lemon",
+          "pos": [1.3, 1.2, 1.5]
+        },
+        {
+          "item": "quasium:lemon",
+          "pos": [1.7, 1.2, 1.5]
+        },
+        {
+          "item": "quasium:aroma_vial",
+          "pos": [2.4, 1.2, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "icons": [
+        {
+          "item": "quasium:aroma_vial",
+          "pos": [1.5, 1.5, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "minecraft:emerald",
+          "pos": [0.6, 1.3, 1.5]
+        },
+        {
+          "item": "minecraft:lime_dye",
+          "pos": [1.2, 1.3, 1.5]
+        },
+        {
+          "item": "minecraft:gray_dye",
+          "pos": [1.8, 1.3, 1.5]
+        },
+        {
+          "item": "minecraft:redstone",
+          "pos": [2.4, 1.3, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:progression_book",
+          "pos": [1.1, 1.3, 1.5]
+        },
+        {
+          "item": "quasium:mint_tobacco",
+          "pos": [1.9, 1.3, 1.5]
+        }
+      ]
+    }
+  ]
+}

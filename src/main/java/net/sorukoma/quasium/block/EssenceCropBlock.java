@@ -1,8 +1,10 @@
 package net.sorukoma.quasium.block;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -10,12 +12,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 public class EssenceCropBlock extends CropBlock {
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
+    private static final VoxelShape[] SHAPE_BY_AGE = {Block.box(0, 0, 0, 16, 4, 16), Block.box(0, 0, 0, 16, 7, 16),
+            Block.box(0, 0, 0, 16, 10, 16), Block.box(0, 0, 0, 16, 12, 16), Block.box(0, 0, 0, 16, 14, 16)};
     private final Supplier<Item> seedsItem;
     private final Supplier<Item> outputItem;
 
@@ -38,6 +44,11 @@ public class EssenceCropBlock extends CropBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE_BY_AGE[getAge(state)];
     }
 
     @Override

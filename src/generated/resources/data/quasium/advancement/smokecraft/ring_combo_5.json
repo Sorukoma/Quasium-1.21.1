@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/first_cast",
+  "criteria": {
+    "ring_combo_5": {
+      "conditions": {
+        "event": "ring_combo_5"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.ring_combo_5.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:firework_star"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.ring_combo_5.title"
+    }
+  },
+  "requirements": [
+    [
+      "ring_combo_5"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,10 +1,15 @@
 package net.sorukoma.quasium.recipe;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
 import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.item.LeavesItem;
 import net.sorukoma.quasium.item.ModItems;
+import net.sorukoma.quasium.item.TobaccoVarieties;
+import net.sorukoma.quasium.selection.variety.SeedSoaking;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +21,7 @@ public class SoakingRecipes {
      * essences — список всех подходящих экстрактов (для JEI/EMI отображается циклически).
      * Пустой список означает, что экстракт не используется в этом рецепте.
      */
-    public record SoakingRecipe(ItemStack fermentedLeaves, List<ItemStack> essences,
+    public record SoakingRecipe(List<ItemStack> fermentedLeaves, List<ItemStack> essences,
                                 @Nullable ItemStack molasses, ItemStack output) {}
 
     /** Все типы экстрактов, которые можно применить в миске (кроме "unknown"). */
@@ -44,22 +49,29 @@ public class SoakingRecipes {
         return output;
     }
 
-    private static ItemStack createFermentedLeaves(boolean makhorka) {
-        ItemStack leaves = new ItemStack(makhorka ? ModItems.MAKHORKA_LEAVES.get() : ModItems.TOBACCO_LEAVES.get());
-        leaves.set(ModDataComponents.FERMENTED.get(), true);
-        return leaves;
+    private static List<ItemStack> createFermentedLeaves(@Nullable String variety) {
+        return BuiltInRegistries.ITEM.stream().filter(item -> item instanceof LeavesItem).map(item -> {
+            ItemStack leaves = new ItemStack(item);
+            leaves.set(ModDataComponents.FERMENTED.get(), true);
+            return leaves;
+        }).filter(leaves -> variety == null || variety.equals(TobaccoVarieties.getVariety(leaves))).toList();
     }
 
     public static List<SoakingRecipe> createRecipes() {
-        return List.of(
-                new SoakingRecipe(createFermentedLeaves(false), createEssences(), null,
-                        createOutput(net.sorukoma.quasium.item.TobaccoVarieties.DIKAR, 0.2f, 0)),
-                new SoakingRecipe(createFermentedLeaves(false), createEssences(),
-                        new ItemStack(ModItems.MOLASSES_BOTTLE.get()), createOutput(net.sorukoma.quasium.item.TobaccoVarieties.DIKAR, 0.0f, 5)),
-                new SoakingRecipe(createFermentedLeaves(true), createEssences(), null,
-                        createOutput(net.sorukoma.quasium.item.TobaccoVarieties.PESCHANIK, 1.0f, 0)),
-                new SoakingRecipe(createFermentedLeaves(true), createEssences(),
-                        new ItemStack(ModItems.MOLASSES_BOTTLE.get()), createOutput(net.sorukoma.quasium.item.TobaccoVarieties.PESCHANIK, 0.0f, 5))
-        );
+        List<SoakingRecipe> recipes = new ArrayList<>(List.of(
+                new SoakingRecipe(createFermentedLeaves(TobaccoVarieties.DIKAR), createEssences(), null,
+                        createOutput(TobaccoVarieties.DIKAR, 0.2f, 0)),
+                new SoakingRecipe(createFermentedLeaves(TobaccoVarieties.DIKAR), createEssences(),
+                        new ItemStack(ModItems.MOLASSES_BOTTLE.get()), createOutput(TobaccoVarieties.DIKAR, 0.0f, 5)),
+                new SoakingRecipe(createFermentedLeaves(TobaccoVarieties.PESCHANIK), createEssences(), null,
+                        createOutput(TobaccoVarieties.PESCHANIK, 1.0f, 0)),
+                new SoakingRecipe(createFermentedLeaves(TobaccoVarieties.PESCHANIK), createEssences(),
+                        new ItemStack(ModItems.MOLASSES_BOTTLE.get()), createOutput(TobaccoVarieties.PESCHANIK, 0.0f, 5))
+        ));
+        for (SeedSoaking.Recipe seed : SeedSoaking.RECIPES) {
+            recipes.add(new SoakingRecipe(createFermentedLeaves(seed.variety()), List.of(new ItemStack(seed.catalyst())), null,
+                    seed.shown()));
+        }
+        return recipes;
     }
 }

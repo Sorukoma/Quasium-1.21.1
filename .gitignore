@@ -49,3 +49,14 @@ node_modules/
 package.json
 package-lock.json
 opencode.json
+
+# autotest client world and screenshots
+run-autotest
+
+# secrets and logs
+.env
+.env.*
+*.log
+.DS_Store
+.vscode
+.claude/

@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:ritual/first_ritual",
+  "criteria": {
+    "smokestep_dash": {
+      "conditions": {
+        "event": "smokestep_dash"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.smokestep_dash.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:feather"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.smokestep_dash.title"
+    }
+  },
+  "requirements": [
+    [
+      "smokestep_dash"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

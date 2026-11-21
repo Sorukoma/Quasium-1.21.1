@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokecraft/overdose",
+  "criteria": {
+    "smoke_phantom": {
+      "conditions": {
+        "event": "smoke_phantom"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.smoke_phantom.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:phantom_membrane"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.smoke_phantom.title"
+    }
+  },
+  "requirements": [
+    [
+      "smoke_phantom"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

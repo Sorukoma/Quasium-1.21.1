@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.smoke_portal.title",
+  "hint": "quasium.progression.smoke_portal.hint",
+  "category": "quasium",
+  "order": 100,
+  "icon": "quasium:quasium_block",
+  "unlockCondition": "quasium:progression/smoke_portal",
+  "scene": "quasium:smoke_portal",
+  "pages": [
+    {"text": "quasium.progression.smoke_portal.page1", "items": ["quasium:quasium_block"]},
+    {"text": "quasium.progression.smoke_portal.page2", "items": ["quasium:kaifometer"], "args": ["PORTAL_KAIF", "PORTAL_SECONDS"]},
+    {"text": "quasium.progression.smoke_portal.page3", "items": ["quasium:petrified_smoke"]},
+    {"text": "quasium.progression.smoke_portal.page4", "items": ["quasium:ash_sand"], "args": ["GEODE_REVEAL_KAIF"]}
+  ]
+}

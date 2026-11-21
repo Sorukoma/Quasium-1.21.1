@@ -1,10 +1,16 @@
 {
   "title": "quasium.progression.charcoal.title",
   "hint": "quasium.progression.charcoal.hint",
+  "category": "hookah",
+  "order": 10,
+  "icon": "quasium:charcoal_25",
+  "unlockCondition": "quasium:progression/first_tobacco",
+  "scene": "quasium:hookah_coals",
   "pages": [
-    { "text": "quasium.progression.charcoal.page1" },
-    { "text": "quasium.progression.charcoal.page2" },
-    { "text": "quasium.progression.charcoal.page3" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_charcoal"
+    {"text": "quasium.progression.charcoal.page1", "recipe": "quasium:raw_briquette_from_charcoal_and_clay"},
+    {"text": "quasium.progression.charcoal.page2", "recipe": "quasium:charcoal_22_from_briquette_stonecutting"},
+    {"text": "quasium.progression.charcoal.page3", "recipe": "quasium:charcoal_25_from_briquette_stonecutting"},
+    {"text": "quasium.progression.charcoal.page4", "recipe": "quasium:charcoal_27_from_briquette_stonecutting"},
+    {"text": "quasium.progression.charcoal.page5"}
+  ]
 }

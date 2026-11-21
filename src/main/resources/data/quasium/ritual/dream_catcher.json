@@ -1,0 +1,29 @@
+{
+  "tier": 1,
+  "catalyst": {
+    "item": "minecraft:amethyst_block"
+  },
+  "pedestals": [
+    {
+      "item": "quasium:dream_quartz"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    }
+  ],
+  "notes": {
+    "menthol": 32,
+    "dew": 32
+  },
+  "puffs": 400,
+  "rate": 64,
+  "kaif": {
+    "min": 30,
+    "or_below": 10
+  },
+  "base": 15,
+  "research": "quasium:research_dreams_catcher",
+  "result": {
+    "id": "quasium:dream_catcher"
+  }
+}

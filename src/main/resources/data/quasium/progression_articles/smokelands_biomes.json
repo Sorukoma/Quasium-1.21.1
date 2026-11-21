@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.smokelands_biomes.title",
+  "hint": "quasium.progression.smokelands_biomes.hint",
+  "category": "quasium",
+  "order": 120,
+  "icon": "quasium:ash_sand",
+  "unlockCondition": "quasium:smokelands/root",
+  "scene": "quasium:smoke_sea",
+  "pages": [
+    {"text": "quasium.progression.smokelands_biomes.page1", "items": ["quasium:ash_sand", "quasium:ash_cactus"]},
+    {"text": "quasium.progression.smokelands_biomes.page2", "args": ["SEA_WALK_KAIF", "SEA_WALK_KAIF", "SEA_SINK_KAIF_PER_SECOND"]},
+    {"text": "quasium.progression.smokelands_biomes.page3", "items": ["quasium:smolder", "quasium:soot_mud"], "args": ["SMOLDER_KAIF_PER_SECOND"]},
+    {"text": "quasium.progression.smokelands_biomes.page4", "items": ["quasium:hookah_log", "quasium:hose_vine", "quasium:nicotine_fruit"]}
+  ]
+}

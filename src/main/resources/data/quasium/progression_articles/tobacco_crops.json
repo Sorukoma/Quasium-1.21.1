@@ -1,11 +1,15 @@
 {
   "title": "quasium.progression.tobacco_crops.title",
   "hint": "quasium.progression.tobacco_crops.hint",
+  "category": "start",
+  "order": 20,
+  "icon": "quasium:dikar_seeds",
+  "unlockCondition": "quasium:progression/found_seeds",
+  "scene": "quasium:tobacco_crops",
   "pages": [
-    { "text": "quasium.progression.tobacco_crops.page1" },
-    { "text": "quasium.progression.tobacco_crops.page2" },
-    { "text": "quasium.progression.tobacco_crops.page3" },
-    { "text": "quasium.progression.tobacco_crops.page4" }
-  ],
-  "unlockCondition": "quasium:progression/found_seeds"
+    {"text": "quasium.progression.tobacco_crops.page1", "items": ["quasium:dikar_seeds", "quasium:peschanik_seeds", "quasium:bolotnik_seeds", "quasium:ledyanoy_seeds", "minecraft:shears", "minecraft:water_bucket"]},
+    {"text": "quasium.progression.tobacco_crops.page2", "items": ["quasium:dikar_leaves", "quasium:peschanik_leaves", "quasium:bolotnik_leaves", "quasium:ledyanoy_leaves"]},
+    {"text": "quasium.progression.tobacco_crops.page3"},
+    {"text": "quasium.progression.tobacco_crops.page4"}
+  ]
 }

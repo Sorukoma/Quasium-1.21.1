@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:ecology/tea_path",
+  "criteria": {
+    "tea_cup": {
+      "conditions": {
+        "event": "tea_cup"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ecology.tea_cup.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:cup_of_tea"
+    },
+    "title": {
+      "translate": "advancements.quasium.ecology.tea_cup.title"
+    }
+  },
+  "requirements": [
+    [
+      "tea_cup"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

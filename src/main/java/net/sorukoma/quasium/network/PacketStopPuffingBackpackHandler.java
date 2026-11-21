@@ -14,6 +14,7 @@ public class PacketStopPuffingBackpackHandler {
             if (!hasBackpackHookah) return;
             BackpackHookahState state = BackpackHookahState.getOrCreate(player);
             if (state.isPuffing()) {
+                net.sorukoma.quasium.magic.SmokeCasting.release(player, state);
                 state.stopPuffing();
             }
         });

@@ -1,0 +1,13 @@
+{
+  "title": "quasium.progression.warden_friends.title",
+  "hint": "quasium.progression.warden_friends.hint",
+  "category": "golems",
+  "order": 70,
+  "icon": "minecraft:paper",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:smoke_warden",
+  "pages": [
+    {"text": "quasium.progression.warden_friends.page1", "items": ["minecraft:paper", "minecraft:anvil"]},
+    {"text": "quasium.progression.warden_friends.page2"}
+  ]
+}

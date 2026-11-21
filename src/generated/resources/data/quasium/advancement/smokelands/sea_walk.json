@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:smokelands/root",
+  "criteria": {
+    "smoke_sea_walk": {
+      "conditions": {
+        "event": "smoke_sea_walk"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokelands.sea_walk.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:feather"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.sea_walk.title"
+    }
+  },
+  "requirements": [
+    [
+      "smoke_sea_walk"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

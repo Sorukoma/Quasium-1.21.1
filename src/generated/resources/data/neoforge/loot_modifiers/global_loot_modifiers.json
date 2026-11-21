@@ -1,7 +1,10 @@
 {
   "entries": [
+    "quasium:bestiary",
     "quasium:tobacco_seeds_from_short_grass",
-    "quasium:tobacco_seeds_from_tall_grass"
+    "quasium:tobacco_seeds_from_tall_grass",
+    "quasium:ashen_seeds_in_nether_bridge",
+    "quasium:chorus_seeds_in_end_city"
   ],
   "replace": false
 }

@@ -1,0 +1,19 @@
+{
+  "form": "ring",
+  "inputs": [
+    {
+      "resin": 2,
+      "ash": 1
+    }
+  ],
+  "lungs": 50,
+  "grams": 0.4,
+  "cooldown": 8,
+  "action": "trap",
+  "color": "#8A6D3B",
+  "params": {
+    "speed": 0.8,
+    "range": 16,
+    "root_seconds": 3
+  }
+}

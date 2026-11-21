@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.calloud_golem.title",
+  "hint": "quasium.progression.calloud_golem.hint",
+  "category": "golems",
+  "order": 20,
+  "icon": "quasium:calloud_golem",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:golems",
+  "pages": [
+    {"text": "quasium.progression.calloud_golem.page1", "anvil": "quasium:calloud_golem", "args": ["COAL_GOLEM_HEALTH", "COAL_GOLEM_INVENTORY"]},
+    {"text": "quasium.progression.calloud_golem.page2", "args": ["COAL_GOLEM_RANGE", "COAL_GOLEM_HEAT_PCT"]},
+    {"text": "quasium.progression.calloud_golem.page3", "args": ["COAL_GOLEM_FIRE_SECONDS"]},
+    {"text": "quasium.progression.calloud_golem.refill"}
+  ]
+}

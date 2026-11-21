@@ -1,0 +1,37 @@
+{
+  "title": "quasium.research.research_draft_quasium_pipes.title",
+  "hint": "quasium.research.research_draft_quasium_pipes.hint",
+  "category": "research_draft",
+  "order": 20,
+  "icon": "quasium:quasium_pipe",
+  "scene": "quasium:quasium_pipes",
+  "research": {
+    "tier": 3,
+    "notes": [
+      "ember",
+      "resin"
+    ],
+    "recipes": [
+      "quasium:quasium_pipe",
+      "quasium:quasium_fan"
+    ],
+    "requires": [
+      "quasium:research_draft_boiler"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_draft_quasium_pipes.page1",
+      "recipe": "quasium:quasium_fan",
+      "args": [
+        "FAN_DRAFT",
+        "FAN_SECONDS_PER_EMBER_ML",
+        "FAN_TANK_ML"
+      ]
+    },
+    {
+      "text": "quasium.research.research_draft_quasium_pipes.page2",
+      "recipe": "quasium:quasium_pipe"
+    }
+  ]
+}

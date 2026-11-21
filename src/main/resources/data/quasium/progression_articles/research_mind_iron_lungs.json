@@ -1,0 +1,22 @@
+{
+  "title": "quasium.research.research_mind_iron_lungs.title",
+  "hint": "quasium.research.research_mind_iron_lungs.hint",
+  "category": "research_mind",
+  "order": 10,
+  "icon": "minecraft:iron_ingot",
+  "research": {
+    "tier": 1,
+    "perk": "iron_lungs",
+    "insight": 3,
+    "treatises": 0
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mind_iron_lungs.page1",
+      "args": [
+        "IRON_LUNGS_PCT",
+        "IRON_LUNGS_PCT"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,579 @@
+{
+  "hookah_puff_full": {
+    "sounds": [
+      "quasium:hookah_pufffull"
+    ],
+    "subtitle": "subtitles.quasium.hookah_puff_full"
+  },
+  "cast_inhale": {
+    "sounds": [
+      "quasium:cast_inhale"
+    ],
+    "subtitle": "subtitles.quasium.cast_inhale"
+  },
+  "cast_exhale_beam": {
+    "sounds": [
+      "quasium:cast_exhale_beam"
+    ],
+    "subtitle": "subtitles.quasium.cast_exhale"
+  },
+  "cast_exhale_cone": {
+    "sounds": [
+      "quasium:cast_exhale_cone"
+    ],
+    "subtitle": "subtitles.quasium.cast_exhale"
+  },
+  "cast_exhale_cloud": {
+    "sounds": [
+      "quasium:cast_exhale_cloud"
+    ],
+    "subtitle": "subtitles.quasium.cast_exhale"
+  },
+  "calloud_hiss": {
+    "sounds": [
+      "quasium:calloud_hiss"
+    ],
+    "subtitle": "subtitles.quasium.calloud_hiss"
+  },
+  "scanner_ping": {
+    "sounds": [
+      "quasium:scanner_ping"
+    ],
+    "subtitle": "subtitles.quasium.scanner_ping"
+  },
+  "cube_bubble": {
+    "sounds": [
+      "quasium:cube_bubble"
+    ],
+    "subtitle": "subtitles.quasium.cube_bubble"
+  },
+  "cough": {
+    "sounds": [
+      "quasium:cough"
+    ],
+    "subtitle": "subtitles.quasium.cough"
+  },
+  "note_jar_clink": {
+    "sounds": [
+      "quasium:note_jar_clink"
+    ],
+    "subtitle": "subtitles.quasium.note_jar_clink"
+  },
+  "ring_release": {
+    "sounds": [
+      "quasium:ring_release"
+    ],
+    "subtitle": "subtitles.quasium.ring_release"
+  },
+  "ring_perfect": {
+    "sounds": [
+      "quasium:ring_perfect"
+    ],
+    "subtitle": "subtitles.quasium.ring_perfect"
+  },
+  "zone_enter": {
+    "sounds": [
+      "quasium:zone_enter"
+    ],
+    "subtitle": "subtitles.quasium.zone_enter"
+  },
+  "zone_exit": {
+    "sounds": [
+      "quasium:zone_exit"
+    ],
+    "subtitle": "subtitles.quasium.zone_exit"
+  },
+  "zone_drone": {
+    "sounds": [
+      {
+        "name": "quasium:zone_drone",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.quasium.zone_drone"
+  },
+  "lamp_lit": {
+    "sounds": [
+      "quasium:lamp_lit"
+    ],
+    "subtitle": "subtitles.quasium.lamp_lit"
+  },
+  "table_place": {
+    "sounds": [
+      "quasium:table_place"
+    ],
+    "subtitle": "subtitles.quasium.table_place"
+  },
+  "music_disc.lofi_kaif_beats": {
+    "sounds": [
+      {
+        "name": "quasium:record_lofi_kaif_beats_silence",
+        "stream": true
+      }
+    ]
+  },
+  "boiler_loop": {
+    "sounds": [
+      "quasium:boiler_loop"
+    ],
+    "subtitle": "subtitles.quasium.boiler_loop"
+  },
+  "bellows": {
+    "sounds": [
+      "quasium:bellows"
+    ],
+    "subtitle": "subtitles.quasium.bellows"
+  },
+  "pipe_flow": {
+    "sounds": [
+      "quasium:pipe_flow"
+    ],
+    "subtitle": "subtitles.quasium.pipe_flow"
+  },
+  "pneumatic_hit": {
+    "sounds": [
+      "quasium:pneumatic_hit"
+    ],
+    "subtitle": "subtitles.quasium.pneumatic_hit"
+  },
+  "cannon_shot": {
+    "sounds": [
+      "quasium:cannon_shot"
+    ],
+    "subtitle": "subtitles.quasium.cannon_shot"
+  },
+  "valve_click": {
+    "sounds": [
+      "quasium:valve_click"
+    ],
+    "subtitle": "subtitles.quasium.valve_click"
+  },
+  "fan_hum": {
+    "sounds": [
+      "quasium:fan_hum"
+    ],
+    "subtitle": "subtitles.quasium.fan_hum"
+  },
+  "minecart_hookah_rattle": {
+    "sounds": [
+      "quasium:minecart_hookah_rattle"
+    ],
+    "subtitle": "subtitles.quasium.minecart_hookah_rattle"
+  },
+  "golem_coal_step": {
+    "sounds": [
+      "quasium:golem_coal_step"
+    ],
+    "subtitle": "subtitles.quasium.golem_coal_step"
+  },
+  "golem_clay_hurt": {
+    "sounds": [
+      "quasium:golem_clay_hurt"
+    ],
+    "subtitle": "subtitles.quasium.golem_clay_hurt"
+  },
+  "warden_shot": {
+    "sounds": [
+      "quasium:cast_exhale_beam"
+    ],
+    "subtitle": "subtitles.quasium.warden_shot"
+  },
+  "kiln_loop": {
+    "sounds": [
+      "quasium:kiln_loop"
+    ],
+    "subtitle": "subtitles.quasium.kiln_loop"
+  },
+  "seal_place": {
+    "sounds": [
+      "quasium:seal_place"
+    ],
+    "subtitle": "subtitles.quasium.seal_place"
+  },
+  "golem_ready": {
+    "sounds": [
+      "quasium:golem_ready"
+    ],
+    "subtitle": "subtitles.quasium.golem_ready"
+  },
+  "coal_golem_ignite": {
+    "sounds": [
+      "quasium:coal_golem_ignite"
+    ],
+    "subtitle": "subtitles.quasium.coal_golem_ignite"
+  },
+  "geode_hum": {
+    "sounds": [
+      "quasium:geode_hum"
+    ],
+    "subtitle": "subtitles.quasium.geode_hum"
+  },
+  "cluster_break": {
+    "sounds": [
+      "quasium:cluster_break"
+    ],
+    "subtitle": "subtitles.quasium.cluster_break"
+  },
+  "villager_hookah_master_work": {
+    "sounds": [
+      "quasium:villager_hookah_master_work1",
+      "quasium:villager_hookah_master_work2",
+      "quasium:villager_hookah_master_work3"
+    ],
+    "subtitle": "subtitles.quasium.villager_hookah_master_work"
+  },
+  "caravan_bell": {
+    "sounds": [
+      "quasium:caravan_bell"
+    ],
+    "subtitle": "subtitles.quasium.caravan_bell"
+  },
+  "aphid_squish": {
+    "sounds": [
+      "quasium:aphid_squish"
+    ],
+    "subtitle": "subtitles.quasium.aphid_squish"
+  },
+  "echo_leaf_muffle": {
+    "sounds": [
+      "quasium:echo_leaf_muffle"
+    ],
+    "subtitle": "subtitles.quasium.echo_leaf_muffle"
+  },
+  "smog_ambience": {
+    "sounds": [
+      "quasium:smog_ambience"
+    ],
+    "subtitle": "subtitles.quasium.smog_ambience"
+  },
+  "smog_cleanse": {
+    "sounds": [
+      "quasium:smog_cleanse"
+    ],
+    "subtitle": "subtitles.quasium.smog_cleanse"
+  },
+  "dymnik_whisper": {
+    "sounds": [
+      "quasium:dymnik_whisper_1",
+      "quasium:dymnik_whisper_2",
+      "quasium:dymnik_whisper_3"
+    ],
+    "subtitle": "subtitles.quasium.dymnik_whisper"
+  },
+  "samovar_boil": {
+    "sounds": [
+      "quasium:samovar_boil"
+    ],
+    "subtitle": "subtitles.quasium.samovar_boil"
+  },
+  "tea_pour": {
+    "sounds": [
+      "quasium:tea_pour"
+    ],
+    "subtitle": "subtitles.quasium.tea_pour"
+  },
+  "tea_party_chime": {
+    "sounds": [
+      "quasium:tea_party_chime"
+    ],
+    "subtitle": "subtitles.quasium.tea_party_chime"
+  },
+  "seal_hum": {
+    "sounds": [
+      "quasium:seal_hum"
+    ],
+    "subtitle": "subtitles.quasium.seal_hum"
+  },
+  "scan_reveal": {
+    "sounds": [
+      "quasium:scan_reveal"
+    ],
+    "subtitle": "subtitles.quasium.scan_reveal"
+  },
+  "research_complete": {
+    "sounds": [
+      "quasium:research_complete"
+    ],
+    "subtitle": "subtitles.quasium.research_complete"
+  },
+  "treatise_write": {
+    "sounds": [
+      "quasium:treatise_write"
+    ],
+    "subtitle": "subtitles.quasium.treatise_write"
+  },
+  "ghost_offer": {
+    "sounds": [
+      "quasium:ghost_offer"
+    ],
+    "subtitle": "subtitles.quasium.ghost_offer"
+  },
+  "ghost_deal": {
+    "sounds": [
+      "quasium:ghost_deal"
+    ],
+    "subtitle": "subtitles.quasium.ghost_deal"
+  },
+  "coma_fade": {
+    "sounds": [
+      "quasium:coma_fade"
+    ],
+    "subtitle": "subtitles.quasium.coma_fade"
+  },
+  "dream_inspiration": {
+    "sounds": [
+      "quasium:dream_inspiration"
+    ],
+    "subtitle": "subtitles.quasium.dream_inspiration"
+  },
+  "dream_compass": {
+    "sounds": [
+      "quasium:dream_compass"
+    ],
+    "subtitle": "subtitles.quasium.dream_compass"
+  },
+  "dream_recipe": {
+    "sounds": [
+      "quasium:dream_recipe"
+    ],
+    "subtitle": "subtitles.quasium.dream_recipe"
+  },
+  "dream_insight": {
+    "sounds": [
+      "quasium:dream_insight"
+    ],
+    "subtitle": "subtitles.quasium.dream_insight"
+  },
+  "dream_lucid": {
+    "sounds": [
+      "quasium:dream_lucid"
+    ],
+    "subtitle": "subtitles.quasium.dream_lucid"
+  },
+  "awaken_nightmare": {
+    "sounds": [
+      "quasium:awaken_nightmare"
+    ],
+    "subtitle": "subtitles.quasium.awaken_nightmare"
+  },
+  "enlightenment": {
+    "sounds": [
+      "quasium:enlightenment"
+    ],
+    "subtitle": "subtitles.quasium.enlightenment"
+  },
+  "ritual_loop": {
+    "sounds": [
+      "quasium:ritual_loop"
+    ],
+    "subtitle": "subtitles.quasium.ritual_loop"
+  },
+  "ritual_complete": {
+    "sounds": [
+      "quasium:ritual_complete"
+    ],
+    "subtitle": "subtitles.quasium.ritual_complete"
+  },
+  "ritual_fail": {
+    "sounds": [
+      "quasium:ritual_fail"
+    ],
+    "subtitle": "subtitles.quasium.ritual_fail"
+  },
+  "eternal_coal_idle": {
+    "sounds": [
+      "quasium:eternal_coal_idle"
+    ],
+    "subtitle": "subtitles.quasium.eternal_coal_idle"
+  },
+  "portal_open": {
+    "sounds": [
+      "quasium:portal_open"
+    ],
+    "subtitle": "subtitles.quasium.portal_open"
+  },
+  "artifact_equip": {
+    "sounds": [
+      "quasium:artifact_equip"
+    ],
+    "subtitle": "subtitles.quasium.artifact_equip"
+  },
+  "smokelands_ambience": {
+    "sounds": [
+      "quasium:smokelands_ambience"
+    ],
+    "subtitle": "subtitles.quasium.smokelands_ambience"
+  },
+  "cinder_storm": {
+    "sounds": [
+      "quasium:cinder_storm"
+    ],
+    "subtitle": "subtitles.quasium.cinder_storm"
+  },
+  "portal_travel": {
+    "sounds": [
+      "quasium:portal_travel"
+    ],
+    "subtitle": "subtitles.quasium.portal_travel"
+  },
+  "wisp_tame": {
+    "sounds": [
+      "quasium:wisp_tame"
+    ],
+    "subtitle": "subtitles.quasium.wisp_tame"
+  },
+  "sultan_inhale": {
+    "sounds": [
+      "quasium:sultan_inhale"
+    ],
+    "subtitle": "subtitles.quasium.sultan_inhale"
+  },
+  "sultan_hurt": {
+    "sounds": [
+      "quasium:sultan_hurt"
+    ],
+    "subtitle": "subtitles.quasium.sultan_hurt"
+  },
+  "sultan_stun": {
+    "sounds": [
+      "quasium:sultan_stun"
+    ],
+    "subtitle": "subtitles.quasium.sultan_stun"
+  },
+  "sultan_burnout": {
+    "sounds": [
+      "quasium:sultan_burnout"
+    ],
+    "subtitle": "subtitles.quasium.sultan_burnout"
+  },
+  "sultan_ring": {
+    "sounds": [
+      {
+        "name": "quasium:ring_release",
+        "pitch": 0.6
+      }
+    ],
+    "subtitle": "subtitles.quasium.sultan_ring"
+  },
+  "sultan_theme": {
+    "sounds": [
+      {
+        "name": "quasium:sultan_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.ash_lofi": {
+    "sounds": [
+      {
+        "name": "quasium:record_ash_lofi",
+        "stream": true
+      }
+    ]
+  },
+  "dry_cough": {
+    "sounds": [
+      "quasium:dry_cough"
+    ],
+    "subtitle": "subtitles.quasium.dry_cough"
+  },
+  "music_disc.lofi_kaif_beats.keys": {
+    "sounds": [
+      {
+        "name": "quasium:record_lofi_kaif_beats_keys",
+        "preload": true,
+        "attenuation_distance": 64
+      }
+    ]
+  },
+  "music_disc.lofi_kaif_beats.bass": {
+    "sounds": [
+      {
+        "name": "quasium:record_lofi_kaif_beats_bass",
+        "preload": true,
+        "attenuation_distance": 64
+      }
+    ]
+  },
+  "music_disc.lofi_kaif_beats.drums": {
+    "sounds": [
+      {
+        "name": "quasium:record_lofi_kaif_beats_drums",
+        "preload": true,
+        "attenuation_distance": 64
+      }
+    ]
+  },
+  "music_disc.lofi_kaif_beats.lead": {
+    "sounds": [
+      {
+        "name": "quasium:record_lofi_kaif_beats_lead",
+        "preload": true,
+        "attenuation_distance": 64
+      }
+    ]
+  },
+  "record_scratch": {
+    "sounds": [
+      {
+        "name": "quasium:record_scratch",
+        "attenuation_distance": 64
+      }
+    ],
+    "subtitle": "subtitles.quasium.record_scratch"
+  },
+  "ritual_pulse": {
+    "sounds": [
+      "quasium:ritual_pulse"
+    ],
+    "subtitle": "subtitles.quasium.ritual_pulse"
+  },
+  "hookah_spirit_squeak": {
+    "sounds": [
+      "quasium:hookah_spirit_squeak"
+    ],
+    "subtitle": "subtitles.quasium.hookah_spirit_squeak"
+  },
+  "hookah_spirit_pop": {
+    "sounds": [
+      "quasium:hookah_spirit_pop"
+    ],
+    "subtitle": "subtitles.quasium.hookah_spirit_pop"
+  },
+  "accord_tone_menthol": {
+    "sounds": [
+      "quasium:accord_tone_menthol"
+    ],
+    "subtitle": "subtitles.quasium.accord_tone_menthol"
+  },
+  "accord_tone_ember": {
+    "sounds": [
+      "quasium:accord_tone_ember"
+    ],
+    "subtitle": "subtitles.quasium.accord_tone_ember"
+  },
+  "accord_tone_nectar": {
+    "sounds": [
+      "quasium:accord_tone_nectar"
+    ],
+    "subtitle": "subtitles.quasium.accord_tone_nectar"
+  },
+  "accord_tone_dew": {
+    "sounds": [
+      "quasium:accord_tone_dew"
+    ],
+    "subtitle": "subtitles.quasium.accord_tone_dew"
+  },
+  "accord_tone_resin": {
+    "sounds": [
+      "quasium:accord_tone_resin"
+    ],
+    "subtitle": "subtitles.quasium.accord_tone_resin"
+  },
+  "accord_tone_ash": {
+    "sounds": [
+      "quasium:accord_tone_ash"
+    ],
+    "subtitle": "subtitles.quasium.accord_tone_ash"
+  }
+}

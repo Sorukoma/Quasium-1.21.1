@@ -31,6 +31,7 @@ public class PacketStopPuffingServerHandler {
 
                     if (!connections.isEmpty()) {
                         HookahConnectionEntity connectionEntity = connections.get(0); // Берем первое найденное соединение
+                        net.sorukoma.quasium.magic.SmokeCasting.release(player, hookahBlockEntity);
                         connectionEntity.stopPuffing(hookahBlockEntity, player); // Передаем player
                     } else {
                         player.sendSystemMessage(Component.translatable("quasium.message.not_connected"));

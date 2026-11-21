@@ -1,0 +1,29 @@
+{
+  "title": "quasium.research.research_notes_sorting.title",
+  "hint": "quasium.research.research_notes_sorting.hint",
+  "category": "research_notes",
+  "order": 10,
+  "icon": "quasium:note_filter",
+  "scene": "quasium:note_sorting",
+  "research": {
+    "tier": 1,
+    "recipes": [
+      "quasium:note_filter",
+      "quasium:smoke_sorter"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_notes_sorting.page1",
+      "recipe": "quasium:note_filter"
+    },
+    {
+      "text": "quasium.research.research_notes_sorting.page2",
+      "recipe": "quasium:smoke_sorter",
+      "args": [
+        "SORTER_NOTES_PER_ESSENCE",
+        "SORTER_TANK_ML"
+      ]
+    }
+  ]
+}

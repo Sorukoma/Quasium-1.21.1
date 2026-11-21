@@ -1,0 +1,22 @@
+{
+  "title": "quasium.research.research_notes_transmutation.title",
+  "hint": "quasium.research.research_notes_transmutation.hint",
+  "category": "research_notes",
+  "order": 25,
+  "icon": "minecraft:crying_obsidian",
+  "scene": "quasium:transmutation",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "resin"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_notes_transmutation.page1"
+    },
+    {
+      "text": "quasium.research.research_notes_transmutation.page2"
+    }
+  ]
+}

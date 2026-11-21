@@ -18,7 +18,7 @@ public class ModBlocks {
             DeferredRegister.createBlocks(QuasiumMod.MOD_ID);
 
     public static final DeferredBlock<Block> HOOKAH_BLOCK = BLOCKS.register("hookah_block",
-            () -> new HookahBlock());
+            () -> new HookahBlock(standProperties().sound(net.minecraft.world.level.block.SoundType.WOOD)));
 
     // Модульный кальян — 5 вариантов колбы (база), различаются только цветом/рендером.
     public static final DeferredBlock<Block> MODULAR_HOOKAH_WHITE = registerModularHookah("white");
@@ -26,12 +26,20 @@ public class ModBlocks {
     public static final DeferredBlock<Block> MODULAR_HOOKAH_RED = registerModularHookah("red");
     public static final DeferredBlock<Block> MODULAR_HOOKAH_BLUE = registerModularHookah("blue");
     public static final DeferredBlock<Block> MODULAR_HOOKAH_AMBER = registerModularHookah("amber");
+    public static final DeferredBlock<Block> MODULAR_HOOKAH_JADE = registerModularHookah("jade");
+    public static final DeferredBlock<Block> MODULAR_HOOKAH_VIOLET = registerModularHookah("violet");
+    public static final DeferredBlock<Block> MODULAR_HOOKAH_GOLD = registerModularHookah("gold");
 
     private static DeferredBlock<Block> registerModularHookah(String color) {
         return BLOCKS.register("modular_hookah_" + color, () -> new ModularHookahBlock(
-                BlockBehaviour.Properties.ofFullCopy(Blocks.BREWING_STAND)
+                standProperties()
                         .sound(net.minecraft.world.level.block.SoundType.GLASS)
-                        .noOcclusion()));
+                        .forceSolidOn()));
+    }
+
+    private static BlockBehaviour.Properties standProperties() {
+        return BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL)
+                .strength(0.5F).lightLevel(state -> 1).noOcclusion();
     }
 
     // Кусты четырёх диких сортов
@@ -39,23 +47,35 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PESCHANIK_CROP = registerTobaccoCrop("peschanik", () -> ModItems.PESCHANIK_SEEDS.get(), () -> ModItems.PESCHANIK_LEAVES.get());
     public static final DeferredBlock<Block> BOLOTNIK_CROP = registerTobaccoCrop("bolotnik", () -> ModItems.BOLOTNIK_SEEDS.get(), () -> ModItems.BOLOTNIK_LEAVES.get());
     public static final DeferredBlock<Block> LEDYANOY_CROP = registerTobaccoCrop("ledyanoy", () -> ModItems.LEDYANOY_SEEDS.get(), () -> ModItems.LEDYANOY_LEAVES.get());
-    public static final DeferredBlock<Block> HYBRID_TOBACCO_CROP = registerTobaccoCrop("hybrid_tobacco", "hybrid", () -> ModItems.HYBRID_TOBACCO_SEEDS.get(), () -> ModItems.HYBRID_TOBACCO_LEAVES.get());
+    public static final DeferredBlock<Block> HYBRID_TOBACCO_CROP = registerTobaccoCrop("hybrid_tobacco", "hybrid", () -> ModItems.HYBRID_TOBACCO_SEEDS.get(), () -> ModItems.HYBRID_TOBACCO_LEAVES.get(),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT));
+    public static final DeferredBlock<Block> ECHO_CROP = registerTobaccoCrop("echo", () -> ModItems.ECHO_SEEDS.get(), () -> ModItems.ECHO_LEAVES.get(),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT).lightLevel(state -> state.getValue(TobaccoCropBlock.AGE) == 4 ? 4 : 0));
+    public static final DeferredBlock<Block> ASHEN_CROP = registerTobaccoCrop("ashen", () -> ModItems.ASHEN_SEEDS.get(), () -> ModItems.ASHEN_LEAVES.get());
+    public static final DeferredBlock<Block> CHORUS_CROP = registerTobaccoCrop("chorus", () -> ModItems.CHORUS_SEEDS.get(), () -> ModItems.CHORUS_LEAVES.get());
+    public static final DeferredBlock<Block> PRIMORDIAL_CROP = registerTobaccoCrop("primordial", () -> ModItems.PRIMORDIAL_SEEDS.get(), () -> ModItems.PRIMORDIAL_LEAVES.get());
 
     public static final DeferredBlock<Block> TOBACCO_CROP = DIKAR_CROP;
-    public static final DeferredBlock<Block> MAKHORKA_CROP = PESCHANIK_CROP;
 
     private static DeferredBlock<Block> registerTobaccoCrop(String name,
                                                                java.util.function.Supplier<Item> seeds,
                                                                java.util.function.Supplier<Item> leaves) {
-        return registerTobaccoCrop(name, name, seeds, leaves);
+        return registerTobaccoCrop(name, seeds, leaves, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT));
+    }
+
+    private static DeferredBlock<Block> registerTobaccoCrop(String name,
+                                                               java.util.function.Supplier<Item> seeds,
+                                                               java.util.function.Supplier<Item> leaves,
+                                                               BlockBehaviour.Properties properties) {
+        return registerTobaccoCrop(name, name, seeds, leaves, properties);
     }
 
     private static DeferredBlock<Block> registerTobaccoCrop(String name,
                                                                String variety,
                                                                java.util.function.Supplier<Item> seeds,
-                                                               java.util.function.Supplier<Item> leaves) {
-        return BLOCKS.register(name + "_crop", () -> new VarietyTobaccoCropBlock(
-                seeds, leaves, variety, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)));
+                                                               java.util.function.Supplier<Item> leaves,
+                                                               BlockBehaviour.Properties properties) {
+        return BLOCKS.register(name + "_crop", () -> new VarietyTobaccoCropBlock(seeds, leaves, variety, properties));
     }
 
     public static final DeferredBlock<Block> WOODEN_TOBACCO_POLE = registerPole("wooden_tobacco_pole", 0.70f, 0.05f);
@@ -72,7 +92,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ANISE_CROP = registerEssenceCrop("anise_crop", ModItems.ANISE_SEEDS, ModItems.ANISE);
 
     public static final DeferredBlock<Block> BONSAI_POT = BLOCKS.register("bonsai_pot",
-            () -> new BonsaiPotBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT).noOcclusion()));
+            () -> new BonsaiPotBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT).noOcclusion().forceSolidOn()));
 
     // Сушильная полка
     public static final DeferredBlock<Block> DRYING_SHELF = BLOCKS.register("drying_shelf",
@@ -85,7 +105,7 @@ public class ModBlocks {
 
     // Миска для пропитывания
     public static final DeferredBlock<Block> SOAKING_BOWL = BLOCKS.register("soaking_bowl",
-            () -> new SoakingBowlBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BREWING_STAND)));
+            () -> new SoakingBowlBlock(standProperties().forceSolidOn()));
 
     // Пресс для экстрактов
     public static final DeferredBlock<Block> ESSENCE_PRESS = BLOCKS.register("essence_press",
@@ -118,6 +138,25 @@ public class ModBlocks {
                     .strength(3.5F, 1200.0F)
                     .sound(net.minecraft.world.level.block.SoundType.METAL)));
 
+    public static final DeferredBlock<Block> DISTILLATION_CUBE = BLOCKS.register("distillation_cube",
+            () -> new DistillationCubeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS)
+                    .lightLevel(state -> state.getValue(DistillationCubeBlock.LIT) ? 11 : 0)));
+
+    public static final DeferredBlock<Block> NOTE_JAR = BLOCKS.register("note_jar",
+            () -> new NoteJarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(0.5f).forceSolidOn()));
+
+    public static final DeferredBlock<Block> SMOKE_JAR = BLOCKS.register("smoke_jar",
+            () -> new SmokeJarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(0.3f).lightLevel(state -> 5).forceSolidOn()));
+
+    public static final DeferredItem<BlockItem> SMOKE_JAR_ITEM = ModItems.ITEMS.register("smoke_jar",
+            () -> new net.sorukoma.quasium.item.SmokeJarItem(SMOKE_JAR.get(), new Item.Properties().stacksTo(16)));
+
+    public static final DeferredItem<BlockItem> DISTILLATION_CUBE_ITEM = ModItems.ITEMS.register("distillation_cube",
+            () -> new BlockItem(DISTILLATION_CUBE.get(), new Item.Properties()));
+
+    public static final DeferredItem<BlockItem> NOTE_JAR_ITEM = ModItems.ITEMS.register("note_jar",
+            () -> new BlockItem(NOTE_JAR.get(), new Item.Properties().stacksTo(16)));
+
     public static final DeferredItem<BlockItem> WOODEN_TOBACCO_POLE_ITEM = registerPoleItem("wooden_tobacco_pole", WOODEN_TOBACCO_POLE);
     public static final DeferredItem<BlockItem> REINFORCED_TOBACCO_POLE_ITEM = registerPoleItem("reinforced_tobacco_pole", REINFORCED_TOBACCO_POLE);
     public static final DeferredItem<BlockItem> GOLDEN_TOBACCO_POLE_ITEM = registerPoleItem("golden_tobacco_pole", GOLDEN_TOBACCO_POLE);
@@ -135,6 +174,9 @@ public class ModBlocks {
     public static final DeferredItem<BlockItem> MODULAR_HOOKAH_RED_ITEM = registerBulbItem("red", MODULAR_HOOKAH_RED, net.sorukoma.quasium.hookah.HookahBulbVariant.RED);
     public static final DeferredItem<BlockItem> MODULAR_HOOKAH_BLUE_ITEM = registerBulbItem("blue", MODULAR_HOOKAH_BLUE, net.sorukoma.quasium.hookah.HookahBulbVariant.BLUE);
     public static final DeferredItem<BlockItem> MODULAR_HOOKAH_AMBER_ITEM = registerBulbItem("amber", MODULAR_HOOKAH_AMBER, net.sorukoma.quasium.hookah.HookahBulbVariant.AMBER);
+    public static final DeferredItem<BlockItem> MODULAR_HOOKAH_JADE_ITEM = registerBulbItem("jade", MODULAR_HOOKAH_JADE, net.sorukoma.quasium.hookah.HookahBulbVariant.JADE);
+    public static final DeferredItem<BlockItem> MODULAR_HOOKAH_VIOLET_ITEM = registerBulbItem("violet", MODULAR_HOOKAH_VIOLET, net.sorukoma.quasium.hookah.HookahBulbVariant.VIOLET);
+    public static final DeferredItem<BlockItem> MODULAR_HOOKAH_GOLD_ITEM = registerBulbItem("gold", MODULAR_HOOKAH_GOLD, net.sorukoma.quasium.hookah.HookahBulbVariant.GOLD);
 
     private static DeferredItem<BlockItem> registerBulbItem(String color, DeferredBlock<Block> block, net.sorukoma.quasium.hookah.HookahBulbVariant variant) {
         return ModItems.ITEMS.register("modular_hookah_" + color,

@@ -1,0 +1,12 @@
+{
+  "title": "quasium.progression.smokelands.title",
+  "hint": "quasium.progression.smokelands.hint",
+  "category": "quasium",
+  "order": 110,
+  "icon": "quasium:petrified_smoke",
+  "unlockCondition": "quasium:smokelands/root",
+  "pages": [
+    {"text": "quasium.progression.smokelands.page1", "items": ["minecraft:clock", "minecraft:compass"], "args": ["DRAFT_CYCLE_SECONDS"]},
+    {"text": "quasium.progression.smokelands.page2"}
+  ]
+}

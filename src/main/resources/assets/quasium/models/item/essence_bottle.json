@@ -3,5 +3,43 @@
   "textures": {
     "layer0": "quasium:item/essence_bottle_liquid",
     "layer1": "quasium:item/essence_bottle"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "quasium:note": 0.1
+      },
+      "model": "quasium:item/essence_bottle_menthol"
+    },
+    {
+      "predicate": {
+        "quasium:note": 0.2
+      },
+      "model": "quasium:item/essence_bottle_ember"
+    },
+    {
+      "predicate": {
+        "quasium:note": 0.3
+      },
+      "model": "quasium:item/essence_bottle_nectar"
+    },
+    {
+      "predicate": {
+        "quasium:note": 0.4
+      },
+      "model": "quasium:item/essence_bottle_dew"
+    },
+    {
+      "predicate": {
+        "quasium:note": 0.5
+      },
+      "model": "quasium:item/essence_bottle_resin"
+    },
+    {
+      "predicate": {
+        "quasium:note": 0.6
+      },
+      "model": "quasium:item/essence_bottle_ash"
+    }
+  ]
 }

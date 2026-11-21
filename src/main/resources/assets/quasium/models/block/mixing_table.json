@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "quasium:block/mixing_table_top",
+    "bottom": "quasium:block/mixing_table_bottom",
+    "side": "quasium:block/mixing_table_side",
+    "front": "quasium:block/mixing_table_front"
+  }
+}

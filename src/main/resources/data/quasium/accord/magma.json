@@ -1,0 +1,9 @@
+{
+  "first": "ember",
+  "second": "resin",
+  "color": "#FF5020",
+  "params": {
+    "radius": 1,
+    "fire_seconds": 4
+  }
+}

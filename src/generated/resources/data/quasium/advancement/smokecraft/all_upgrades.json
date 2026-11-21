@@ -1,0 +1,99 @@
+{
+  "parent": "quasium:smokecraft/first_cast",
+  "criteria": {
+    "focus_upgrade_collimator": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:focus_upgrade_collimator"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "focus_upgrade_condenser": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:focus_upgrade_condenser"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "focus_upgrade_cooler": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:focus_upgrade_cooler"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "focus_upgrade_filter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:focus_upgrade_filter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "focus_upgrade_resonator": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:focus_upgrade_resonator"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "focus_upgrade_splitter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:focus_upgrade_splitter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.all_upgrades.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "quasium:focus_upgrade_resonator"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.all_upgrades.title"
+    }
+  },
+  "requirements": [
+    [
+      "focus_upgrade_resonator"
+    ],
+    [
+      "focus_upgrade_collimator"
+    ],
+    [
+      "focus_upgrade_cooler"
+    ],
+    [
+      "focus_upgrade_splitter"
+    ],
+    [
+      "focus_upgrade_condenser"
+    ],
+    [
+      "focus_upgrade_filter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

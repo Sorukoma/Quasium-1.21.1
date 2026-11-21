@@ -1,0 +1,33 @@
+{
+  "title": "quasium.progression.hookah_ghost.title",
+  "hint": "quasium.progression.hookah_ghost.hint",
+  "category": "kaif",
+  "order": 60,
+  "icon": "minecraft:emerald",
+  "unlockCondition": "quasium:smokecraft/overdose",
+  "pages": [
+    {
+      "text": "quasium.progression.hookah_ghost.page1",
+      "args": [
+        "GHOST_KAIF",
+        "GHOST_RADIUS"
+      ]
+    },
+    {
+      "text": "quasium.progression.hookah_ghost.page2",
+      "args": [
+        "GHOST_KAIF_GAIN",
+        "GHOST_PRICE_EMERALDS",
+        "GHOST_PRICE_LEVELS"
+      ]
+    },
+    {
+      "text": "quasium.progression.hookah_ghost.page3",
+      "args": [
+        "GHOST_TOLERANCE",
+        "GHOST_CURSE_TICKS",
+        "GHOST_CURSE_MULTIPLIER"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "tier": 3,
+  "catalyst": {
+    "item": "quasium:quasium_chestplate"
+  },
+  "notes": {
+    "resin": 32,
+    "menthol": 32
+  },
+  "puffs": 800,
+  "rate": 192,
+  "kaif": {
+    "min": 40
+  },
+  "base": 25,
+  "infuse": {
+    "quasium:smoke_carapace": {},
+    "minecraft:item_name": "{\"translate\":\"item.quasium.smoke_carapace\"}",
+    "minecraft:enchantment_glint_override": true
+  }
+}

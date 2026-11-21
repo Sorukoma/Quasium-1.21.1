@@ -11,6 +11,16 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#quasium:tobacco_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_tallow": {
       "conditions": {
         "items": [
@@ -36,6 +46,7 @@
   },
   "requirements": [
     [
+      "has_leaves",
       "has_tallow",
       "has_drying_shelf"
     ]

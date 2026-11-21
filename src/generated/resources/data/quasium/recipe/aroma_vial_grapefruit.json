@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "quasium:essence_ingredients/grapefruit"
+    },
+    {
+      "tag": "quasium:essence_ingredients/grapefruit"
+    }
+  ],
+  "result": {
+    "components": {
+      "quasium:essence_type": "grapefruit"
+    },
+    "count": 1,
+    "id": "quasium:aroma_vial"
+  }
+}

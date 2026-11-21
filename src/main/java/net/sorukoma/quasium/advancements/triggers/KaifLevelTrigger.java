@@ -2,6 +2,7 @@ package net.sorukoma.quasium.advancements.triggers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
@@ -23,13 +24,15 @@ public class KaifLevelTrigger extends SimpleCriterionTrigger<KaifLevelTrigger.Tr
         this.trigger(player, instance -> instance.matches(currentKaif));
     }
 
+    public static Criterion<TriggerInstance> reached(int kaif) {
+        return new Criterion<>(QuasiumModAdvancements.KAIF_LEVEL.get(), new TriggerInstance(Optional.empty(), kaif));
+    }
+
     public record TriggerInstance(Optional<ContextAwarePredicate> player, int minKaifLevel) implements SimpleCriterionTrigger.SimpleInstance {
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ContextAwarePredicate.CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player),
                 Codec.INT.fieldOf("min_kaif_level").forGetter(TriggerInstance::minKaifLevel)
         ).apply(instance, TriggerInstance::new));
-
-        // Удален статический метод kaifLevel
 
         public boolean matches(int currentKaif) {
             return currentKaif >= this.minKaifLevel;

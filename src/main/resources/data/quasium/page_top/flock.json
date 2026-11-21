@@ -1,0 +1,12 @@
+{
+  "volume": 20,
+  "max": 2,
+  "add": {
+    "count": 1
+  },
+  "forms": [
+    "spirit"
+  ],
+  "unlock": "research:quasium:research_mirror_spiritism",
+  "order": 6
+}

@@ -1,0 +1,17 @@
+// 1.21.1	2026-10-09T04:58:33.2135386	Smokelands advancements
+915c7f7ead260bf84997baf4c758ea6eef482bbb data/quasium/advancement/smokelands/enter.json
+cd8294079ba333aeaf4130e5996793dae5fe71de data/quasium/advancement/smokelands/epilogue.json
+92c4d4d03ec5db8a930139c649ca24708305550a data/quasium/advancement/smokelands/fell_through.json
+91d445a872153a1f175789cf600973ad15531a99 data/quasium/advancement/smokelands/lore.json
+c8b0f5655faf3864fc94c1cd80c5172e72d2c4f6 data/quasium/advancement/smokelands/lore_1.json
+4912d9860189904a10d734a56219e5ef9da387d7 data/quasium/advancement/smokelands/lore_2.json
+fd9082b36a314f7c948dc6868f6f3a572a552978 data/quasium/advancement/smokelands/lore_3.json
+2454218eae384c4e004ce2e98caa316178176c36 data/quasium/advancement/smokelands/lore_4.json
+c335170664d69e3b8e2ed7fcd83d92b090004120 data/quasium/advancement/smokelands/lore_5.json
+2779ed68f697b0d1c72123d1ff003590dae8c0cf data/quasium/advancement/smokelands/lore_6.json
+9b4721a443639f2c98209ca02f4d707abe2fd470 data/quasium/advancement/smokelands/root.json
+cc5d882030722eb7fd5086f2951a39791f77e550 data/quasium/advancement/smokelands/sea_walk.json
+b2e24668237c51b91cdbd40a01d726f5c7e3ffe6 data/quasium/advancement/smokelands/storm.json
+770cb4f5e68dc42048c3f995dfb418fdcf88b5b3 data/quasium/advancement/smokelands/sultan.json
+2970f1588e98b4453850cb727943c6d8cccc8610 data/quasium/advancement/smokelands/sultan_doused.json
+fc684fb7b0eb7697fe076b2aa9fd182614c0a0d5 data/quasium/advancement/smokelands/wisp.json

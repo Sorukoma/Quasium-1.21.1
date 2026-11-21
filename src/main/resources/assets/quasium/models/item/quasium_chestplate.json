@@ -2,5 +2,8 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "quasium:item/quasium_chestplate"
-  }
+  },
+  "overrides": [
+    {"predicate": {"quasium:artifact": 1}, "model": "quasium:item/smoke_carapace"}
+  ]
 }

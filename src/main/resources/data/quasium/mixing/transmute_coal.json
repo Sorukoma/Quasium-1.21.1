@@ -1,0 +1,7 @@
+{
+  "essence": "resin",
+  "ml": 4,
+  "catalyst": "minecraft:stone",
+  "result": "minecraft:coal",
+  "research": "quasium:research_notes_transmutation"
+}

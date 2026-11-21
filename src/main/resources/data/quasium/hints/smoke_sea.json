@@ -1,0 +1,460 @@
+{
+  "items": [
+    "quasium:smolder",
+    "quasium:budding_dream_quartz",
+    "quasium:dream_quartz_bud",
+    "quasium:dream_quartz_cluster"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            3,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            4,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            0,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            0,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            1,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            1,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            2,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            2,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            3,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            3,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            4,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            4,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "minecraft:light_gray_stained_glass",
+          "pos": [
+            4,
+            0,
+            4
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          3
+        ]
+      ],
+      "args": [
+        "SEA_WALK_KAIF"
+      ]
+    },
+    {
+      "duration": 120,
+      "remove": [
+        [
+          2,
+          0,
+          3
+        ],
+        [
+          3,
+          0,
+          3
+        ]
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          3
+        ],
+        [
+          3,
+          0,
+          3
+        ]
+      ],
+      "args": [
+        "SEA_WALK_KAIF",
+        "SEA_SINK_KAIF_PER_SECOND"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            1,
+            -1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            1,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            2,
+            -1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            2,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            3,
+            -1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:petrified_smoke",
+          "pos": [
+            3,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:budding_dream_quartz",
+          "pos": [
+            2,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:dream_quartz_cluster[facing=up]",
+          "pos": [
+            2,
+            1,
+            4
+          ]
+        },
+        {
+          "state": "quasium:dream_quartz_bud[facing=up]",
+          "pos": [
+            1,
+            1,
+            4
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            3,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:soot_mud",
+          "pos": [
+            4,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:smolder",
+          "pos": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:smolder",
+          "pos": [
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:smolder",
+          "pos": [
+            2,
+            0,
+            1
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "args": [
+        "SMOLDER_KAIF_PER_SECOND"
+      ]
+    }
+  ]
+}

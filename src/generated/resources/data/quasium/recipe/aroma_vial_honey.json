@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "quasium:essence_ingredients/honey"
+    },
+    {
+      "tag": "quasium:essence_ingredients/honey"
+    }
+  ],
+  "result": {
+    "components": {
+      "quasium:essence_type": "honey"
+    },
+    "count": 1,
+    "id": "quasium:aroma_vial"
+  }
+}

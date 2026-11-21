@@ -1,0 +1,105 @@
+{
+  "items": [
+    "quasium:raw_briquette",
+    "quasium:charcoal_22",
+    "quasium:charcoal_25",
+    "quasium:charcoal_27",
+    "quasium:calloud",
+    "quasium:heater"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:charcoal_22",
+          "pos": [0.7, 0.7, 1.5]
+        },
+        {
+          "item": "quasium:charcoal_25",
+          "pos": [1.5, 0.7, 1.5]
+        },
+        {
+          "item": "quasium:charcoal_27",
+          "pos": [2.3, 0.7, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:heater",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:charcoal",
+          "pos": [1.1, 1.6, 1.5]
+        },
+        {
+          "item": "quasium:charcoal_25",
+          "pos": [1.9, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 150,
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "quasium:calloud",
+          "pos": [1.5, 1.7, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 230,
+      "place": [
+        {
+          "state": "quasium:hookah_block",
+          "pos": [2, 0, 2]
+        }
+      ],
+      "highlight": [
+        [2, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:calloud",
+          "pos": [2.5, 1.9, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "highlight": [
+        [2, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:charcoal_27",
+          "pos": [2.2, 1.9, 2.5]
+        },
+        {
+          "item": "quasium:charcoal_27",
+          "pos": [2.8, 1.9, 2.5]
+        },
+        {
+          "item": "minecraft:fire_charge",
+          "pos": [2.5, 2.5, 2.5]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "reached_kaif_20": {
+      "conditions": {
+        "min_kaif_level": 20
+      },
+      "trigger": "quasium:kaif_level"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.kaif_level_20.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:experience_bottle"
+    },
+    "title": {
+      "translate": "advancements.quasium.kaif_level_20.title"
+    }
+  },
+  "requirements": [
+    [
+      "reached_kaif_20"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,30 @@
+{
+  "title": "quasium.research.research_dreams_catcher.title",
+  "hint": "quasium.research.research_dreams_catcher.hint",
+  "category": "research_dreams",
+  "order": 5,
+  "icon": "quasium:dream_catcher",
+  "scene": "quasium:dream_catcher",
+  "research": {
+    "tier": 3,
+    "notes": [
+      "dew",
+      "nectar"
+    ],
+    "dream": "inspiration"
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_dreams_catcher.page1",
+      "args": [
+        "DREAM_CATCHER_ML_PER_NIGHT",
+        "DREAM_CATCHER_RADIUS",
+        "DREAM_CATCHER_CAP_ML"
+      ],
+      "ritual": "quasium:dream_catcher"
+    },
+    {
+      "text": "quasium.research.research_dreams_catcher.page2"
+    }
+  ]
+}

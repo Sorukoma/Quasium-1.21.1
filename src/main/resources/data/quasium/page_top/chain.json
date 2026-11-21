@@ -1,0 +1,16 @@
+{
+  "volume": 20,
+  "max": 2,
+  "add": {
+    "chain": 1
+  },
+  "forms": [
+    "bolt",
+    "beam",
+    "cone",
+    "ring",
+    "spirit"
+  ],
+  "unlock": "research:quasium:research_smoke_tops",
+  "order": 7
+}

@@ -1,0 +1,11 @@
+{
+  "note": "dew",
+  "volume": 10,
+  "cooldown": 0.5,
+  "target": "any",
+  "params": {
+    "wet_seconds": 6
+  },
+  "unlock": "note:dew",
+  "order": 10
+}

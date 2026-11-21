@@ -1,0 +1,18 @@
+{
+  "title": "quasium.research.research_smoke_heart.title",
+  "hint": "quasium.research.research_smoke_heart.hint",
+  "category": "research_smoke",
+  "order": 50,
+  "icon": "quasium:spell_tetrad",
+  "research": {
+    "tier": 1
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smoke_heart.page1"
+    },
+    {
+      "text": "quasium.research.research_smoke_heart.page2"
+    }
+  ]
+}

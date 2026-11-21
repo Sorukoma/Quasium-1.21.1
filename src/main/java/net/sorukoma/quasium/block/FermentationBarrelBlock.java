@@ -77,7 +77,7 @@ public class FermentationBarrelBlock extends BaseEntityBlock {
                 player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.added", toInsert, toInsert), true);
                 if (!player.isCreative()) heldItem.shrink(toInsert);
                 return ItemInteractionResult.CONSUME;
-            } else if (heldItem.getItem() == slotItem.getItem()) {
+            } else if (FermentationBarrelBlockEntity.sameBatch(slotItem, heldItem)) {
                 int canAdd = 16 - slotItem.getCount();
                 if (canAdd <= 0) {
                     player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.full"), true);
@@ -89,6 +89,12 @@ public class FermentationBarrelBlock extends BaseEntityBlock {
                 barrelEntity.getItemHandler().setStackInSlot(0, newSlot);
                 player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.added", toInsert, slotItem.getCount() + toInsert), true);
                 if (!player.isCreative()) heldItem.shrink(toInsert);
+                return ItemInteractionResult.CONSUME;
+            } else if (barrelEntity.isReady()) {
+                player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.take_ready"), true);
+                return ItemInteractionResult.CONSUME;
+            } else if (heldItem.is(slotItem.getItem())) {
+                player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.other_quality"), true);
                 return ItemInteractionResult.CONSUME;
             } else {
                 player.displayClientMessage(Component.translatable("block.quasium.fermentation_barrel.wrong_type"), true);

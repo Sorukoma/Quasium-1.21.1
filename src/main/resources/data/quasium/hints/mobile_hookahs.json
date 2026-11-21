@@ -1,0 +1,114 @@
+{
+  "items": [
+    "quasium:backpack_hookah",
+    "quasium:hookah_minecart"
+  ],
+  "floor": 4,
+  "steps": [
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:quasium_anvil",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_block",
+          "pos": [1.2, 1.5, 1.5]
+        },
+        {
+          "item": "minecraft:leather",
+          "pos": [1.8, 1.5, 1.5]
+        },
+        {
+          "item": "quasium:netherite_hammer",
+          "pos": [1.5, 2.1, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:backpack_hookah",
+          "pos": [1.5, 1.6, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 190,
+      "remove": [
+        [1, 0, 1]
+      ],
+      "place": [
+        {
+          "state": "minecraft:rail[shape=east_west]",
+          "pos": [0, 0, 2]
+        },
+        {
+          "state": "minecraft:rail[shape=east_west]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "minecraft:rail[shape=east_west]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "minecraft:rail[shape=east_west]",
+          "pos": [3, 0, 2]
+        }
+      ],
+      "highlight": [
+        [0, 0, 2],
+        [1, 0, 2],
+        [2, 0, 2],
+        [3, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hookah_minecart",
+          "pos": [1.5, 0.6, 2.5]
+        },
+        {
+          "item": "quasium:hookah_pipe",
+          "pos": [3.5, 1.4, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "icons": [
+        {
+          "item": "quasium:hookah_minecart",
+          "pos": [1.5, 0.6, 2.5]
+        },
+        {
+          "item": "quasium:calloud",
+          "pos": [1.1, 1.4, 2.5]
+        },
+        {
+          "item": "quasium:hookah_bowl",
+          "pos": [1.9, 1.4, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:backpack_hookah",
+          "pos": [1.0, 1.5, 1.5]
+        },
+        {
+          "item": "quasium:hookah_minecart",
+          "pos": [2.5, 0.6, 2.5]
+        }
+      ]
+    }
+  ]
+}

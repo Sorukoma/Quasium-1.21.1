@@ -1,0 +1,12 @@
+{
+  "note": "dew",
+  "volume": 20,
+  "cooldown": 6,
+  "target": "foe",
+  "params": {
+    "armor": 4,
+    "effect_seconds": 8
+  },
+  "unlock": "research:quasium:research_notes_overtones",
+  "order": 12
+}

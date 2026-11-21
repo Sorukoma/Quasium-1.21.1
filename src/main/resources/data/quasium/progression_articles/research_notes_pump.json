@@ -1,0 +1,39 @@
+{
+  "title": "quasium.research.research_notes_pump.title",
+  "hint": "quasium.research.research_notes_pump.hint",
+  "category": "research_notes",
+  "order": 20,
+  "icon": "quasium:essence_pump",
+  "scene": "quasium:essence_pump",
+  "research": {
+    "tier": 2,
+    "notes": [
+      "dew"
+    ],
+    "recipes": [
+      "quasium:essence_pump",
+      "quasium:auto_distiller"
+    ],
+    "requires": [
+      "quasium:research_notes_sorting"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_notes_pump.page1",
+      "recipe": "quasium:essence_pump",
+      "args": [
+        "PUMP_ML_PER_SECOND",
+        "PUMP_DEMAND"
+      ]
+    },
+    {
+      "text": "quasium.research.research_notes_pump.page2",
+      "recipe": "quasium:auto_distiller",
+      "args": [
+        "DISTILLER_DEMAND",
+        "DISTILLER_SPEED_MULTIPLIER"
+      ]
+    }
+  ]
+}

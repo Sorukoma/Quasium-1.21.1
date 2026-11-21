@@ -1,0 +1,53 @@
+{
+  "title": "quasium.research.research_notes_kiln.title",
+  "hint": "quasium.research.research_notes_kiln.hint",
+  "category": "research_notes",
+  "order": 30,
+  "icon": "quasium:smoke_kiln",
+  "scene": "quasium:smoke_kiln",
+  "research": {
+    "tier": 3,
+    "notes": [
+      "ember",
+      "resin"
+    ],
+    "kaif": 40,
+    "recipes": [
+      "quasium:smoke_kiln"
+    ],
+    "requires": [
+      "quasium:research_notes_pump"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_notes_kiln.page1",
+      "recipe": "quasium:smoke_kiln",
+      "args": [
+        "KILN_ML_PER_ITEM",
+        "KILN_SECONDS_PER_ITEM"
+      ]
+    },
+    {
+      "text": "quasium.research.research_notes_kiln.page2",
+      "args": [
+        "INFUSION_EMBER_FIRE_SECONDS",
+        "INFUSION_EMBER_DROP_PCT"
+      ]
+    },
+    {
+      "text": "quasium.research.research_notes_kiln.page3",
+      "args": [
+        "INFUSION_RESIN_DURABILITY_PCT",
+        "INFUSION_DEW_EXTRA_DROPS",
+        "INFUSION_ASH_FINISH_PCT"
+      ]
+    },
+    {
+      "text": "quasium.research.research_notes_kiln.page4",
+      "args": [
+        "KILN_ML_PER_ITEM"
+      ]
+    }
+  ]
+}

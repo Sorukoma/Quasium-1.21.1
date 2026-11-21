@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokelands/root",
+  "criteria": {
+    "smokelands_coma": {
+      "conditions": {
+        "event": "smokelands_coma"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokelands.fell_through.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:phantom_membrane"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokelands.fell_through.title"
+    }
+  },
+  "requirements": [
+    [
+      "smokelands_coma"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

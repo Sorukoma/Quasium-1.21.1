@@ -1,0 +1,22 @@
+{
+  "rules": [
+    {"mob_tag": "c:bosses", "priority": 100, "notes": {"ember": 3, "ash": 3, "menthol": 2}},
+    {"mob_tag": "minecraft:skeletons", "priority": 90, "notes": {"ash": 3}},
+    {"mob_tag": "minecraft:zombies", "priority": 90, "notes": {"ash": 2, "resin": 1}},
+    {"mob_tag": "minecraft:illager", "priority": 90, "notes": {"ash": 2, "resin": 1}},
+    {"mob_tag": "minecraft:raiders", "priority": 85, "notes": {"resin": 2, "ash": 1}},
+    {"mob_tag": "minecraft:arthropod", "priority": 80, "notes": {"resin": 2, "ash": 1}},
+    {"mob_tag": "minecraft:undead", "priority": 70, "notes": {"ash": 3}},
+    {"mob_tag": "minecraft:aquatic", "priority": 60, "notes": {"dew": 3}},
+    {"trait": "fire_immune_mob", "priority": 50, "notes": {"ember": 3}},
+    {"mob_category": "monster", "priority": 30, "notes": {"ash": 2, "ember": 1}},
+    {"mob_category": "creature", "priority": 30, "notes": {"resin": 2, "nectar": 1}},
+    {"mob_category": "ambient", "priority": 30, "notes": {"menthol": 1, "ash": 1}},
+    {"mob_category": "water_creature", "priority": 30, "notes": {"dew": 2, "resin": 1}},
+    {"mob_category": "water_ambient", "priority": 30, "notes": {"dew": 2}},
+    {"mob_category": "underground_water_creature", "priority": 30, "notes": {"dew": 2, "menthol": 1}},
+    {"mob_category": "axolotls", "priority": 30, "notes": {"dew": 2, "nectar": 1}},
+    {"mob_category": "misc", "priority": 30, "notes": {"resin": 1, "nectar": 1}},
+    {"trait": "mob", "priority": 0, "notes": {"resin": 1}}
+  ]
+}

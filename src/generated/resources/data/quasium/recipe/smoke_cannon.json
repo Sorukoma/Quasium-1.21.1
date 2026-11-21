@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    },
+    "P": {
+      "item": "quasium:copper_pipe"
+    },
+    "Q": {
+      "item": "quasium:quasiumingot"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "CDC",
+    "CQC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:smoke_cannon"
+  }
+}

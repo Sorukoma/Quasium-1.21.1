@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "quasium:block/program_table_top",
+    "bottom": "minecraft:block/spruce_planks",
+    "side": "quasium:block/program_table_side",
+    "front": "quasium:block/program_table_front"
+  }
+}

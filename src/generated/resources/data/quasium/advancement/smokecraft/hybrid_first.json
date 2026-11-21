@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:progression/found_seeds",
+  "criteria": {
+    "hybrid_first": {
+      "conditions": {
+        "event": "hybrid_first"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.hybrid_first.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:hybrid_tobacco_seeds"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.hybrid_first.title"
+    }
+  },
+  "requirements": [
+    [
+      "hybrid_first"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

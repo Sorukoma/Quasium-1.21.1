@@ -1,0 +1,12 @@
+{
+  "note": "ash",
+  "volume": 20,
+  "cooldown": 3,
+  "target": "foe",
+  "params": {
+    "damage_per_second": 1,
+    "choke_seconds": 5
+  },
+  "unlock": "note:ash",
+  "order": 16
+}

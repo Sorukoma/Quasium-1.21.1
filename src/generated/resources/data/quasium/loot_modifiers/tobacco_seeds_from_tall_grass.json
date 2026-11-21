@@ -1,5 +1,5 @@
 {
-  "type": "quasium:add_item",
+  "type": "quasium:add_wild_seeds",
   "conditions": [
     {
       "condition": "neoforge:loot_table_id",
@@ -10,8 +10,5 @@
       "condition": "minecraft:random_chance"
     }
   ],
-  "item": {
-    "count": 1,
-    "id": "quasium:dikar_seeds"
-  }
+  "item": "quasium:dikar_seeds"
 }

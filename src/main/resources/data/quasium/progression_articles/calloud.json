@@ -1,10 +1,15 @@
 {
   "title": "quasium.progression.calloud.title",
   "hint": "quasium.progression.calloud.hint",
+  "category": "hookah",
+  "order": 30,
+  "icon": "quasium:calloud",
+  "unlockCondition": "quasium:progression/first_tobacco",
+  "scene": "quasium:hookah_coals",
   "pages": [
-    { "text": "quasium.progression.calloud.page1" },
-    { "text": "quasium.progression.calloud.page2" },
-    { "text": "quasium.progression.calloud.page3" }
-  ],
-  "unlockCondition": "quasium:progression/obtained_calloud"
+    {"text": "quasium.progression.calloud.page1", "recipe": "quasium:calloud_from_iron_and_copper"},
+    {"text": "quasium.progression.calloud.page2"},
+    {"text": "quasium.progression.calloud.page3"},
+    {"text": "quasium.progression.calloud.page4"}
+  ]
 }

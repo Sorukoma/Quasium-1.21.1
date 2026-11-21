@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_drying_shelf": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:drying_shelf"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#quasium:tobacco_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_tallow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:tallow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:fries_from_potatoes_and_tallow"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_leaves",
+      "has_tallow",
+      "has_drying_shelf"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:fries_from_potatoes_and_tallow"
+    ]
+  }
+}

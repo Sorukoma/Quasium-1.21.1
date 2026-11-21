@@ -1,11 +1,19 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_glass": {
+    "has_hookah": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:glass"
+            "items": [
+              "quasium:hookah_block",
+              "quasium:modular_hookah_amber",
+              "quasium:modular_hookah_black",
+              "quasium:modular_hookah_blue",
+              "quasium:modular_hookah_red",
+              "quasium:modular_hookah_white",
+              "quasium:hookah_minecart"
+            ]
           }
         ]
       },
@@ -16,12 +24,16 @@
         "recipe": "quasium:modular_hookah_amber"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "hookah_opened": {
+      "trigger": "quasium:hookah_opened"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_glass"
+      "hookah_opened",
+      "has_hookah"
     ]
   ],
   "rewards": {

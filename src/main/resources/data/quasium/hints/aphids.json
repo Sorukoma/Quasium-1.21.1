@@ -1,0 +1,102 @@
+{
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "quasium:dikar_crop[age=2]",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "quasium:dikar_crop[age=2,aphids=true]",
+          "pos": [2, 1, 2]
+        },
+        {
+          "state": "quasium:dikar_crop[age=2]",
+          "pos": [3, 1, 2]
+        }
+      ],
+      "highlight": [
+        [2, 1, 2]
+      ],
+      "args": [
+        "APHID_DAILY_CHANCE_PCT",
+        "APHID_GROWTH_PCT"
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "minecraft:poppy",
+          "pos": [0, 0, 1]
+        },
+        {
+          "state": "minecraft:dandelion",
+          "pos": [4, 0, 3]
+        },
+        {
+          "state": "minecraft:cornflower",
+          "pos": [0, 0, 4]
+        }
+      ],
+      "highlight": [
+        [0, 0, 1],
+        [4, 0, 3],
+        [0, 0, 4]
+      ],
+      "args": [
+        "APHID_FLOWER_RADIUS",
+        "APHID_FLOWER_REDUCTION_PCT"
+      ]
+    },
+    {
+      "duration": 170,
+      "highlight": [
+        [2, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [2.5, 2.2, 2.5]
+        }
+      ],
+      "args": [
+        "APHID_CURE_EMBER_ML"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:dikar_crop[age=4]",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "quasium:dikar_crop[age=4]",
+          "pos": [2, 1, 2]
+        },
+        {
+          "state": "quasium:dikar_crop[age=4]",
+          "pos": [3, 1, 2]
+        }
+      ],
+      "highlight": [
+        [2, 1, 2]
+      ]
+    }
+  ]
+}

@@ -1,1 +1,1 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"minecraft:item/salmon","layer1":"quasium:item/salmon_jerky_overlay"}}
+{"parent":"minecraft:item/generated","textures":{"layer0":"quasium:item/salmon_jerky"}}

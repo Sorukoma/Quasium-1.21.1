@@ -206,6 +206,10 @@ public class CalloudMenu extends AbstractContainerMenu {
         }
         if (hadOrphans) return;
 
+        calloudStack.set(ModDataComponents.CALLOUD_CONTENTS.get(), contents());
+    }
+
+    public ModDataComponents.CalloudData contents() {
         List<ModDataComponents.CharcoalData> charcoals = new ArrayList<>();
         List<ModDataComponents.CharcoalData> stackedCharcoals = new ArrayList<>();
         for (int i = 0; i < BASE_SLOTS; i++) {
@@ -222,8 +226,7 @@ public class CalloudMenu extends AbstractContainerMenu {
                 stackedCharcoals.add(data);
             }
         }
-
-        calloudStack.set(ModDataComponents.CALLOUD_CONTENTS.get(), new ModDataComponents.CalloudData(charcoals, stackedCharcoals));
+        return new ModDataComponents.CalloudData(charcoals, stackedCharcoals);
     }
 
     private static CharcoalItem getCharcoalItemForSize(ModDataComponents.CharcoalSize size) {

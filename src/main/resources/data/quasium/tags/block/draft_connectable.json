@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "quasium:note_jar",
+    "quasium:smoke_sorter",
+    "quasium:bellows",
+    "quasium:auto_distiller",
+    "quasium:smoke_boiler",
+    "quasium:quasium_fan",
+    "quasium:essence_pump",
+    "quasium:flask_charger",
+    "quasium:ventilation",
+    "quasium:pneumatic_hammer",
+    "quasium:smoke_cannon",
+    "quasium:ritual_brazier"
+  ]
+}

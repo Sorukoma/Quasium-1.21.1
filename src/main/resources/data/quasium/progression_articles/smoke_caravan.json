@@ -1,0 +1,14 @@
+{
+  "title": "quasium.progression.smoke_caravan.title",
+  "hint": "quasium.progression.smoke_caravan.hint",
+  "category": "start",
+  "order": 120,
+  "icon": "quasium:smoke_caravan_spawn_egg",
+  "unlockCondition": "quasium:progression/self_mixed_obtained",
+  "scene": "quasium:smoke_caravan",
+  "pages": [
+    {"text": "quasium.progression.smoke_caravan.page1", "args": ["CARAVAN_DAILY_CHANCE_PCT", "CARAVAN_STAY_MINUTES"]},
+    {"text": "quasium.progression.smoke_caravan.page2", "items": ["minecraft:apple", "minecraft:sugar", "minecraft:cocoa_beans", "minecraft:pink_petals", "minecraft:honeycomb", "minecraft:nether_wart"], "args": ["CARAVAN_DAILY_FLAVORS", "CARAVAN_FLAVOR_PRICE", "CARAVAN_FLAVOR_MAX_USES", "CARAVAN_TOBACCO_OFFERS", "CARAVAN_TOBACCO_MAX_USES"]},
+    {"text": "quasium.progression.smoke_caravan.page3", "items": ["quasium:self_mixed_tobacco", "minecraft:emerald"], "args": ["CARAVAN_SELF_MIX_MIN_STARS", "CARAVAN_SELF_MIX_MIN_GRAMS", "CARAVAN_SELF_MIX_PRICE"]}
+  ]
+}

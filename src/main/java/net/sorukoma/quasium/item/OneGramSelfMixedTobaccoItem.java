@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.selection.quality.LeafQuality;
 import net.minecraft.ChatFormatting;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class OneGramSelfMixedTobaccoItem extends Item {
             String base = pStack.get(ModDataComponents.TOBACCO_BASE.get());
             pTooltipComponents.add(Component.translatable("quasium.tooltip.tobacco_base", Component.translatable("quasium.base." + base)).withStyle(ChatFormatting.GOLD));
         }
+
+        LeafQuality.appendTooltip(pStack, pTooltipComponents);
 
         // Крепость
         if (pStack.has(ModDataComponents.TOBACCO_DAMAGE.get())) {

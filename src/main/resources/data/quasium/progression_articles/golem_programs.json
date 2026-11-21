@@ -1,0 +1,23 @@
+{
+  "title": "quasium.progression.golem_programs.title",
+  "hint": "quasium.progression.golem_programs.hint",
+  "category": "golems",
+  "order": 90,
+  "icon": "quasium:program_table",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:golem_programs",
+  "pages": [
+    {"text": "quasium.progression.golem_programs.page1", "recipe": "quasium:place_marker"},
+    {"text": "quasium.progression.golem_programs.page2", "recipe": "quasium:program_table", "args": ["GOLEM_MARK_RADIUS"]},
+    {"text": "quasium.progression.golem_programs.page3"},
+    {"text": "quasium.progression.golem_programs.page4", "items": ["minecraft:iron_pickaxe", "minecraft:chest"]},
+    {"text": "quasium.progression.golem_programs.page5"},
+    {"text": "quasium.progression.golem_programs.page6"},
+    {"text": "quasium.progression.golem_programs.page7"},
+    {"text": "quasium.progression.golem_programs.page8", "args": ["PROGRAM_MAX_BLOCKS", "PROGRAM_MAX_NESTING"]},
+    {"text": "quasium.progression.golem_programs.page9", "recipe": "quasium:program_card"},
+    {"text": "quasium.progression.golem_programs.page10", "items": ["quasium:golem_staff"]},
+    {"text": "quasium.progression.golem_programs.page11"},
+    {"text": "quasium.progression.golem_programs.page12", "args": ["GOLEM_JOB_COST_PCT"]}
+  ]
+}

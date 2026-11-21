@@ -1,0 +1,19 @@
+{
+  "title": "quasium.progression.draft.title",
+  "hint": "quasium.progression.draft.hint",
+  "category": "draft",
+  "order": 10,
+  "icon": "quasium:copper_pipe",
+  "unlockCondition": "quasium:smokecraft/first_distill",
+  "scene": "quasium:draft_network",
+  "pages": [
+    {"text": "quasium.progression.draft.page1", "args": ["DRAFT_BUFFER_PER_PIPE"]},
+    {"text": "quasium.progression.draft.page2", "recipe": "quasium:bellows", "args": ["BELLOWS_PULSE_DRAFT", "BELLOWS_REDSTONE_DRAFT"]},
+    {"text": "quasium.progression.draft.page3", "recipe": "quasium:clay_pipe"},
+    {"text": "quasium.progression.draft.page4", "recipe": "quasium:copper_pipe"},
+    {"text": "quasium.progression.draft.page5", "recipe": "quasium:glass_pipe"},
+    {"text": "quasium.progression.draft.page6", "items": ["quasium:kaifometer"]},
+    {"text": "quasium.progression.draft.page7", "recipe": "quasium:smoke_valve"},
+    {"text": "quasium.progression.draft.page10", "recipe": "quasium:smoke_splitter"}
+  ]
+}

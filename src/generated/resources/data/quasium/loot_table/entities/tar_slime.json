@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "quasium:essence_type": "resin"
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "components": {
+                "quasium:essence_amount": 2
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "quasium:essence_bottle"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "quasium:entities/tar_slime"
+}

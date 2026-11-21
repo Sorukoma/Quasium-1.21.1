@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:mind/dream",
+  "criteria": {
+    "nightmare": {
+      "conditions": {
+        "event": "nightmare"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.nightmare.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:wither_rose"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.nightmare.title"
+    }
+  },
+  "requirements": [
+    [
+      "nightmare"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

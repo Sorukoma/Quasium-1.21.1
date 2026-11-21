@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.hybrids.title",
+  "hint": "quasium.progression.hybrids.hint",
+  "category": "start",
+  "order": 30,
+  "icon": "quasium:diamond_tobacco_pole",
+  "unlockCondition": "quasium:progression/found_seeds",
+  "scene": "quasium:selection",
+  "pages": [
+    {"text": "quasium.progression.hybrids.page1", "recipe": "quasium:wooden_tobacco_pole"},
+    {"text": "quasium.progression.hybrids.page2", "recipe": "quasium:reinforced_tobacco_pole", "args": ["MUTATION_QUALITY_BONUS_PCT"]},
+    {"text": "quasium.progression.hybrids.page3", "recipe": "quasium:golden_tobacco_pole"},
+    {"text": "quasium.progression.hybrids.page4", "recipe": "quasium:diamond_tobacco_pole"}
+  ]
+}

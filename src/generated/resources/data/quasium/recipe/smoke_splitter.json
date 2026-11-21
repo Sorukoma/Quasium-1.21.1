@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "quasium:copper_pipe"
+    },
+    {
+      "item": "quasium:copper_pipe"
+    },
+    {
+      "item": "quasium:copper_pipe"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:smoke_splitter"
+  }
+}

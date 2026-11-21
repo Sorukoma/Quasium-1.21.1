@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:mind/dream",
+  "criteria": {
+    "lucid_choice": {
+      "conditions": {
+        "event": "lucid_choice"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.lucid.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:ender_eye"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.lucid.title"
+    }
+  },
+  "requirements": [
+    [
+      "lucid_choice"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

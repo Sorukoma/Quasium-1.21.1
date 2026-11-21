@@ -1,0 +1,144 @@
+{
+  "items": [
+    "quasium:wisp_flute",
+    "quasium:draft_wisp_spawn_egg"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "minecraft:honey_bottle",
+          "pos": [
+            2.0,
+            1.2,
+            2.5
+          ]
+        },
+        {
+          "item": "quasium:wisp_flute",
+          "pos": [
+            3.0,
+            1.2,
+            2.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:ash_sand",
+          "pos": [
+            2,
+            0,
+            1
+          ]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:wisp_flute",
+          "pos": [
+            2.5,
+            1.8,
+            2.5
+          ]
+        }
+      ],
+      "args": [
+        "WISP_LIGHT"
+      ]
+    },
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:deepslate_quasium_ore",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:deepslate_quasium_ore",
+          "pos": [
+            4,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:deepslate_quasium_ore",
+          "pos": [
+            1,
+            0,
+            4
+          ]
+        },
+        {
+          "state": "quasium:deepslate_quasium_ore",
+          "pos": [
+            4,
+            0,
+            4
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          4
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:wisp_flute",
+          "pos": [
+            2.5,
+            1.8,
+            2.5
+          ]
+        }
+      ],
+      "args": [
+        "WISP_ORE_GLOW_RADIUS"
+      ]
+    }
+  ]
+}

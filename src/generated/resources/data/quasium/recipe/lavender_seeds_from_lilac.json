@@ -4,6 +4,9 @@
   "ingredients": [
     {
       "item": "minecraft:lilac"
+    },
+    {
+      "item": "minecraft:bone_meal"
     }
   ],
   "result": {

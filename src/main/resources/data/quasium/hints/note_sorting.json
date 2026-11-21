@@ -1,0 +1,49 @@
+{
+  "items": [
+    "quasium:note_filter",
+    "quasium:smoke_sorter"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 190,
+      "place": [
+        {
+          "state": "quasium:bellows[facing=east]",
+          "pos": [0, 0, 1]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true]",
+          "pos": [1, 0, 1]
+        },
+        {
+          "state": "quasium:note_filter[west=true,east=true]",
+          "pos": [2, 0, 1]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [3, 0, 1]
+        }
+      ],
+      "highlight": [
+        [2, 0, 1]
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:copper_pipe[west=true,east=true,south=true]",
+          "pos": [1, 0, 1]
+        },
+        {
+          "state": "quasium:smoke_sorter",
+          "pos": [1, 0, 2]
+        }
+      ],
+      "highlight": [
+        [1, 0, 2]
+      ]
+    }
+  ]
+}

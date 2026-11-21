@@ -1,0 +1,31 @@
+{
+  "title": "quasium.progression.insight_mastery.title",
+  "hint": "quasium.progression.insight_mastery.hint",
+  "category": "kaif",
+  "order": 50,
+  "icon": "minecraft:glowstone_dust",
+  "unlockCondition": "quasium:kaif/kaif_level_30",
+  "pages": [
+    {
+      "text": "quasium.progression.insight_mastery.page1",
+      "args": [
+        "INSIGHT_DRIP_KAIF",
+        "INSIGHT_DRIP_SECONDS",
+        "INSIGHT_CAP"
+      ]
+    },
+    {
+      "text": "quasium.progression.insight_mastery.page2"
+    },
+    {
+      "text": "quasium.progression.insight_mastery.page3",
+      "args": [
+        "ENLIGHTENMENT_HOLD_SECONDS",
+        "ENLIGHTENMENT_RADIUS",
+        "ENLIGHTENMENT_GLOW_SECONDS",
+        "ENLIGHTENMENT_INSIGHT",
+        "ENLIGHTENMENT_COOLDOWN_TICKS"
+      ]
+    }
+  ]
+}

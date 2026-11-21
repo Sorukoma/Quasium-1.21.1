@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:ritual/brazier",
+  "criteria": {
+    "ritual_failed": {
+      "conditions": {
+        "event": "ritual_failed"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.failed.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:gunpowder"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.failed.title"
+    }
+  },
+  "requirements": [
+    [
+      "ritual_failed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

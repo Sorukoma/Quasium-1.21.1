@@ -1,0 +1,124 @@
+{
+  "floor": 7,
+  "steps": [
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:samovar[facing=south,lit=true]",
+          "pos": [
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [
+            5,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [
+            1,
+            0,
+            5
+          ]
+        },
+        {
+          "state": "quasium:lounge_cushion",
+          "pos": [
+            5,
+            0,
+            5
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          5,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          5
+        ],
+        [
+          5,
+          0,
+          5
+        ]
+      ],
+      "args": [
+        "TEA_PARTY_CUSHIONS",
+        "TEA_PARTY_RADIUS"
+      ]
+    },
+    {
+      "duration": 160,
+      "highlight": [
+        [
+          3,
+          0,
+          3
+        ]
+      ],
+      "icons": [
+        {
+          "item": "quasium:teapot",
+          "pos": [
+            3.5,
+            1.9,
+            3.5
+          ]
+        }
+      ],
+      "args": [
+        "TEA_PARTY_MINUTES"
+      ]
+    },
+    {
+      "duration": 200,
+      "icons": [
+        {
+          "item": "quasium:cup_of_tea",
+          "pos": [
+            2.5,
+            1.6,
+            3.5
+          ]
+        },
+        {
+          "item": "minecraft:gray_dye",
+          "pos": [
+            4.5,
+            1.6,
+            3.5
+          ]
+        }
+      ],
+      "args": [
+        "TEA_PARTY_KAIF_PER_MINUTE",
+        "TEA_PARTY_SMOG_CLEANSE"
+      ]
+    }
+  ]
+}

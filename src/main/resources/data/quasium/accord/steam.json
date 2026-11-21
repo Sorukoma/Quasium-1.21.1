@@ -1,0 +1,9 @@
+{
+  "first": "ember",
+  "second": "dew",
+  "color": "#E8E8E8",
+  "params": {
+    "damage": 2,
+    "blind_seconds": 1
+  }
+}

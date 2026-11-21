@@ -1,0 +1,134 @@
+{
+  "items": [
+    "quasium:dikar_seeds",
+    "quasium:peschanik_seeds",
+    "quasium:bolotnik_seeds",
+    "quasium:ledyanoy_seeds",
+    "quasium:hybrid_tobacco_seeds",
+    "quasium:wooden_tobacco_pole",
+    "quasium:reinforced_tobacco_pole",
+    "quasium:golden_tobacco_pole",
+    "quasium:diamond_tobacco_pole"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [3, 0, 2]
+        },
+        {
+          "state": "quasium:dikar_crop[age=0]",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "quasium:peschanik_crop[age=0]",
+          "pos": [3, 1, 2]
+        }
+      ],
+      "highlight": [
+        [1, 1, 2],
+        [3, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:dikar_seeds",
+          "pos": [1.5, 1.9, 2.5]
+        },
+        {
+          "item": "quasium:peschanik_seeds",
+          "pos": [3.5, 1.9, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 100,
+      "place": [
+        {
+          "state": "quasium:dikar_crop[age=2]",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "quasium:peschanik_crop[age=2]",
+          "pos": [3, 1, 2]
+        }
+      ],
+      "icons": [
+        {
+          "item": "minecraft:water_bucket",
+          "pos": [1.5, 2.2, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:dikar_crop[age=4]",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "quasium:peschanik_crop[age=4]",
+          "pos": [3, 1, 2]
+        }
+      ],
+      "highlight": [
+        [1, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:shears",
+          "pos": [1.5, 2.4, 2.5]
+        },
+        {
+          "item": "quasium:dikar_leaves",
+          "pos": [1.5, 1.6, 3.4]
+        }
+      ]
+    },
+    {
+      "duration": 140,
+      "place": [
+        {
+          "state": "quasium:wooden_tobacco_pole",
+          "pos": [2, 1, 2]
+        }
+      ],
+      "highlight": [
+        [2, 1, 2]
+      ]
+    },
+    {
+      "duration": 210,
+      "place": [
+        {
+          "state": "quasium:dikar_crop[age=3]",
+          "pos": [1, 1, 2]
+        },
+        {
+          "state": "quasium:peschanik_crop[age=3]",
+          "pos": [3, 1, 2]
+        }
+      ],
+      "highlight": [
+        [2, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "quasium:hybrid_tobacco_seeds",
+          "pos": [2.5, 2.4, 2.5]
+        }
+      ]
+    }
+  ]
+}

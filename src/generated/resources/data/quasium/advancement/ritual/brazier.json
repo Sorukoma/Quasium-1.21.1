@@ -1,0 +1,51 @@
+{
+  "parent": "quasium:smokecraft/zone_1",
+  "criteria": {
+    "has_brazier": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:ritual_brazier"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_quasium_anvil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:quasium_anvil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "zone_2": {
+      "conditions": {
+        "event": "zone_2"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.brazier.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:ritual_brazier"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.brazier.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_quasium_anvil",
+      "zone_2",
+      "has_brazier"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

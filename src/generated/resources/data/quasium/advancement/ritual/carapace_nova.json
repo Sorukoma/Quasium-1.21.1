@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:ritual/first_ritual",
+  "criteria": {
+    "carapace_nova": {
+      "conditions": {
+        "event": "carapace_nova"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.ritual.carapace_nova.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:chainmail_chestplate"
+    },
+    "title": {
+      "translate": "advancements.quasium.ritual.carapace_nova.title"
+    }
+  },
+  "requirements": [
+    [
+      "carapace_nova"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

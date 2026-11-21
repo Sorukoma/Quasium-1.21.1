@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:mind/kaif_coma",
+  "criteria": {
+    "ghost_deal": {
+      "conditions": {
+        "event": "ghost_deal"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.mind.ghost_deal.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:emerald"
+    },
+    "title": {
+      "translate": "advancements.quasium.mind.ghost_deal.title"
+    }
+  },
+  "requirements": [
+    [
+      "ghost_deal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

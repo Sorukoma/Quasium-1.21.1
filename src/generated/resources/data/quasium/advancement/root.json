@@ -6,7 +6,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "quasium:textures/item/progression_book.png",
+    "background": "quasium:textures/gui/advancements/backgrounds/quasium.png",
     "description": {
       "translate": "advancements.quasium.root.description"
     },

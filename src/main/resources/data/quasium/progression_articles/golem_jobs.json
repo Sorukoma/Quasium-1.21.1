@@ -1,0 +1,18 @@
+{
+  "title": "quasium.progression.golem_jobs.title",
+  "hint": "quasium.progression.golem_jobs.hint",
+  "category": "golems",
+  "order": 80,
+  "icon": "quasium:zone_mark",
+  "unlockCondition": "quasium:progression/obtained_anvil",
+  "scene": "quasium:golem_jobs",
+  "pages": [
+    {"text": "quasium.progression.golem_jobs.page1", "recipe": "quasium:zone_mark"},
+    {"text": "quasium.progression.golem_jobs.page2", "items": ["minecraft:iron_axe", "minecraft:iron_sword", "minecraft:shears"]},
+    {"text": "quasium.progression.golem_jobs.page3"},
+    {"text": "quasium.progression.golem_jobs.page4"},
+    {"text": "quasium.progression.golem_jobs.page5"},
+    {"text": "quasium.progression.golem_jobs.page6"},
+    {"text": "quasium.progression.golem_jobs.page7", "anvil": "quasium:toolkeeper_module"}
+  ]
+}

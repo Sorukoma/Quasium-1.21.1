@@ -1,0 +1,12 @@
+{
+  "note": "ash",
+  "volume": 20,
+  "cooldown": 4,
+  "target": "foe",
+  "params": {
+    "weakness_seconds": 8,
+    "armor_wear": 10
+  },
+  "unlock": "research:quasium:research_notes_overtones",
+  "order": 18
+}

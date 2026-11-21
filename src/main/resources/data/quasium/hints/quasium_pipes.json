@@ -1,0 +1,46 @@
+{
+  "items": [
+    "quasium:quasium_fan",
+    "quasium:quasium_pipe"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:quasium_fan[facing=east,running=true]",
+          "pos": [0, 0, 2]
+        }
+      ],
+      "highlight": [
+        [0, 0, 2]
+      ],
+      "args": [
+        "FAN_DRAFT"
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:quasium_pipe[west=true,east=true]",
+          "pos": [1, 0, 2]
+        },
+        {
+          "state": "quasium:quasium_pipe[west=true,east=true]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "quasium:quasium_pipe[west=true]",
+          "pos": [3, 0, 2]
+        }
+      ],
+      "highlight": [
+        [1, 0, 2],
+        [2, 0, 2],
+        [3, 0, 2]
+      ]
+    }
+  ]
+}

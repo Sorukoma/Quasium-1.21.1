@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "quasium:quasium_helmet",
+    "quasium:quasium_chestplate",
+    "quasium:quasium_leggings",
+    "quasium:quasium_boots"
+  ]
+}

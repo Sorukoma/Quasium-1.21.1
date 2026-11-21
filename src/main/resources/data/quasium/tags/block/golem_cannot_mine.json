@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "quasium:deepslate_quasium_ore",
+    "quasium:quasium_cluster",
+    "quasium:budding_quasium",
+    "quasium:budding_dream_quartz",
+    "minecraft:budding_amethyst"
+  ]
+}

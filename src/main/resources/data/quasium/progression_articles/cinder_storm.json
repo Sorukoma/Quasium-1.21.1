@@ -1,0 +1,11 @@
+{
+  "title": "quasium.progression.cinder_storm.title",
+  "hint": "quasium.progression.cinder_storm.hint",
+  "category": "quasium",
+  "order": 130,
+  "icon": "quasium:ash_cactus",
+  "unlockCondition": "quasium:smokelands/root",
+  "pages": [
+    {"text": "quasium.progression.cinder_storm.page1", "args": ["STORM_CALM_MIN_SECONDS", "STORM_CALM_MAX_SECONDS", "STORM_SECONDS", "STORM_VISIBILITY_CUT_PCT", "STORM_CAST_MISS_PCT", "DYMNIKS_PER_PLAYER", "STORM_DYMNIK_MULTIPLIER"]}
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "cast": {
+      "conditions": {
+        "event": "cast"
+      },
+      "trigger": "quasium:smokecraft"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:mixing_table"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "cast"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:mixing_table"
+    ]
+  }
+}

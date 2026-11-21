@@ -1,0 +1,14 @@
+{
+  "title": "quasium.progression.smoke_ruins.title",
+  "hint": "quasium.progression.smoke_ruins.hint",
+  "category": "quasium",
+  "order": 170,
+  "icon": "quasium:ancient_flask",
+  "unlockCondition": "quasium:smokelands/root",
+  "scene": "quasium:smoke_ruins",
+  "pages": [
+    {"text": "quasium.progression.smoke_ruins.page1", "items": ["quasium:ash_bricks", "quasium:cracked_ash_bricks", "quasium:ancient_flask"]},
+    {"text": "quasium.progression.smoke_ruins.page2", "items": ["quasium:kaifometer"], "args": ["PERCEPTION_RUINS", "RUINS_SIGHT_RADIUS"]},
+    {"text": "quasium.progression.smoke_ruins.page3", "items": ["quasium:lore_page", "quasium:music_disc_ash_lofi", "minecraft:map"]}
+  ]
+}

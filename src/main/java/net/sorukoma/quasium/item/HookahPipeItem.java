@@ -19,14 +19,32 @@ import net.sorukoma.quasium.network.PacketStartPuffing;
 import net.sorukoma.quasium.network.PacketStopPuffing;
 import net.sorukoma.quasium.network.PacketStartPuffingBackpack;
 import net.sorukoma.quasium.network.PacketStopPuffingBackpack;
+import net.sorukoma.quasium.cart.CartPipePacket;
+import net.sorukoma.quasium.client.CartClient;
 import net.sorukoma.quasium.client.ClientHookahInputHandler;
 import net.sorukoma.quasium.component.ModDataComponents;
+import net.sorukoma.quasium.magic.SmokeCasting;
 
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 public class HookahPipeItem extends Item {
     private static final Logger LOGGER = LogUtils.getLogger();
+
+    public static boolean holdsPipe(Player player) {
+        return player.getMainHandItem().is(ModItems.HOOKAH_PIPE.get()) || player.getOffhandItem().is(ModItems.HOOKAH_PIPE.get());
+    }
+
+    public static boolean carriesPipe(Player player) {
+        return player.getInventory().contains(stack -> stack.is(ModItems.HOOKAH_PIPE.get()))
+                || player.containerMenu.getCarried().is(ModItems.HOOKAH_PIPE.get());
+    }
+
+    public static boolean coolingDown(Player player) {
+        ItemStack pipe = player.getMainHandItem().is(ModItems.HOOKAH_PIPE.get()) ? player.getMainHandItem() : player.getOffhandItem();
+        Long end = pipe.get(ModDataComponents.HOOKAH_PIPE_COOLDOWN_END.get());
+        return end != null && player.level().getGameTime() < end || !SmokeCasting.breathReady(player);
+    }
 
     public HookahPipeItem(Properties pProperties) {
         super(pProperties);
@@ -56,38 +74,33 @@ public class HookahPipeItem extends Item {
             Vec3 endVector = eyePosition.add(viewVector.scale(pPlayer.blockInteractionRange()));
             HitResult hitResult = pLevel.clip(new ClipContext(eyePosition, endVector, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, pPlayer));
 
-            boolean isShiftKeyDown = pPlayer.isShiftKeyDown();
-            boolean isLookingAtHookahBlock = false;
-
-            if (hitResult.getType() == HitResult.Type.BLOCK) {
-                BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-                isLookingAtHookahBlock = pLevel.getBlockEntity(blockHitResult.getBlockPos())
-                        instanceof net.sorukoma.quasium.block.entity.HookahBlockEntity;
-            }
-
-            // Если игрок держит трубку, смотрит на блок кальяна и нажимает Shift,
-            // это попытка присоединить трубку. Затяжка НЕ должна начинаться.
-            // ClientHookahInputHandler должен обработать фактический пакет присоединения.
-            if (isLookingAtHookahBlock && isShiftKeyDown) {
+            if (hitResult instanceof BlockHitResult blockHit && hitResult.getType() == HitResult.Type.BLOCK
+                    && pLevel.getBlockEntity(blockHit.getBlockPos()) instanceof net.sorukoma.quasium.block.entity.HookahBlockEntity
+                    && !blockHit.getBlockPos().equals(ClientHookahInputHandler.getConnectedHookahPos())) {
                 return InteractionResultHolder.pass(itemstack);
             }
 
-            // Если игрок кликает ПКМ по блоку кальяна, держа трубку, и НЕ нажимает Shift,
-            // то мы пропускаем использование предмета, чтобы блок кальяна мог обработать свой интерактив (например, открыть GUI).
-            // В этом случае затяжка НЕ должна начинаться.
-            if (isLookingAtHookahBlock && !isShiftKeyDown) {
-                return InteractionResultHolder.pass(itemstack); // Позволяем блоку кальяна обработать свой интерактив
+            if (!net.sorukoma.quasium.client.RingTiming.breathReady(pLevel)) {
+                return InteractionResultHolder.fail(itemstack);
             }
 
-            // Начинаем использовать предмет (затяжку) только если игрок подключен к кальяну
-            // и не сработали предыдущие условия (т.е. не клик по кальяну без Shift и не Shift+ПКМ для присоединения)
             if (ClientHookahInputHandler.getConnectedHookahPos() != null) {
                 pPlayer.startUsingItem(pUsedHand);
                 PacketDistributor.sendToServer(new PacketStartPuffing(ClientHookahInputHandler.getConnectedHookahPos()));
+                net.sorukoma.quasium.client.PuffSoundPlayer.start(pPlayer);
+                net.sorukoma.quasium.client.RingTiming.pullStarted();
                 return InteractionResultHolder.consume(itemstack);
             } else if (ClientHookahInputHandler.isConnectedToBackpack()) {
                 pPlayer.startUsingItem(pUsedHand);
                 PacketDistributor.sendToServer(new PacketStartPuffingBackpack());
+                net.sorukoma.quasium.client.PuffSoundPlayer.start(pPlayer);
+                net.sorukoma.quasium.client.RingTiming.pullStarted();
+                return InteractionResultHolder.consume(itemstack);
+            } else if (CartClient.connectedCart() >= 0) {
+                pPlayer.startUsingItem(pUsedHand);
+                PacketDistributor.sendToServer(new CartPipePacket(CartClient.connectedCart(), true));
+                net.sorukoma.quasium.client.PuffSoundPlayer.start(pPlayer);
+                net.sorukoma.quasium.client.RingTiming.pullStarted();
                 return InteractionResultHolder.consume(itemstack);
             }
         }
@@ -113,11 +126,15 @@ public class HookahPipeItem extends Item {
     @Override
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
         if (pLevel.isClientSide() && pLivingEntity instanceof Player) {
+            net.sorukoma.quasium.client.PuffSoundPlayer.stop();
+            net.sorukoma.quasium.client.RingTiming.pullReleased((Player) pLivingEntity);
             BlockPos connectedPos = ClientHookahInputHandler.getConnectedHookahPos();
             if (connectedPos != null) {
                 PacketDistributor.sendToServer(new PacketStopPuffing(connectedPos));
             } else if (ClientHookahInputHandler.isConnectedToBackpack()) {
                 PacketDistributor.sendToServer(new PacketStopPuffingBackpack());
+            } else if (CartClient.connectedCart() >= 0) {
+                PacketDistributor.sendToServer(new CartPipePacket(CartClient.connectedCart(), false));
             }
         }
     }

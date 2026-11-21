@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_quasium_ingot": {
+    "has_raw_quasium": {
       "conditions": {
         "items": [
           {
-            "items": "quasium:quasiumingot"
+            "items": "quasium:rawquasium"
           }
         ]
       },
@@ -16,12 +16,23 @@
         "recipe": "quasium:undried_quasium_block_from_quasium_ingots"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "smelted_quasium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "quasium:quasiumingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_quasium_ingot"
+      "has_raw_quasium",
+      "smelted_quasium"
     ]
   ],
   "rewards": {

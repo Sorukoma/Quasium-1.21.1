@@ -1,0 +1,14 @@
+{
+  "title": "quasium.progression.hookah_minecart.title",
+  "hint": "quasium.progression.hookah_minecart.hint",
+  "category": "hookah",
+  "order": 80,
+  "icon": "quasium:hookah_minecart",
+  "unlockCondition": "quasium:hookah/opened_gui",
+  "scene": "quasium:mobile_hookahs",
+  "pages": [
+    {"text": "quasium.progression.hookah_minecart.page1", "recipe": "quasium:hookah_minecart"},
+    {"text": "quasium.progression.hookah_minecart.page2"},
+    {"text": "quasium.progression.hookah_minecart.page3"}
+  ]
+}

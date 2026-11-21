@@ -1,0 +1,98 @@
+{
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "minecraft:farmland[moisture=7]",
+          "pos": [2, 0, 2]
+        },
+        {
+          "state": "quasium:bolotnik_crop[age=4]",
+          "pos": [2, 1, 2]
+        }
+      ],
+      "highlight": [
+        [2, 1, 2]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:shears",
+          "pos": [2.5, 2.3, 2.5]
+        }
+      ],
+      "args": [
+        "EXACT_MATURE_WINDOW_SECONDS"
+      ]
+    },
+    {
+      "duration": 150,
+      "highlight": [
+        [2, 0, 2]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:water_bucket",
+          "pos": [1.5, 1.3, 2.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "minecraft:beehive[facing=north,honey_level=5]",
+          "pos": [4, 0, 1]
+        }
+      ],
+      "highlight": [
+        [4, 0, 1]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:honey_bottle",
+          "pos": [4.5, 1.5, 1.5]
+        }
+      ],
+      "args": [
+        "HIVE_RADIUS"
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:fermentation_barrel",
+          "pos": [0, 0, 3]
+        }
+      ],
+      "highlight": [
+        [0, 0, 3]
+      ],
+      "icons": [
+        {
+          "item": "quasium:bolotnik_leaves",
+          "pos": [0.5, 1.6, 3.5]
+        }
+      ]
+    },
+    {
+      "duration": 190,
+      "icons": [
+        {
+          "item": "quasium:self_mixed_tobacco",
+          "pos": [2.1, 2.3, 2.5]
+        },
+        {
+          "item": "quasium:distillation_cube",
+          "pos": [2.9, 2.3, 2.5]
+        }
+      ],
+      "args": [
+        "KAIF_MULTIPLIER_PCT",
+        "DISTILL_BONUS_ML"
+      ]
+    }
+  ]
+}

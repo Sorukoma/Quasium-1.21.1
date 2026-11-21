@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "quasium:smoke_boiler"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "researched": {
+      "conditions": {
+        "event": "research:research_draft_boiler"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "researched"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "quasium:smoke_boiler"
+    ]
+  }
+}

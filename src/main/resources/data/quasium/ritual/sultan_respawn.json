@@ -1,0 +1,30 @@
+{
+  "tier": 3,
+  "catalyst": {
+    "item": "quasium:ash_of_time"
+  },
+  "pedestals": [
+    {
+      "item": "quasium:petrified_smoke"
+    },
+    {
+      "item": "quasium:petrified_smoke"
+    },
+    {
+      "item": "quasium:petrified_smoke"
+    },
+    {
+      "item": "quasium:petrified_smoke"
+    }
+  ],
+  "notes": {
+    "ash": 64,
+    "ember": 32
+  },
+  "puffs": 800,
+  "rate": 128,
+  "kaif": {
+    "min": 60
+  },
+  "base": 25
+}

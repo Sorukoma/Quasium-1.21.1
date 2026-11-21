@@ -1,0 +1,25 @@
+{
+  "title": "quasium.progression.withdrawal.title",
+  "hint": "quasium.progression.withdrawal.hint",
+  "category": "kaif",
+  "order": 65,
+  "icon": "minecraft:bow",
+  "unlockCondition": "quasium:progression/obtained_kaifometer",
+  "pages": [
+    {
+      "text": "quasium.progression.withdrawal.page1",
+      "args": [
+        "WITHDRAWAL_SHAKE_KAIF"
+      ]
+    },
+    {
+      "text": "quasium.progression.withdrawal.page2",
+      "args": [
+        "WITHDRAWAL_FATIGUE_KAIF"
+      ]
+    },
+    {
+      "text": "quasium.progression.withdrawal.page3"
+    }
+  ]
+}

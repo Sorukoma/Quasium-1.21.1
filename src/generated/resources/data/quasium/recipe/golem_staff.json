@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "Q": {
+      "item": "quasium:quasiumingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "  Q",
+    " S ",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:golem_staff"
+  }
+}

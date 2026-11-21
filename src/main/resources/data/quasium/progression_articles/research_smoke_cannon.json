@@ -1,0 +1,37 @@
+{
+  "title": "quasium.research.research_smoke_cannon.title",
+  "hint": "quasium.research.research_smoke_cannon.hint",
+  "category": "research_smoke",
+  "order": 30,
+  "icon": "quasium:smoke_cannon",
+  "scene": "quasium:smoke_cannon",
+  "research": {
+    "tier": 3,
+    "notes": [
+      "ember",
+      "ash"
+    ],
+    "kaif": 40,
+    "recipes": [
+      "quasium:smoke_cannon"
+    ],
+    "requires": [
+      "quasium:research_smoke_rings"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_smoke_cannon.page1",
+      "recipe": "quasium:smoke_cannon",
+      "args": [
+        "CANNON_RANGE",
+        "CANNON_DAMAGE",
+        "CANNON_POISON_SECONDS",
+        "CANNON_DRAFT_PER_SHOT",
+        "CANNON_ASH_PER_SHOT",
+        "CANNON_TANK_ML",
+        "CANNON_DENSITY_PER_SHOT"
+      ]
+    }
+  ]
+}

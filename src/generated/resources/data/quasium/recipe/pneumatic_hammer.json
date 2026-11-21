@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "quasium:copper_pipe"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "Q": {
+      "item": "quasium:quasiumingot"
+    }
+  },
+  "pattern": [
+    "C ",
+    "PQ",
+    "I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "quasium:pneumatic_hammer"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "parent": "quasium:smokecraft/mark_place",
+  "criteria": {
+    "warden_kill": {
+      "conditions": {
+        "event": "warden_kill"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.warden_kill.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:zombie_head"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.warden_kill.title"
+    }
+  },
+  "requirements": [
+    [
+      "warden_kill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

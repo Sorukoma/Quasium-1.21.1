@@ -1,0 +1,21 @@
+{
+  "form": "cloud",
+  "inputs": [
+    {
+      "delirium": 1
+    }
+  ],
+  "hidden": true,
+  "lungs": 100,
+  "grams": 0.8,
+  "cooldown": 30,
+  "action": "delirium",
+  "color": "#C050A0",
+  "params": {
+    "throw": 10,
+    "radius": 4,
+    "duration": 8,
+    "trip_seconds": 20,
+    "self_grams": 3
+  }
+}

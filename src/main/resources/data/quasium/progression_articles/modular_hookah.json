@@ -1,0 +1,15 @@
+{
+  "title": "quasium.progression.modular_hookah.title",
+  "hint": "quasium.progression.modular_hookah.hint",
+  "category": "hookah",
+  "order": 60,
+  "icon": "quasium:modular_hookah_amber",
+  "unlockCondition": "quasium:hookah/opened_gui",
+  "scene": "quasium:modular_hookah",
+  "pages": [
+    {"text": "quasium.progression.modular_hookah.page1", "recipe": "quasium:modular_hookah_amber"},
+    {"text": "quasium.progression.modular_hookah.page2", "recipe": "quasium:modular_shaft_amber"},
+    {"text": "quasium.progression.modular_hookah.page3", "items": ["quasium:modular_hookah_white", "quasium:modular_hookah_black", "quasium:modular_hookah_red", "quasium:modular_hookah_blue", "quasium:modular_hookah_amber", "quasium:modular_hookah_jade", "quasium:modular_hookah_violet", "quasium:modular_hookah_gold"]},
+    {"text": "quasium.progression.modular_hookah.page4"}
+  ]
+}

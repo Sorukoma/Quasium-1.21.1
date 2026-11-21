@@ -1,0 +1,7 @@
+// 1.21.1	2026-10-08T19:45:19.662728	Ritual brazier recipes
+84db09b74846625acf1e5e73d1cf970901ef1b9a data/quasium/advancement/recipes/misc/ritual_brazier.json
+79ba03712d8ad12f7f41ed58bbbb6cf697162540 data/quasium/advancement/recipes/misc/ritual_pedestal.json
+ffe7a180520e4a6933c7b49692430bc093bfe1c7 data/quasium/advancement/recipes/tools/signal_pipe.json
+24dcc61350e76e46a121fb2ae56008838dda1af2 data/quasium/recipe/ritual_brazier.json
+a67bfe1152d00f003fa6f328384f7f68f4a4bcf7 data/quasium/recipe/ritual_pedestal.json
+6ecdc21ba69c3934cae9412e2b66d0a9c9e4cbc2 data/quasium/recipe/signal_pipe.json

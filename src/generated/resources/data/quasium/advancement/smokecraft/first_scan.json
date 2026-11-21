@@ -1,0 +1,29 @@
+{
+  "parent": "quasium:root",
+  "criteria": {
+    "scan": {
+      "conditions": {
+        "event": "scan"
+      },
+      "trigger": "quasium:smokecraft"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.quasium.smokecraft.first_scan.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "quasium:kaifometer"
+    },
+    "title": {
+      "translate": "advancements.quasium.smokecraft.first_scan.title"
+    }
+  },
+  "requirements": [
+    [
+      "scan"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

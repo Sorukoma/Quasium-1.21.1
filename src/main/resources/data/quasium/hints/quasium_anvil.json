@@ -1,0 +1,74 @@
+{
+  "items": [
+    "quasium:quasium_anvil",
+    "quasium:netherite_hammer",
+    "quasium:quasium_block"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 130,
+      "place": [
+        {
+          "state": "quasium:quasium_anvil[facing=north]",
+          "pos": [1, 0, 1]
+        }
+      ],
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 150,
+      "highlight": [
+        [1, 0, 1]
+      ]
+    },
+    {
+      "duration": 130,
+      "icons": [
+        {
+          "item": "quasium:netherite_hammer",
+          "pos": [1.5, 1.8, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "icons": [
+        {
+          "item": "quasium:kaifometer",
+          "pos": [1.5, 1.8, 1.5]
+        }
+      ]
+    },
+    {
+      "duration": 180,
+      "place": [
+        {
+          "state": "quasium:pneumatic_hammer",
+          "pos": [1, 1, 1]
+        }
+      ],
+      "highlight": [
+        [1, 1, 1]
+      ]
+    },
+    {
+      "duration": 180,
+      "remove": [
+        [1, 1, 1]
+      ],
+      "icons": [
+        {
+          "item": "quasium:quasiumingot",
+          "pos": [1.5, 1.4, 1.5]
+        },
+        {
+          "item": "quasium:quasium_chestplate",
+          "pos": [1.5, 2.3, 1.5]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "title": "quasium.progression.spell_tetrad.title",
+  "hint": "quasium.progression.spell_tetrad.hint",
+  "category": "smokecraft",
+  "order": 22,
+  "icon": "quasium:spell_tetrad",
+  "unlockCondition": "quasium:smokecraft/first_scan",
+  "scene": "quasium:page_pyramid",
+  "pages": [
+    {
+      "text": "quasium.progression.spell_tetrad.page1",
+      "recipe": "quasium:spell_tetrad"
+    },
+    {
+      "text": "quasium.progression.spell_tetrad.page2"
+    },
+    {
+      "text": "quasium.progression.spell_tetrad.page3"
+    },
+    {
+      "text": "quasium.progression.spell_tetrad.page4"
+    },
+    {
+      "text": "quasium.progression.spell_tetrad.page5"
+    }
+  ]
+}

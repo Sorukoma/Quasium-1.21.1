@@ -11,6 +11,7 @@
               "Name": "quasium:dikar_crop",
               "Properties": {
                 "age": "0",
+                "aphids": "false",
                 "mutation": "0",
                 "watered": "false"
               }

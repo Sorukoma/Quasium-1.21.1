@@ -1,0 +1,242 @@
+{
+  "items": [
+    "quasium:spell_tetrad",
+    "quasium:large_spell_tetrad"
+  ],
+  "floor": 3,
+  "steps": [
+    {
+      "duration": 150,
+      "place": [
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "state": "quasium:ash_bricks",
+          "pos": [
+            2,
+            0,
+            2
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "duration": 170,
+      "place": [
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "state": "quasium:note_jar",
+          "pos": [
+            2,
+            1,
+            1
+          ]
+        }
+      ],
+      "icons": [
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            0.5,
+            2.3,
+            1.5
+          ]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            1.5,
+            2.3,
+            1.5
+          ]
+        },
+        {
+          "item": "quasium:essence_bottle",
+          "pos": [
+            2.5,
+            2.3,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:smoke_jar",
+          "pos": [
+            1,
+            2,
+            1
+          ]
+        }
+      ],
+      "highlight": [
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "icons": [
+        {
+          "item": "minecraft:glowstone_dust",
+          "pos": [
+            0.7,
+            3.4,
+            1.5
+          ]
+        },
+        {
+          "item": "minecraft:feather",
+          "pos": [
+            2.3,
+            3.4,
+            1.5
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 170,
+      "icons": [
+        {
+          "item": "quasium:spell_tetrad",
+          "pos": [
+            1.5,
+            3.6,
+            1.5
+          ]
+        }
+      ],
+      "args": [
+        "LUNG_CAPACITY_MB"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "items": [
+    "quasium:smoke_cannon"
+  ],
+  "floor": 5,
+  "steps": [
+    {
+      "duration": 160,
+      "place": [
+        {
+          "state": "quasium:bellows[facing=east]",
+          "pos": [0, 0, 1]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true]",
+          "pos": [1, 0, 1]
+        },
+        {
+          "state": "quasium:copper_pipe[west=true,east=true]",
+          "pos": [2, 0, 1]
+        },
+        {
+          "state": "quasium:smoke_cannon[facing=east]",
+          "pos": [3, 0, 1]
+        }
+      ],
+      "highlight": [
+        [3, 0, 1]
+      ],
+      "args": [
+        "CANNON_RANGE"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "quasium.progression.spells.title",
+  "hint": "quasium.progression.spells.hint",
+  "category": "smokecraft",
+  "order": 30,
+  "icon": "quasium:hookah_pipe",
+  "unlockCondition": "quasium:smokecraft/first_cast",
+  "scene": "quasium:casting",
+  "pages": [
+    {"text": "quasium.progression.spells.page1"},
+    {"text": "quasium.progression.spells.costs", "args": ["ZONE_CAST_DISCOUNT_PCT"]},
+    {"text": "quasium.progression.spells.page2"},
+    {"text": "quasium.progression.spells.page3", "args": ["HEAVY_FALL_DAMAGE_PCT"]},
+    {"text": "quasium.progression.spells.page4"},
+    {"text": "quasium.progression.spells.page5"}
+  ]
+}

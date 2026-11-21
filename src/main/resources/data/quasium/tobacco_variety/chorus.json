@@ -1,0 +1,8 @@
+{
+  "strength": 2,
+  "yield": 3,
+  "quality": 4,
+  "soil": "quasium:chorus_soil",
+  "native_dimension": "minecraft:the_end",
+  "foreign_growth_pct": 50
+}

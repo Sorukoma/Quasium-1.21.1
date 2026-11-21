@@ -1,0 +1,58 @@
+{
+  "title": "quasium.progression.ritual_brazier.title",
+  "hint": "quasium.progression.ritual_brazier.hint",
+  "category": "smokecraft",
+  "order": 60,
+  "icon": "quasium:ritual_brazier",
+  "unlockCondition": "quasium:ritual/brazier",
+  "scene": "quasium:ritual_brazier",
+  "pages": [
+    {
+      "text": "quasium.progression.ritual_brazier.page1",
+      "recipe": "quasium:ritual_brazier"
+    },
+    {
+      "text": "quasium.progression.ritual_brazier.page2",
+      "recipe": "quasium:ritual_pedestal",
+      "args": [
+        "PEDESTAL_MIN_DISTANCE",
+        "PEDESTAL_MAX_DISTANCE",
+        "MAX_PEDESTALS"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_brazier.page3",
+      "items": [
+        "minecraft:flint_and_steel",
+        "minecraft:fire_charge",
+        "quasium:note_jar"
+      ],
+      "args": [
+        "JAR_RADIUS"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_brazier.page4",
+      "items": [
+        "quasium:kaifometer",
+        "quasium:ritual_brazier"
+      ],
+      "args": [
+        "PARTICIPANT_RADIUS",
+        "NIRVANA_TIER"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_brazier.ghosts",
+      "items": [
+        "quasium:ritual_pedestal"
+      ]
+    },
+    {
+      "text": "quasium.progression.ritual_brazier.page5",
+      "args": [
+        "RITUAL_DENSITY"
+      ]
+    }
+  ]
+}

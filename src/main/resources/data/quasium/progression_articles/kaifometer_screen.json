@@ -1,0 +1,25 @@
+{
+  "title": "quasium.progression.kaifometer_screen.title",
+  "hint": "quasium.progression.kaifometer_screen.hint",
+  "category": "kaif",
+  "order": 15,
+  "icon": "quasium:kaifometer",
+  "unlockCondition": "quasium:progression/obtained_kaifometer",
+  "pages": [
+    {
+      "text": "quasium.progression.kaifometer_screen.page1"
+    },
+    {
+      "text": "quasium.progression.kaifometer_screen.page2",
+      "args": [
+        "SCAN_KAIF_ITEM",
+        "SCAN_KAIF_MOB",
+        "PERCEPTION_RUINS",
+        "PERCEPTION_MIRROR"
+      ]
+    },
+    {
+      "text": "quasium.progression.kaifometer_screen.page3"
+    }
+  ]
+}

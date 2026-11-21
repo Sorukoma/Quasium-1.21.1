@@ -1,9 +1,12 @@
 {
   "title": "quasium.progression.kaif_mastery.title",
   "hint": "quasium.progression.kaif_mastery.hint",
+  "category": "kaif",
+  "order": 30,
+  "icon": "quasium:music_disc_lofi_kaif_beats",
+  "unlockCondition": "quasium:kaif/kaif_level_30",
   "pages": [
-    { "text": "quasium.progression.kaif_mastery.page1" },
-    { "text": "quasium.progression.kaif_mastery.page2" }
-  ],
-  "unlockCondition": "quasium:kaif/kaif_level_30"
+    {"text": "quasium.progression.kaif_mastery.page1", "args": ["SCAN_KAIF_MOB"]},
+    {"text": "quasium.progression.kaif_mastery.page2", "items": ["quasium:empty_smoke_jar", "quasium:clay_golem", "quasium:calloud_golem", "quasium:sommelier_module", "quasium:toolkeeper_module", "quasium:backpack_hookah", "quasium:smoke_warden"]}
+  ]
 }

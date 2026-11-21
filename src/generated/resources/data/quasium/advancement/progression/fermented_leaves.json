@@ -1,11 +1,37 @@
 {
   "parent": "quasium:root",
   "criteria": {
+    "has_dried_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:drying_stage": 2
+            },
+            "items": "#quasium:tobacco_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_fermented_barrel": {
       "conditions": {
         "items": [
           {
             "items": "quasium:fermentation_barrel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_overdried_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "quasium:drying_stage": 3
+            },
+            "items": "#quasium:tobacco_leaves"
           }
         ]
       },
@@ -26,6 +52,8 @@
   },
   "requirements": [
     [
+      "has_dried_leaves",
+      "has_overdried_leaves",
       "has_fermented_barrel"
     ]
   ],

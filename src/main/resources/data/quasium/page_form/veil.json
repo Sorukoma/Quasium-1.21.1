@@ -1,0 +1,14 @@
+{
+  "shape": "wall",
+  "volume": 45,
+  "params": {
+    "distance": 3,
+    "width": 5,
+    "height": 3,
+    "duration": 8,
+    "tick_interval": 20,
+    "cloud_strength": 0.4
+  },
+  "unlock": "research:quasium:research_smoke_veil",
+  "order": 7
+}

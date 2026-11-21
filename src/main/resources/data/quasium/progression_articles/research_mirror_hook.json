@@ -1,0 +1,33 @@
+{
+  "title": "quasium.research.research_mirror_hook.title",
+  "hint": "quasium.research.research_mirror_hook.hint",
+  "category": "research_mirror",
+  "order": 10,
+  "icon": "quasium:smokeland_hook",
+  "research": {
+    "tier": 4,
+    "notes": [
+      "ash"
+    ],
+    "noteMl": 20,
+    "lived": true,
+    "items": [
+      "quasium:dream_quartz*3",
+      "minecraft:echo_shard"
+    ],
+    "gives": [
+      "quasium:smokeland_hook"
+    ]
+  },
+  "pages": [
+    {
+      "text": "quasium.research.research_mirror_hook.page1"
+    },
+    {
+      "text": "quasium.research.research_mirror_hook.page2",
+      "args": [
+        "COMA_SECONDS"
+      ]
+    }
+  ]
+}
